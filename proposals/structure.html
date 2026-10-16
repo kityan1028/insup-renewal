@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Insup リニューアル｜構成案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f4f2; --card:#fff; --ink:#1d1d1f; --sub:#6b6b70; --line:#dcdcdc;
+    --wf:#e6e6e6; --wf-strong:#c9c9c9; --wf-ink:#555; --accent:#1d1d1f;
+    --new:#fff3c4; --new-line:#e0c25a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1180px;margin:0 auto;padding:40px 16px 80px}
+  h1{font-size:26px;margin:0 0 6px}
+  h2{font-size:21px;margin:56px 0 4px;padding-top:16px;border-top:2px solid var(--ink)}
+  .lead{color:var(--sub);margin:0 0 8px}
+  .note{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin:18px 0;font-size:14px}
+  .note b{display:inline-block;margin-right:6px}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--sub);margin:10px 0 0}
+  .legend span::before{content:"";display:inline-block;width:14px;height:10px;margin-right:6px;vertical-align:middle;border-radius:2px;background:var(--wf);border:1px solid var(--wf-strong)}
+  .legend span.new::before{background:var(--new);border-color:var(--new-line)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px;margin-top:20px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column}
+  .card .id{font-size:12px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--accent);display:inline-block;padding:2px 10px;border-radius:99px}
+  .card h3{font-size:17px;margin:8px 0 4px}
+  .card p{margin:0 0 10px;color:var(--sub);font-size:13.5px}
+  .card ul.pc{margin:auto 0 0;padding:10px 0 0 0;list-style:none;font-size:13px;border-top:1px dashed var(--line)}
+  .card ul.pc li{padding-left:1.4em;text-indent:-1.4em}
+  .card ul.pc li.p::before{content:"＋ ";color:#2a7a3b;font-weight:700}
+  .card ul.pc li.c::before{content:"− ";color:#b23a3a;font-weight:700}
+  .card.current{background:#fafafa;border-style:dashed}
+  .card.current .id{background:#888}
+
+  /* ---- site map wireframe ---- */
+  .map{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+  .pg{flex:1 1 92px;min-width:92px;background:#fafafa;border:1px solid var(--wf-strong);border-radius:6px;padding:6px;font-size:11px}
+  .pg > b{display:block;font-size:11.5px;margin-bottom:4px;color:var(--ink)}
+  .pg i{display:block;font-style:normal;background:var(--wf);color:var(--wf-ink);border-radius:3px;padding:1px 5px;margin-top:3px;font-size:10.5px;line-height:1.5}
+  .pg i.new{background:var(--new);outline:1px solid var(--new-line)}
+  .pg.top{flex-basis:100%;border-width:2px}
+  .pg.top .row{display:flex;flex-wrap:wrap;gap:4px}
+  .pg.top .row i{margin:0}
+  .pg.small{flex:0 1 auto;opacity:.75}
+
+  /* ---- order wireframe (phone-like column) ---- */
+  .phone{width:180px;margin:6px auto 14px;border:2px solid var(--ink);border-radius:18px;padding:10px 8px;background:#fafafa}
+  .phone .blk{border-radius:5px;background:var(--wf);color:var(--wf-ink);font-size:11px;text-align:center;margin-bottom:4px;display:flex;align-items:center;justify-content:center;padding:2px 4px}
+  .phone .blk.hero{background:#3a3a3c;color:#fff;font-weight:700}
+  .phone .blk.cta{background:var(--wf-strong);color:#222;font-weight:700}
+  .phone .blk.new{background:var(--new);outline:1px solid var(--new-line)}
+  .phone .blk.split{background:none;gap:4px;padding:0}
+  .phone .blk.split span{flex:1;background:var(--wf);border-radius:5px;height:100%;display:flex;align-items:center;justify-content:center}
+  .phone .blk:last-child{margin-bottom:0}
+
+  .ask{background:var(--ink);color:#fff;border-radius:14px;padding:22px 24px;margin-top:56px}
+  .ask h2{border:0;margin:0 0 8px;padding:0;color:#fff}
+  .ask ol{margin:0;padding-left:1.4em}
+  footer{margin-top:40px;color:var(--sub);font-size:12px}
+  @media (max-width:420px){ .grid{grid-template-columns:1fr} h1{font-size:22px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>株式会社Insup HPリニューアル　構成案</h1>
+  <p class="lead">文章などの内容は現行サイトのまま。<b>「サイトをどのページに分けるか」</b>と<b>「TOPページに何をどの順で並べるか」</b>の候補をまとめました。</p>
+  <div class="note">
+    <b>この段階では色と3Dは未反映です。</b>新しいロゴを確認したあと、配色と3D背景（マウスに合わせて動く背景）の案を別途お出しします。<br>
+    <b>写真：</b>すべて新しい写真に差し替える前提のため、案の中には入れていません。
+    <div class="legend"><span>現行サイトにある内容</span><span class="new">現行では別ページにある内容をここへ移動（文章は同じ）</span></div>
+  </div>
+
+  <!-- ================= PART 1: SITE STRUCTURE ================= -->
+  <h2>① ページ構成案（全6案＋現行）</h2>
+  <p class="lead">四角1つが1ページです。中の小さい帯がそのページに載せる内容です。</p>
+
+  <div class="grid">
+
+    <div class="card current">
+      <span class="id">現行</span>
+      <h3>現行サイト（参考）</h3>
+      <p>7ページ構成。各下層ページの末尾にも同じCTAが入っています。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP</b><div class="row"><i>ヒーロー</i><i>ABOUT</i><i>事業内容</i><i>実績</i><i>選ばれる理由</i><i>CTA</i></div></div>
+        <div class="pg"><b>事業内容</b><i>サービス概要</i><i>3事業の詳細</i><i>ご契約後の流れ</i></div>
+        <div class="pg"><b>応募</b><i>募集ポジション</i><i>働く魅力</i><i>応募方法</i></div>
+        <div class="pg"><b>FAQ</b><i>よくある質問 7問</i></div>
+        <div class="pg"><b>お問い合わせ</b><i>連絡方法4種</i><i>会社情報</i></div>
+        <div class="pg"><b>事業所概要</b><i>会社概要</i><i>代表挨拶</i><i>取引実績</i></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="id">S1</span>
+      <h3>現行7ページを踏襲</h3>
+      <p>ページの分け方は今のまま。各ページの中の並び順とデザインだけ作り直します。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP</b><div class="row"><i>（並び順は②で選択）</i></div></div>
+        <div class="pg"><b>事業内容</b><i>サービス概要</i><i>3事業の詳細</i><i>ご契約後の流れ</i></div>
+        <div class="pg"><b>応募</b><i>募集ポジション</i><i>働く魅力</i><i>応募方法</i></div>
+        <div class="pg"><b>FAQ</b><i>よくある質問</i></div>
+        <div class="pg"><b>お問い合わせ</b><i>連絡方法</i><i>会社情報</i></div>
+        <div class="pg"><b>事業所概要</b><i>会社概要</i><i>代表挨拶</i><i>取引実績</i></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+      <ul class="pc"><li class="p">今のサイトと同じ感覚で使える</li><li class="c">FAQ・お問い合わせのページは内容が少なく、間延びしやすい</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">S2</span>
+      <h3>TOP1ページに集約</h3>
+      <p>全部の内容を縦に長い1ページにまとめ、メニューを押すとその場所までスクロールします。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP（1ページ）</b><div class="row"><i>ヒーロー</i><i>ABOUT</i><i class="new">サービス概要</i><i>事業内容</i><i>実績</i><i>選ばれる理由</i><i class="new">ご契約後の流れ</i><i class="new">FAQ</i><i class="new">応募</i><i class="new">会社概要</i><i class="new">代表挨拶</i><i class="new">お問い合わせ</i></div></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+      <ul class="pc"><li class="p">3D背景がスクロールに合わせて途切れずに変化し、演出が一番映える</li><li class="c">ページがかなり長くなる</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">S3</span>
+      <h3>5ページに整理</h3>
+      <p>内容の少ないページをまとめて5ページに減らします。FAQはサービスのページの中に入れます。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP</b><div class="row"><i>（並び順は②で選択）</i></div></div>
+        <div class="pg"><b>SERVICE</b><i>サービス概要</i><i>3事業の詳細</i><i>ご契約後の流れ</i><i class="new">FAQ</i></div>
+        <div class="pg"><b>COMPANY</b><i>会社概要</i><i>代表挨拶</i><i>取引実績</i></div>
+        <div class="pg"><b>RECRUIT</b><i>募集ポジション</i><i>働く魅力</i><i>応募方法</i></div>
+        <div class="pg"><b>CONTACT</b><i>連絡方法</i><i>会社情報</i></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+      <ul class="pc"><li class="p">各ページの内容量がそろい、バランスが取りやすい</li><li class="p">メニューが5つに減ってすっきりする</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">S4</span>
+      <h3>「企業様向け」と「働きたい方向け」で分ける</h3>
+      <p>TOPで入口を2つに分けます。発注を検討する企業様と、アポインターとして応募したい方とで見るページを分けます。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP</b><div class="row"><i>ヒーロー</i><i class="new">入口：企業様 ／ 働きたい方</i><i>ABOUT</i><i>実績</i></div></div>
+        <div class="pg"><b>企業様向け</b><i>サービス概要</i><i>3事業</i><i>選ばれる理由</i><i>ご契約後の流れ</i><i class="new">FAQ</i><i>CTA</i></div>
+        <div class="pg"><b>働きたい方向け</b><i>募集ポジション</i><i>働く魅力</i><i>応募方法</i></div>
+        <div class="pg"><b>会社概要</b><i>会社概要</i><i>代表挨拶</i><i>取引実績</i><i class="new">連絡方法</i></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+      <ul class="pc"><li class="p">2種類の訪問者が迷わず目的のページに行ける</li><li class="c">お問い合わせの専用ページがなくなる（会社概要の中とフッターで対応）</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">S5</span>
+      <h3>事業ごとにページを分ける</h3>
+      <p>3つの事業にそれぞれ専用ページを作ります。Bar事業とテレアポ事業の雰囲気を分けられます。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP</b><div class="row"><i>ヒーロー</i><i>ABOUT</i><i>3事業への入口</i><i>実績</i><i>選ばれる理由</i><i>CTA</i></div></div>
+        <div class="pg"><b>インサイドセールス支援</b><i>サービス概要</i><i>詳細・提供ポジション</i><i>ご契約後の流れ</i><i class="new">FAQ</i></div>
+        <div class="pg"><b>Bar事業</b><i>詳細</i></div>
+        <div class="pg"><b>マーケティング支援</b><i>詳細</i></div>
+        <div class="pg"><b>会社概要</b><i>会社概要</i><i>代表挨拶</i><i>取引実績</i></div>
+        <div class="pg"><b>応募</b><i>募集・魅力・方法</i></div>
+        <div class="pg"><b>お問い合わせ</b><i>連絡方法</i></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+      <ul class="pc"><li class="p">事業ごとに後から内容を足しやすい</li><li class="c">Bar・マーケティングのページは今の文章量だと短い</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">S6</span>
+      <h3>全画面スライド型（1ページ）</h3>
+      <p>内容はS2と同じ1ページですが、1セクション＝1画面で、スクロールするたびに画面ごと切り替わります。画面が変わるたびに3D背景の形も大きく変化します。右端に現在位置の点を表示します。</p>
+      <div class="map">
+        <div class="pg top"><b>TOP（1画面ずつ切替）</b><div class="row"><i>① ヒーロー</i><i>② ABOUT</i><i>③ 事業内容</i><i>④ 実績</i><i>⑤ 選ばれる理由</i><i class="new">⑥ 流れ</i><i class="new">⑦ FAQ</i><i class="new">⑧ 応募</i><i class="new">⑨ 会社・代表挨拶</i><i>⑩ お問い合わせ</i></div></div>
+        <div class="pg small"><b>プライバシー</b></div>
+      </div>
+      <ul class="pc"><li class="p">プレゼンのような見せ方で、一番インパクトがある</li><li class="c">代表挨拶やFAQのように文章が長いところは1画面に収めるための工夫が必要</li></ul>
+    </div>
+
+  </div>
+
+  <!-- ================= PART 2: TOP ORDER ================= -->
+  <h2>② TOPページの並び順（全6案＋現行）</h2>
+  <p class="lead">①でS1・S3・S4・S5を選んだ場合のTOPの並び順です（S2・S6はTOPに全部入るので、その場合もこの順番を元にします）。黒がヒーロー（最初の画面）、濃いグレーがお問い合わせ（CTA）です。</p>
+
+  <div class="grid">
+
+    <div class="card current">
+      <span class="id">現行</span>
+      <h3>現行の並び順（参考）</h3>
+      <div class="phone">
+        <div class="blk hero" style="height:70px">ヒーロー</div>
+        <div class="blk" style="height:34px">ABOUT</div>
+        <div class="blk" style="height:44px">事業内容</div>
+        <div class="blk" style="height:34px">実績</div>
+        <div class="blk" style="height:44px">選ばれる理由</div>
+        <div class="blk cta" style="height:30px">CTA</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="id">O1</span>
+      <h3>数字から見せる</h3>
+      <p>「1,500名」「220%」「100社+」を最初に出して信頼感を作り、そのあとに理由と事業を説明します。</p>
+      <div class="phone">
+        <div class="blk hero" style="height:70px">ヒーロー</div>
+        <div class="blk" style="height:34px">実績（数字）</div>
+        <div class="blk" style="height:44px">選ばれる理由</div>
+        <div class="blk" style="height:44px">事業内容</div>
+        <div class="blk" style="height:34px">ABOUT</div>
+        <div class="blk cta" style="height:30px">CTA</div>
+      </div>
+      <ul class="pc"><li class="p">数字のインパクトが最初に伝わる</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">O2</span>
+      <h3>サービスを順に説明する</h3>
+      <p>何をしているか → なぜ選ばれるか → どう始まるか → 実績 → よくある質問、の順で、読み進めるとそのまま問い合わせにつながります。</p>
+      <div class="phone">
+        <div class="blk hero" style="height:70px">ヒーロー</div>
+        <div class="blk" style="height:44px">事業内容</div>
+        <div class="blk" style="height:44px">選ばれる理由</div>
+        <div class="blk new" style="height:36px">ご契約後の流れ</div>
+        <div class="blk" style="height:30px">実績</div>
+        <div class="blk new" style="height:34px">FAQ（抜粋）</div>
+        <div class="blk cta" style="height:30px">CTA</div>
+      </div>
+      <ul class="pc"><li class="p">初めての方にも話の流れがわかりやすい</li><li class="c">TOPが少し長くなる</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">O3</span>
+      <h3>想いから入る</h3>
+      <p>ABOUTのあとに代表挨拶の一部を置き、会社の原点を伝えてから事業と実績を見せます。</p>
+      <div class="phone">
+        <div class="blk hero" style="height:70px">ヒーロー</div>
+        <div class="blk" style="height:34px">ABOUT</div>
+        <div class="blk new" style="height:44px">代表挨拶（抜粋）</div>
+        <div class="blk" style="height:44px">事業内容</div>
+        <div class="blk" style="height:34px">実績</div>
+        <div class="blk cta" style="height:30px">CTA</div>
+      </div>
+      <ul class="pc"><li class="p">他社との違い（会社の想い）が伝わる</li><li class="c">代表挨拶をどこで区切るかの確認が必要</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">O4</span>
+      <h3>問い合わせを優先する</h3>
+      <p>ヒーローに数字と「無料相談」ボタンを重ねて、最初の画面から問い合わせできるようにします。CTAは途中と最後の2か所に置きます。</p>
+      <div class="phone">
+        <div class="blk hero" style="height:80px">ヒーロー＋実績の数字</div>
+        <div class="blk" style="height:44px">選ばれる理由</div>
+        <div class="blk cta" style="height:24px">CTA</div>
+        <div class="blk" style="height:44px">事業内容</div>
+        <div class="blk new" style="height:34px">ご契約後の流れ</div>
+        <div class="blk" style="height:30px">ABOUT</div>
+        <div class="blk cta" style="height:30px">CTA</div>
+      </div>
+      <ul class="pc"><li class="p">問い合わせボタンが目に入る回数が多い</li><li class="c">営業色が少し強くなる</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">O5</span>
+      <h3>企業様と働きたい方、両方に向ける</h3>
+      <p>ヒーローの直後で「導入を検討中の企業様」「働きたい方」に分け、そのあと両方に関係する内容を並べます。①のS4と相性が良い並び順です。</p>
+      <div class="phone">
+        <div class="blk hero" style="height:70px">ヒーロー</div>
+        <div class="blk split new" style="height:40px"><span>企業様</span><span>働きたい方</span></div>
+        <div class="blk" style="height:34px">ABOUT</div>
+        <div class="blk" style="height:44px">事業内容</div>
+        <div class="blk" style="height:34px">実績</div>
+        <div class="blk new" style="height:36px">募集ポジション</div>
+        <div class="blk cta" style="height:30px">CTA</div>
+      </div>
+      <ul class="pc"><li class="p">採用の入口がTOPから目立つ</li></ul>
+    </div>
+
+    <div class="card">
+      <span class="id">O6</span>
+      <h3>短くまとめる</h3>
+      <p>TOPは4つのブロックだけにして、詳しい内容は下層ページに任せます。ABOUTは実績の中に1行で入れます。</p>
+      <div class="phone">
+        <div class="blk hero" style="height:80px">ヒーロー</div>
+        <div class="blk" style="height:44px">事業内容（3つ）</div>
+        <div class="blk" style="height:44px">実績＋ABOUT</div>
+        <div class="blk cta" style="height:34px">CTA</div>
+      </div>
+      <ul class="pc"><li class="p">3D背景が見える面積が一番広い</li><li class="c">「選ばれる理由」はTOPから外れ、下層ページだけに載る</li></ul>
+    </div>
+
+  </div>
+
+  <div class="ask">
+    <h2>選んでいただきたいこと</h2>
+    <ol>
+      <li>① ページ構成：S1〜S6のどれにしますか？（複数の案を組み合わせることもできます）</li>
+      <li>② TOPの並び順：O1〜O6のどれにしますか？</li>
+    </ol>
+  </div>
+
+  <footer>構成案 v1 ／ 2026-10-17 ／ 色・3D背景はロゴ確認後に別ページで提案します</footer>
+</div>
+</body>
+</html>
