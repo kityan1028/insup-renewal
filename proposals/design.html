@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Insup リニューアル｜デザイン案</title>
+<link rel="icon" href="../assets/img/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f6fa; --card:#fff; --ink:#0d1a33; --sub:#5d6880; --line:#dbe1ec;
+    --navy:#051c50; --royal:#0135a3; --blue:#026afd; --cyan:#3ad1fc; --ice:#75f2ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1240px;margin:0 auto;padding:36px 16px 80px}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .top img{height:44px}
+  h1{font-size:24px;margin:0}
+  h2{font-size:21px;margin:60px 0 4px;padding-top:16px;border-top:2px solid var(--ink)}
+  h2 small{font-size:13px;color:var(--sub);font-weight:500;margin-left:8px}
+  .lead{color:var(--sub);margin:0 0 6px}
+  .note{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:16px 0;font-size:14px}
+  .note b{color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:22px;margin-top:20px}
+  @media (max-width:600px){ .grid{grid-template-columns:1fr} }
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .card .meta{padding:14px 18px 16px}
+  .id{font-size:12px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--ink);display:inline-block;padding:2px 10px;border-radius:99px}
+  .card h3{font-size:17px;margin:8px 0 4px}
+  .card p{margin:0 0 8px;color:var(--sub);font-size:13.5px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+  .chips span{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--sub);font-family:Poppins,sans-serif}
+  .chips i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,.12);display:inline-block}
+
+  /* ---------- live demo tile ---------- */
+  .demo{position:relative;aspect-ratio:16/10;overflow:hidden;cursor:crosshair;touch-action:pan-y}
+  @media (max-width:600px){ .demo{aspect-ratio:4/5} }
+  .demo canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .demo .ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;padding:14px 18px}
+  .demo .bar{display:flex;align-items:center;justify-content:space-between}
+  .demo .brand{display:flex;align-items:center;gap:6px}
+  .demo .brand img{height:24px}
+  .demo .brand img.type{height:15px}
+  .demo .brand.plate{background:#fff;padding:5px 12px 5px 8px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+  .demo .nav{display:flex;gap:12px;font-size:10.5px;font-weight:500;opacity:.85}
+  @media (max-width:600px){ .demo .nav{display:none} .demo .hero{max-width:100%} .demo .h{font-size:19px} }
+  .demo .hero{margin:auto 0;max-width:80%}
+  .demo .eyebrow{font-family:Poppins,sans-serif;font-size:11px;letter-spacing:.25em;font-weight:600;opacity:.8}
+  .demo .h{font-weight:900;font-size:clamp(18px,2.4vw,28px);line-height:1.35;margin:6px 0 2px;letter-spacing:.02em}
+  .demo .h em{font-style:normal}
+  .demo .s{font-size:12px;opacity:.85}
+  .demo .btns{display:flex;gap:8px;margin-top:12px}
+  .demo .btns span{font-size:11px;font-weight:700;padding:6px 14px;border-radius:99px}
+  .demo .dots{position:absolute;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px}
+  .demo .dots b{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.3;transition:opacity .3s,transform .3s}
+  .demo .dots b.on{opacity:1;transform:scale(1.4)}
+  .demo .next{pointer-events:auto;position:absolute;right:14px;bottom:12px;font:700 11px "Noto Sans JP",sans-serif;border:0;border-radius:99px;padding:7px 14px;cursor:pointer;background:rgba(255,255,255,.16);color:inherit;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.35)}
+  .demo .hint{position:absolute;left:18px;bottom:14px;font-size:10.5px;opacity:.7}
+  /* dark theme text */
+  .demo.dark{color:#fff}
+  .demo.dark .h em{background:linear-gradient(90deg,var(--ice),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .demo.dark .btns span:first-child{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#fff}
+  .demo.dark .btns span:last-child{border:1px solid rgba(255,255,255,.5)}
+  /* light theme text */
+  .demo.light{color:var(--navy)}
+  .demo.light .h em{background:linear-gradient(90deg,var(--royal),var(--blue) 60%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .demo.light .btns span:first-child{background:linear-gradient(90deg,var(--royal),var(--blue));color:#fff}
+  .demo.light .btns span:last-child{border:1px solid var(--navy)}
+  .demo.light .next{background:rgba(5,28,80,.08);border-color:rgba(5,28,80,.25)}
+
+  .demo[data-bg="d1"]{background:radial-gradient(120% 90% at 70% 20%,#0a2a6e 0%,#03102e 55%,#010714 100%)}
+  .demo[data-bg="d2"]{background:radial-gradient(100% 80% at 50% 40%,#071d4d 0%,#020a1e 70%)}
+  .demo[data-bg="d3"]{background:linear-gradient(160deg,#ffffff 0%,#eaf2ff 55%,#d9e9ff 100%)}
+  .demo[data-bg="d4"]{background:linear-gradient(160deg,#0135a3 0%,#051c50 100%)}
+  .demo[data-bg="d4"] .ui{background:linear-gradient(90deg,rgba(3,16,46,.78) 0%,rgba(3,16,46,.35) 45%,rgba(3,16,46,0) 70%)}
+  .demo[data-bg="d4"] .h em{background:linear-gradient(90deg,#fff,var(--ice));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .demo[data-bg="d5"]{background:linear-gradient(180deg,#020b22 0%,#04163e 100%)}
+  .demo[data-bg="d6"]{background:linear-gradient(180deg,#ffffff 0%,#f1f6ff 100%)}
+
+  /* ---------- copy ---------- */
+  .copygrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-top:14px}
+  .copy{background:linear-gradient(150deg,#03102e,#0a2a6e);color:#fff;border-radius:14px;padding:22px 20px 18px;min-height:170px;display:flex;flex-direction:column}
+  .copy.w{background:linear-gradient(150deg,#f7fbff,#dcebff);color:var(--navy);border:1px solid var(--line)}
+  .copy .id{background:rgba(255,255,255,.18)}
+  .copy.w .id{background:var(--navy)}
+  .copy .c{font-weight:900;font-size:22px;line-height:1.45;margin:12px 0 6px;letter-spacing:.03em}
+  .copy .e{font-family:Poppins,sans-serif;font-size:11.5px;letter-spacing:.12em;opacity:.7;font-weight:500}
+  .copy .why{margin-top:auto;padding-top:10px;font-size:12px;opacity:.8;border-top:1px solid rgba(255,255,255,.2)}
+  .copy.w .why{border-color:var(--line)}
+  h3.aud{margin:28px 0 0;font-size:16px}
+
+  /* ---------- slide order ---------- */
+  .orders{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;margin-top:18px}
+  .ord{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ord h3{margin:0 0 10px;font-size:16px}
+  .ord ol{margin:0;padding:0;list-style:none;counter-reset:s}
+  .ord li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .ord li:last-child{border:0}
+  .ord li::before{content:counter(s);flex:0 0 24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font:600 12px/24px Poppins,sans-serif;text-align:center}
+  .ord li small{display:block;color:var(--sub);font-size:12px}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:0 7px;border-radius:4px;margin-left:4px;vertical-align:1px}
+  .tag.ph{background:#fff1c7;color:#7a5a00}
+  .tag.nw{background:#dff3ff;color:#035b8a}
+  .tag.big{background:#e3e9ff;color:#0135a3}
+
+  .ask{background:var(--navy);color:#fff;border-radius:16px;padding:22px 24px;margin-top:56px}
+  .ask h2{border:0;margin:0 0 8px;padding:0;color:#fff}
+  .ask ol{margin:0;padding-left:1.4em}
+  footer{margin-top:36px;color:var(--sub);font-size:12px}
+  a{color:var(--blue)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../assets/img/logo-mark.png" alt=""><h1>株式会社Insup HPリニューアル　デザイン案</h1></div>
+  <p class="lead">決まったこと：<b>入口ページ＋「企業様向け」「働きたい方向け」の2ページ</b>（どちらも全画面スライド型）／数字は今の実績（1,500名・220%・100社+）を大きく見せる／会社概要・代表挨拶・お問い合わせは両方のページに入れ、FAQは企業様向けだけ／写真はすべて「写真入る」の仮の枠。</p>
+  <div class="note"><b>このページで選んでいただくこと：</b> ① 配色と3D背景（6案） ② フルリモートのキャッチコピー ③ スライドの並び順の確認　→ 一番下にまとめてあります。　<a href="structure.html">← 前回の構成案</a></div>
+
+  <!-- ================= A ================= -->
+  <h2>① 配色 × 3D背景<small>マウスを動かしてみてください（スマホは指でなぞる）</small></h2>
+  <p class="lead">どの案も新しいロゴの<b>ネイビー → ブルー → シアン</b>のグラデーションから色を取っています。右下の「次のスライドへ」を押すと、スライドが切り替わるときに背景がどう変わるかを確認できます。文字の内容は見本です。</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="demo dark" data-demo="ribbon" data-bg="d1"></div>
+      <div class="meta"><span class="id">D1</span><h3>濃紺 × 光のリボン</h3>
+        <p>ロゴの「折れ曲がる帯」と同じ形の、立体的な光のリボンが背景を流れます。マウスの位置でリボンがうねり、ねじれます。高級感のある見え方です。</p>
+        <div class="chips"><span><i style="background:#010714"></i>#010714</span><span><i style="background:#0135a3"></i>#0135A3</span><span><i style="background:#026afd"></i>#026AFD</span><span><i style="background:#75f2ff"></i>#75F2FF</span></div></div>
+    </div>
+    <div class="card">
+      <div class="demo dark" data-demo="particles" data-bg="d2"></div>
+      <div class="meta"><span class="id">D2</span><h3>濃紺 × 粒子の吹き出し</h3>
+        <p>今のサイトにある粒子の背景を発展させた案です。数千の光の粒がスライドごとに集まり、ロゴの「2つの吹き出し」や波の形に変わります。マウスを近づけると粒が押しのけられます。</p>
+        <div class="chips"><span><i style="background:#020a1e"></i>#020A1E</span><span><i style="background:#026afd"></i>#026AFD</span><span><i style="background:#3ad1fc"></i>#3AD1FC</span><span><i style="background:#ffffff"></i>#FFFFFF</span></div></div>
+    </div>
+    <div class="card">
+      <div class="demo light" data-demo="glass" data-bg="d3"></div>
+      <div class="meta"><span class="id">D3</span><h3>ホワイト × 立体の吹き出し</h3>
+        <p>白を基調に、ロゴの吹き出しを立体にしたオブジェクトが浮かびます。マウスに合わせて向きと光の当たり方が変わります。明るく、親しみやすい見え方です。</p>
+        <div class="chips"><span><i style="background:#ffffff"></i>#FFFFFF</span><span><i style="background:#eaf2ff"></i>#EAF2FF</span><span><i style="background:#051c50"></i>#051C50</span><span><i style="background:#026afd"></i>#026AFD</span><span><i style="background:#3ad1fc"></i>#3AD1FC</span></div></div>
+    </div>
+    <div class="card">
+      <div class="demo dark" data-demo="wave" data-bg="d4"></div>
+      <div class="meta"><span class="id">D4</span><h3>ブルー × 波打つ面</h3>
+        <p>ロゴのブルーで画面全体を染め、光る波の面が広がります。マウスの位置から波紋が広がり、視点も傾きます。色の印象が一番強い案です。</p>
+        <div class="chips"><span><i style="background:#051c50"></i>#051C50</span><span><i style="background:#0135a3"></i>#0135A3</span><span><i style="background:#026afd"></i>#026AFD</span><span><i style="background:#75f2ff"></i>#75F2FF</span></div></div>
+    </div>
+    <div class="card">
+      <div class="demo dark" data-demo="network" data-bg="d5"></div>
+      <div class="meta"><span class="id">D5</span><h3>濃紺 × つながるネットワーク</h3>
+        <p>点と線がつながり合い、「企業」と「人材」を結ぶイメージです。マウスの周りの点が引き寄せられ、線がつながります。スライドごとに2つの群れに分かれたり、球体になったりします。</p>
+        <div class="chips"><span><i style="background:#020b22"></i>#020B22</span><span><i style="background:#026afd"></i>#026AFD</span><span><i style="background:#3ad1fc"></i>#3AD1FC</span><span><i style="background:#75f2ff"></i>#75F2FF</span></div></div>
+    </div>
+    <div class="card">
+      <div class="demo light" data-demo="lines" data-bg="d6"></div>
+      <div class="meta"><span class="id">D6</span><h3>ホワイト × 流れる線</h3>
+        <p>白い背景に、ブルーからシアンへ変わる細い線が何十本も流れます。マウスの周りで線がよけるように曲がります。すっきりとして上品な見え方です。</p>
+        <div class="chips"><span><i style="background:#ffffff"></i>#FFFFFF</span><span><i style="background:#051c50"></i>#051C50</span><span><i style="background:#0135a3"></i>#0135A3</span><span><i style="background:#3ad1fc"></i>#3AD1FC</span></div></div>
+    </div>
+  </div>
+
+  <!-- ================= B ================= -->
+  <h2>② フルリモートを伝えるキャッチコピー案<small>新しく追加する文章です</small></h2>
+  <p class="lead">「フルリモート」の専用スライドに大きく載せる見出しの案です。それぞれのページから1つずつ選んでください（言い回しの修正も大丈夫です）。</p>
+
+  <h3 class="aud">企業様向けページ</h3>
+  <div class="copygrid">
+    <div class="copy"><span class="id">B1</span><div class="c">場所を選ばない、<br>即戦力。</div><div class="e">FULL REMOTE, FULL POWER.</div><div class="why">全国のプロがフルリモートで稼働することを、短く言い切ります。</div></div>
+    <div class="copy"><span class="id">B2</span><div class="c">全国のプロアポインターを、<br>明日からあなたのチームに。</div><div class="e">YOUR REMOTE SALES TEAM</div><div class="why">「1,500名」「最短即日」と組み合わせやすい言い方です。</div></div>
+    <div class="copy"><span class="id">B3</span><div class="c">オフィスがいらないから、<br>スピードが違う。</div><div class="e">NO OFFICE. NO DELAY.</div><div class="why">フルリモートを「早く始められる理由」として伝えます。</div></div>
+    <div class="copy"><span class="id">B4</span><div class="c">北海道から、<br>全国の商談をつくる。</div><div class="e">FROM HOKKAIDO TO NATIONWIDE</div><div class="why">代表挨拶にある「北海道に輸入する」という想いとつながります。</div></div>
+  </div>
+
+  <h3 class="aud">働きたい方向けページ</h3>
+  <div class="copygrid">
+    <div class="copy w"><span class="id">W1</span><div class="c">通勤ゼロで、<br>トップセールスへ。</div><div class="e">ZERO COMMUTE. TOP RESULTS.</div><div class="why">在宅で働けることと、稼げることを同時に伝えます。</div></div>
+    <div class="copy w"><span class="id">W2</span><div class="c">雪の日も、子育て中も、<br>最前線で。</div><div class="e">WORK FROM ANYWHERE</div><div class="why">代表挨拶の「子育て中のママ」「冬場の通勤」から作りました。</div></div>
+    <div class="copy w"><span class="id">W3</span><div class="c">ここから、<br>もう一度。</div><div class="e">RESTART, REMOTELY.</div><div class="why">代表挨拶の「再スタートのきっかけ」から作りました。</div></div>
+    <div class="copy w"><span class="id">W4</span><div class="c">オフィスは、<br>あなたの部屋。</div><div class="e">YOUR ROOM IS THE OFFICE.</div><div class="why">フルリモートの働き方をひと目でイメージできる言い方です。</div></div>
+  </div>
+
+  <!-- ================= C ================= -->
+  <h2>③ スライドの並び順（確認）<small>1行 = 全画面1枚</small></h2>
+  <p class="lead">今のサイトの内容を、決まったことに合わせて振り分けた並び順です。この順番でよいか確認してください。<span class="tag big">数字を大きく</span><span class="tag nw">新しいコピー</span><span class="tag ph">写真入る（仮の枠）</span></p>
+
+  <div class="orders">
+    <div class="ord"><h3>入口ページ（TOP）</h3><ol>
+      <li><div>ロゴ＋2つの入口<small>「導入をご検討の企業様」「一緒に働きたい方」の2つのボタン。背景は3D。</small></div></li>
+    </ol>
+    <p class="lead" style="margin-top:12px;font-size:12.5px">下の方に、フッター（会社名・所在地・メール・SNS・プライバシーポリシー）を小さく入れます。</p></div>
+
+    <div class="ord"><h3>企業様向けページ</h3><ol>
+      <li><div>ヒーロー<small>即戦力テレアポ人材の確保なら／レンタルプロアポインター</small></div></li>
+      <li><div>実績の数字<span class="tag big">数字を大きく</span><small>1,500名・220%・100社+／取引業界</small></div></li>
+      <li><div>フルリモート<span class="tag nw">新しいコピー</span><span class="tag ph">写真入る</span><small>オフィスの雰囲気写真と一緒に</small></div></li>
+      <li><div>ABOUT／サービス概要<small>テレアポBPOを軸に…／料金・解約・差し替えの図</small></div></li>
+      <li><div>事業内容（3事業）<small>インサイドセールス支援・Bar事業・マーケティング支援</small></div></li>
+      <li><div>選ばれる理由（4つ）</div></li>
+      <li><div>ご契約後の流れ（5ステップ）</div></li>
+      <li><div>よくあるご質問（7問）</div></li>
+      <li><div>代表挨拶<span class="tag ph">写真入る</span><small>代表写真と一緒に</small></div></li>
+      <li><div>会社概要</div></li>
+      <li><div>お問い合わせ／無料相談<small>初期費用無料・最短即日・1ヶ月〜／LINE・Instagram・TikTok・メール</small></div></li>
+    </ol></div>
+
+    <div class="ord"><h3>働きたい方向けページ</h3><ol>
+      <li><div>ヒーロー<small>一緒に働く仲間を募集しています。在宅ワーク可、高時給…</small></div></li>
+      <li><div>フルリモート<span class="tag nw">新しいコピー</span><span class="tag ph">写真入る</span><small>オフィスの雰囲気写真と一緒に</small></div></li>
+      <li><div>実績の数字<span class="tag big">数字を大きく</span><small>1,500名・220%・100社+</small></div></li>
+      <li><div>募集ポジション（3職種）<small>インサイドセールス・フィールドセールス・ディレクター</small></div></li>
+      <li><div>働く魅力（4つ）</div></li>
+      <li><div>代表挨拶<span class="tag ph">写真入る</span><small>代表写真と一緒に</small></div></li>
+      <li><div>会社概要</div></li>
+      <li><div>応募方法／お問い合わせ<small>LINE・Instagram・TikTok・メール</small></div></li>
+    </ol></div>
+  </div>
+
+  <div class="ask">
+    <h2>選んでいただきたいこと</h2>
+    <ol>
+      <li>① 配色 × 3D背景：D1〜D6のどれにしますか？</li>
+      <li>② フルリモートのコピー：企業様向けはB1〜B4、働きたい方向けはW1〜W4のどれにしますか？</li>
+      <li>③ スライドの並び順：このままでよいですか？（入れ替えたいところがあれば教えてください）</li>
+    </ol>
+  </div>
+  <footer>デザイン案 v1 ／ 2026-10-17</footer>
+</div>
+
+<!-- shared mock overlay -->
+<template id="ui-dark">
+  <div class="ui">
+    <div class="bar"><div class="brand plate"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><div class="nav"><span>企業様へ</span><span>働きたい方へ</span><span>会社概要</span><span>お問い合わせ</span></div></div>
+    <div class="hero"><div class="eyebrow">FOR BUSINESS</div><div class="h">即戦力テレアポ人材の確保なら<br><em>レンタルプロアポインター</em></div><div class="s">テレアポ専門業務委託</div><div class="btns"><span>お問い合わせ</span><span>サービス詳細</span></div></div>
+  </div>
+</template>
+<template id="ui-light">
+  <div class="ui">
+    <div class="bar"><div class="brand"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><div class="nav"><span>企業様へ</span><span>働きたい方へ</span><span>会社概要</span><span>お問い合わせ</span></div></div>
+    <div class="hero"><div class="eyebrow">FOR BUSINESS</div><div class="h">即戦力テレアポ人材の確保なら<br><em>レンタルプロアポインター</em></div><div class="s">テレアポ専門業務委託</div><div class="btns"><span>お問い合わせ</span><span>サービス詳細</span></div></div>
+  </div>
+</template>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+  const C = { navy:new THREE.Color('#051c50'), royal:new THREE.Color('#0135a3'), blue:new THREE.Color('#026afd'), cyan:new THREE.Color('#3ad1fc'), ice:new THREE.Color('#75f2ff') };
+  const lerp = (a,b,t)=>a+(b-a)*t;
+  const demos = [];
+  const STAGES = 3;
+
+  function makeDemo(el, init){
+    const dark = el.classList.contains('dark');
+    el.appendChild(document.getElementById(dark?'ui-dark':'ui-light').content.cloneNode(true));
+    const dots = document.createElement('div'); dots.className='dots';
+    for(let i=0;i<STAGES;i++){ const b=document.createElement('b'); if(!i) b.className='on'; dots.appendChild(b); }
+    el.appendChild(dots);
+    const hint = document.createElement('div'); hint.className='hint'; hint.textContent='マウスを動かしてみてください'; el.appendChild(hint);
+    const btn = document.createElement('button'); btn.className='next'; btn.type='button'; btn.textContent='次のスライドへ ▶'; el.appendChild(btn);
+
+    const canvas = document.createElement('canvas'); el.prepend(canvas);
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+    renderer.setClearColor(0x000000, 0);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1.6, 0.1, 200);
+    camera.position.set(0,0,10);
+    const st = { el, renderer, scene, camera, t:0, stage:0, mouse:new THREE.Vector2(), target:new THREE.Vector2(), visible:false, aspect:1.6 };
+    const api = init(st);
+
+    const setTarget = (x,y)=>{ const r=el.getBoundingClientRect(); st.target.set((x-r.left)/r.width*2-1, -((y-r.top)/r.height*2-1)); };
+    el.addEventListener('pointermove', e=>setTarget(e.clientX,e.clientY));
+    el.addEventListener('pointerleave', ()=>st.target.set(0,0));
+    btn.addEventListener('click', e=>{ e.stopPropagation(); st.stage=(st.stage+1)%STAGES; [...dots.children].forEach((d,i)=>d.classList.toggle('on',i===st.stage)); api.next && api.next(st.stage); });
+
+    const resize = ()=>{ const w=el.clientWidth, h=el.clientHeight; if(!w||!h) return; renderer.setSize(w,h,false); camera.aspect=w/h; st.aspect=w/h; camera.updateProjectionMatrix(); api.resize && api.resize(); };
+    new ResizeObserver(resize).observe(el); resize();
+    new IntersectionObserver(es=>es.forEach(e=>st.visible=e.isIntersecting),{rootMargin:'100px'}).observe(el);
+    demos.push({st, api});
+  }
+
+  // world point of the pointer on the z=0 plane
+  const ray = new THREE.Raycaster(), plane = new THREE.Plane(new THREE.Vector3(0,0,1),0), tmpV = new THREE.Vector3();
+  function pointerWorld(st, out){ ray.setFromCamera(st.mouse, st.camera); ray.ray.intersectPlane(plane, out); return out; }
+
+  /* ---------------- D1: ribbons ---------------- */
+  function ribbon(st){
+    const group = new THREE.Group(); st.scene.add(group);
+    const vs = `
+      uniform float uTime, uAmp, uTwist, uPhase, uWidth, uY, uLen, uZ;
+      uniform vec2 uMouse;
+      varying float vU, vV, vShade;
+      vec3 curve(float u){
+        float x = u*uLen;
+        float bump = exp(-pow(x - uMouse.x*6.5, 2.0)*0.06);
+        float y = uY + sin(u*3.1 + uTime*0.35 + uPhase)*uAmp + sin(u*7.3 - uTime*0.27 + uPhase*2.0)*0.25*uAmp + uMouse.y*3.2*bump;
+        float z = uZ + cos(u*2.4 + uTime*0.3 + uPhase)*1.6 + bump*uMouse.y*1.5;
+        return vec3(x,y,z);
+      }
+      void main(){
+        float u = position.x, v = position.y;
+        vec3 p = curve(u), p2 = curve(u+0.003);
+        vec3 T = normalize(p2-p);
+        vec3 N = normalize(cross(T, vec3(0.0,0.0,1.0)));
+        vec3 B = normalize(cross(T, N));
+        float ang = u*uTwist + uTime*0.22 + uPhase + uMouse.x*1.8;
+        vec3 W = N*cos(ang) + B*sin(ang);
+        vec3 pos = p + W*v*uWidth;
+        vec3 nrm = normalize(cross(T, W));
+        vec3 wn = normalize(normalMatrix*nrm);
+        vShade = abs(wn.z);
+        vU = u; vV = v;
+        gl_Position = projectionMatrix*modelViewMatrix*vec4(pos,1.0);
+      }`;
+    const fs = `
+      uniform vec3 c1,c2,c3,c4;
+      varying float vU, vV, vShade;
+      void main(){
+        float s = vShade;
+        vec3 col = mix(c1, c2, smoothstep(0.0,0.7,s));
+        col = mix(col, c3, smoothstep(0.55,0.95,s)*0.9);
+        col = mix(col, c4, pow(s,8.0)*0.8);
+        col += c4*smoothstep(0.42,0.5,abs(vV))*0.35*s;
+        float a = smoothstep(0.5,0.38,abs(vU));
+        gl_FragColor = vec4(col, a);
+      }`;
+    const P = [
+      {uY: 1.3, uWidth:1.1, uPhase:0.0, uTwist:5.0, uZ:0.0},
+      {uY:-0.2, uWidth:0.7, uPhase:2.1, uTwist:7.0, uZ:-1.5},
+      {uY:-1.8, uWidth:1.3, uPhase:4.0, uTwist:4.0, uZ:-0.5},
+    ];
+    const STG = [ {amp:1.0, len:16, rotZ:0.0}, {amp:2.2, len:18, rotZ:-0.45}, {amp:0.5, len:14, rotZ:0.35} ];
+    const mats = P.map(p=>{
+      const m = new THREE.ShaderMaterial({ vertexShader:vs, fragmentShader:fs, transparent:true, side:THREE.DoubleSide, depthWrite:false,
+        uniforms:{ uTime:{value:0}, uAmp:{value:1}, uTwist:{value:p.uTwist}, uPhase:{value:p.uPhase}, uWidth:{value:p.uWidth}, uY:{value:p.uY}, uLen:{value:16}, uZ:{value:p.uZ}, uMouse:{value:new THREE.Vector2()},
+          c1:{value:C.navy}, c2:{value:C.royal.clone().lerp(C.blue,0.4)}, c3:{value:C.blue}, c4:{value:C.ice} } });
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(1,1,500,2), m);
+      mesh.frustumCulled = false; group.add(mesh); return m;
+    });
+    let cur = {amp:1, len:16, rotZ:0};
+    return {
+      update(dt){
+        const s = STG[st.stage];
+        cur.amp = lerp(cur.amp, s.amp, 0.03); cur.len = lerp(cur.len, s.len, 0.03); cur.rotZ = lerp(cur.rotZ, s.rotZ, 0.03);
+        mats.forEach((m,i)=>{ m.uniforms.uTime.value = st.t; m.uniforms.uMouse.value.copy(st.mouse); m.uniforms.uAmp.value = cur.amp*(1+Math.abs(st.mouse.y)*0.6) * (i===1?0.8:1); m.uniforms.uLen.value = cur.len; });
+        group.rotation.set(-st.mouse.y*0.35, st.mouse.x*0.55, cur.rotZ);
+      }
+    };
+  }
+
+  /* ---------------- D2: particles ---------------- */
+  function particles(st){
+    const N = 7000;
+    const cloud = new Float32Array(N*3), bubble = new Float32Array(N*3), grid = new Float32Array(N*3), col = new Float32Array(N*3), rnd = new Float32Array(N);
+    const bubbleShape = (cx,cy,w,h,r,tail)=>{ const s=new THREE.Shape(), x0=cx-w/2, y0=cy-h/2, x1=cx+w/2, y1=cy+h/2;
+      s.moveTo(x0+r,y0); if(tail){ s.lineTo(x0+r+0.15,y0-0.7); s.lineTo(x0+r+0.6,y0); }
+      s.lineTo(x1-r,y0); s.quadraticCurveTo(x1,y0,x1,y0+r); s.lineTo(x1,y1-r); s.quadraticCurveTo(x1,y1,x1-r,y1); s.lineTo(x0+r,y1); s.quadraticCurveTo(x0,y1,x0,y1-r); s.lineTo(x0,y0+r); s.quadraticCurveTo(x0,y0,x0+r,y0);
+      return s.getSpacedPoints(900); };
+    const outlines = [bubbleShape(-1.5,1.05,3.6,2.5,0.9,true), bubbleShape(1.5,-1.15,3.6,2.5,0.9,false)];
+    const gw = 110, gh = 64;
+    for(let i=0;i<N;i++){
+      const u = Math.random(), v = Math.acos(2*Math.random()-1), th = u*Math.PI*2, r = 3.2+Math.random()*2.6;
+      cloud.set([Math.sin(v)*Math.cos(th)*r*1.5, Math.sin(v)*Math.sin(th)*r*0.85, Math.cos(v)*r], i*3);
+      const o = outlines[i%2], p = o[(Math.random()*o.length)|0], j = (Math.random()-0.5);
+      bubble.set([p.x + j*0.32, p.y + (Math.random()-0.5)*0.32, (Math.random()-0.5)*0.6], i*3);
+      const gx = i%gw, gy = Math.floor(i/gw)%gh;
+      grid.set([(gx/(gw-1)-0.5)*15, (gy/(gh-1)-0.5)*8.5, 0], i*3);
+      const c = C.blue.clone().lerp(C.cyan, Math.random()).lerp(new THREE.Color('#ffffff'), Math.random()<0.12?0.7:0);
+      col.set([c.r,c.g,c.b], i*3); rnd[i]=Math.random();
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(cloud,3));
+    g.setAttribute('aBubble', new THREE.BufferAttribute(bubble,3));
+    g.setAttribute('aGrid', new THREE.BufferAttribute(grid,3));
+    g.setAttribute('aCol', new THREE.BufferAttribute(col,3));
+    g.setAttribute('aRnd', new THREE.BufferAttribute(rnd,1));
+    const m = new THREE.ShaderMaterial({ transparent:true, depthWrite:false, blending:THREE.AdditiveBlending,
+      uniforms:{ uTime:{value:0}, uW:{value:new THREE.Vector3(1,0,0)}, uM:{value:new THREE.Vector3(99,99,0)}, uPR:{value:st.renderer.getPixelRatio()} },
+      vertexShader:`
+        attribute vec3 aBubble, aGrid, aCol; attribute float aRnd;
+        uniform float uTime, uPR; uniform vec3 uW, uM;
+        varying vec3 vCol; varying float vA;
+        void main(){
+          vec3 gp = aGrid; gp.z = sin(gp.x*0.7+uTime*0.9)*cos(gp.y*0.9+uTime*0.6)*0.9;
+          vec3 cp = position; float a = uTime*0.08; cp.xz = mat2(cos(a),-sin(a),sin(a),cos(a))*cp.xz;
+          vec3 p = cp*uW.x + aBubble*uW.y + gp*uW.z;
+          p += vec3(sin(uTime*0.7+aRnd*20.0), cos(uTime*0.6+aRnd*15.0), sin(uTime*0.5+aRnd*9.0))*0.06;
+          vec2 d = p.xy - uM.xy; float dist = length(d);
+          float f = exp(-dist*dist*0.55);
+          p.xy += normalize(d+1e-4)*f*1.6; p.z += f*1.8;
+          vCol = aCol + f*0.5; vA = 0.55 + f*0.45;
+          vec4 mv = modelViewMatrix*vec4(p,1.0);
+          gl_PointSize = (2.0 + aRnd*2.6 + f*3.0) * uPR * (9.0 / -mv.z);
+          gl_Position = projectionMatrix*mv;
+        }`,
+      fragmentShader:`
+        varying vec3 vCol; varying float vA;
+        void main(){ float d = length(gl_PointCoord-0.5); if(d>0.5) discard; gl_FragColor = vec4(vCol, vA*smoothstep(0.5,0.0,d)); }`
+    });
+    const pts = new THREE.Points(g,m); pts.frustumCulled=false; st.scene.add(pts);
+    const W = [new THREE.Vector3(1,0,0), new THREE.Vector3(0,1,0), new THREE.Vector3(0,0,1)];
+    const local = new THREE.Vector3();
+    return {
+      update(){
+        m.uniforms.uTime.value = st.t;
+        m.uniforms.uW.value.lerp(W[st.stage], 0.035);
+        pts.rotation.y = lerp(pts.rotation.y, st.mouse.x*0.5, 0.08);
+        pts.rotation.x = lerp(pts.rotation.x, -st.mouse.y*0.35, 0.08);
+        pts.updateMatrixWorld();
+        pointerWorld(st, tmpV); local.copy(tmpV); pts.worldToLocal(local);
+        if(st.target.lengthSq()===0 && st.mouse.lengthSq()<0.001) local.set(99,99,0);
+        m.uniforms.uM.value.lerp(local, 0.25);
+      }
+    };
+  }
+
+  /* ---------------- D3: glass speech bubbles (light) ---------------- */
+  function glass(st){
+    const sc = st.scene;
+    sc.add(new THREE.HemisphereLight(0xffffff, 0xbcd4ff, 0.75));
+    const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(3,5,8); sc.add(key);
+    const lc = new THREE.PointLight(0x3ad1fc, 2.2, 30); sc.add(lc);
+    const lb = new THREE.PointLight(0x026afd, 1.6, 30); lb.position.set(-6,-3,5); sc.add(lb);
+    function bubbleGeo(w,h,r,t,tail){
+      const x0=-w/2,y0=-h/2,x1=w/2,y1=h/2, s=new THREE.Shape();
+      s.moveTo(x0+r,y0); if(tail){ s.lineTo(x0+r+0.05,y0-0.75); s.lineTo(x0+r+0.65,y0); }
+      s.lineTo(x1-r,y0); s.quadraticCurveTo(x1,y0,x1,y0+r); s.lineTo(x1,y1-r); s.quadraticCurveTo(x1,y1,x1-r,y1); s.lineTo(x0+r,y1); s.quadraticCurveTo(x0,y1,x0,y1-r); s.lineTo(x0,y0+r); s.quadraticCurveTo(x0,y0,x0+r,y0);
+      const hi = new THREE.Path(), a0=x0+t,b0=y0+t,a1=x1-t,b1=y1-t, ri=Math.max(r-t,0.15);
+      hi.moveTo(a0+ri,b0); hi.lineTo(a1-ri,b0); hi.quadraticCurveTo(a1,b0,a1,b0+ri); hi.lineTo(a1,b1-ri); hi.quadraticCurveTo(a1,b1,a1-ri,b1); hi.lineTo(a0+ri,b1); hi.quadraticCurveTo(a0,b1,a0,b1-ri); hi.lineTo(a0,b0+ri); hi.quadraticCurveTo(a0,b0,a0+ri,b0);
+      s.holes.push(hi);
+      const g = new THREE.ExtrudeGeometry(s,{depth:0.45,bevelEnabled:true,bevelThickness:0.16,bevelSize:0.13,bevelSegments:6,curveSegments:24});
+      g.center(); return g;
+    }
+    const geoA = bubbleGeo(3.0,2.2,0.8,0.42,true), geoB = bubbleGeo(3.0,2.2,0.8,0.42,false);
+    const mk = c => new THREE.MeshPhysicalMaterial({color:c, metalness:0.15, roughness:0.18, clearcoat:1, clearcoatRoughness:0.08});
+    const defs = [
+      {g:geoA, c:'#026afd', s:1.0}, {g:geoB, c:'#0a52e0', s:1.0}, {g:geoA, c:'#3ad1fc', s:0.55}, {g:geoB, c:'#0135a3', s:0.45}, {g:geoA, c:'#53e0fe', s:0.35}, {g:geoB, c:'#026afd', s:0.3}
+    ];
+    // stage layouts: [x,y,z,rx,ry,rz]
+    const L = [
+      [[3.2,0.9,0,0.2,-0.5,0.1],[4.8,-1.3,-1.5,-0.2,-0.7,-0.1],[0.6,2.6,-2,0.4,0.3,0.3],[6.2,2.4,-3,0.1,0.8,0.2],[-1.5,-2.6,-1,0.3,0.4,-0.2],[7,-2.8,-2,-0.4,0.2,0.4]],
+      [[2.6,0.9,0.5,0,-0.25,0],[4.4,-0.8,-0.2,0,-0.25,0],[-4.5,2.8,-3,0.5,0.6,0.2],[7,2.6,-4,0.3,0.4,0.1],[-5.5,-2.5,-3,-0.3,0.5,0.4],[6.5,-3.0,-3,0.4,-0.3,0.2]],
+      [[-3.2,2.2,-2,0.6,0.9,0.4],[3.6,-2.0,-1,-0.5,-0.8,0.3],[4.5,2.0,0,0.2,-1.2,0.5],[-5.5,-1.8,-1,0.8,0.5,-0.4],[1.0,-3.2,-0.5,-0.2,0.9,0.6],[7.2,0.2,-2,0.5,-0.5,-0.3]],
+    ];
+    const meshes = defs.map((d,i)=>{ const m=new THREE.Mesh(d.g, mk(d.c)); m.scale.setScalar(d.s); const l=L[0][i]; m.position.set(l[0],l[1],l[2]); m.rotation.set(l[3],l[4],l[5]); sc.add(m); return m; });
+    return {
+      update(){
+        const lay = L[st.stage];
+        meshes.forEach((m,i)=>{
+          const l = lay[i], k = 0.04, depth = 1 + (2 + l[2]) * 0.25;
+          m.position.x = lerp(m.position.x, l[0] + st.mouse.x*0.6*depth, k);
+          m.position.y = lerp(m.position.y, l[1] + st.mouse.y*0.4*depth + Math.sin(st.t*0.8+i)*0.12, k);
+          m.position.z = lerp(m.position.z, l[2], k);
+          m.rotation.x = lerp(m.rotation.x, l[3] - st.mouse.y*0.9, k*1.5);
+          m.rotation.y = lerp(m.rotation.y, l[4] + st.mouse.x*1.1 + Math.sin(st.t*0.5+i)*0.08, k*1.5);
+          m.rotation.z = lerp(m.rotation.z, l[5], k);
+        });
+        lc.position.set(st.mouse.x*7, st.mouse.y*4.5, 4);
+        lb.position.set(-st.mouse.x*6, -st.mouse.y*3-1, 5);
+      }
+    };
+  }
+
+  /* ---------------- D4: wave surface ---------------- */
+  function wave(st){
+    const g = new THREE.PlaneGeometry(26,16,260,160);
+    const m = new THREE.ShaderMaterial({ transparent:true,
+      uniforms:{ uTime:{value:0}, uM:{value:new THREE.Vector2()}, uAmp:{value:1}, uFreq:{value:1}, uRip:{value:0}, c1:{value:C.navy}, c2:{value:C.blue}, c3:{value:C.ice} },
+      vertexShader:`
+        uniform float uTime, uAmp, uFreq, uRip; uniform vec2 uM;
+        varying float vH; varying vec3 vN; varying vec2 vP;
+        float h(vec2 p){
+          float f = uFreq;
+          float z = sin(p.x*0.45*f + uTime*0.6)*0.9 + sin(p.y*0.6*f - uTime*0.45)*0.7 + sin((p.x+p.y)*0.32*f + uTime*0.35)*0.8;
+          float d = distance(p, uM);
+          z += sin(d*2.2 - uTime*3.2)*exp(-d*0.28)*1.3*uRip;
+          return z*uAmp*0.55;
+        }
+        void main(){
+          vec2 p = position.xy; float e = 0.06;
+          float z = h(p);
+          vec3 n = normalize(vec3(h(p-vec2(e,0.0))-h(p+vec2(e,0.0)), h(p-vec2(0.0,e))-h(p+vec2(0.0,e)), 2.0*e));
+          vH = z; vN = normalMatrix*n; vP = p;
+          gl_Position = projectionMatrix*modelViewMatrix*vec4(p, z, 1.0);
+        }`,
+      fragmentShader:`
+        uniform vec3 c1,c2,c3; varying float vH; varying vec3 vN; varying vec2 vP;
+        void main(){
+          vec3 n = normalize(vN);
+          float l = clamp(dot(n, normalize(vec3(0.3,0.6,0.8))),0.0,1.0);
+          float spec = pow(clamp(dot(reflect(-normalize(vec3(-0.2,0.5,0.8)), n), vec3(0.0,0.0,1.0)),0.0,1.0), 24.0);
+          vec3 col = mix(c1, c2, smoothstep(-1.0,0.9,vH+l*0.6));
+          col = mix(col, c3, smoothstep(0.55,1.3,vH+l*0.5)*0.75) + spec*0.6*c3;
+          vec2 gl = abs(fract(vP*0.9)-0.5);
+          float line = smoothstep(0.035,0.0,min(gl.x,gl.y));
+          col += c3*line*0.12;
+          float edge = smoothstep(13.0,9.0,abs(vP.x))*smoothstep(8.0,5.0,abs(vP.y));
+          gl_FragColor = vec4(col, edge*0.95);
+        }`
+    });
+    const mesh = new THREE.Mesh(g,m); mesh.rotation.x = -1.05; mesh.position.set(0,-1.6,0); st.scene.add(mesh);
+    const STG = [{amp:1,freq:1,rx:-1.05,y:-1.6},{amp:1.8,freq:1.5,rx:-0.75,y:-0.6},{amp:0.6,freq:0.7,rx:-1.3,y:-2.4}];
+    const loc = new THREE.Vector3(); let rip = 0;
+    return {
+      update(){
+        const s = STG[st.stage];
+        m.uniforms.uTime.value = st.t;
+        m.uniforms.uAmp.value = lerp(m.uniforms.uAmp.value, s.amp, 0.03);
+        m.uniforms.uFreq.value = lerp(m.uniforms.uFreq.value, s.freq, 0.03);
+        mesh.rotation.x = lerp(mesh.rotation.x, s.rx + st.mouse.y*0.25, 0.04);
+        mesh.rotation.z = lerp(mesh.rotation.z, st.mouse.x*0.35, 0.05);
+        mesh.position.y = lerp(mesh.position.y, s.y, 0.04);
+        mesh.updateMatrixWorld();
+        ray.setFromCamera(st.mouse, st.camera);
+        const hit = ray.intersectObject(mesh)[0];
+        if(hit){ loc.copy(hit.point); mesh.worldToLocal(loc); m.uniforms.uM.value.lerp(new THREE.Vector2(loc.x,loc.y), 0.2); }
+        rip = lerp(rip, st.target.lengthSq()>0 ? 1 : 0.25, 0.05); m.uniforms.uRip.value = rip;
+      }
+    };
+  }
+
+  /* ---------------- D5: network ---------------- */
+  function network(st){
+    const N = 150, MAXL = 1600;
+    const nodes = [], targets = [[],[],[]];
+    for(let i=0;i<N;i++){
+      const v = new THREE.Vector3((Math.random()-0.5)*15,(Math.random()-0.5)*8,(Math.random()-0.5)*5);
+      nodes.push({p:v.clone(), off:Math.random()*10});
+      targets[0].push(v);
+      const side = i%2? 1:-1, a=Math.random()*Math.PI*2, b=Math.acos(2*Math.random()-1), r=1.2+Math.random()*1.6;
+      targets[1].push(new THREE.Vector3(side*3.6 + Math.sin(b)*Math.cos(a)*r, Math.sin(b)*Math.sin(a)*r, Math.cos(b)*r));
+      const r2 = 3.4;
+      targets[2].push(new THREE.Vector3(Math.sin(b)*Math.cos(a)*r2, Math.sin(b)*Math.sin(a)*r2, Math.cos(b)*r2));
+    }
+    const ppos = new Float32Array(N*3), pg = new THREE.BufferGeometry(); pg.setAttribute('position', new THREE.BufferAttribute(ppos,3));
+    const pm = new THREE.PointsMaterial({color:0x75f2ff, size:0.09, transparent:true, opacity:0.95, blending:THREE.AdditiveBlending, depthWrite:false});
+    const group = new THREE.Group(); st.scene.add(group);
+    group.add(new THREE.Points(pg,pm));
+    const lpos = new Float32Array(MAXL*6), lcol = new Float32Array(MAXL*6), lg = new THREE.BufferGeometry();
+    lg.setAttribute('position', new THREE.BufferAttribute(lpos,3)); lg.setAttribute('color', new THREE.BufferAttribute(lcol,3));
+    const lines = new THREE.LineSegments(lg, new THREE.LineBasicMaterial({vertexColors:true, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false}));
+    lines.frustumCulled = false; group.add(lines);
+    const mw = new THREE.Vector3(), ml = new THREE.Vector3(), cB = C.blue, cC = C.cyan, cI = C.ice;
+    return {
+      update(){
+        group.rotation.y = lerp(group.rotation.y, st.mouse.x*0.6 + (st.stage===2? st.t*0.15 : 0), 0.05);
+        group.rotation.x = lerp(group.rotation.x, -st.mouse.y*0.4, 0.05);
+        group.updateMatrixWorld();
+        pointerWorld(st, mw); ml.copy(mw); group.worldToLocal(ml);
+        const active = st.target.lengthSq()>0;
+        const T = targets[st.stage];
+        nodes.forEach((n,i)=>{
+          const t = T[i];
+          n.p.x = lerp(n.p.x, t.x + Math.sin(st.t*0.5+n.off)*0.25, 0.03);
+          n.p.y = lerp(n.p.y, t.y + Math.cos(st.t*0.4+n.off)*0.25, 0.03);
+          n.p.z = lerp(n.p.z, t.z, 0.03);
+          if(active){ const d = n.p.distanceTo(ml); if(d<3.2){ n.p.lerp(ml, 0.04*(1-d/3.2)); } }
+          ppos[i*3]=n.p.x; ppos[i*3+1]=n.p.y; ppos[i*3+2]=n.p.z;
+        });
+        pg.attributes.position.needsUpdate = true;
+        let k = 0; const R = 1.9;
+        for(let i=0;i<N && k<MAXL;i++){
+          const a = nodes[i].p;
+          if(active){ const d=a.distanceTo(ml); if(d<3.0){ const s=(1-d/3.0); lpos.set([a.x,a.y,a.z,ml.x,ml.y,ml.z],k*6); lcol.set([cI.r*s,cI.g*s,cI.b*s,cI.r*s,cI.g*s,cI.b*s],k*6); k++; } }
+          for(let j=i+1;j<N && k<MAXL;j++){
+            const b = nodes[j].p, d = a.distanceTo(b);
+            if(d<R){ const s=(1-d/R)*0.8, c = cB.clone().lerp(cC, s); lpos.set([a.x,a.y,a.z,b.x,b.y,b.z],k*6); lcol.set([c.r*s,c.g*s,c.b*s,c.r*s,c.g*s,c.b*s],k*6); k++; }
+          }
+        }
+        lg.setDrawRange(0,k*2); lg.attributes.position.needsUpdate = true; lg.attributes.color.needsUpdate = true;
+      }
+    };
+  }
+
+  /* ---------------- D6: flowing lines (light) ---------------- */
+  function flowLines(st){
+    const L = 64, P = 180, group = new THREE.Group(); st.scene.add(group);
+    const objs = [];
+    for(let i=0;i<L;i++){
+      const pos = new Float32Array(P*3), g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.BufferAttribute(pos,3));
+      const t = i/(L-1), c = C.royal.clone().lerp(C.blue, Math.min(t*1.6,1)).lerp(C.cyan, Math.max(0,t*1.4-0.5));
+      const line = new THREE.Line(g, new THREE.LineBasicMaterial({color:c, transparent:true, opacity:0.75}));
+      line.frustumCulled=false; group.add(line); objs.push({pos,g,base:(t-0.5)*9});
+    }
+    const STG = [{amp:0.7,f:0.45,rz:-0.18},{amp:1.6,f:0.3,rz:0.35},{amp:0.35,f:0.8,rz:-0.6}];
+    const cur = {amp:0.7,f:0.45,rz:-0.18}, mw = new THREE.Vector3(), ml = new THREE.Vector3();
+    let strength = 0;
+    return {
+      update(){
+        const s = STG[st.stage];
+        for(const k in cur) cur[k] = lerp(cur[k], s[k], 0.03);
+        group.rotation.z = cur.rz + st.mouse.x*0.12;
+        group.rotation.x = -st.mouse.y*0.25;
+        group.updateMatrixWorld();
+        pointerWorld(st, mw); ml.copy(mw); group.worldToLocal(ml);
+        strength = lerp(strength, st.target.lengthSq()>0 ? 1 : 0, 0.06);
+        objs.forEach((o,i)=>{
+          for(let j=0;j<P;j++){
+            const x = (j/(P-1)-0.5)*20;
+            let y = o.base + Math.sin(x*cur.f + st.t*0.6 + i*0.09)*cur.amp + Math.sin(x*0.17 - st.t*0.3)*0.6;
+            const dx = x-ml.x, dy = y-ml.y, d2 = dx*dx+dy*dy;
+            y += Math.sign(dy||1)*Math.exp(-d2*0.22)*1.7*strength;
+            const z = Math.cos(x*0.3 + i*0.07 + st.t*0.4)*1.2;
+            o.pos[j*3]=x; o.pos[j*3+1]=y; o.pos[j*3+2]=z;
+          }
+          o.g.attributes.position.needsUpdate = true;
+        });
+      }
+    };
+  }
+
+  const F = { ribbon, particles, glass, wave, network, lines:flowLines };
+  document.querySelectorAll('[data-demo]').forEach(el=>{ try{ makeDemo(el, F[el.dataset.demo]); }catch(e){ console.error(e); } });
+
+  const clock = new THREE.Clock();
+  (function loop(){
+    requestAnimationFrame(loop);
+    const dt = Math.min(clock.getDelta(), 0.05);
+    for(const {st,api} of demos){
+      if(!st.visible) continue;
+      st.t += dt;
+      st.mouse.lerp(st.target, 0.07);
+      api.update(dt);
+      st.renderer.render(st.scene, st.camera);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
