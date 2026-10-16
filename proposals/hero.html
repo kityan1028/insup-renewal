@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Insup リニューアル｜最初の画面・アクセス・ラウンジ</title>
+<link rel="icon" href="../assets/img/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b2d6b; --blue:#1976f6; --sky:#4db3ff; --pale:#ebf4ff; --deep:#06183d;
+    --bg:#f4f7fc; --card:#fff; --ink:#0b1d40; --sub:#5b6884; --line:#d9e2f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .en{font-family:Inter,sans-serif}
+  .wrap{max-width:1240px;margin:0 auto;padding:36px 16px 80px}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .top img{height:44px}
+  h1{font-size:24px;margin:0}
+  h2{font-size:21px;margin:60px 0 4px;padding-top:16px;border-top:2px solid var(--ink)}
+  h2 small{font-size:13px;color:var(--sub);font-weight:500;margin-left:8px}
+  .lead{color:var(--sub);margin:0 0 6px}
+  .note{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:16px 0;font-size:14px}
+  .note b{color:var(--ink)}
+  .sw{display:inline-flex;gap:6px;align-items:center;margin-right:12px;font-size:12px;color:var(--sub)}
+  .sw i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(0,0,0,.1);display:inline-block}
+  a{color:var(--blue)}
+  .id{font-size:12px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--ink);display:inline-block;padding:2px 10px;border-radius:99px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:22px}
+  .card .meta{padding:14px 20px 18px}
+  .card h3{font-size:17px;margin:8px 0 4px}
+  .card p{margin:0;color:var(--sub);font-size:13.5px}
+
+  /* ---------- slide frame ---------- */
+  .slide{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--deep);color:#fff;cursor:crosshair;touch-action:pan-y}
+  @media (max-width:700px){ .slide{aspect-ratio:9/16} }
+  .slide .fx-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .layer{position:absolute;inset:0;transition:opacity 1.2s ease, transform 1.4s cubic-bezier(.2,.7,.2,1), filter 1.2s}
+  .shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,24,61,.55) 0%,rgba(6,24,61,0) 22%,rgba(6,24,61,0) 52%,rgba(6,24,61,.88) 100%)}
+  .ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;padding:18px 24px 22px}
+  .bar{display:flex;align-items:center;justify-content:space-between}
+  .plate{display:flex;align-items:center;gap:6px;background:#fff;padding:5px 12px 5px 8px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+  .plate img{height:22px}.plate img.type{height:14px}
+  .bar .menu{font:600 11px Inter,sans-serif;letter-spacing:.2em;opacity:.9}
+  .entry{margin-top:auto}
+  .entry .tag{font:600 11px Inter,sans-serif;letter-spacing:.3em;opacity:.85}
+  .entry .msg{font-size:clamp(13px,1.5vw,17px);font-weight:500;margin:4px 0 14px;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px}
+  @media (max-width:700px){ .doors{grid-template-columns:1fr} }
+  .door{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-radius:14px;text-decoration:none;color:#fff;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .25s, background .25s}
+  .door:hover{transform:translateY(-2px)}
+  .door small{display:block;font:600 10.5px Inter,sans-serif;letter-spacing:.25em;opacity:.85}
+  .door b{font-size:clamp(14px,1.6vw,18px);font-weight:700}
+  .door .arr{font:600 18px Inter,sans-serif}
+  .door.biz{background:linear-gradient(100deg,rgba(25,118,246,.92),rgba(77,179,255,.85))}
+  .door.car{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.45)}
+  .ctrl{position:absolute;right:16px;bottom:16px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:60%}
+  .ctrl button{pointer-events:auto;font:700 11px "Noto Sans JP",sans-serif;border-radius:99px;padding:6px 12px;cursor:pointer;color:#fff;background:rgba(6,24,61,.55);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px)}
+  .ctrl button.on{background:#fff;color:var(--navy)}
+  .hint{position:absolute;left:24px;top:62px;font-size:11px;opacity:.75;pointer-events:none}
+  @media (max-width:700px){ .ctrl{top:60px;bottom:auto;right:12px;max-width:80%} .hint{display:none} .entry .msg{display:none} }
+
+  /* H1 photo layer */
+  .photo{background:url(../assets/img/reception.jpg) 44% 50%/cover no-repeat;transform:scale(1.08)}
+  .h1 .fx-host{position:absolute;inset:0;mix-blend-mode:screen}
+  .h1 .fx-host .fx-canvas{transition:opacity .6s}
+  .h1 .ctrl{top:58px;bottom:auto}
+  .h1 .hint{display:none}
+
+  /* H2 second stage */
+  .h2 .stage3d{opacity:0;background:radial-gradient(120% 90% at 70% 20%,#0d3a8a 0%,#06183d 55%,#020a1e 100%)}
+  .h2.go .stage3d{opacity:1}
+  .h2.go .photo-layer{opacity:0;filter:blur(6px)}
+  .h2 .s2ui{opacity:0;transition:opacity .8s .5s}
+  .h2.go .s2ui{opacity:1}
+  .h2.go .s1ui{opacity:0}
+  .s1ui{transition:opacity .5s}
+  .s2ui .hero{margin:auto 0;max-width:640px}
+  .s2ui .eyebrow{font:600 11px Inter,sans-serif;letter-spacing:.3em;opacity:.8}
+  .s2ui .h{font-weight:900;font-size:clamp(20px,2.6vw,32px);line-height:1.35;margin:6px 0 4px}
+  .s2ui .h em{font-style:normal;background:linear-gradient(90deg,#9fdcff,var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ---------- access slide ---------- */
+  .access{background:linear-gradient(135deg,#06183d,#0b2d6b);display:grid;grid-template-columns:42% 1fr;cursor:default}
+  @media (max-width:700px){ .access{grid-template-columns:1fr;grid-template-rows:46% 1fr} }
+  .access .pic{background:url(../assets/img/building.jpg) 50% 38%/cover no-repeat;position:relative}
+  .access .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,24,61,0) 60%,rgba(6,24,61,.9) 100%)}
+  @media (max-width:700px){ .access .pic::after{background:linear-gradient(180deg,rgba(6,24,61,0) 55%,rgba(6,24,61,.95) 100%)} }
+  .access .txt{padding:clamp(18px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
+  .kicker{font:700 12px Inter,sans-serif;letter-spacing:.35em;color:var(--sky)}
+  .access h4{font-size:clamp(20px,2.4vw,30px);margin:4px 0 14px;font-weight:900}
+  .addr{font-size:clamp(13px,1.3vw,16px);line-height:1.8}
+  .addr .bld{font-weight:700;font-size:1.1em}
+  .addr .pc{display:inline-block;background:#ffe9a8;color:#5c4300;font-size:11px;font-weight:700;padding:0 6px;border-radius:4px;margin-right:6px}
+  .stations{list-style:none;padding:0;margin:16px 0 18px;display:grid;gap:8px}
+  .stations li{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:8px 14px;font-size:clamp(12.5px,1.2vw,15px)}
+  .stations .ln{font:700 11px "Noto Sans JP";background:var(--blue);border-radius:6px;padding:2px 8px;white-space:nowrap}
+  .stations .min{margin-left:auto;font:700 clamp(15px,1.6vw,20px) Inter,sans-serif;color:#9fdcff}
+  .stations .min small{font-size:.6em;color:#fff;margin-left:2px}
+  .btn{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;background:#fff;color:var(--navy);font-weight:700;font-size:13px;padding:9px 18px;border-radius:99px;text-decoration:none}
+
+  /* ---------- lounge slide ---------- */
+  .lounge{background:var(--pale);color:var(--ink);display:grid;grid-template-columns:58% 1fr;cursor:default}
+  @media (max-width:700px){ .lounge{grid-template-columns:1fr;grid-template-rows:40% 1fr} }
+  .lounge .gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:6px;padding:6px}
+  .lounge .gal div{background-size:cover;background-position:center;border-radius:10px}
+  .lounge .gal .a{grid-row:1/3;background-image:url(../assets/img/lounge-main.jpg)}
+  .lounge .gal .b{background-image:url(../assets/img/lounge-work.jpg)}
+  .lounge .gal .c{background-image:url(../assets/img/lounge-counter.jpg)}
+  @media (max-width:700px){ .lounge .gal{grid-template-columns:1fr;grid-template-rows:1fr} .lounge .gal .b,.lounge .gal .c{display:none} .lounge .gal .a{grid-row:auto} }
+  .lounge .txt{padding:clamp(16px,3vw,40px);display:flex;flex-direction:column;justify-content:center}
+  .lounge .kicker{color:var(--blue)}
+  .lounge h4{font-size:clamp(19px,2.2vw,28px);margin:4px 0 10px;font-weight:900;color:var(--navy)}
+  .lounge p.body{margin:0 0 12px;font-size:clamp(12.5px,1.15vw,15px);color:#33415e}
+  .uses{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .uses span{font-size:12px;font-weight:700;color:var(--navy);background:#fff;border:1px solid #cfe0f7;border-radius:99px;padding:3px 12px}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px}
+  .facts div{background:#fff;border-radius:8px;padding:6px 10px;border:1px solid #dbe7f7}
+  .facts b{display:block;color:var(--blue);font:700 10px Inter,sans-serif;letter-spacing:.15em}
+
+  /* ---------- copy options ---------- */
+  .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin-top:16px}
+  .opt{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .opt h5{font-size:17px;margin:8px 0 6px;color:var(--navy)}
+  .opt p{margin:0 0 8px;font-size:13.5px;color:#33415e}
+  .opt ul{margin:0;padding-left:1.2em;font-size:12.5px;color:var(--sub)}
+  .opt .why{margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;color:var(--sub)}
+
+  .ask{background:var(--navy);color:#fff;border-radius:16px;padding:22px 24px;margin-top:56px}
+  .ask h2{border:0;margin:0 0 8px;padding:0;color:#fff}
+  .ask ol{margin:0;padding-left:1.4em}
+  footer{margin-top:36px;color:var(--sub);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../assets/img/logo-mark.png" alt=""><h1>最初の画面・アクセス・ラウンジ　見本</h1></div>
+  <p class="lead">いただいた写真を使った見本です。受付サインとラウンジの写真は、文字を消して高画質にしてあります。</p>
+  <div class="note">
+    <b>色とフォントについて：</b>ロゴのボードにあるブランドカラーとフォントに合わせました。
+    <div style="margin-top:6px"><span class="sw"><i style="background:#0b2d6b"></i>#0B2D6B</span><span class="sw"><i style="background:#1976f6"></i>#1976F6</span><span class="sw"><i style="background:#4db3ff"></i>#4DB3FF</span><span class="sw"><i style="background:#ebf4ff"></i>#EBF4FF</span>／ Noto Sans JP ＋ <span class="en">Inter</span></div>
+    <div style="margin-top:6px"><a href="index.html">← 提案一覧</a>　<a href="design.html">配色×3D背景の案（D1〜D6）</a></div>
+  </div>
+
+  <!-- ================= H1 ================= -->
+  <h2>① 最初の画面（入口ページ）<small>マウスを動かしてみてください</small></h2>
+
+  <div class="card">
+    <div class="slide h1" id="h1">
+      <div class="layer photo" id="h1photo"></div>
+      <div class="fx-host" id="h1fx"></div>
+      <div class="shade"></div>
+      <div class="ui">
+        <div class="bar"><div class="plate"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><span class="menu">MENU</span></div>
+        <div class="entry">
+          <div class="tag">WELCOME TO INSUP</div>
+          <div class="msg">テレアポBPOを軸に、インサイドセールス支援を行う企業です。</div>
+          <div class="doors">
+            <a class="door biz" href="#"><span><small>FOR BUSINESS</small><b>導入をご検討の企業様</b></span><span class="arr">→</span></a>
+            <a class="door car" href="#"><span><small>FOR CAREERS</small><b>一緒に働きたい方</b></span><span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="hint">写真の上の3Dの種類 →</div>
+      <div class="ctrl" id="h1ctrl">
+        <button type="button" data-fx="ribbon" class="on">光のリボン（D1）</button>
+        <button type="button" data-fx="particles">粒子（D2）</button>
+        <button type="button" data-fx="network">ネットワーク（D5）</button>
+        <button type="button" data-fx="none">3Dなし</button>
+      </div>
+    </div>
+    <div class="meta"><span class="id">H1</span><h3>写真の上に3Dを重ねる</h3>
+      <p>受付サインの写真を画面いっぱいに敷き、その上で3Dが光りながらマウスに合わせて動きます。写真もマウスの方向へ少し動きます。右下のボタンで3Dの種類を切り替えられます。白い背景の案（D3・D6）は写真の上だと見えにくいため外しています。</p></div>
+  </div>
+
+  <div class="card">
+    <div class="slide h2" id="h2">
+      <div class="layer stage3d" id="h2three"></div>
+      <div class="layer photo-layer" id="h2photo"></div>
+      <div class="shade"></div>
+      <div class="ui s1ui">
+        <div class="bar"><div class="plate"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><span class="menu">MENU</span></div>
+        <div class="entry">
+          <div class="tag">WELCOME TO INSUP</div>
+          <div class="msg">テレアポBPOを軸に、インサイドセールス支援を行う企業です。</div>
+          <div class="doors">
+            <a class="door biz" href="#"><span><small>FOR BUSINESS</small><b>導入をご検討の企業様</b></span><span class="arr">→</span></a>
+            <a class="door car" href="#"><span><small>FOR CAREERS</small><b>一緒に働きたい方</b></span><span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="ui s2ui">
+        <div class="bar"><div class="plate"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><span class="menu">MENU</span></div>
+        <div class="hero"><div class="eyebrow">FOR BUSINESS</div><div class="h">即戦力テレアポ人材の確保なら<br><em>レンタルプロアポインター</em></div><div style="font-size:13px;opacity:.85">テレアポ専門業務委託</div></div>
+      </div>
+      <div class="ctrl"><button type="button" id="h2next">「企業様」を押したときの切り替え ▶</button></div>
+    </div>
+    <div class="meta"><span class="id">H2</span><h3>写真そのものを立体的に動かす</h3>
+      <p>手前の植物や受付カウンターは大きく、奥の壁やガラスの部屋は小さく動くので、写真に奥行きが出ます。サインはマウスを近づけるほど青く光り、壁にはマウスの位置にスポットライトが当たります。右下のボタンを押すと、サインに吸い込まれるように3D背景（ここでは見本としてD1）のページへ切り替わります。</p></div>
+  </div>
+
+  <!-- ================= ACCESS ================= -->
+  <h2>② アクセスの画面<small>ビルの写真を使用</small></h2>
+  <div class="card">
+    <div class="slide access">
+      <div class="pic"></div>
+      <div class="txt">
+        <div class="kicker">ACCESS</div>
+        <h4>アクセス</h4>
+        <div class="addr"><span class="pc">〒 確認中</span>北海道札幌市中央区南三条西3丁目11-1<br><span class="bld">サザンクロス札幌 9F</span></div>
+        <ul class="stations">
+          <li><span class="ln">地下鉄</span>すすきの駅<span class="min">3<small>分</small></span></li>
+          <li><span class="ln">地下鉄</span>大通駅<span class="min">5<small>分</small></span></li>
+        </ul>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%B5%E3%82%B6%E3%83%B3%E3%82%AF%E3%83%AD%E3%82%B9%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">Googleマップで見る ↗</a>
+      </div>
+    </div>
+    <div class="meta"><span class="id">A</span><h3>アクセス</h3>
+      <p>企業様向け・働きたい方向けの両方のページで、会社概要の近くに入れる予定です。駅は近い順に並べ、「分」は徒歩の時間です。郵便番号はまだいただいていないので「確認中」にしています。</p></div>
+  </div>
+
+  <!-- ================= LOUNGE ================= -->
+  <h2>③ ラウンジの画面<small>来客・ご訪問・商談</small></h2>
+  <div class="card">
+    <div class="slide lounge">
+      <div class="gal"><div class="a"></div><div class="b"></div><div class="c"></div></div>
+      <div class="txt">
+        <div class="kicker">LOUNGE</div>
+        <h4>打ち合わせは、<br>眺めのいいラウンジで。</h4>
+        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+        <div class="uses"><span>ご来社</span><span>ご訪問</span><span>商談</span></div>
+        <div class="facts">
+          <div><b>HOURS</b>8:00〜20:00</div>
+          <div><b>BOOTH</b>テレフォンブース 2台</div>
+          <div><b>POWER</b>全席コンセント完備</div>
+          <div><b>DRINK</b>自動販売機 2台</div>
+        </div>
+      </div>
+    </div>
+    <div class="meta"><span class="id">L</span><h3>ラウンジ</h3>
+      <p>文字を消したラウンジの写真3枚（全体・作業スペース・カウンター席）を並べています。見本の文章は下のL1です。下の4つの設備の情報は、いただいたチラシから載せています。</p></div>
+  </div>
+
+  <h3 style="margin:28px 0 0">ラウンジの説明文の案</h3>
+  <div class="opts">
+    <div class="opt"><span class="id">L1</span><h5>打ち合わせは、眺めのいいラウンジで。</h5>
+      <p>ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+      <ul><li>設備情報（利用時間・ブースなど）も載せる</li></ul>
+      <div class="why">景色と居心地のよさを中心に伝えます。</div></div>
+    <div class="opt"><span class="id">L2</span><h5>来客・商談ラウンジ</h5>
+      <p>サザンクロス札幌10階のラウンジを、ご来社・ご訪問・商談の場としてご用意しています。カウンター席・テーブル席・ソファ席があり、人数や用途に合わせてお使いいただけます。</p>
+      <ul><li>設備情報も載せる</li></ul>
+      <div class="why">どんな席があるかを具体的に伝えます。</div></div>
+    <div class="opt"><span class="id">L3</span><h5>ご来社の際は、10階のラウンジへ。</h5>
+      <p>商談やお打ち合わせは、10階のラウンジスペースで行います。テレフォンブースや全席コンセントもあり、待ち時間のちょっとした作業にも便利です。</p>
+      <ul><li>設備情報も載せる</li></ul>
+      <div class="why">来社するときの案内として、わかりやすく伝えます。</div></div>
+  </div>
+
+  <div class="ask">
+    <h2>選んでいただきたいこと・確認したいこと</h2>
+    <ol>
+      <li>① 最初の画面：H1（写真の上に3D）とH2（写真が立体的に動く）、どちらにしますか？ H1の場合は3Dの種類も選んでください。</li>
+      <li>② アクセス：郵便番号を教えてください。会社概要の住所も、この新しい住所に変えてよいですか？</li>
+      <li>③ ラウンジ：説明文はL1〜L3のどれにしますか？ チラシに「入居者限定」とありましたが、来客・商談で使えるということで合っていますか？ 利用時間などの設備情報も載せてよいですか？</li>
+      <li>④ 前回のデザイン案からの続き：フルリモートのコピー（B1〜B4・W1〜W4）と、スライドの並び順の確認もお願いします。</li>
+    </ol>
+  </div>
+  <footer>見本 v3 ／ 2026-10-17 ／ 写真：受付サイン（文字消し・AIで高画質化）、ビル、ラウンジ（AIで文字消し・切り抜き）</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../assets/js/fx.js?v=1"></script>
+<script>
+(() => {
+  /* H1: photo + switchable 3D overlay */
+  const h1 = document.getElementById('h1'), host = document.getElementById('h1fx'), photo = document.getElementById('h1photo');
+  const layers = {};
+  ['ribbon', 'particles', 'network'].forEach(n => { const st = InsupFX.mount(host, n, { hit: h1 }); st.scene.traverse(o => { const u = o.material && o.material.uniforms; if (u && u.uAlpha) u.uAlpha.value = 0.72; }); st.enabled = n === 'ribbon'; st.canvas.style.opacity = n === 'ribbon' ? 1 : 0; layers[n] = st; });
+  document.getElementById('h1ctrl').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    document.querySelectorAll('#h1ctrl button').forEach(x => x.classList.toggle('on', x === b));
+    for (const [n, st] of Object.entries(layers)) { const on = n === b.dataset.fx; st.enabled = on; st.canvas.style.opacity = on ? 1 : 0; }
+  });
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  h1.addEventListener('pointermove', e => { const r = h1.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - 0.5; ty = (e.clientY - r.top) / r.height - 0.5; });
+  h1.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
+  (function pan() { mx += (tx - mx) * 0.06; my += (ty - my) * 0.06; photo.style.transform = `scale(1.08) translate(${-mx * 3}%, ${-my * 2.4}%)`; requestAnimationFrame(pan); })();
+
+  /* H2: depth-parallax photo → zoom into the sign → 3D page */
+  const h2 = document.getElementById('h2');
+  const pst = InsupFX.mount(document.getElementById('h2photo'), st => InsupFX.FX.photoDepth(st, {
+    image: '../assets/img/reception.jpg', depth: '../assets/img/reception-depth.png', imageAspect: 4415 / 2160, center: [0.45, 0.55], sign: [0.438, 0.58]
+  }), { hit: h2 });
+  const rst = InsupFX.mount(document.getElementById('h2three'), 'ribbon', { hit: h2 });
+  rst.enabled = false;
+  document.getElementById('h2next').addEventListener('click', e => {
+    const go = !h2.classList.contains('go');
+    e.currentTarget.textContent = go ? '◀ 最初の画面に戻る' : '「企業様」を押したときの切り替え ▶';
+    pst.next(go ? 1 : 0);
+    if (go) { rst.enabled = true; setTimeout(() => h2.classList.add('go'), 350); }
+    else { h2.classList.remove('go'); setTimeout(() => { if (!h2.classList.contains('go')) rst.enabled = false; }, 1300); }
+  });
+})();
+</script>
+</body>
+</html>
