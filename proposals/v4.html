@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Insup リニューアル｜確認ページ v4</title>
+<link rel="icon" href="../assets/img/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b2d6b; --blue:#1976f6; --sky:#4db3ff; --pale:#ebf4ff; --deep:#06183d;
+    --bg:#f4f7fc; --card:#fff; --ink:#0b1d40; --sub:#5b6884; --line:#d9e2f0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",system-ui,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1240px;margin:0 auto;padding:36px 16px 80px}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .top img{height:44px}
+  h1{font-size:24px;margin:0}
+  h2{font-size:21px;margin:60px 0 4px;padding-top:16px;border-top:2px solid var(--ink)}
+  h2 small{font-size:13px;color:var(--sub);font-weight:500;margin-left:8px}
+  .lead{color:var(--sub);margin:0 0 6px}
+  .note{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:16px 0;font-size:14px}
+  .done{display:inline-block;background:#e3f6ea;color:#1b6b3a;font-size:11.5px;font-weight:700;padding:1px 9px;border-radius:99px;margin-right:6px}
+  a{color:var(--blue)}
+  .id{font-size:12px;font-weight:700;letter-spacing:.1em;color:#fff;background:var(--ink);display:inline-block;padding:2px 10px;border-radius:99px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:22px}
+  .card .meta{padding:14px 20px 18px}
+  .card h3{font-size:17px;margin:8px 0 4px}
+  .card p{margin:0;color:var(--sub);font-size:13.5px}
+
+  .slide{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--deep);color:#fff;touch-action:pan-y}
+  @media (max-width:700px){ .slide{aspect-ratio:9/16} }
+  .fx-host{position:absolute;inset:0}
+  .fx-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transition:opacity .6s}
+  .plate{display:inline-flex;align-items:center;gap:6px;background:#fff;padding:5px 12px 5px 8px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+  .plate img{height:22px}.plate img.type{height:14px}
+  .bar{display:flex;align-items:center;justify-content:space-between}
+  .bar .menu{font:600 11px Inter,sans-serif;letter-spacing:.2em;opacity:.9}
+
+  /* ---------- entrance (decided) ---------- */
+  .ent .photo{position:absolute;inset:-4%;background:url(../assets/img/reception.jpg) 44% 50%/cover no-repeat;filter:brightness(1.16) saturate(1.06) contrast(.96)}
+  .ent .fx-host{mix-blend-mode:screen}
+  .ent .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 55% at 45% 38%,rgba(235,244,255,.22),rgba(235,244,255,0) 70%)}
+  .ent .shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,24,61,.18) 0%,rgba(6,24,61,0) 18%,rgba(6,24,61,0) 60%,rgba(6,24,61,.62) 100%)}
+  .ent .ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;padding:18px 24px 22px}
+  .entry{margin-top:auto}
+  .entry .tag{font:600 11px Inter,sans-serif;letter-spacing:.3em;opacity:.95;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+  .entry .msg{font-size:clamp(13px,1.5vw,17px);font-weight:500;margin:4px 0 14px;text-shadow:0 2px 12px rgba(0,0,0,.45)}
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px}
+  @media (max-width:700px){ .doors{grid-template-columns:1fr} .entry .msg{display:none} }
+  .door{pointer-events:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-radius:14px;text-decoration:none;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .25s}
+  .door:hover{transform:translateY(-2px)}
+  .door small{display:block;font:600 10.5px Inter,sans-serif;letter-spacing:.25em;opacity:.85}
+  .door b{font-size:clamp(14px,1.6vw,18px)}
+  .door .arr{font:600 18px Inter,sans-serif}
+  .door.biz{background:linear-gradient(100deg,rgba(25,118,246,.95),rgba(77,179,255,.9));color:#fff}
+  .door.car{background:rgba(255,255,255,.82);color:var(--navy)}
+
+  /* ---------- palette × copy previewer ---------- */
+  .picker{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:18px}
+  .prow{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .prow:last-child{border:0}
+  .prow > b{flex:0 0 78px;font-size:13px;padding-top:7px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opts button{font:500 13px "Noto Sans JP",sans-serif;background:#f6f9ff;border:1.5px solid var(--line);border-radius:10px;padding:6px 12px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:8px;text-align:left}
+  .opts button.on{border-color:var(--blue);background:#e8f1ff;box-shadow:0 0 0 2px rgba(25,118,246,.15)}
+  .opts button .k{font:700 11px Inter,sans-serif;color:#fff;background:var(--ink);border-radius:99px;padding:1px 7px}
+  .opts button.on .k{background:var(--blue)}
+  .opts .chip{width:30px;height:20px;border-radius:5px;border:1px solid rgba(0,0,0,.12);flex:0 0 auto}
+  .opts button small{display:block;font-size:11px;color:var(--sub)}
+  @media (max-width:700px){ .prow{flex-direction:column;gap:4px} .prow > b{padding:0} }
+
+  .pv{color:#fff}
+  .pv.light{color:var(--navy)}
+  .pv .ui{position:absolute;inset:0;display:grid;grid-template-columns:1.1fr .9fr;gap:4%;padding:18px 7% 26px 24px;pointer-events:none}
+  .pv .bar{grid-column:1/3;align-self:start}
+  .pv .copyside{align-self:center;grid-row:2}
+  .pv .photo-ph{grid-row:2;align-self:center;aspect-ratio:4/3;border:2px dashed currentColor;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;opacity:.75;font-weight:700;font-size:clamp(12px,1.3vw,16px);background:rgba(255,255,255,.08);backdrop-filter:blur(4px)}
+  .pv.light .photo-ph{background:rgba(255,255,255,.55)}
+  .photo-ph small{font-weight:500;font-size:.8em;opacity:.8}
+  .pv .ui{grid-template-rows:auto 1fr}
+  @media (max-width:700px){ .pv .ui{grid-template-columns:1fr;grid-template-rows:auto 1fr auto;padding:16px 18px 22px} .pv .bar{grid-column:1} .pv .photo-ph{grid-row:3;aspect-ratio:16/9} }
+  .eyebrow{font:700 11.5px Inter,sans-serif;letter-spacing:.35em;opacity:.85}
+  .pv .copy{font-weight:900;font-size:clamp(22px,3.3vw,44px);line-height:1.3;margin:8px 0 6px;letter-spacing:.02em}
+  .pv .en{font:600 clamp(10px,1vw,13px) Inter,sans-serif;letter-spacing:.18em;opacity:.75}
+  .pv .body{font-size:clamp(12px,1.15vw,15px);margin:12px 0 14px;max-width:34em;opacity:.92}
+  .pts{display:flex;gap:8px;flex-wrap:wrap}
+  .pts span{font-size:clamp(11px,1vw,13px);font-weight:700;border-radius:10px;padding:6px 12px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3)}
+  .pv.light .pts span{background:#fff;border-color:#cfe0f7}
+  .pts span b{display:block;font:700 10px Inter,sans-serif;letter-spacing:.15em;opacity:.75}
+  .dots{position:absolute;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.3}
+  .dots i.on{opacity:1;transform:scale(1.4)}
+  .now{margin-top:12px;background:var(--ink);color:#fff;border-radius:12px;padding:10px 16px;font-size:14px}
+  .now b{color:#9fdcff}
+
+  /* ---------- lounge ---------- */
+  .lounge{background:var(--pale);color:var(--ink);display:grid;grid-template-columns:58% 1fr}
+  @media (max-width:700px){ .lounge{grid-template-columns:1fr;grid-template-rows:42% 1fr} }
+  .gal{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:6px;padding:6px}
+  .gal .t{position:relative;overflow:hidden;border-radius:10px;background:#cfdcef}
+  .gal .t.a{grid-row:1/3}
+  @media (max-width:700px){ .gal{grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr} .gal .t.a{grid-row:auto;grid-column:1/3} }
+  .gal video,.gal .img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .gal .img{background-size:cover;background-position:center;will-change:transform}
+  .kb .t.a .img{animation:kbA 16s ease-in-out infinite alternate}
+  .kb .t.b .img{animation:kbB 14s ease-in-out infinite alternate}
+  .kb .t.c .img{animation:kbC 15s ease-in-out infinite alternate}
+  @keyframes kbA{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.22) translate(-4%,2%)}}
+  @keyframes kbB{from{transform:scale(1.12) translate(4%,0)}to{transform:scale(1.12) translate(-4%,0)}}
+  @keyframes kbC{from{transform:scale(1.25) translate(-3%,2%)}to{transform:scale(1.08) translate(2%,-1%)}}
+  .gal .par{position:absolute;inset:-6%;transition:transform .25s ease-out}
+  .gal .t::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 70%);transform:translateX(-120%);transition:transform 1s}
+  .kb .t:hover::after{transform:translateX(120%)}
+  .lounge .txt{padding:clamp(16px,3vw,40px);display:flex;flex-direction:column;justify-content:center}
+  .lounge .kicker{font:700 12px Inter,sans-serif;letter-spacing:.35em;color:var(--blue)}
+  .lounge h4{font-size:clamp(19px,2.2vw,28px);margin:4px 0 10px;font-weight:900;color:var(--navy)}
+  .lounge p.body{margin:0 0 12px;font-size:clamp(12.5px,1.15vw,15px);color:#33415e}
+  .uses{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+  .uses span{font-size:12px;font-weight:700;color:var(--navy);background:#fff;border:1px solid #cfe0f7;border-radius:99px;padding:3px 12px}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px}
+  .facts div{background:#fff;border-radius:8px;padding:6px 10px;border:1px solid #dbe7f7}
+  .facts b{display:block;color:var(--blue);font:700 10px Inter,sans-serif;letter-spacing:.15em}
+
+  /* ---------- access ---------- */
+  .access{background:linear-gradient(135deg,#06183d,#0b2d6b);display:grid;grid-template-columns:42% 1fr}
+  @media (max-width:700px){ .access{grid-template-columns:1fr;grid-template-rows:46% 1fr} }
+  .access .pic{background:url(../assets/img/building.jpg) 50% 38%/cover no-repeat;position:relative}
+  .access .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,24,61,0) 60%,rgba(6,24,61,.9) 100%)}
+  @media (max-width:700px){ .access .pic::after{background:linear-gradient(180deg,rgba(6,24,61,0) 55%,rgba(6,24,61,.95) 100%)} }
+  .access .txt{padding:clamp(18px,4vw,48px);display:flex;flex-direction:column;justify-content:center}
+  .access .kicker{font:700 12px Inter,sans-serif;letter-spacing:.35em;color:var(--sky)}
+  .access h4{font-size:clamp(20px,2.4vw,30px);margin:4px 0 14px;font-weight:900}
+  .addr{font-size:clamp(13px,1.3vw,16px);line-height:1.8}
+  .addr .bld{font-weight:700;font-size:1.1em}
+  .stations{list-style:none;padding:0;margin:16px 0 18px;display:grid;gap:8px}
+  .stations li{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:8px 14px;font-size:clamp(12.5px,1.2vw,15px)}
+  .stations .ln{font:700 11px "Noto Sans JP";background:var(--blue);border-radius:6px;padding:2px 8px}
+  .stations .min{margin-left:auto;font:700 clamp(15px,1.6vw,20px) Inter,sans-serif;color:#9fdcff}
+  .stations .min small{font-size:.6em;color:#fff;margin-left:2px}
+  .btn{display:inline-flex;align-self:flex-start;background:#fff;color:var(--navy);font-weight:700;font-size:13px;padding:9px 18px;border-radius:99px;text-decoration:none}
+
+  .orders{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;margin-top:18px}
+  .ord{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+  .ord h3{margin:0 0 10px;font-size:16px}
+  .ord ol{margin:0;padding:0;list-style:none;counter-reset:s}
+  .ord li{counter-increment:s;display:flex;gap:10px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .ord li:last-child{border:0}
+  .ord li::before{content:counter(s);flex:0 0 24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font:600 12px/24px Inter,sans-serif;text-align:center}
+  .ord li.nw{background:#fff8de}
+  .tg{font-size:10.5px;font-weight:700;padding:0 7px;border-radius:4px;margin-left:4px;background:#fff1c7;color:#7a5a00}
+
+  .ask{background:var(--navy);color:#fff;border-radius:16px;padding:22px 24px;margin-top:56px}
+  .ask h2{border:0;margin:0 0 8px;padding:0;color:#fff}
+  .ask ol{margin:0;padding-left:1.4em}
+  footer{margin-top:36px;color:var(--sub);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../assets/img/logo-mark.png" alt=""><h1>確認ページ v4</h1></div>
+  <p class="lead"><span class="done">反映済み</span>最初の画面＝粒子で明るく／ラウンジの説明＝L1（「入居者限定」の表記なし・利用時間あり）／郵便番号 060-0063</p>
+  <div class="note">このページで決めていただくのは <b>①配色</b>・<b>②フルリモートのコピー</b>・<b>③ラウンジの動き</b>・<b>④スライドの並び順</b> の4つです。<a href="index.html">← 提案一覧</a></div>
+
+  <!-- ================= ENTRANCE ================= -->
+  <h2>最初の画面（入口ページ）<small>粒子・明るめ ／ マウスを動かしてみてください</small></h2>
+  <div class="card">
+    <div class="slide ent" id="ent">
+      <div class="photo" id="entPhoto"></div>
+      <div class="glow"></div>
+      <div class="fx-host" id="entFx"></div>
+      <div class="shade"></div>
+      <div class="ui">
+        <div class="bar"><div class="plate"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><span class="menu">MENU</span></div>
+        <div class="entry">
+          <div class="tag">WELCOME TO INSUP</div>
+          <div class="msg">テレアポBPOを軸に、インサイドセールス支援を行う企業です。</div>
+          <div class="doors">
+            <a class="door biz" href="#pv"><span><small>FOR BUSINESS</small><b>導入をご検討の企業様</b></span><span class="arr">→</span></a>
+            <a class="door car" href="#pv"><span><small>FOR CAREERS</small><b>一緒に働きたい方</b></span><span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="meta"><p>写真を明るくして、白っぽい光の粒が浮かぶようにしました。マウスを近づけると、粒がよけるように広がります。</p></div>
+  </div>
+
+  <!-- ================= PREVIEW ================= -->
+  <h2 id="pv">① 配色 ・ ② フルリモートのコピー<small>ボタンを押すと下の画面が切り替わります</small></h2>
+  <p class="lead">2つの入口から先のページ（企業様向け・働きたい方向け）の見た目です。「フルリモート」の画面を例に、配色とコピーを組み合わせて確認できます。</p>
+
+  <div class="picker">
+    <div class="prow"><b>① 配色</b><div class="opts" id="optTheme">
+      <button data-v="d1" class="on"><span class="chip" style="background:linear-gradient(135deg,#06183d,#1976f6)"></span><span><span class="k">D1</span> 夜の濃紺 × 光のリボン<small>暗め・高級感</small></span></button>
+      <button data-v="d2"><span class="chip" style="background:radial-gradient(circle,#4db3ff 0 2px,#06183d 3px) 0 0/6px 6px"></span><span><span class="k">D2</span> 夜の濃紺 × 光の粒<small>暗め・最初の画面と同じ粒</small></span></button>
+      <button data-v="d3"><span class="chip" style="background:linear-gradient(135deg,#fff,#ebf4ff);box-shadow:inset 0 0 0 4px #1976f6"></span><span><span class="k">D3</span> 白 × 立体の吹き出し<small>明るい・親しみやすい</small></span></button>
+      <button data-v="d4"><span class="chip" style="background:linear-gradient(135deg,#1976f6,#0b2d6b)"></span><span><span class="k">D4</span> ロゴの青 × 波<small>色の印象が一番強い</small></span></button>
+      <button data-v="d5"><span class="chip" style="background:#06183d;background-image:linear-gradient(45deg,transparent 45%,#4db3ff 46% 54%,transparent 55%)"></span><span><span class="k">D5</span> 夜の濃紺 × つながる線<small>暗め・テック感</small></span></button>
+      <button data-v="d6"><span class="chip" style="background:repeating-linear-gradient(170deg,#fff 0 3px,#4db3ff 3px 4px)"></span><span><span class="k">D6</span> 白 × 流れる線<small>明るい・すっきり上品</small></span></button>
+    </div></div>
+    <div class="prow"><b>ページ</b><div class="opts" id="optAud">
+      <button data-v="biz" class="on">企業様向けページ</button>
+      <button data-v="car">働きたい方向けページ</button>
+    </div></div>
+    <div class="prow"><b>② コピー</b><div class="opts" id="optCopy"></div></div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="slide pv" id="pvSlide">
+      <div class="fx-host" id="pvFx"></div>
+      <div class="ui">
+        <div class="bar"><div class="plate"><img src="../assets/img/logo-mark.png" alt=""><img class="type" src="../assets/img/logo-type.png" alt="Insup"></div><span class="menu">MENU</span></div>
+        <div class="copyside">
+          <div class="eyebrow">FULL REMOTE</div>
+          <div class="copy" id="pvCopy"></div>
+          <div class="en" id="pvEn"></div>
+          <div class="body" id="pvBody"></div>
+          <div class="pts" id="pvPts"></div>
+        </div>
+        <div class="photo-ph">写真入る<small>オフィスの雰囲気</small></div>
+      </div>
+      <div class="dots"><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+  <div class="now" id="now"></div>
+
+  <!-- ================= LOUNGE ================= -->
+  <h2>③ ラウンジの動き<small>2つの見本</small></h2>
+
+  <div class="card">
+    <div class="slide lounge">
+      <div class="gal">
+        <div class="t a"><video src="../assets/video/lounge-main.mp4" poster="../assets/img/lounge-main.jpg" autoplay muted loop playsinline></video></div>
+        <div class="t b"><video src="../assets/video/lounge-work.mp4" poster="../assets/img/lounge-work.jpg" autoplay muted loop playsinline></video></div>
+        <div class="t c"><video src="../assets/video/lounge-counter.mp4" poster="../assets/img/lounge-counter.jpg" autoplay muted loop playsinline></video></div>
+      </div>
+      <div class="txt">
+        <div class="kicker">LOUNGE</div>
+        <h4>打ち合わせは、<br>眺めのいいラウンジで。</h4>
+        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+        <div class="uses"><span>ご来社</span><span>ご訪問</span><span>商談</span></div>
+        <div class="facts"><div><b>HOURS</b>8:00〜20:00</div><div><b>BOOTH</b>テレフォンブース 2台</div><div><b>POWER</b>全席コンセント完備</div><div><b>DRINK</b>自動販売機 2台</div></div>
+      </div>
+    </div>
+    <div class="meta"><span class="id">LA</span><h3>AIで作った動画</h3>
+      <p>写真から5秒の動画をAIで作りました。カメラがゆっくり前に進んだり、横に流れたりします。くり返し再生され、音は出ません。</p></div>
+  </div>
+
+  <div class="card">
+    <div class="slide lounge" id="kbSlide">
+      <div class="gal kb">
+        <div class="t a"><div class="par"><div class="img" style="background-image:url(../assets/img/lounge-main.jpg)"></div></div></div>
+        <div class="t b"><div class="par"><div class="img" style="background-image:url(../assets/img/lounge-work.jpg)"></div></div></div>
+        <div class="t c"><div class="par"><div class="img" style="background-image:url(../assets/img/lounge-counter.jpg)"></div></div></div>
+      </div>
+      <div class="txt">
+        <div class="kicker">LOUNGE</div>
+        <h4>打ち合わせは、<br>眺めのいいラウンジで。</h4>
+        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+        <div class="uses"><span>ご来社</span><span>ご訪問</span><span>商談</span></div>
+        <div class="facts"><div><b>HOURS</b>8:00〜20:00</div><div><b>BOOTH</b>テレフォンブース 2台</div><div><b>POWER</b>全席コンセント完備</div><div><b>DRINK</b>自動販売機 2台</div></div>
+      </div>
+    </div>
+    <div class="meta"><span class="id">LB</span><h3>写真に動きの演出をつける</h3>
+      <p>写真のまま、ゆっくりズームしたり横に流れたりします。マウスを動かすと奥行きが出るように動き、写真に乗せると光が横切ります。</p></div>
+  </div>
+
+  <!-- ================= ACCESS ================= -->
+  <h2>アクセス<small><span class="done">反映済み</span>郵便番号</small></h2>
+  <div class="card">
+    <div class="slide access">
+      <div class="pic"></div>
+      <div class="txt">
+        <div class="kicker">ACCESS</div>
+        <h4>アクセス</h4>
+        <div class="addr">〒060-0063　北海道札幌市中央区南三条西3丁目11-1<br><span class="bld">サザンクロス札幌 9F</span></div>
+        <ul class="stations">
+          <li><span class="ln">地下鉄</span>すすきの駅<span class="min">3<small>分</small></span></li>
+          <li><span class="ln">地下鉄</span>大通駅<span class="min">5<small>分</small></span></li>
+        </ul>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=%E3%82%B5%E3%82%B6%E3%83%B3%E3%82%AF%E3%83%AD%E3%82%B9%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">Googleマップで見る ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ORDER ================= -->
+  <h2>④ スライドの並び順<small>1行 = 全画面1枚</small></h2>
+  <p class="lead">前回の並び順に、ラウンジとアクセスの画面を足しました（黄色の行）。この順番でよいか確認してください。</p>
+  <div class="orders">
+    <div class="ord"><h3>企業様向けページ</h3><ol>
+      <li>ヒーロー（即戦力テレアポ人材の確保なら）</li>
+      <li>実績の数字（1,500名・220%・100社+）</li>
+      <li>フルリモート<span class="tg">写真入る</span></li>
+      <li>ABOUT・サービス概要</li>
+      <li>事業内容（3事業）</li>
+      <li>選ばれる理由（4つ）</li>
+      <li>ご契約後の流れ（5ステップ）</li>
+      <li>よくあるご質問（7問）</li>
+      <li>代表挨拶<span class="tg">写真入る</span></li>
+      <li>会社概要</li>
+      <li class="nw">ラウンジ</li>
+      <li class="nw">アクセス</li>
+      <li>お問い合わせ・無料相談</li>
+    </ol></div>
+    <div class="ord"><h3>働きたい方向けページ</h3><ol>
+      <li>ヒーロー（一緒に働く仲間を募集しています）</li>
+      <li>フルリモート<span class="tg">写真入る</span></li>
+      <li>実績の数字（1,500名・220%・100社+）</li>
+      <li>募集ポジション（3職種）</li>
+      <li>働く魅力（4つ）</li>
+      <li>代表挨拶<span class="tg">写真入る</span></li>
+      <li>会社概要</li>
+      <li class="nw">ラウンジ</li>
+      <li class="nw">アクセス</li>
+      <li>応募方法・お問い合わせ</li>
+    </ol></div>
+  </div>
+
+  <div class="ask">
+    <h2>選んでいただきたいこと</h2>
+    <ol>
+      <li>① 配色：D1〜D6のどれにしますか？</li>
+      <li>② フルリモートのコピー：企業様向け（B1〜B4）と働きたい方向け（W1〜W4）から1つずつ選んでください。</li>
+      <li>③ ラウンジの動き：LA（AI動画）とLB（写真に動きの演出）のどちらにしますか？</li>
+      <li>④ スライドの並び順：この順番でよいですか？</li>
+    </ol>
+    <p style="margin:10px 0 0;font-size:13px;opacity:.85">上のボタンで選んだ組み合わせは、すぐ上の紺色の帯に「いま表示中：…」と出ます。その内容をそのまま送っていただいても大丈夫です。</p>
+  </div>
+  <footer>確認ページ v4 ／ 2026-10-17</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="../assets/js/fx.js?v=2"></script>
+<script>
+(() => {
+  /* ---------- entrance: bright particles over the photo ---------- */
+  const ent = document.getElementById('ent'), photo = document.getElementById('entPhoto');
+  InsupFX.mount(document.getElementById('entFx'), st => InsupFX.FX.particles(st, { bright: true, size: 1.7 }), { hit: ent });
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  ent.addEventListener('pointermove', e => { const r = ent.getBoundingClientRect(); tx = (e.clientX - r.left) / r.width - 0.5; ty = (e.clientY - r.top) / r.height - 0.5; });
+  ent.addEventListener('pointerleave', () => { tx = 0; ty = 0; });
+  (function pan() { mx += (tx - mx) * 0.06; my += (ty - my) * 0.06; photo.style.transform = `translate(${-mx * 3}%, ${-my * 2.4}%)`; requestAnimationFrame(pan); })();
+
+  /* ---------- palette × copy previewer ---------- */
+  const THEMES = {
+    d1: { fx: 'ribbon',    light: false, bg: 'radial-gradient(120% 90% at 70% 20%,#0d3a8a 0%,#06183d 55%,#020a1e 100%)', name: '夜の濃紺 × 光のリボン' },
+    d2: { fx: 'particles', light: false, bg: 'radial-gradient(100% 80% at 50% 40%,#0b2d6b 0%,#030d26 72%)', name: '夜の濃紺 × 光の粒' },
+    d3: { fx: 'glass',     light: true,  bg: 'linear-gradient(160deg,#ffffff 0%,#ebf4ff 55%,#d6e8ff 100%)', name: '白 × 立体の吹き出し' },
+    d4: { fx: 'wave',      light: false, bg: 'linear-gradient(160deg,#1976f6 0%,#0b2d6b 100%)', name: 'ロゴの青 × 波' },
+    d5: { fx: 'network',   light: false, bg: 'linear-gradient(180deg,#020b22 0%,#06183d 100%)', name: '夜の濃紺 × つながる線' },
+    d6: { fx: 'lines',     light: true,  bg: 'linear-gradient(180deg,#ffffff 0%,#f1f6ff 100%)', name: '白 × 流れる線' },
+  };
+  const COPY = {
+    biz: [
+      { k: 'B1', c: '場所を選ばない、<br>即戦力。', e: 'FULL REMOTE, FULL POWER.' },
+      { k: 'B2', c: '全国のプロアポインターを、<br>明日からあなたのチームに。', e: 'YOUR REMOTE SALES TEAM' },
+      { k: 'B3', c: 'オフィスがいらないから、<br>スピードが違う。', e: 'NO OFFICE. NO DELAY.' },
+      { k: 'B4', c: '北海道から、<br>全国の商談をつくる。', e: 'FROM HOKKAIDO TO NATIONWIDE' },
+    ],
+    car: [
+      { k: 'W1', c: '通勤ゼロで、<br>トップセールスへ。', e: 'ZERO COMMUTE. TOP RESULTS.' },
+      { k: 'W2', c: '雪の日も、子育て中も、<br>最前線で。', e: 'WORK FROM ANYWHERE' },
+      { k: 'W3', c: 'ここから、<br>もう一度。', e: 'RESTART, REMOTELY.' },
+      { k: 'W4', c: 'オフィスは、<br>あなたの部屋。', e: 'YOUR ROOM IS THE OFFICE.' },
+    ],
+  };
+  const BODY = {
+    biz: { t: '1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。', p: [['INITIAL COST', '初期費用 無料'], ['START', '最短稼働 即日〜'], ['TRIAL', 'お試し期間 1ヶ月〜']] },
+    car: { t: '在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。', p: [['REMOTE', '在宅ワーク可能'], ['DAYS', '週2日〜OK'], ['PAY', '時給 1,500円〜3,000円']] },
+  };
+  const state = { theme: 'd1', aud: 'biz', copy: { biz: 0, car: 0 } };
+  const slide = document.getElementById('pvSlide'), host = document.getElementById('pvFx');
+  const mounted = {};
+  function setTheme(id) {
+    const t = THEMES[id];
+    slide.style.background = t.bg;
+    slide.classList.toggle('light', t.light);
+    if (!mounted[id]) mounted[id] = InsupFX.mount(host, t.fx, { hit: slide });
+    for (const [k, st] of Object.entries(mounted)) { st.enabled = k === id; st.canvas.style.opacity = k === id ? 1 : 0; }
+  }
+  function renderCopyButtons() {
+    const box = document.getElementById('optCopy');
+    box.innerHTML = COPY[state.aud].map((c, i) => `<button data-v="${i}" class="${i === state.copy[state.aud] ? 'on' : ''}"><span class="k">${c.k}</span><span>${c.c.replace('<br>', '')}</span></button>`).join('');
+  }
+  function render() {
+    const c = COPY[state.aud][state.copy[state.aud]], b = BODY[state.aud];
+    document.getElementById('pvCopy').innerHTML = c.c;
+    document.getElementById('pvEn').textContent = c.e;
+    document.getElementById('pvBody').textContent = b.t;
+    document.getElementById('pvPts').innerHTML = b.p.map(([k, v]) => `<span><b>${k}</b>${v}</span>`).join('');
+    const bz = COPY.biz[state.copy.biz], cr = COPY.car[state.copy.car];
+    document.getElementById('now').innerHTML = `いま表示中：<b>${state.theme.toUpperCase()} ${THEMES[state.theme].name}</b> ／ 企業様向け <b>${bz.k}</b>「${bz.c.replace('<br>', '')}」 ／ 働きたい方向け <b>${cr.k}</b>「${cr.c.replace('<br>', '')}」`;
+  }
+  const group = (id, fn) => document.getElementById(id).addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    e.currentTarget.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b));
+    fn(b.dataset.v);
+  });
+  group('optTheme', v => { state.theme = v; setTheme(v); render(); });
+  group('optAud', v => { state.aud = v; renderCopyButtons(); render(); });
+  group('optCopy', v => { state.copy[state.aud] = +v; render(); });
+  setTheme('d1'); renderCopyButtons(); render();
+
+  /* ---------- lounge LB: mouse parallax ---------- */
+  const kb = document.getElementById('kbSlide');
+  kb.addEventListener('pointermove', e => {
+    const r = kb.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    kb.querySelectorAll('.par').forEach((p, i) => { const d = [1, 1.6, 2.2][i]; p.style.transform = `translate(${-x * 3 * d}%, ${-y * 3 * d}%)`; });
+  });
+  kb.addEventListener('pointerleave', () => kb.querySelectorAll('.par').forEach(p => p.style.transform = ''));
+})();
+</script>
+</body>
+</html>
