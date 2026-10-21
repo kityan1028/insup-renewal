@@ -289,6 +289,12 @@ body.theme-light{--ft-bg:rgba(255,255,255,.78);--ft-fg:#3e4f70}
    becomes active the first time (.is-seen). Delay with style="--d:.2s". */
 html.js .slide [data-rv]{opacity:0;transform:translateY(18px);transition:opacity .9s ease var(--d,0s),transform 1s var(--ease) var(--d,0s)}
 html.js .slide.is-seen [data-rv]{opacity:1;transform:none}
+/* slides passed during a long jump (menu / dots / tab bar) show their content at once instead of a blank screen;
+   site.js removes .is-passed again once they are off-screen, so a later real visit still plays the entrance.
+   Fragments with their own hidden states may add  #s-<key>.is-passed …{…}  rules too. */
+html.js .slide.is-passed [data-rv]{opacity:1;transform:none;transition:none}
+/* a slide / the deck receives focus programmatically (after choosing a menu item): no full-screen outline */
+.deck:focus,.slide[tabindex="-1"]:focus{outline:none}
 
 /* ---------- 11. phone ---------- */
 @media (max-width:900px){

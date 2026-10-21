@@ -8,6 +8,10 @@
      and the hero text rises in (T1). Direct visit: the network simply fades in.
    - afterwards the network follows the mouse (nodes pulled toward the cursor, lines
      to the cursor) and changes shape per slide (stage 0 spread / 1 two groups / 2 globe).
+   - per-slide placement keeps the dense part of the network off the text side:
+     slides listed in PLACE below (or any slide with data-bg="right|left|center") move and
+     shrink the shape to one half on wide screens and fade nodes/lines on the text half;
+     on narrow / portrait screens (text everywhere) the network is dimmed instead.
    Contract with src/business/hero.html: this script sets html[data-arrival="door"|"direct"],
    dispatches  document 'insup:hero'  when the hero text should appear during T1 and adds
    html.t1-done when the arrival is over.
@@ -34,7 +38,23 @@
 
   const HERO_AT = 1.8, DUR = 3.0; /* T1 timings (seconds) */
   /* shared timeline state (read by the WebGL effect) */
-  const S = { phase: T1 ? 'ent' : 'done', t: 0, start: 0, doorNdc: [door ? door.x * 2 - 1 : 0, door ? -(door.y * 2 - 1) : -0.7], snapHome: false, stage: 0 };
+  const S = { phase: T1 ? 'ent' : 'done', t: 0, start: 0, doorNdc: [door ? door.x * 2 - 1 : 0, door ? -(door.y * 2 - 1) : -0.7], snapHome: false, stage: 0, place: null };
+
+  /* ---------- per-slide placement of the network ----------
+     side: 1 = shape on the right half (text on the left), -1 = left half, 0 = centred
+     x: centre offset (fraction of the half screen width), k: shape scale, fade: how much nodes/lines
+     on the text half are faded (wide screens); dim / kp: brightness and scale on narrow screens. */
+  const NONE = { side: 0, x: 0, k: 1, fade: 0, dim: 1, kp: 1 };
+  const SIDE = { side: 1, x: 0.45, k: 0.8, fade: 0.72, dim: 0.42, kp: 0.92 };
+  const PLACE = { remote: SIDE }; /* フルリモート: text column left, photo right */
+  function placeOf(el) {
+    const v = el && el.dataset ? (el.dataset.bg || '') : '';
+    if (v === 'right') return SIDE;
+    if (v === 'left') return Object.assign({}, SIDE, { side: -1 });
+    if (v === 'center') return NONE;
+    return PLACE[IS.keyOf(el)] || NONE;
+  }
+  S.place = NONE;
 
   /* ================= custom network effect (based on fx.js network + bizenter T1) ================= */
   function netFX(st) {
@@ -82,6 +102,7 @@
     const KX = new Float32Array(N), KY = new Float32Array(N), KZ = new Float32Array(N);
     const SX = new Float32Array(N), SY = new Float32Array(N), SZ = new Float32Array(N);
     const PX = new Float32Array(N), PY = new Float32Array(N), PZ = new Float32Array(N), LV = new Float32Array(N);
+    let pX = 0, pK = 1, pF = 0, pD = 1, pS = 0; /* current placement (eased toward S.place) */
     for (let i = 0; i < N; i++) {
       U.push(Math.random() * 2 - 1); V.push(Math.random() * 2 - 1); W.push(Math.random() * 2 - 1); OFF.push(Math.random() * 10); RND.push(Math.random());
       const a = Math.random() * Math.PI * 2, b = Math.acos(2 * Math.random() - 1);
@@ -148,7 +169,13 @@
         const stg = ph === 'done' ? S.stage : 0;
         if (stg === 2 && !IS.reduced) spin += dt * 0.12;
         const cs = Math.cos(spin), sn = Math.sin(spin);
-        const Rt = stg === 2 ? Math.min(Rb, rS * 0.62) : stg === 1 ? Rb * 0.9 : Rb;
+        /* placement: wide screens move the shape to the free half, narrow screens dim it */
+        const P = ph === 'done' && S.place ? S.place : NONE, wide = st.aspect >= 1.15;
+        const tK = wide ? P.k : P.kp;
+        pX = lerp(pX, wide ? P.side * P.x * halfW : 0, homeK); pK = lerp(pK, tK, homeK);
+        pF = lerp(pF, wide ? P.fade : 0, homeK); pD = lerp(pD, wide ? 1 : P.dim, homeK);
+        if (P.side) pS = P.side;
+        const Rt = stg === 2 ? Math.min(Rb, rS * tK * 0.62) : stg === 1 ? Rb * 0.9 : Rb;
         Rcur = playing || ph === 'ent' ? Rb : lerp(Rcur, Rt, homeK);
         const R = Rcur;
         k = 0;
@@ -161,6 +188,7 @@
           if (stg === 1) { tx = KX[i]; ty = KY[i]; tz = KZ[i]; }
           else if (stg === 2) { const x = SX[i] * rS, z = SZ[i] * rS; tx = x * cs - z * sn; ty = SY[i] * rS; tz = x * sn + z * cs; }
           else { tx = HX[i]; ty = HY[i]; tz = HZ[i]; }
+          if (ph === 'done') { tx = tx * pK + pX; ty *= pK; tz *= pK; }
           const gx = tx + wx, gy = ty + wy, gz = tz;
           let a = 0, s = BASE, h = 0, lv = 0;
           if (ph === 'ent') { PX[i] = HX[i]; PY[i] = HY[i]; PZ[i] = HZ[i]; }
@@ -170,7 +198,9 @@
               const dx = ml.x - PX[i], dy = ml.y - PY[i], dz = ml.z - PZ[i], d = Math.hypot(dx, dy, dz);
               if (d < 3.2) { const f = 0.04 * (1 - d / 3.2); PX[i] += dx * f; PY[i] += dy * f; PZ[i] += dz * f; }
             }
-            a = act ? 0.95 : 0; lv = act ? 1 : 0;
+            /* fade on the text half (pS = which side the shape sits on) and overall dim */
+            const mk = (1 - pF * (1 - sm(-0.12, 0.3, pS * PX[i] / halfW))) * pD;
+            a = act ? 0.95 * mk : 0; lv = act ? mk : 0;
           } else { /* T1: nodes fly out of the door one after another, trailing a light line back to it */
             const di = 0.12 + Math.hypot(HX[i] - ox, HY[i] - oy, HZ[i] - oz) / maxD * 1.0 + RND[i] * 0.22;
             const q = cl((t - di) / 0.9), p = eo3(q);
@@ -213,7 +243,7 @@
   const bgHost = doc.getElementById('bg');
   if (T1 && bgHost) bgHost.style.transition = 'none'; /* the burst must be visible from the first frame */
   let st = null;
-  try { st = IS.mountBg(s => netFX(s)); } catch (e) { console.warn('business: 3D background unavailable', e); }
+  try { st = IS.mountBg(s => netFX(s), { onStage: (_st, _stage, el) => { S.place = placeOf(el); } }); } catch (e) { console.warn('business: 3D background unavailable', e); }
   if (T1 && bgHost) { bgHost.classList.add('is-ready'); setTimeout(() => { bgHost.style.transition = ''; }, 100); }
 
   const heroNow = () => { if (!root.classList.contains('hero-cued')) { root.classList.add('hero-cued'); doc.dispatchEvent(new Event('insup:hero')); } };

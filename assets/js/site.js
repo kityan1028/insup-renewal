@@ -30,7 +30,27 @@
   let deck = null, lastGo = { idx: -1, t: 0 };
   /* while go() glides past several slides, only the destination gets 'enter' */
   let nav = { idx: -1, until: 0 }, navTimer = 0;
-  const endNav = () => { if (nav.idx < 0) return; nav.idx = -1; clearTimeout(navTimer); evaluate(); };
+  /* slides glided past (never entered) get .is-passed so their data-rv content is visible instead of blank */
+  let passed = [], passTimer = 0;
+  const inView = el => { const d = deck.getBoundingClientRect(), r = el.getBoundingClientRect(); return r.bottom > d.top + 1 && r.top < d.bottom - 1; };
+  function clearPassed() {
+    clearTimeout(passTimer);
+    if (deck) deck.classList.remove('is-gliding');
+    if (!passed.length) return;
+    /* off-screen ones go back to hidden (so they still play their entrance later); visible ones stay shown */
+    passed = passed.filter(s => { if (inView(s)) return true; s.classList.remove('is-passed'); return false; });
+  }
+  function markPassed(from, to) {
+    clearPassed();
+    const lo = Math.min(from, to), hi = Math.max(from, to);
+    for (let k = lo + 1; k < hi; k++) {
+      const s = S.slides[k];
+      if (s && !s.classList.contains('is-seen') && !s.classList.contains('is-passed')) { s.classList.add('is-passed'); passed.push(s); }
+    }
+    if (passed.length) deck.classList.add('is-gliding');
+    passTimer = setTimeout(clearPassed, 3000);
+  }
+  const endNav = () => { clearPassed(); if (nav.idx < 0) return; nav.idx = -1; clearTimeout(navTimer); evaluate(); };
 
   const S = window.InsupSite = {
     slides: [], current: -1, reduced: !!mq.matches, deck: null, isReady: false,
@@ -56,6 +76,7 @@
       const smooth = !(S.reduced || opts.smooth === false);
       if (smooth && Math.abs(i - S.current) > 1) {
         nav = { idx: i }; clearTimeout(navTimer); navTimer = setTimeout(endNav, 2200);
+        if (S.current >= 0) markPassed(S.current, i);
       }
       deck.scrollTo({ top: S.slides[i].offsetTop, behavior: (S.reduced || opts.smooth === false) ? 'auto' : 'smooth' });
       return true;
@@ -125,9 +146,24 @@
     menuBtn.addEventListener('click', () => setMenu(!menuOpen));
     menu.addEventListener('click', e => {
       const a = e.target.closest('a[data-i]');
-      if (a) { e.preventDefault(); setMenu(false, true); S.go(+a.dataset.i); history.replaceState(null, '', a.getAttribute('href')); }
+      if (a) {
+        e.preventDefault(); setMenu(false, true);
+        const i = +a.dataset.i;
+        S.go(i); history.replaceState(null, '', a.getAttribute('href'));
+        focusSlide(S.slides[i]);
+      }
       else if (e.target === menu) setMenu(false);
     });
+  }
+  /* move keyboard focus to a slide (temporary tabindex) so Tab continues from there, not from the top */
+  function focusSlide(el) {
+    if (!el) return;
+    if (!el.hasAttribute('tabindex')) {
+      el.setAttribute('tabindex', '-1');
+      el.addEventListener('blur', () => el.removeAttribute('tabindex'), { once: true });
+    }
+    try { el.focus({ preventScroll: true }); } catch (_) { if (deck) deck.focus({ preventScroll: true }); }
+    if (doc.activeElement !== el && deck) deck.focus({ preventScroll: true });
   }
   function setMenu(open, keepFocus) {
     if (!menu || open === menuOpen) return;

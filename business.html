@@ -13,11 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=17b9427b05">
+<link rel="stylesheet" href="assets/css/site.css?v=4723546c0a">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=17b9427b05"></script>
-<script src="assets/js/business.js?v=17b9427b05" defer></script>
+<script src="assets/js/site.js?v=4723546c0a"></script>
+<script src="assets/js/business.js?v=4723546c0a" defer></script>
 </head>
 <body class="theme-dark page-business">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -35,7 +35,7 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (business/hero.html) ===== -->
 <style>
-  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=17b9427b05 */
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=4723546c0a */
   #s-hero{align-items:stretch}
   #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
     background:linear-gradient(90deg,rgba(2,11,34,.55) 0%,rgba(2,11,34,.22) 45%,rgba(2,11,34,0) 72%)}
@@ -181,6 +181,16 @@
   #s-numbers.nb-wait .nb-bar{transform:scaleX(0)}
   #s-numbers.nb-run .nb-bar{transform:scaleX(1);transition:transform .9s var(--ease) calc(var(--i) * .16s + 1.5s)}
 
+  /* short desktop screens (e.g. a 1280x800 laptop = ~713px of viewport): keep the slide within one screen */
+  @media (min-width:641px) and (max-height:760px){
+    #s-numbers .nb-stats{margin-top:16px}
+    #s-numbers .nb-stat{padding:16px 14px 14px}
+    #s-numbers .nb-v{font-size:clamp(44px,5vw,64px)}
+    #s-numbers .nb-bar{margin:10px auto 8px}
+    #s-numbers .nb-txt{margin-top:16px;padding:12px clamp(18px,2.4vw,32px)}
+    #s-numbers .nb-txt p{line-height:1.75}
+    #s-numbers .nb-txt p.nb-key{margin-top:8px}
+  }
   @media (max-width:900px){
     #s-numbers .nb-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
   }
@@ -398,6 +408,28 @@
     #s-services .pos .ic{height:24px}
   }
   @media (max-width:1199px){ #s-services .br-pc{display:none} }
+  /* short desktop screens (e.g. 1024×768, 1366×768 browser windows): keep all three services on one screen
+     under the snap — three columns, tighter type and spacing (nothing hidden, same text) */
+  @media (min-width:900px) and (min-height:560px) and (max-height:760px){
+    #s-services .sv-hd{gap:4px 32px}
+    #s-services .eyebrow{margin-bottom:6px}
+    #s-services .s-title{font-size:clamp(24px,2.6vw,34px);line-height:1.3}
+    #s-services .sv-hd .lead{font-size:14px;line-height:1.75;word-break:auto-phrase}
+    #s-services .sv-grid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:14px}
+    #s-services .sv.main{grid-column:auto}
+    #s-services .sv{padding:14px 16px 12px}
+    #s-services .sv .num{margin-bottom:4px}
+    #s-services .sv h3{font-size:16.5px;margin:0 0 5px}
+    #s-services .sv .desc{font-size:12.5px;line-height:1.65}
+    #s-services .sv ul{margin-top:8px;padding-top:8px;gap:3px}
+    #s-services .sv li{font-size:12.5px;line-height:1.5;padding-left:19px}
+    #s-services .sv li::before{width:10px;height:6px}
+    #s-services .pos{padding-top:10px}
+    #s-services .pos h4{font-size:11.5px;margin-bottom:6px}
+    #s-services .pos ul{display:flex;flex-wrap:wrap;gap:6px}
+    #s-services .pos li{flex-direction:row;gap:6px;padding:3px 10px 3px 3px;border-radius:99px;font-size:12px}
+    #s-services .pos .ic{height:20px;min-width:22px;padding:0 6px;font-size:10.5px}
+  }
 </style>
 <section class="slide" id="s-services" data-title="事業内容">
   <div class="s-inner wide">
@@ -680,6 +712,10 @@
     #s-ceo .ceo-msg{font-size:14px;line-height:1.75}
     #s-ceo .ceo-msg p{margin-bottom:.7em}
   }
+  @media (min-width:1100px) and (max-height:760px){
+    #s-ceo .s-title{margin-bottom:10px}
+    #s-ceo .ceo-msg{line-height:1.7;padding:16px clamp(20px,2.2vw,30px)}
+  }
   /* medium desktop: one column with a soft-fade inner scroll */
   @media (min-width:901px) and (max-width:1099.98px){
     #s-ceo .ceo-txt{max-height:min(54vh,480px);overflow-y:auto;padding:0 10px 36px 0;scrollbar-width:thin;
@@ -756,6 +792,13 @@
   #s-faq .it.open .a p{opacity:1;transform:none;transition-delay:.12s}
   @media (max-width:900px){
     #s-faq .fq-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+  }
+  /* short desktop screens: tighter rows so the list (with the first answer open) fits one screen */
+  @media (min-width:900px) and (min-height:560px) and (max-height:760px){
+    #s-faq .fq{gap:7px}
+    #s-faq .q{min-height:44px;padding:8px 16px;font-size:14.5px;line-height:1.5}
+    #s-faq .q .pm{flex-basis:24px;width:24px;height:24px}
+    #s-faq .a p{padding:0 16px 12px;font-size:13.5px;line-height:1.75}
   }
   @media (max-width:640px){
     #s-faq .q{padding:12px 14px;font-size:15px;gap:10px}
@@ -1115,6 +1158,8 @@
     #s-contact .ct-grid{grid-template-columns:minmax(0,1fr);gap:28px}
   }
   #s-contact .lead,#s-contact .mt p{text-wrap:pretty}
+  #s-contact .cm-hd{grid-column:1/-1;margin:0 0 2px;font-size:14px;line-height:1.7;color:var(--sub)}
+  #s-contact .cm-hd b{display:block;font-size:15px;color:var(--heading)}
   @media (max-width:640px){
     #s-contact .cm{grid-template-columns:minmax(0,1fr);gap:12px}
     #s-contact .mt{padding:18px 18px 16px}
@@ -1138,6 +1183,7 @@
         </ul>
       </div>
       <div class="cm">
+        <p class="cm-hd" data-rv style="--d:.26s"><b>お問い合わせ方法</b>サービスに関するご質問やご相談など、お気軽にお問い合わせください。</p>
         <a class="card mt line" href="https://lin.ee/XIZn82k" target="_blank" rel="noopener" data-rv style="--d:.3s">
           <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L5 20.5l1.1-3.6C4.2 15.5 3 13.6 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span><h3>公式LINE</h3></div>
           <p>LINEからお気軽にお問い合わせいただけます。</p>
