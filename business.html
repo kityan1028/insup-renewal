@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- noindex: preview on github.io only — REMOVE this robots meta at launch -->
+<meta name="robots" content="noindex">
+<title>企業様向けページ | 株式会社Insup</title>
+<meta name="description" content="株式会社Insup - テレアポ代行、テレアポ人材マッチングのプロフェッショナル。即戦力のテレアポ人材を提供します。">
+<meta name="theme-color" content="#06183d">
+<link rel="icon" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=17b9427b05">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/js/fx.js?v=2"></script>
+<script src="assets/js/site.js?v=17b9427b05"></script>
+<script src="assets/js/business.js?v=17b9427b05" defer></script>
+</head>
+<body class="theme-dark page-business">
+<a class="skip" href="#deck">本文へ移動</a>
+
+<!-- fixed full-screen 3D background (D5 夜の濃紺 × つながる線 — network); mounted by business.js -->
+<div class="bg" id="bg" aria-hidden="true"></div>
+
+<header class="site-hd">
+  <a class="plate" href="index.html" aria-label="株式会社Insup トップ（入口）へ"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></a>
+  <button type="button" class="menu-btn"><span class="lbl">MENU</span><span class="bars" aria-hidden="true"></span></button>
+</header>
+<div class="menu-ov" id="menu" role="dialog" aria-modal="true" aria-label="メニュー"></div>
+<nav class="dots" id="dots" aria-label="スライドの位置"></nav>
+
+<main class="deck" id="deck">
+<!-- ===== slide s-hero (business/hero.html) ===== -->
+<style>
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=17b9427b05 */
+  #s-hero{align-items:stretch}
+  #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
+    background:linear-gradient(90deg,rgba(2,11,34,.55) 0%,rgba(2,11,34,.22) 45%,rgba(2,11,34,0) 72%)}
+  #s-hero .hero-copy{position:relative;max-width:900px}
+  #s-hero .hero-h{font-size:clamp(30px,4.5vw,64px);font-weight:900;line-height:1.36;letter-spacing:.02em;margin:4px 0 14px;word-break:keep-all}
+  #s-hero .hero-h em{font-style:normal;background:linear-gradient(90deg,#9fdcff,#4db3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #s-hero .hero-sub{font-size:clamp(15px,1.45vw,20px);font-weight:500;color:var(--fg);opacity:.9;letter-spacing:.04em}
+  #s-hero .btns{margin-top:30px}
+  /* SCROLL cue (desktop) */
+  #s-hero .hero-scroll{position:absolute;left:var(--gutter);bottom:30px;display:flex;flex-direction:column;align-items:center;gap:10px;
+    font:600 10.5px var(--font-en);letter-spacing:.3em;color:var(--sub);writing-mode:vertical-rl;opacity:0;transition:opacity .8s ease .9s}
+  #s-hero .hero-scroll i{position:relative;display:block;width:1px;height:56px;background:rgba(255,255,255,.18);overflow:hidden}
+  #s-hero .hero-scroll i::after{content:"";position:absolute;left:0;top:0;width:1px;height:40%;background:#75f2ff;animation:hero-scroll 2.4s cubic-bezier(.45,0,.25,1) infinite}
+  @keyframes hero-scroll{0%{transform:translateY(-100%)}100%{transform:translateY(250%)}}
+  /* entrance: rise in one after another (T1 timings from v5 bizenter) */
+  html.js #s-hero .h-rv{display:block;opacity:0;transform:translateY(16px);
+    transition:opacity .7s ease var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+  html.js #s-hero .hero-h .h-rv{display:inline-block}
+  html.js #s-hero .btns.h-rv{display:flex}
+  html.js #s-hero.is-in .h-rv{opacity:1;transform:none}
+  html:not(.js) #s-hero .hero-scrim,#s-hero.is-in .hero-scrim,#s-hero.is-in .hero-scroll,html:not(.js) #s-hero .hero-scroll{opacity:1}
+  @media (max-width:900px){
+    #s-hero .hero-scroll{display:none}
+  }
+  @media (max-width:640px){
+    #s-hero{justify-content:center}
+    #s-hero .hero-scrim{background:linear-gradient(180deg,rgba(2,11,34,0) 14%,rgba(2,11,34,.45) 38%,rgba(2,11,34,.45) 66%,rgba(2,11,34,0) 88%)}
+    #s-hero .hero-h{font-size:clamp(28px,8.4vw,36px)}
+    #s-hero .btns{margin-top:24px}
+    #s-hero .btns .btn,#s-hero .btns .btn-outline{flex:1 1 auto}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #s-hero .hero-scroll i::after{animation:none;transform:none}
+  }
+</style>
+<section class="slide" id="s-hero" data-title="トップ" data-stage="0">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="s-inner">
+    <div class="hero-copy">
+      <span class="eyebrow h-rv" style="--d:0s">FOR BUSINESS</span>
+      <h1 class="hero-h"><span class="h-rv" style="--d:.1s">即戦力テレアポ<wbr>人材の確保なら</span><br><em class="h-rv" style="--d:.24s">レンタル<wbr>プロアポインター</em></h1>
+      <p class="hero-sub h-rv" style="--d:.4s">テレアポ専門業務委託</p>
+      <div class="btns h-rv" style="--d:.55s">
+        <a class="btn" href="#s-contact">お問い合わせ <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn-outline" href="#s-about">サービス詳細</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">SCROLL<i></i></div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-hero'), root = document.documentElement;
+  let shown = false;
+  const show = () => { if (shown) return; shown = true; sec.classList.add('is-in'); };
+  /* T1 arrival (business.js): the text appears at the right moment of the transition */
+  document.addEventListener('insup:hero', show);
+  sec.addEventListener('slide:enter', e => {
+    if (!e.detail.first || shown) return;
+    if (root.dataset.arrival === 'door' && !root.classList.contains('t1-done') && !root.classList.contains('hero-cued')) {
+      setTimeout(show, 4500); /* safety net in case the transition never reports */
+      return;
+    }
+    if (InsupSite.reduced) show(); else setTimeout(show, 450); /* direct visit: network fades in, then the text */
+  });
+})();
+</script>
+
+<!-- ===== slide s-reasons (business/reasons.html) ===== -->
+<style>
+  /* 選ばれる理由 — 4 items, text from top.html */
+  #s-reasons .rs-head{text-align:center}
+  #s-reasons .rs-head .s-title{margin-bottom:0}
+  #s-reasons .cards{margin-top:clamp(26px,4vh,40px);gap:18px}
+  #s-reasons .card{padding:28px 24px 26px;overflow:hidden;display:flex;flex-direction:column}
+  #s-reasons .card::before{content:"";position:absolute;left:24px;right:24px;top:0;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,#75f2ff,rgba(77,179,255,.5) 60%,rgba(77,179,255,0));transform-origin:left center}
+  #s-reasons .rs-num{display:block;font:800 clamp(36px,3.4vw,48px)/1 var(--font-en);letter-spacing:.02em;margin-bottom:16px;
+    background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #s-reasons .card h3{font-size:clamp(18px,1.55vw,21px);margin-bottom:10px}
+  #s-reasons .card p{font-size:14.5px;line-height:1.9;word-break:auto-phrase;text-wrap:pretty}
+  html.js #s-reasons .card::before{transform:scaleX(0);transition:transform 1.1s var(--ease) calc(var(--d,0s) + .35s)}
+  html.js #s-reasons.is-seen .card::before{transform:scaleX(1)}
+  @media (max-width:640px){
+    #s-reasons .card{padding:20px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:16px;align-items:start}
+    #s-reasons .card::before{left:18px;right:18px}
+    #s-reasons .rs-num{font-size:30px;margin:2px 0 0;grid-row:span 2;min-width:1.45em}
+    #s-reasons .card h3{margin-bottom:6px}
+    #s-reasons .card p{font-size:14px;line-height:1.85}
+  }
+</style>
+<section class="slide" id="s-reasons" data-title="選ばれる理由">
+  <div class="s-inner">
+    <div class="rs-head">
+      <span class="eyebrow" data-rv>STRENGTHS</span>
+      <h2 class="s-title" data-rv style="--d:.08s">選ばれる理由</h2>
+    </div>
+    <div class="cards c4">
+      <div class="card" data-rv style="--d:.18s">
+        <span class="rs-num" aria-hidden="true">01</span>
+        <h3>即戦力人材</h3>
+        <p>1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。</p>
+      </div>
+      <div class="card" data-rv style="--d:.3s">
+        <span class="rs-num" aria-hidden="true">02</span>
+        <h3>業界最安水準</h3>
+        <p>初期費用無料、従量課金制で無駄なコストを削減。1ヶ月からのお試し発注も可能で、リスクを最小限に抑えます。</p>
+      </div>
+      <div class="card" data-rv style="--d:.42s">
+        <span class="rs-num" aria-hidden="true">03</span>
+        <h3>柔軟な対応</h3>
+        <p>30日前申告で解約可能、人員の差し替えも期間内無料で対応。お客様のニーズに合わせた柔軟なサービスを提供します。</p>
+      </div>
+      <div class="card" data-rv style="--d:.54s">
+        <span class="rs-num" aria-hidden="true">04</span>
+        <h3>確かな実績</h3>
+        <p>東証プライム上場企業やDMMグループなど、大手企業との取引実績多数。高い品質とサービスをお約束します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-numbers (shared/numbers.html) ===== -->
+<!-- shared: 実績の数字 (business #3 / careers #5) — count-up on first enter -->
+<style>
+  #s-numbers .s-title{margin-bottom:0}
+  #s-numbers .nb-stats{list-style:none;margin:clamp(18px,3.6vh,36px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
+  #s-numbers .nb-stat{position:relative;overflow:hidden;text-align:center;padding:clamp(20px,3.6vh,36px) 14px clamp(18px,3vh,28px);
+    background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  #s-numbers .nb-v{display:block;font:800 clamp(46px,6.2vw,86px)/1.05 var(--font-en);letter-spacing:-.015em;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #s-numbers .nb-v > span,#s-numbers .nb-v > small{background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  #s-numbers .nb-v .n{display:inline-block;text-align:right}
+  #s-numbers .nb-v small{font-size:.5em;font-weight:800;margin-left:.04em}
+  /* thin bar under the number, grows once the count has finished */
+  #s-numbers .nb-bar{display:block;width:44px;height:3px;margin:clamp(12px,2vh,18px) auto clamp(10px,1.6vh,14px);border-radius:3px;background:var(--em-grad);transform-origin:50% 50%}
+  #s-numbers .nb-l{display:block;font-weight:700;font-size:clamp(14px,1.2vw,16px);color:var(--fg);letter-spacing:.04em}
+  #s-numbers .nb-txt{margin:clamp(16px,3vh,30px) auto 0;max-width:640px;text-align:center;padding:clamp(14px,2.4vh,22px) clamp(18px,2.4vw,32px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-numbers .nb-txt p{font-size:clamp(14px,1.15vw,16px);line-height:1.95;color:var(--sub)}
+  #s-numbers .nb-txt p.nb-key{margin-top:clamp(10px,1.6vh,14px);color:var(--fg);font-weight:700}
+
+  /* count-up states (set by the script; without JS / with reduced motion the final values simply show) */
+  #s-numbers.nb-wait .nb-bar{transform:scaleX(0)}
+  #s-numbers.nb-run .nb-bar{transform:scaleX(1);transition:transform .9s var(--ease) calc(var(--i) * .16s + 1.5s)}
+
+  @media (max-width:900px){
+    #s-numbers .nb-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media (max-width:640px){
+    #s-numbers .nb-stats{grid-template-columns:minmax(0,1fr);gap:10px}
+    #s-numbers .nb-stat{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px 16px;text-align:left;padding:16px 18px}
+    #s-numbers .nb-v{font-size:44px;grid-row:1/3}
+    #s-numbers .nb-bar{margin:0;width:32px;align-self:end}
+    #s-numbers .nb-l{align-self:start;font-size:14.5px}
+    #s-numbers .nb-txt{text-align:left;padding:16px 18px}
+    #s-numbers .nb-txt p{font-size:14.5px}
+    #s-numbers .nb-txt br{display:none}
+  }
+</style>
+<section class="slide" id="s-numbers" data-title="実績の数字">
+  <div class="s-inner center">
+    <span class="eyebrow" data-rv>ACHIEVEMENTS</span>
+    <h2 class="s-title" data-rv style="--d:.08s">実績</h2>
+    <ul class="nb-stats">
+      <li class="nb-stat" data-rv style="--d:.18s;--i:0"><span class="nb-v" data-to="1500"><span class="n">1,500</span></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">登録アポインター数</span></li>
+      <li class="nb-stat" data-rv style="--d:.3s;--i:1"><span class="nb-v" data-to="220"><span class="n">220</span><small>%</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">最大アポ率改善</span></li>
+      <li class="nb-stat" data-rv style="--d:.42s;--i:2"><span class="nb-v" data-to="100"><span class="n">100</span><small>+</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">取引実績企業数</span></li>
+    </ul>
+    <div class="nb-txt" data-rv style="--d:.7s">
+      <p>人材系企業、SaaS・DX支援ツール、<br>営業代行会社、インサイドセールス支援、<br>メディア・広報・PR、Web制作・広告など、<br>幅広い業界での実績がございます。</p>
+      <p class="nb-key">東証プライム上場企業やDMMグループをはじめ、<br>100社以上の企業様にサービスをご提供しています。</p>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-numbers');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  const vals = [...sec.querySelectorAll('.nb-v')].map(v => ({ v, n: v.querySelector('.n'), to: +v.dataset.to, fin: v.querySelector('.n').textContent }));
+  const fmt = x => x.toLocaleString('en-US');
+  let started = false;
+
+  if (site.reduced) return;              /* reduced motion: final numbers, no counting */
+  sec.classList.add('nb-wait');
+  /* keep each number's final width so nothing shifts while counting */
+  const lock = () => vals.forEach(o => { o.n.style.minWidth = ''; o.n.textContent = o.fin; o.n.style.minWidth = o.n.getBoundingClientRect().width + 'px'; if (!started) o.n.textContent = '0'; });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!started) lock(); });
+  lock();
+  window.addEventListener('resize', () => {
+    if (!started) lock();
+    else if (sec.classList.contains('nb-done')) vals.forEach(o => { o.n.style.minWidth = ''; });
+  });
+
+  function run() {
+    if (started) return;
+    started = true;
+    if (site.reduced) { vals.forEach(o => { o.n.textContent = o.fin; }); sec.classList.remove('nb-wait'); return; }
+    sec.classList.remove('nb-wait');
+    sec.classList.add('nb-run');
+    const t0 = performance.now(), dur = 1900;
+    let left = vals.length;
+    vals.forEach((o, i) => {
+      const delay = 350 + i * 160;
+      const step = now => {
+        const t = Math.min(1, Math.max(0, (now - t0 - delay) / dur));
+        const e = 1 - Math.pow(1 - t, 4);
+        o.n.textContent = t >= 1 ? o.fin : fmt(Math.round(o.to * e));
+        if (t < 1) requestAnimationFrame(step);
+        else if (--left === 0) sec.classList.add('nb-done');
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  sec.addEventListener('slide:enter', run);
+})();
+</script>
+
+<!-- ===== slide s-about (business/about.html) ===== -->
+<style>
+  /* ABOUT US (top.html) + サービス概要 (business.html) — two columns on desktop */
+  #s-about .ab-grid{align-items:center}
+  #s-about p,#s-about dd,#s-about h4{word-break:auto-phrase;text-wrap:pretty}
+  #s-about .ab-text p{font-size:clamp(15px,1.2vw,16.5px);line-height:1.95;color:var(--sub)}
+  #s-about .ab-text p + p{margin-top:.55em}
+  #s-about .ab-text p:first-child{color:var(--fg);font-weight:700}
+  #s-about .btns{margin-top:26px}
+  /* サービス概要 panel */
+  #s-about .ab-ov{padding:clamp(22px,2.4vw,32px)}
+  #s-about .ab-h{display:flex;align-items:center;gap:12px;font-size:clamp(19px,1.7vw,23px);margin-bottom:10px}
+  #s-about .ab-h::before{content:"";width:22px;height:3px;border-radius:3px;background:linear-gradient(90deg,#75f2ff,#4db3ff)}
+  #s-about .ab-lead{font-size:clamp(14.5px,1.2vw,16px);font-weight:700;line-height:1.8;color:var(--fg)}
+  #s-about .ab-lead em{font-style:normal;color:var(--accent-2)}
+  /* diagram: 企業様 → 業務委託 → Insup → 再委託 → セールス人材 */
+  #s-about .ab-dg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(58px,.45fr) auto minmax(58px,.45fr) minmax(0,1.1fr);align-items:center;margin-top:22px}
+  #s-about .dg-box{border:1px solid var(--card-line);background:rgba(255,255,255,.05);border-radius:14px;padding:14px 10px;text-align:center;min-height:96px;
+    display:flex;flex-direction:column;justify-content:center}
+  #s-about .dg-box h4{font-size:15.5px;margin:0 0 4px;color:var(--heading)}
+  #s-about .dg-box p{font-size:12.5px;line-height:1.6;color:var(--sub)}
+  #s-about .dg-arr{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 6px}
+  #s-about .dg-arr span{font-size:12px;font-weight:700;color:var(--accent-2);white-space:nowrap;letter-spacing:.04em}
+  #s-about .dg-arr i{position:relative;display:block;width:100%;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(77,179,255,.35),#4db3ff)}
+  #s-about .dg-arr i::before{content:"";position:absolute;right:-1px;top:50%;width:8px;height:8px;border-top:2px solid #4db3ff;border-right:2px solid #4db3ff;transform:translateY(-50%) rotate(45deg);transform-origin:center}
+  #s-about .dg-arr i::after{content:"";position:absolute;left:0;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;background:#fff;
+    box-shadow:0 0 8px 2px #75f2ff;opacity:0}
+  #s-about.is-active .dg-arr i::after{animation:about-flow 2.6s cubic-bezier(.45,0,.55,1) infinite}
+  #s-about.is-active .dg-arr + .dg-center + .dg-arr i::after{animation-delay:1.3s}
+  @keyframes about-flow{0%{left:0;opacity:0}12%{opacity:1}70%{left:100%;opacity:1}80%,100%{left:100%;opacity:0}}
+  #s-about .dg-center{display:flex;justify-content:center;padding:0 4px}
+  #s-about .dg-plate{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;background:#fff;border-radius:18px;padding:14px 16px 12px;line-height:0;
+    box-shadow:0 0 0 1px rgba(117,242,255,.35),0 0 30px rgba(77,179,255,.45),0 14px 30px rgba(0,0,0,.3)}
+  #s-about .dg-plate img{height:40px;width:auto}
+  #s-about .dg-plate img.type{height:17px}
+  /* 報酬・解約・人員差し替え */
+  #s-about .ab-ft{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0 0}
+  #s-about .ab-ft > div{border-radius:12px;background:var(--chip-bg);border:1px solid var(--chip-line);padding:10px 12px}
+  #s-about .ab-ft dt{font-size:12px;font-weight:700;color:var(--accent-2);letter-spacing:.06em}
+  #s-about .ab-ft dd{margin:2px 0 0;font-size:14px;font-weight:700;line-height:1.55;color:var(--fg)}
+  /* entrance: diagram builds left → right on the first visit */
+  html.js #s-about .dg-step{opacity:0;transform:translateY(10px);transition:opacity .7s ease var(--d,0s),transform .8s var(--ease) var(--d,0s)}
+  html.js #s-about .dg-arr i{transform:scaleX(0);transform-origin:left center;transition:transform .7s var(--ease) var(--d,0s)}
+  html.js #s-about.is-seen .dg-step{opacity:1;transform:none}
+  html.js #s-about.is-seen .dg-arr i{transform:none}
+  html.js #s-about .dg-center.dg-step{transform:scale(.8)}
+  html.js #s-about.is-seen .dg-center.dg-step{transform:none;transition:opacity .6s ease var(--d,0s),transform .9s cubic-bezier(.34,1.4,.64,1) var(--d,0s)}
+  @media (max-width:900px){
+    #s-about .ab-grid{gap:30px}
+  }
+  @media (max-width:640px){
+    #s-about .ab-ov{padding:20px 16px}
+    #s-about .ab-dg{grid-template-columns:minmax(0,1fr);justify-items:center;margin-top:18px}
+    #s-about .dg-box{width:100%;min-height:0;padding:12px 10px}
+    #s-about .dg-arr{flex-direction:row-reverse;justify-content:center;gap:10px;height:54px;padding:4px 0}
+    #s-about .dg-arr span{position:absolute;left:calc(50% + 14px);top:50%;transform:translateY(-50%)}
+    #s-about .dg-arr i{width:2px;height:100%;background:linear-gradient(180deg,rgba(77,179,255,.35),#4db3ff)}
+    #s-about .dg-arr i::before{right:auto;left:50%;top:auto;bottom:-1px;transform:translateX(-50%) rotate(135deg)}
+    #s-about .dg-arr i::after{left:50%;top:0;margin:-3.5px 0 0 -3.5px}
+    #s-about.is-active .dg-arr i::after{animation-name:about-flow-v}
+    html.js #s-about .dg-arr i{transform:scaleY(0);transform-origin:center top}
+    #s-about .dg-plate{flex-direction:row;gap:8px;padding:10px 16px}
+    #s-about .dg-plate img{height:32px}
+    #s-about .dg-plate img.type{height:15px}
+    #s-about .ab-ft{grid-template-columns:minmax(0,1fr);gap:8px}
+    #s-about .ab-ft > div{display:grid;grid-template-columns:6.2em minmax(0,1fr);align-items:center;gap:8px}
+    #s-about .ab-ft dd{margin:0}
+  }
+  @keyframes about-flow-v{0%{top:0;opacity:0}12%{opacity:1}70%{top:100%;opacity:1}80%,100%{top:100%;opacity:0}}
+  @media (prefers-reduced-motion:reduce){
+    #s-about .dg-arr i::after{display:none}
+  }
+</style>
+<section class="slide" id="s-about" data-title="ABOUT・サービス概要">
+  <div class="s-inner wide">
+    <div class="two-col wide-r ab-grid">
+      <div class="ab-left">
+        <span class="eyebrow" data-rv>ABOUT US</span>
+        <h2 class="s-title" data-rv style="--d:.08s">株式会社Insup</h2>
+        <div class="ab-text" data-rv style="--d:.16s">
+          <p>私たちは、テレアポBPOを軸にインサイドセールス支援を行う企業です。</p>
+          <p>お客様の営業課題に寄り添い、最適なセールス人材とソリューションをご提供します。</p>
+          <p>初期費用無料、1ヶ月からのお試し発注も可能。</p>
+          <p>確かな実績と柔軟なサービスで、お客様のビジネスを加速させます。</p>
+        </div>
+        <div class="btns" data-rv style="--d:.26s">
+          <a class="btn-outline sm" href="#s-company">会社概要を見る <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="card ab-ov" data-rv style="--d:.2s">
+        <h3 class="ab-h">サービス概要</h3>
+        <p class="ab-lead">即戦力「セールス人材」をすぐにリソース確保できる！<br><em>30日前申告で解約も可能！</em></p>
+        <div class="ab-dg">
+          <div class="dg-box dg-step" style="--d:.45s"><h4>企業様</h4><p>営業人員が足りていない...</p></div>
+          <div class="dg-arr dg-step" style="--d:.7s"><span>業務委託</span><i style="--d:.8s"></i></div>
+          <div class="dg-center dg-step" style="--d:1s"><span class="dg-plate"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></span></div>
+          <div class="dg-arr dg-step" style="--d:1.25s"><span>再委託</span><i style="--d:1.35s"></i></div>
+          <div class="dg-box dg-step" style="--d:1.55s"><h4>セールス人材</h4><p>即戦力のプロ</p></div>
+        </div>
+        <dl class="ab-ft">
+          <div class="dg-step" style="--d:1.75s"><dt>報酬</dt><dd>時給×稼働時間の従量課金</dd></div>
+          <div class="dg-step" style="--d:1.85s"><dt>解約</dt><dd>30日前申告で解約可能</dd></div>
+          <div class="dg-step" style="--d:1.95s"><dt>人員差し替え</dt><dd>期間内で無料で対応</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-services (business/services.html) ===== -->
+<!-- business 「事業内容」 — BUSINESS lead + SERVICE 01/02/03 (text: cur/text_business.txt) -->
+<style>
+  #s-services .sv-hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 40px}
+  #s-services .sv-hd .s-title{margin-bottom:0}
+  #s-services .sv-hd .lead{max-width:30em}
+  #s-services .sv-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:18px;align-items:stretch}
+  #s-services .sv{display:flex;flex-direction:column;padding:18px 22px 16px}
+  #s-services .sv .num{margin-bottom:6px}
+  #s-services .sv h3{font-size:clamp(17px,1.45vw,20px);margin:0 0 8px}
+  #s-services .sv .desc{font-size:13.5px;line-height:1.8;color:var(--sub)}
+  #s-services .sv ul{list-style:none;margin:12px 0 0;padding:12px 0 0;border-top:1px solid var(--line);display:grid;gap:6px}
+  #s-services .sv li{position:relative;padding-left:22px;font-size:13.5px;line-height:1.6;font-weight:500;color:var(--fg)}
+  #s-services .sv li::before{content:"";position:absolute;left:2px;top:.38em;width:12px;height:7px;border-left:2px solid var(--accent-2);border-bottom:2px solid var(--accent-2);transform:rotate(-45deg);transform-origin:center;border-radius:1px}
+  #s-services .pos{margin-top:auto;padding-top:14px}
+  #s-services .pos h4{font:700 12px/1.5 var(--font-ja);letter-spacing:.08em;color:var(--sub);margin:0 0 8px}
+  #s-services .pos ul{margin:0;padding:0;border:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  #s-services .pos li{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 5px;border-radius:12px;background:var(--chip-bg);border:1px solid var(--chip-line);font-size:12px;line-height:1.35;font-weight:700;min-width:0;text-align:center;white-space:nowrap}
+  #s-services .pos li::before{display:none}
+  #s-services .pos .ic{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:24px;height:22px;padding:0 7px;border-radius:99px;
+    background:linear-gradient(135deg,#1976f6,#4db3ff);color:#fff;font:800 11.5px var(--font-en);letter-spacing:.04em}
+  #s-services .sv.main{border-color:rgba(117,242,255,.38);background:var(--card-bg-strong)}
+  @media (max-width:1100px){
+    #s-services .sv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    #s-services .sv.main{grid-column:1/-1}
+  }
+  #s-services .sv .desc,#s-services .sv li,#s-services .lead{text-wrap:pretty}
+  @media (max-width:640px){
+    #s-services .sv-grid{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:20px}
+    #s-services .sv{padding:20px 18px}
+    #s-services .pos ul{display:flex;flex-wrap:wrap}
+    #s-services .pos li{flex-direction:row;gap:7px;padding:4px 12px 4px 4px;border-radius:99px;font-size:12.5px}
+    #s-services .pos .ic{height:24px}
+  }
+  @media (max-width:1199px){ #s-services .br-pc{display:none} }
+</style>
+<section class="slide" id="s-services" data-title="事業内容">
+  <div class="s-inner wide">
+    <div class="sv-hd">
+      <div>
+        <span class="eyebrow" data-rv>BUSINESS</span>
+        <h2 class="s-title" data-rv style="--d:.08s">事業内容</h2>
+      </div>
+      <p class="lead" data-rv style="--d:.16s">テレアポBPOを軸に、お客様の満足度を最大化する<br class="br-pc">多彩なサービスを提供しています。</p>
+    </div>
+
+    <div class="sv-grid">
+      <article class="card sv main" data-rv style="--d:.24s">
+        <span class="num">SERVICE 01</span>
+        <h3>インサイドセールス支援</h3>
+        <p class="desc">テレアポ代行から商談代行、カスタマーサクセスまで、インサイドセールス全般をトータルでサポートいたします。</p>
+        <ul>
+          <li>1,500名を超える登録セールス人材から最適な人材を選定</li>
+          <li>初期費用無料、1ヶ月からのお試し発注可能</li>
+          <li>最短即日〜3週間程度で稼働開始</li>
+          <li>面談・オファー・契約までワンストップでサポート</li>
+          <li>30日前申告で解約可能、人員差し替えも無料対応</li>
+        </ul>
+        <div class="pos">
+          <h4>提供ポジション</h4>
+          <ul>
+            <li><span class="ic">IS</span>インサイドセールス</li>
+            <li><span class="ic">D</span>ディレクター</li>
+            <li><span class="ic">FS</span>フィールドセールス</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card sv" data-rv style="--d:.36s">
+        <span class="num">SERVICE 02</span>
+        <h3>Bar事業</h3>
+        <p class="desc">札幌でシーシャとカラオケが両方楽しめる唯一のBar。特別な空間で、くつろぎのひとときをお過ごしください。</p>
+        <ul>
+          <li>札幌唯一のシーシャ×カラオケが楽しめるBar</li>
+          <li>お昼はコワーキングスペースとしてサービス提供予定</li>
+          <li>仕事も遊びも、一つの空間で</li>
+        </ul>
+      </article>
+
+      <article class="card sv" data-rv style="--d:.48s">
+        <span class="num">SERVICE 03</span>
+        <h3>マーケティング支援</h3>
+        <p class="desc">広告の媒体・金融商品など、多岐にわたる商材の認知獲得や顧客開拓の支援を致します。</p>
+        <ul>
+          <li>多様な業界・商材に対応</li>
+          <li>認知獲得から顧客開拓まで一貫支援</li>
+          <li>データドリブンなマーケティング戦略</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-remote (business/remote.html) ===== -->
+<!-- business 「フルリモート」 — headline B4 + animation B4-2 「北海道から光が走る」 (ported from v5parts/b4.html, mode 2 only) -->
+<style>
+  #s-remote .rm-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center}
+  #s-remote .copyside{min-width:0}
+  #s-remote .copy{position:relative;display:block;font-size:clamp(28px,3.6vw,48px);font-weight:900;line-height:1.32;letter-spacing:.02em;color:#fff;margin:0 0 16px}
+  #s-remote .en{display:block;font:600 clamp(11px,1vw,13px)/1.6 var(--font-en);letter-spacing:.18em;color:var(--sub)}
+  #s-remote .body{font-size:clamp(15px,1.25vw,17px);line-height:1.95;color:var(--sub);margin:14px 0 0;max-width:34em}
+  #s-remote .pts{margin-top:20px}
+
+  /* headline pieces */
+  #s-remote .copy .ln{display:block}
+  #s-remote .copy .lt{position:relative}
+  #s-remote .copy .ck{white-space:nowrap}
+
+  /* before the first entry: hidden (only when JS runs) */
+  #s-remote .b4:not(.go):not(.fin) .copy,
+  #s-remote .b4:not(.go):not(.fin) .fol,
+  #s-remote .b4:not(.go):not(.fin) .pre{opacity:0}
+
+  /* eyebrow + following text: short calm fade */
+  #s-remote .b4.go .pre{animation:remote-fol .8s ease .05s both}
+  #s-remote .b4.go .fol{animation:remote-fol .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--fd,3s) + var(--j,0) * .12s)}
+  @keyframes remote-fol{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  #s-remote .en.fol{--j:0} #s-remote .body.fol{--j:1} #s-remote .pts.fol{--j:2}
+
+  /* B4-2: light runs from 北海道 */
+  #s-remote .b4.go .l1{animation:remote-in .7s ease .15s both}
+  #s-remote .b4.go .l2{animation:remote-in .7s ease .15s both}
+  @keyframes remote-in{from{opacity:0}to{opacity:1}}
+  #s-remote .b4.go .l2 .ch{opacity:.14}
+  #s-remote .b4.go .l2 .ch.lit{animation:remote-lit .9s ease-out both}
+  @keyframes remote-lit{0%{opacity:.14;color:#75f2ff;text-shadow:0 0 0 rgba(117,242,255,0)}30%{opacity:1;color:#e6fdff;text-shadow:0 0 18px #75f2ff,0 0 4px #fff}100%{opacity:1;color:#fff;text-shadow:0 0 0 rgba(117,242,255,0)}}
+  #s-remote .b4.go .l1 .ch.glow{animation:remote-glow 1.6s ease both}
+  @keyframes remote-glow{0%{color:#fff;text-shadow:0 0 0 rgba(117,242,255,0)}30%{color:#dcfbff;text-shadow:0 0 16px #75f2ff,0 0 3px #fff}100%{color:#fff;text-shadow:0 0 0 rgba(117,242,255,0)}}
+  #s-remote .l2 .lt::after{content:"";position:absolute;left:0;right:0;bottom:-.06em;height:2px;border-radius:2px;background:linear-gradient(90deg,rgba(117,242,255,.95),rgba(77,179,255,.75) 70%,rgba(77,179,255,0));box-shadow:0 0 10px rgba(117,242,255,.55);opacity:0;transition:opacity 1s ease}
+  #s-remote .b4.ul .l2 .lt::after,#s-remote .b4.fin .l2 .lt::after{opacity:.7}
+  #s-remote .trk{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;opacity:0;transition:opacity .9s ease;filter:drop-shadow(0 0 4px #4db3ff) drop-shadow(0 0 10px rgba(77,179,255,.55))}
+  #s-remote .trk.on{opacity:1}
+  #s-remote .trk.fade{opacity:0}
+  #s-remote .trk path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+  #s-remote .trk .g{stroke:#4db3ff;stroke-width:6;opacity:.35}
+  #s-remote .trk .c{stroke:#bff8ff;stroke-width:2}
+  #s-remote .dot{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;opacity:0;transition:opacity .5s ease}
+  #s-remote .dot.on{opacity:1}
+  #s-remote .dot.out{opacity:0}
+  #s-remote .dot i,#s-remote .dot b{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%}
+  #s-remote .dot i{background:#fff;box-shadow:0 0 10px 3px #75f2ff,0 0 26px 8px rgba(77,179,255,.55)}
+  #s-remote .dot.on i{animation:remote-pop .5s cubic-bezier(.3,1.6,.5,1) both}
+  #s-remote .dot b{border:2px solid #75f2ff;opacity:0}
+  #s-remote .dot.on b{animation:remote-ring 1.1s ease-out 2 both}
+  @keyframes remote-pop{from{transform:scale(0)}to{transform:scale(1)}}
+  @keyframes remote-ring{from{transform:scale(.6);opacity:.9}to{transform:scale(3.4);opacity:0}}
+
+  /* final, readable state (also used when motion is reduced) */
+  #s-remote .b4.fin .copy *,#s-remote .b4.fin .fol,#s-remote .b4.fin .pre{animation:none!important}
+  #s-remote .b4.fin .ch{opacity:1!important;visibility:visible!important;transform:none!important;filter:none!important}
+  #s-remote .b4.fin .trk,#s-remote .b4.fin .dot{display:none}
+
+  @media (max-width:900px){
+    #s-remote .rm-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+    #s-remote .ph{aspect-ratio:16/9}
+  }
+  @media (max-width:640px){
+    #s-remote .copy{font-size:clamp(26px,7.4vw,32px)}
+  }
+</style>
+<section class="slide" id="s-remote" data-title="フルリモート">
+  <div class="s-inner">
+    <div class="rm-grid b4">
+      <div class="copyside">
+        <span class="eyebrow pre">FULL REMOTE</span>
+        <h2 class="s-title copy"><span class="sr-only">北海道から、全国の商談をつくる。</span><span aria-hidden="true"><span class="ln l1"><span class="lt"><span class="ck"><span class="ch">北</span><span class="ch">海</span><span class="ch">道</span><span class="ch">か</span><span class="ch">ら</span><span class="ch">、</span></span></span></span><span class="ln l2"><span class="lt"><span class="ck"><span class="ch">全</span><span class="ch">国</span><span class="ch">の</span><span class="ch">商</span><span class="ch">談</span><span class="ch">を</span></span><span class="ck"><span class="ch">つ</span><span class="ch">く</span><span class="ch">る</span><span class="ch">。</span></span></span></span></span><svg class="trk" aria-hidden="true" focusable="false"><path class="g"></path><path class="c"></path></svg><span class="dot" aria-hidden="true"><i></i><b></b></span></h2>
+        <span class="en fol">FROM HOKKAIDO TO NATIONWIDE</span>
+        <p class="body fol">1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。</p>
+        <div class="pts fol"><span><b>INITIAL COST</b>初期費用 無料</span><span><b>START</b>最短稼働 即日〜</span><span><b>TRIAL</b>お試し期間 1ヶ月〜</span></div>
+      </div>
+      <div class="ph" data-rv style="--d:.4s">写真入る<small>オフィスの雰囲気</small></div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-remote');
+  const box = sec.querySelector('.b4'), copy = sec.querySelector('.copy');
+  const FD = 3.0, END = 4.4;     // when the follow text starts / when the entrance is fully done (s)
+  let run = 0, timers = [], raf = 0, lighting = false, played = false;
+
+  function stop() { run++; timers.forEach(clearTimeout); timers = []; cancelAnimationFrame(raf); lighting = false; }
+  function later(ms, fn) { const r = run; timers.push(setTimeout(() => { if (r === run) fn(); }, ms)); }
+  function finish() { stop(); box.classList.remove('go', 'ul'); box.classList.add('fin'); }
+
+  function play() {
+    stop();
+    box.classList.remove('go', 'fin', 'ul');
+    copy.querySelectorAll('.lit,.glow').forEach(c => c.classList.remove('lit', 'glow'));
+    copy.querySelectorAll('.trk,.dot').forEach(el => el.classList.remove('on', 'fade', 'out'));
+    if (InsupSite.reduced) { box.classList.add('fin'); return; }
+    box.style.setProperty('--fd', FD + 's');
+    void box.offsetWidth;
+    box.classList.add('go');
+    runLight();
+    later(END * 1000, finish);
+  }
+
+  /* B4-2: a light dot starts at 北海道 and runs under the 2nd line */
+  function runLight() {
+    const r = run;
+    lighting = true;   // a resize before/while the light runs jumps to the final state
+    const fr = document.fonts && document.fonts.ready;
+    if (fr) fr.then(() => { if (r === run) measureLight(r); }); else measureLight(r);
+  }
+  function measureLight(r) {
+    const em = parseFloat(getComputedStyle(copy).fontSize);
+    const cr = copy.getBoundingClientRect();
+    const rel = el => { const b = el.getBoundingClientRect(); return { l: b.left - cr.left, r: b.right - cr.left, t: b.top - cr.top, b: b.bottom - cr.top }; };
+    const hk = [...copy.querySelectorAll('.l1 .ch')].slice(0, 3);
+    const l2 = [...copy.querySelectorAll('.l2 .ch')];
+    const lt2 = rel(copy.querySelector('.l2 .lt')), a = rel(hk[0]);
+    const x0 = -0.34 * em, y0 = (a.t + a.b) / 2, y2 = lt2.b + 0.06 * em - 1, rad = 0.32 * em, x1 = lt2.r;
+    const svg = copy.querySelector('.trk'), paths = [...svg.querySelectorAll('path')], dot = copy.querySelector('.dot');
+    svg.setAttribute('width', Math.ceil(cr.width)); svg.setAttribute('height', Math.ceil(cr.height));
+    const d = `M${x0} ${y0} L${x0} ${y2 - rad} Q${x0} ${y2} ${x0 + rad} ${y2} L${x1} ${y2}`;
+    paths.forEach(p => p.setAttribute('d', d));
+    const total = paths[1].getTotalLength();
+    paths.forEach(p => { p.style.strokeDasharray = total; p.style.strokeDashoffset = total; });
+    const centers = l2.map(c => { const b = rel(c); return b.l + (b.r - b.l) * 0.35; });
+    dot.style.transform = `translate(${x0}px,${y0}px)`;
+    later(800, () => { dot.classList.add('on'); hk.forEach(c => c.classList.add('glow')); });
+    later(1350, () => {
+      svg.classList.add('on');
+      const t0 = performance.now(), D = 1900; let lit = 0;
+      const ease = p => -(Math.cos(Math.PI * p) - 1) / 2;
+      const step = now => {
+        if (r !== run) return;
+        const p = Math.min(1, (now - t0) / D), s = ease(p) * total, pt = paths[1].getPointAtLength(s);
+        dot.style.transform = `translate(${pt.x}px,${pt.y}px)`;
+        paths.forEach(q => q.style.strokeDashoffset = total - s);
+        if (pt.y >= y2 - 0.5) while (lit < centers.length && pt.x >= centers[lit]) l2[lit++].classList.add('lit');
+        if (p < 1) { raf = requestAnimationFrame(step); return; }
+        while (lit < l2.length) l2[lit++].classList.add('lit');
+        lighting = false;
+        box.classList.add('ul'); dot.classList.add('out'); svg.classList.add('fade');
+      };
+      raf = requestAnimationFrame(step);
+    });
+  }
+
+  // keep B4-2 correct if the size changes while the light is running
+  let lastW = 0;
+  if (window.ResizeObserver) new ResizeObserver(() => { const w = copy.clientWidth; if (w !== lastW) { if (lastW && lighting) finish(); lastW = w; } }).observe(copy);
+
+  if (InsupSite.reduced) box.classList.add('fin');
+  sec.addEventListener('slide:enter', () => { if (played) return; played = true; play(); });
+  sec.addEventListener('slide:leave', () => { if (box.classList.contains('go')) finish(); });
+})();
+</script>
+
+<!-- ===== slide s-flow (business/flow.html) ===== -->
+<!-- business 「ご契約後の流れ」 — STEP 1–5 exactly as on the current site (cur/text_business.txt) -->
+<style>
+  #s-flow .fl{position:relative;list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+  /* the connecting line behind the step markers; it fills from left to right on entry */
+  #s-flow .fl::before,#s-flow .fl::after{content:"";position:absolute;left:10%;right:10%;top:27px;height:2px;border-radius:2px}
+  #s-flow .fl::before{background:var(--line)}
+  #s-flow .fl::after{background:linear-gradient(90deg,#4db3ff,#75f2ff);box-shadow:0 0 10px rgba(117,242,255,.5);transform-origin:left center;transform:scaleX(0);transition:transform 2.2s cubic-bezier(.45,0,.25,1) .3s}
+  #s-flow.is-seen .fl::after{transform:scaleX(1)}
+  #s-flow .st{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;min-width:0}
+  #s-flow .mk{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;
+    background:var(--card-bg-strong);border:1.5px solid var(--card-line);color:var(--accent-2);font:800 10px/1.1 var(--font-en);letter-spacing:.12em;
+    transition:border-color .6s ease,box-shadow .6s ease;transition-delay:var(--md,0s)}
+  #s-flow .mk b{display:block;font:800 19px/1 var(--font-en);letter-spacing:0;color:var(--fg);margin-top:2px}
+  #s-flow.is-seen .mk{border-color:rgba(117,242,255,.75);box-shadow:0 0 0 4px rgba(77,179,255,.12),0 0 18px rgba(117,242,255,.35)}
+  #s-flow .bx{margin-top:14px;width:100%;flex:1;padding:18px 12px 16px;border-radius:16px}
+  #s-flow .bx h3{font-size:clamp(16px,1.35vw,18px);line-height:1.45;margin:0 0 6px}
+  #s-flow .bx p{font-size:13.5px;line-height:1.7;color:var(--sub);text-wrap:pretty}
+  #s-flow .lead{text-wrap:pretty}
+  @media (max-width:900px){
+    #s-flow .fl{grid-template-columns:minmax(0,1fr);gap:0;margin-top:28px;max-width:520px}
+    #s-flow .fl::before,#s-flow .fl::after{left:27px;right:auto;top:28px;bottom:28px;width:2px;height:auto}
+    #s-flow .fl::after{transform-origin:center top;transform:scaleY(0)}
+    #s-flow.is-seen .fl::after{transform:scaleY(1)}
+    #s-flow .st{flex-direction:row;align-items:center;text-align:left;gap:16px;padding:7px 0}
+    #s-flow .mk{flex:0 0 56px}
+    #s-flow .bx{margin-top:0;padding:14px 16px}
+  }
+</style>
+<section class="slide" id="s-flow" data-title="ご契約後の流れ">
+  <div class="s-inner">
+    <h2 class="s-title" data-rv style="--d:.08s">ご契約後の流れ</h2>
+    <p class="lead" data-rv style="--d:.16s">最短即日で稼働開始。日本一のデリバリー速度を実現します。</p>
+    <ol class="fl">
+      <li class="st" data-rv style="--d:.3s;--md:.5s"><span class="mk">STEP<b>1</b></span><div class="card bx"><h3>ヒアリング</h3><p>依頼内容をヒアリング</p></div></li>
+      <li class="st" data-rv style="--d:.55s;--md:.95s"><span class="mk">STEP<b>2</b></span><div class="card bx"><h3>推薦</h3><p>候補一覧の提出</p></div></li>
+      <li class="st" data-rv style="--d:.8s;--md:1.4s"><span class="mk">STEP<b>3</b></span><div class="card bx"><h3>面談</h3><p>顔合せ（スキップ可）</p></div></li>
+      <li class="st" data-rv style="--d:1.05s;--md:1.85s"><span class="mk">STEP<b>4</b></span><div class="card bx"><h3>オファー<br>&amp;ご契約</h3><p>候補一覧の提出</p></div></li>
+      <li class="st" data-rv style="--d:1.3s;--md:2.3s"><span class="mk">STEP<b>5</b></span><div class="card bx"><h3>稼働開始</h3><p>費用はキックオフ・ロープレ等から発生</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ===== slide s-ceo (shared/ceo.html) ===== -->
+<!-- shared: 代表挨拶 (business #8 / careers #8) — full text from the current about page, every line in order -->
+<style>
+  #s-ceo .ceo{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,1fr);grid-template-areas:"fig head" "fig msg";column-gap:clamp(28px,4.4vw,64px);align-items:center;align-content:center}
+  #s-ceo .ceo-head{grid-area:head;align-self:end}
+  #s-ceo .ceo-msg{grid-area:msg;align-self:start}
+  #s-ceo .ceo-fig{grid-area:fig;margin:0}
+  #s-ceo .ceo-fig .ph{aspect-ratio:3/4}
+  #s-ceo .ceo-name{display:flex;align-items:baseline;gap:12px;margin-top:14px;padding-left:2px}
+  #s-ceo .ceo-name span{font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.12em}
+  #s-ceo .ceo-name b{font-size:22px;font-weight:900;letter-spacing:.14em;color:var(--heading)}
+  #s-ceo .s-title{font-size:clamp(26px,2.9vw,40px);margin-bottom:clamp(12px,2vh,20px)}
+  #s-ceo .ceo-msg{font-size:14.5px;line-height:1.85;color:var(--fg);padding:clamp(18px,2.6vh,26px) clamp(20px,2.2vw,30px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-ceo .ceo-msg p{margin:0 0 .85em;break-inside:avoid}
+  #s-ceo .ceo-msg p:last-child{margin-bottom:0;font-weight:700}
+  /* wide screens: the message in two text columns so it fits on one screen */
+  @media (min-width:1100px){
+    #s-ceo .ceo-txt{columns:2;column-gap:clamp(32px,3.4vw,48px);column-rule:1px solid var(--line)}
+  }
+  @media (min-width:1100px) and (max-height:800px){
+    #s-ceo .ceo-msg{font-size:14px;line-height:1.75}
+    #s-ceo .ceo-msg p{margin-bottom:.7em}
+  }
+  /* medium desktop: one column with a soft-fade inner scroll */
+  @media (min-width:901px) and (max-width:1099.98px){
+    #s-ceo .ceo-txt{max-height:min(54vh,480px);overflow-y:auto;padding:0 10px 36px 0;scrollbar-width:thin;
+      -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%)}
+  }
+  @media (max-width:900px){
+    #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0}
+    #s-ceo .ceo-fig{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:end;gap:16px;margin-bottom:22px}
+    #s-ceo .ceo-fig .ph{font-size:13px;border-radius:14px}
+    #s-ceo .ceo-name{margin:0 0 4px;flex-direction:column;gap:2px}
+    #s-ceo .ceo-msg{font-size:15px;line-height:1.95;padding:18px 18px}
+  }
+</style>
+<section class="slide" id="s-ceo" data-title="代表挨拶">
+  <div class="s-inner">
+    <div class="ceo">
+      <figure class="ceo-fig" data-rv style="--d:.15s">
+        <div class="ph">写真入る<small>代表写真</small></div>
+        <figcaption class="ceo-name"><span>代表</span><b>佐藤 光</b></figcaption>
+      </figure>
+      <div class="ceo-head">
+        <span class="eyebrow" data-rv>MESSAGE</span>
+        <h2 class="s-title" data-rv style="--d:.08s">代表挨拶</h2>
+      </div>
+        <div class="ceo-msg"><div class="ceo-txt">
+          <p data-rv style="--d:.25s">11年前、通信商材を扱う会社で社内1位を取って、当時はただ「数字を追うこと」が全てだと思っていた。</p>
+          <p data-rv style="--d:.32s">でも、月日が経つにつれて<br>"嘘をつかないと契約が取れない"<br>そんな現実に嫌気がさして、<br>一度はこの業界を離れました。</p>
+          <p data-rv style="--d:.39s">それでも、僕の地元・北海道には今も同じような環境で頑張っている営業マンがたくさんいます。</p>
+          <p data-rv style="--d:.46s">だけど——<br>商材も手法も、10年前と何も変わっていない。</p>
+          <p data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
+          <p data-rv style="--d:.6s">だから僕は、もう一度この業界に戻ることを決めました。</p>
+          <p data-rv style="--d:.67s">東京で扱われているSaaS商材を、北海道に"輸入"するような形で届けたい。</p>
+          <p data-rv style="--d:.74s">フルリモートという新しい働き方を、経験のある人たちにもう一度手渡したい。</p>
+          <p data-rv style="--d:.81s">環境のせいで挑戦をやめてしまった人に、「再スタートのきっかけ」を届けたい。</p>
+          <p data-rv style="--d:.88s">これが、僕が新しく立ち上げた"株式会社Insup"の原点です。</p>
+        </div></div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  /* medium desktop widths show the message in an inner scroll box: make it reachable by keyboard only then */
+  const box = document.querySelector('#s-ceo .ceo-txt');
+  if (!box) return;
+  const sync = () => {
+    const scrolls = getComputedStyle(box).overflowY !== 'visible' && box.scrollHeight > box.clientHeight + 2;
+    if (scrolls) { box.tabIndex = 0; box.setAttribute('role', 'region'); box.setAttribute('aria-label', '代表挨拶'); }
+    else { box.removeAttribute('tabindex'); box.removeAttribute('role'); box.removeAttribute('aria-label'); }
+  };
+  window.addEventListener('resize', sync);
+  if (window.InsupSite && InsupSite.ready) InsupSite.ready(sync); else window.addEventListener('load', sync);
+})();
+</script>
+
+<!-- ===== slide s-faq (business/faq.html) ===== -->
+<!-- business 「よくあるご質問」 — the 7 Q&A from cur/text_faq.txt as an accordion (one open at a time) -->
+<style>
+  #s-faq .fq-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:clamp(28px,5vw,72px);align-items:start}
+  #s-faq .fq-hd{padding-top:6px}
+  #s-faq .fq{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  #s-faq .it{border-radius:16px;background:var(--card-bg);border:1px solid var(--card-line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:border-color .4s ease,background .4s ease}
+  #s-faq .it.open{border-color:rgba(117,242,255,.5);background:var(--card-bg-strong)}
+  #s-faq .it h3{margin:0;font-size:inherit}
+  #s-faq .q{display:flex;align-items:center;gap:14px;width:100%;min-height:52px;padding:12px 18px;border:0;background:none;color:var(--fg);text-align:left;cursor:pointer;
+    font-size:15.5px;font-weight:700;line-height:1.55;border-radius:16px}
+  #s-faq .q .qt{flex:1;min-width:0}
+  #s-faq .q .pm{position:relative;flex:0 0 26px;width:26px;height:26px;border-radius:50%;border:1px solid var(--chip-line);background:var(--chip-bg);color:var(--accent-2)}
+  #s-faq .q .pm::before,#s-faq .q .pm::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:2px;margin:-1px 0 0 -5px;border-radius:2px;background:currentColor;transition:transform .45s var(--ease)}
+  #s-faq .q .pm::after{transform:rotate(90deg)}
+  #s-faq .it.open .q .pm::after{transform:rotate(0deg)}
+  #s-faq .q:hover .qt{color:var(--accent-2)}
+  #s-faq .a{height:0;overflow:hidden;transition:height .5s var(--ease)}
+  #s-faq .a p{padding:0 18px 16px;font-size:14.5px;line-height:1.85;color:var(--sub);text-wrap:pretty;opacity:0;transform:translateY(-4px);transition:opacity .35s ease,transform .45s var(--ease)}
+  #s-faq .it.open .a p{opacity:1;transform:none;transition-delay:.12s}
+  @media (max-width:900px){
+    #s-faq .fq-grid{grid-template-columns:minmax(0,1fr);gap:22px}
+  }
+  @media (max-width:640px){
+    #s-faq .q{padding:12px 14px;font-size:15px;gap:10px}
+    #s-faq .a p{padding:0 14px 14px;font-size:14px}
+  }
+</style>
+<section class="slide" id="s-faq" data-title="よくあるご質問">
+  <div class="s-inner">
+    <div class="fq-grid">
+      <div class="fq-hd">
+        <span class="eyebrow" data-rv>FAQ</span>
+        <h2 class="s-title" data-rv style="--d:.08s">よくあるご質問</h2>
+        <p class="lead" data-rv style="--d:.16s">お客様からよくいただくご質問をまとめました。</p>
+      </div>
+      <ul class="fq">
+        <li class="it" data-rv style="--d:.2s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1"><span class="qt">Q. 最低契約期間はありますか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden><p>1ヶ月からご契約可能です。初期費用無料キャンペーン中は、1ヶ月のお試し発注も可能です。30日前の申告で解約できます。</p></div></li>
+        <li class="it" data-rv style="--d:.26s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2"><span class="qt">Q. 初期費用はかかりますか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden><p>現在、初期費用無料キャンペーンを実施中です。通常15万円の初期費用が無料となります。</p></div></li>
+        <li class="it" data-rv style="--d:.32s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3"><span class="qt">Q. 人材の差し替えは可能ですか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden><p>はい、可能です。契約期間内であれば無料で対応させていただきます。</p></div></li>
+        <li class="it" data-rv style="--d:.38s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4"><span class="qt">Q. 稼働開始までどのくらいかかりますか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden><p>最短即日〜3週間程度で稼働開始可能です。ヒアリング、人材推薦、面談、契約を経て稼働開始となります。</p></div></li>
+        <li class="it" data-rv style="--d:.44s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5"><span class="qt">Q. 在宅ワークは可能ですか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden><p>はい、可能です。多くのアポインターが在宅でリモートワークを行っています。</p></div></li>
+        <li class="it" data-rv style="--d:.5s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a6" id="faq-q6"><span class="qt">Q. 業務管理はどのように行いますか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden><p>CS（カスタマーサクセス）またはディレクターが業務責任者として管理します。ディレクターの場合は5万円〜25万円が管理費用となります。</p></div></li>
+        <li class="it" data-rv style="--d:.56s"><h3><button type="button" class="q" aria-expanded="false" aria-controls="faq-a7" id="faq-q7"><span class="qt">Q. コールシステムは必要ですか？</span><span class="pm" aria-hidden="true"></span></button></h3>
+          <div class="a" id="faq-a7" role="region" aria-labelledby="faq-q7" hidden><p>オプションで提供可能です。1アカウント3,000円〜5,000円で、録音機能・通話料込みです。お客様ご自身でご用意いただくことも可能です。</p></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-faq');
+  const items = [...sec.querySelectorAll('.it')];
+
+  function set(it, open, instant) {
+    const btn = it.querySelector('.q'), a = it.querySelector('.a');
+    if (it.classList.contains('open') === open && !instant) return;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    it.classList.toggle('open', open);
+    clearTimeout(a._t);
+    const fast = instant || InsupSite.reduced;
+    if (open) {
+      a.hidden = false;
+      if (fast) { a.style.height = 'auto'; return; }
+      a.style.height = '0px';
+      void a.offsetHeight;
+      a.style.height = a.scrollHeight + 'px';
+      a._t = setTimeout(() => { if (it.classList.contains('open')) a.style.height = 'auto'; }, 520);
+    } else {
+      if (fast) { a.style.height = '0px'; a.hidden = true; return; }
+      a.style.height = a.scrollHeight + 'px';
+      void a.offsetHeight;
+      a.style.height = '0px';
+      a._t = setTimeout(() => { if (!it.classList.contains('open')) a.hidden = true; }, 520);
+    }
+  }
+
+  items.forEach(it => it.querySelector('.q').addEventListener('click', () => {
+    const open = !it.classList.contains('open');
+    items.forEach(o => { if (o !== it) set(o, false); });   // one open at a time
+    set(it, open);
+  }));
+
+  set(items[0], true, true);   // the first answer is shown from the start
+})();
+</script>
+
+<!-- ===== slide s-company (shared/company.html) ===== -->
+<!-- shared: 会社概要 (business #10 / careers #6) — decided facts (new address, 業務委託を含む150人) -->
+<style>
+  #s-company .co{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
+  #s-company .s-title{margin-bottom:0}
+  #s-company .s-title small{margin-top:12px;line-height:1.7;font-size:clamp(13.5px,1.15vw,15px);letter-spacing:.02em}
+  #s-company .nw{white-space:nowrap}
+  #s-company .co-plate{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(22px,4vh,36px);background:#fff;border-radius:16px;padding:12px 20px 12px 14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);line-height:0}
+  #s-company .co-plate img{height:44px;width:auto}
+  #s-company .co-plate img.type{height:27px}
+  #s-company .co-card{padding:clamp(6px,1vh,10px) clamp(20px,2.4vw,34px)}
+  #s-company .kv{margin:0;border-top:0}
+  #s-company .kv > div{grid-template-columns:8.5em minmax(0,1fr);padding:clamp(11px,1.9vh,16px) 2px;align-items:baseline}
+  #s-company .kv > div:last-child{border-bottom:0}
+  #s-company .kv dt{position:relative;padding-left:14px}
+  #s-company .kv dt::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  #s-company .kv dd{font-size:clamp(14.5px,1.2vw,16px);line-height:1.75}
+  #s-company .kv dd a{color:var(--accent);text-underline-offset:3px;word-break:break-all}
+  #s-company .co-num{font:800 1.3em var(--font-en);background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding:0 .08em}
+  @media (max-width:900px){
+    #s-company .co{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-company .co-plate{margin-top:18px;padding:10px 16px 10px 12px}
+    #s-company .co-plate img{height:34px}
+    #s-company .co-plate img.type{height:21px}
+  }
+  @media (max-width:640px){
+    #s-company .co-card{padding:4px 18px}
+    #s-company .kv > div{grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 0}
+    #s-company .kv dt{font-size:13px}
+    #s-company .co-plate{display:none}
+  }
+</style>
+<section class="slide" id="s-company" data-title="会社概要">
+  <div class="s-inner">
+    <div class="co">
+      <div class="co-head">
+        <span class="eyebrow" data-rv>COMPANY</span>
+        <h2 class="s-title" data-rv style="--d:.08s">会社概要<small>テレアポ代行・テレアポ人材マッチングのプロフェッショナル</small></h2>
+        <div class="co-plate" data-rv style="--d:.2s"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></div>
+      </div>
+      <div class="card co-card" data-rv style="--d:.25s">
+        <dl class="kv">
+          <div data-rv style="--d:.35s"><dt>商号</dt><dd>株式会社Insup</dd></div>
+          <div data-rv style="--d:.43s"><dt>代表者</dt><dd>佐藤 光</dd></div>
+          <div data-rv style="--d:.51s"><dt>本社所在地</dt><dd>〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 <span class="nw">サザンクロス札幌 9F</span></dd></div>
+          <div data-rv style="--d:.59s"><dt>従業員数</dt><dd>業務委託を含む<span class="co-num">150</span>人</dd></div>
+          <div data-rv style="--d:.67s"><dt>事業内容</dt><dd>インサイドセールス支援<br>Bar事業<br>マーケティング支援</dd></div>
+          <div data-rv style="--d:.75s"><dt>メールアドレス</dt><dd><a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-lounge (shared/lounge.html) ===== -->
+<!-- shared: ラウンジ (business #11 / careers #9)
+     photo motion LB (slow zoom/pan + mouse parallax + hover light sweep) and
+     headline L1-3 「ブラインドが開く」 — both ported from v5parts/lounge.html (candidate switcher removed). -->
+<style>
+  #s-lounge .lg{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:clamp(26px,3.6vw,56px);align-items:center}
+
+  /* ---- LB gallery ---- */
+  #s-lounge .gal{height:clamp(340px,60vh,560px);display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:8px;min-height:0}
+  #s-lounge .gal .t{position:relative;overflow:hidden;border-radius:14px;background:#cfdcef;box-shadow:var(--card-shadow)}
+  body.theme-dark #s-lounge .gal .t{background:#14306a}
+  #s-lounge .gal .t.a{grid-row:1/3}
+  #s-lounge .gal .zm{position:absolute;inset:0;transform-origin:50% 50%}
+  #s-lounge .gal .par{position:absolute;inset:-6%;transition:transform .25s ease-out}
+  #s-lounge .gal .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;will-change:transform}
+  #s-lounge .kb .t.a .img{animation:lounge-kbA 16s ease-in-out infinite alternate}
+  #s-lounge .kb .t.b .img{animation:lounge-kbB 14s ease-in-out infinite alternate}
+  #s-lounge .kb .t.c .img{animation:lounge-kbC 15s ease-in-out infinite alternate}
+  @keyframes lounge-kbA{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.22) translate(-4%,2%)}}
+  @keyframes lounge-kbB{from{transform:scale(1.12) translate(4%,0)}to{transform:scale(1.12) translate(-4%,0)}}
+  @keyframes lounge-kbC{from{transform:scale(1.25) translate(-3%,2%)}to{transform:scale(1.08) translate(2%,-1%)}}
+  /* the slow photo motion rests while the slide is off screen */
+  #s-lounge:not(.is-active) .kb .t .img{animation-play-state:paused}
+  #s-lounge .gal .t::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 70%);transform:translateX(-120%);transition:transform 1s;pointer-events:none}
+  #s-lounge .kb .t:hover::after{transform:translateX(120%)}
+
+  /* ---- text ---- */
+  #s-lounge .txt{min-width:0;position:relative;z-index:1;padding:clamp(20px,3.2vh,34px) clamp(20px,2.4vw,34px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-lounge .kicker{margin-bottom:6px}
+  #s-lounge .s-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(24px,2.7vw,38px);line-height:1.5;margin:0 0 clamp(12px,2vh,18px)}
+  #s-lounge .s-title .ln{display:inline-block}
+  #s-lounge .body{font-size:clamp(14px,1.15vw,16px);line-height:1.9;color:var(--sub);margin:0}
+  #s-lounge .tags{margin:clamp(12px,2vh,18px) 0 0}
+  #s-lounge .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:clamp(12px,2vh,18px) 0 0;padding:0}
+  #s-lounge .facts > div{min-width:0;background:var(--chip-bg);border:1px solid var(--chip-line);border-radius:12px;padding:9px 14px}
+  #s-lounge .facts dt{font:700 10.5px/1.5 var(--font-en);letter-spacing:.16em;color:var(--accent-2)}
+  body.theme-light #s-lounge .facts dt{color:var(--accent)}
+  #s-lounge .facts .nw{white-space:nowrap}
+  #s-lounge .facts dd{margin:0;font-size:14px;font-weight:700;color:var(--fg);line-height:1.55}
+
+  /* ---- entrance (calm follow-up stagger, from v5) ---- */
+  #s-lounge .lg{--d:1.55s}
+  @keyframes lounge-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes lounge-fade{from{opacity:0}to{opacity:1}}
+  #s-lounge .lg.play .kicker{animation:lounge-fade .7s ease-out .1s both}
+  #s-lounge .lg.play .body{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) var(--d) both}
+  #s-lounge .lg.play .tags{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .18s) both}
+  #s-lounge .lg.play .facts > div{animation:lounge-up .7s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .34s + var(--i) * .09s) both}
+  /* until the slide is reached, everything waits on its first frame (blinds closed) */
+  #s-lounge .lg.wait.play *,#s-lounge .lg.wait.play *::before,#s-lounge .lg.wait.play *::after,#s-lounge .lg.wait.play{animation-play-state:paused!important}
+
+  /* ---- L1-3 ブラインドが開く ---- */
+  #s-lounge{--sl-a:#ffffff;--sl-b:#f4f7fb;--sl-c:#dbe5f2;--sl-d:#bccde6;--sl-sh:rgba(11,45,107,.16);--rail-a:#d4e0f1;--rail-b:#a9bedd;--cord:#c3d2e8}
+  body.theme-dark #s-lounge{--sl-a:#1d3f80;--sl-b:#16346e;--sl-c:#0f2858;--sl-d:#0a1e47;--sl-sh:rgba(0,0,0,.45);--rail-a:#3a5d9e;--rail-b:#22417c;--cord:#3a5d9e}
+  #s-lounge .blinds{position:absolute;inset:3px -10px -4px -8px;display:none;flex-direction:column;pointer-events:none;perspective:700px}
+  #s-lounge .blinds i{flex:1;display:block;transform-origin:50% 50%;
+    background:linear-gradient(180deg,var(--sl-a) 0%,var(--sl-b) 38%,var(--sl-c) 78%,var(--sl-d) 100%);box-shadow:0 1px 1px var(--sl-sh)}
+  #s-lounge .blinds::before{content:"";position:absolute;left:-3px;right:-3px;top:-2px;height:5px;border-radius:3px;background:linear-gradient(var(--rail-a),var(--rail-b));z-index:1}
+  #s-lounge .blinds::after{content:"";position:absolute;right:14px;top:0;bottom:-10px;width:2px;background:var(--cord);border-radius:2px}
+  #s-lounge .lg.play .blinds{display:flex;animation:lounge-blindsOut .35s ease-out 1.85s both}
+  #s-lounge .lg.play .blinds i{animation:lounge-slat .95s cubic-bezier(.55,0,.25,1) calc(.45s + var(--i) * .06s) both}
+  @keyframes lounge-slat{0%{transform:rotateX(0)}100%{transform:rotateX(86deg)}}
+  @keyframes lounge-blindsOut{from{opacity:1}to{opacity:0}}
+
+  /* ---- phone / narrow ---- */
+  @media (max-width:900px){
+    #s-lounge .lg{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-lounge .gal{height:clamp(260px,64vw,400px);grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr;gap:6px}
+    #s-lounge .gal .t{border-radius:12px}
+    #s-lounge .gal .t.a{grid-row:auto;grid-column:1/3}
+    #s-lounge .s-title{font-size:clamp(24px,6.6vw,32px)}
+  }
+  @media (max-width:640px){
+    #s-lounge .facts dd{font-size:13px}
+    #s-lounge .facts > div{padding:8px 11px}
+    #s-lounge .txt{padding:20px 16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #s-lounge .kb .t .img{animation:none;transform:scale(1.1)}
+    #s-lounge .gal .par{transition:none}
+    #s-lounge .blinds{display:none!important}
+  }
+</style>
+<section class="slide" id="s-lounge" data-title="ラウンジ">
+  <div class="s-inner wide">
+    <div class="lg">
+      <div class="gal kb">
+        <div class="t a" role="img" aria-label="ラウンジの様子"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-main.jpg)"></div></div></div></div>
+        <div class="t b" role="img" aria-label="窓ぎわの席が並ぶラウンジ"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-work.jpg)"></div></div></div></div>
+        <div class="t c" role="img" aria-label="窓ぎわのカウンター席"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-counter.jpg)"></div></div></div></div>
+      </div>
+      <div class="txt">
+        <span class="eyebrow kicker">LOUNGE</span>
+        <h2 class="s-title"><span class="ln l1">打ち合わせは、</span><br><span class="ln l2">眺めのいいラウンジで。</span><span class="blinds" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></span></h2>
+        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+        <ul class="tags"><li>ご来社</li><li>ご訪問</li><li>商談</li></ul>
+        <dl class="facts">
+          <div style="--i:0"><dt>HOURS</dt><dd>8:00〜20:00</dd></div>
+          <div style="--i:1"><dt>BOOTH</dt><dd>テレフォンブース <span class="nw">2台</span></dd></div>
+          <div style="--i:2"><dt>POWER</dt><dd>全席コンセント完備</dd></div>
+          <div style="--i:3"><dt>DRINK</dt><dd>自動販売機 <span class="nw">2台</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-lounge');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  const box = sec.querySelector('.lg');
+
+  /* L1-3: blinds wait closed until the slide is reached, then open once */
+  if (!site.reduced) box.classList.add('play', 'wait');
+  sec.addEventListener('slide:enter', () => {
+    if (!box.classList.contains('wait')) return;
+    if (site.reduced) { box.classList.remove('play', 'wait'); return; }
+    box.classList.remove('wait');
+  });
+
+  /* LB: mouse parallax (same as v4 / v5) */
+  const pars = [...box.querySelectorAll('.par')];
+  box.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch' || site.reduced) return;
+    const r = box.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    pars.forEach((p, i) => { const d = [1, 1.6, 2.2][i]; p.style.transform = `translate(${-x * 3 * d}%, ${-y * 3 * d}%)`; });
+  });
+  box.addEventListener('pointerleave', () => pars.forEach(p => { p.style.transform = ''; }));
+})();
+</script>
+
+<!-- ===== slide s-access (shared/access.html) ===== -->
+<!-- shared: アクセス (business #12 / careers #10) — new address, stations, map button, building photo -->
+<style>
+  #s-access .ac{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,4.6vw,68px);align-items:center}
+  #s-access .ac-pic{position:relative;margin:0;height:clamp(320px,62vh,560px);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);background:#14306a}
+  #s-access .ac-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform-origin:50% 70%}
+  #s-access .ac-pic::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(180deg,rgba(6,24,61,0),rgba(6,24,61,.55));pointer-events:none}
+  #s-access .ac-pic figcaption{position:absolute;left:16px;bottom:14px;z-index:1;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+  /* slow settle of the photo the first time the slide is reached */
+  #s-access.ac-go .ac-pic img{animation:access-settle 2.8s var(--ease) both}
+  @keyframes access-settle{from{transform:scale(1.1)}to{transform:scale(1)}}
+
+  #s-access .ac-txt{padding:clamp(22px,3.4vh,36px) clamp(22px,2.6vw,40px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-access .s-title{margin-bottom:clamp(14px,2.4vh,22px)}
+  #s-access .ac-addr{font-style:normal;font-size:clamp(15px,1.3vw,17px);line-height:1.85;color:var(--fg)}
+  #s-access .ac-addr .zip{font-family:var(--font-en);font-weight:600;color:var(--sub)}
+  #s-access .ac-addr .bld{display:inline-block;margin-top:2px;font-weight:900;font-size:1.22em;letter-spacing:.04em;color:var(--heading)}
+  #s-access .ac-st{list-style:none;margin:clamp(16px,2.8vh,24px) 0 0;padding:0;display:grid;gap:10px;max-width:460px}
+  #s-access .ac-st li{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:12px;background:var(--chip-bg);border:1px solid var(--chip-line);font-size:clamp(14.5px,1.2vw,16px);font-weight:700;color:var(--fg)}
+  #s-access .ac-st .ln{flex:0 0 auto;font-size:11.5px;font-weight:700;line-height:1.6;padding:2px 9px;border-radius:6px;background:var(--blue);color:#fff}
+  #s-access .ac-st .min{margin-left:auto;white-space:nowrap;font-size:13px;color:var(--sub)}
+  #s-access .ac-st .min b{font:800 clamp(20px,1.8vw,24px)/1 var(--font-en);color:var(--accent-2);margin:0 2px 0 6px}
+  body.theme-light #s-access .ac-st .min b{color:var(--accent)}
+  #s-access .btns{margin-top:clamp(18px,3vh,28px)}
+
+  @media (max-width:900px){
+    #s-access .ac{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-access .ac-pic{height:clamp(220px,62vw,340px)}
+    #s-access .ac-pic img{object-position:50% 30%}
+    #s-access .ac-st{max-width:none}
+  }
+  @media (max-width:640px){
+    #s-access .ac-txt{padding:20px 18px}
+    #s-access .ac-st li{padding:9px 13px;gap:10px}
+    #s-access .btns .btn{width:100%}
+  }
+</style>
+<section class="slide" id="s-access" data-title="アクセス">
+  <div class="s-inner">
+    <div class="ac">
+      <figure class="ac-pic" data-rv>
+        <img src="assets/img/building.jpg" alt="サザンクロス札幌の外観" width="853" height="1280" decoding="async">
+        <figcaption>サザンクロス札幌</figcaption>
+      </figure>
+      <div class="ac-txt">
+        <span class="eyebrow" data-rv style="--d:.1s">ACCESS</span>
+        <h2 class="s-title" data-rv style="--d:.18s">アクセス</h2>
+        <address class="ac-addr" data-rv style="--d:.28s"><span class="zip">〒060-0063</span><br>北海道札幌市中央区南三条西3丁目11-1<br><span class="bld">サザンクロス札幌 9F</span></address>
+        <ul class="ac-st">
+          <li data-rv style="--d:.4s"><span class="ln">地下鉄</span>すすきの駅<span class="min">徒歩<b>3</b>分</span></li>
+          <li data-rv style="--d:.5s"><span class="ln">地下鉄</span>大通駅<span class="min">徒歩<b>5</b>分</span></li>
+        </ul>
+        <div class="btns" data-rv style="--d:.62s"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%82%B6%E3%83%B3%E3%82%AF%E3%83%AD%E3%82%B9%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">Googleマップで見る <span class="arr" aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-access');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  sec.addEventListener('slide:enter', e => {
+    if (e.detail.first && !site.reduced) sec.classList.add('ac-go');
+  });
+})();
+</script>
+
+<!-- ===== slide s-contact (business/contact.html) ===== -->
+<!-- business 「お問い合わせ・無料相談」 — CTA text + points + the 4 contact methods (cur/text_contact.txt, links_contact.txt) -->
+<style>
+  #s-contact .ct-grid{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:clamp(28px,5vw,64px);align-items:center}
+  #s-contact .s-title{font-size:clamp(26px,2.9vw,40px)}
+  #s-contact .ct-hl{font-size:clamp(19px,1.9vw,25px);font-weight:900;line-height:1.5;color:var(--heading);margin:0 0 12px}
+  #s-contact .ct-hl em{font-style:normal;background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #s-contact .kp{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:460px}
+  #s-contact .kp li{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:12px 8px;border-radius:14px;background:var(--chip-bg);border:1px solid var(--chip-line);text-align:center}
+  #s-contact .kp span{font-size:12.5px;font-weight:700;color:var(--sub);line-height:1.4}
+  #s-contact .kp b{font-size:clamp(18px,1.6vw,22px);font-weight:900;line-height:1.3;color:var(--fg)}
+  #s-contact .cm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  #s-contact .mt{display:flex;flex-direction:column;min-height:100%;padding:20px 20px 18px;overflow:hidden}
+  #s-contact .mt::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+    background:radial-gradient(120% 80% at 0% 0%,rgba(117,242,255,.16),transparent 60%);transition:opacity .4s ease}
+  #s-contact .mt:hover::after,#s-contact .mt:focus-visible::after{opacity:1}
+  #s-contact .mt .top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  #s-contact .mt .ic{flex:0 0 42px;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#1976f6,#4db3ff);color:#fff;box-shadow:0 6px 16px rgba(25,118,246,.35)}
+  #s-contact .mt .ic svg{width:22px;height:22px}
+  #s-contact .mt h3{font-size:17px;margin:0}
+  #s-contact .mt p{font-size:13.5px;line-height:1.75;color:var(--sub);flex:1}
+  #s-contact .mt .go{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);
+    font-weight:700;font-size:14.5px;color:var(--accent-2);overflow-wrap:normal;word-break:normal}
+  #s-contact .mt .go .en{min-width:0}
+  #s-contact .mt .go .mail{font-size:13px;letter-spacing:-.01em}
+  #s-contact .mt .go .arr{flex:0 0 auto;font:600 15px var(--font-en);transition:transform .35s var(--ease)}
+  #s-contact .mt:hover .go .arr{transform:translate(2px,-2px)}
+  #s-contact .mt.line{border-color:rgba(117,242,255,.4)}
+  @media (max-width:900px){
+    #s-contact .ct-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  }
+  #s-contact .lead,#s-contact .mt p{text-wrap:pretty}
+  @media (max-width:640px){
+    #s-contact .cm{grid-template-columns:minmax(0,1fr);gap:12px}
+    #s-contact .mt{padding:18px 18px 16px}
+    #s-contact .kp{gap:8px}
+    #s-contact .kp li{padding:10px 4px}
+  }
+  @media (max-width:1199px){ #s-contact .br-pc{display:none} }
+</style>
+<section class="slide" id="s-contact" data-title="お問い合わせ・無料相談">
+  <div class="s-inner">
+    <div class="ct-grid">
+      <div class="ct-hd">
+        <span class="eyebrow" data-rv>CONTACT</span>
+        <h2 class="s-title" data-rv style="--d:.08s">お問い合わせ・無料相談</h2>
+        <p class="ct-hl" data-rv style="--d:.16s"><em>初期費用無料・1ヶ月お試し発注が可能</em></p>
+        <p class="lead" data-rv style="--d:.22s">まずは無料でご相談ください。お客様の課題をヒアリングし、<br class="br-pc">最適なプランをご提案いたします。</p>
+        <ul class="kp" data-rv style="--d:.3s">
+          <li><span>初期費用</span><b>無料</b></li>
+          <li><span>最短稼働</span><b>即日〜</b></li>
+          <li><span>お試し期間</span><b>1ヶ月〜</b></li>
+        </ul>
+      </div>
+      <div class="cm">
+        <a class="card mt line" href="https://lin.ee/XIZn82k" target="_blank" rel="noopener" data-rv style="--d:.3s">
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L5 20.5l1.1-3.6C4.2 15.5 3 13.6 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span><h3>公式LINE</h3></div>
+          <p>LINEからお気軽にお問い合わせいただけます。</p>
+          <span class="go">LINEで問い合わせ<span class="arr" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="card mt" href="https://www.instagram.com/insup_official/" target="_blank" rel="noopener" data-rv style="--d:.4s">
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></span><h3>Instagram</h3></div>
+          <p>InstagramのDMでもお問い合わせを受け付けています。</p>
+          <span class="go"><span class="en">@insup_official</span><span class="arr" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="card mt" href="https://www.tiktok.com/@insup2025" target="_blank" rel="noopener" data-rv style="--d:.5s">
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.6"/></svg></span><h3>TikTok</h3></div>
+          <p>TikTokでもお問い合わせを受け付けています。</p>
+          <span class="go"><span class="en">@insup2025</span><span class="arr" aria-hidden="true">↗</span></span>
+        </a>
+        <a class="card mt" href="mailto:insup2025sapporo@gmail.com" data-rv style="--d:.6s">
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span><h3>メール</h3></div>
+          <p>メールでのお問い合わせも受け付けています。</p>
+          <span class="go"><span class="en mail">insup2025sapporo<wbr>@gmail.com</span><span class="arr" aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer (shared/footer.html) ===== -->
+<footer class="site-ft" id="site-footer">
+  <div class="ft-in">
+    <div class="ft-co">
+      <a class="plate ft-plate" href="index.html" aria-label="株式会社Insup トップ（入口）へ"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></a>
+      <p class="ft-name">株式会社Insup</p>
+      <address class="ft-addr">〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 サザンクロス札幌 9F<br>Email: <a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></address>
+    </div>
+    <ul class="ft-sns">
+      <li><a href="https://lin.ee/XIZn82k" target="_blank" rel="noopener">LINE</a></li>
+      <li><a href="https://www.instagram.com/insup_official/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@insup2025" target="_blank" rel="noopener">TikTok</a></li>
+    </ul>
+  </div>
+  <div class="ft-bottom">
+    <a href="privacy.html">プライバシーポリシー</a>
+    <small>© 2025 Insup All Rights Reserved.</small>
+  </div>
+</footer>
+
+</main>
+
+<nav class="tabbar" aria-label="ページ内の移動" data-pin="contact" data-pin-label="無料相談・お問い合わせ" data-items="about:サービス概要,numbers:実績の数字,reasons:選ばれる理由,faq:よくあるご質問"></nav>
+</body>
+</html>

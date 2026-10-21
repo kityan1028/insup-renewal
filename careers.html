@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- noindex: preview on github.io only — REMOVE this robots meta at launch -->
+<meta name="robots" content="noindex">
+<title>働きたい方向けページ | 株式会社Insup</title>
+<meta name="description" content="株式会社Insup - アポインター募集。在宅ワーク可、高時給、柔軟な働き方で一緒に働きませんか。">
+<meta name="theme-color" content="#ebf4ff">
+<link rel="icon" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=17b9427b05">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/js/fx.js?v=2"></script>
+<script src="assets/js/site.js?v=17b9427b05"></script>
+<script src="assets/js/careers.js?v=17b9427b05" defer></script>
+</head>
+<body class="theme-light page-careers">
+<a class="skip" href="#deck">本文へ移動</a>
+
+<!-- fixed full-screen 3D background (D3 白 × 立体の吹き出し — glass); mounted by careers.js -->
+<div class="bg" id="bg" aria-hidden="true"></div>
+
+<header class="site-hd">
+  <a class="plate" href="index.html" aria-label="株式会社Insup トップ（入口）へ"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></a>
+  <button type="button" class="menu-btn"><span class="lbl">MENU</span><span class="bars" aria-hidden="true"></span></button>
+</header>
+<div class="menu-ov" id="menu" role="dialog" aria-modal="true" aria-label="メニュー"></div>
+<nav class="dots" id="dots" aria-label="スライドの位置"></nav>
+
+<main class="deck" id="deck">
+<!-- ===== slide s-hero (careers/hero.html) ===== -->
+<!-- careers ① hero — RECRUIT. Text from cur/text_recruit.txt. Arrival: gentle fade/rise (SPEC: no special transition).
+     The glass bubbles of the page background (careers.js, stage 0) sit on the right; the copy stays on the left. -->
+<style>
+  #s-hero .hero-in{display:flex;flex-direction:column;align-items:flex-start}
+  #s-hero .hero-copy{max-width:min(620px,100%)}
+  #s-hero .eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:18px}
+  #s-hero .eyebrow::after{content:"";width:44px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--sky))}
+  #s-hero h1{font-size:clamp(34px,5vw,66px);font-weight:900;line-height:1.3;letter-spacing:.02em;color:var(--heading);margin:0}
+  #s-hero h1 .ln{display:block;white-space:nowrap}
+  #s-hero .hero-sub{word-break:keep-all;overflow-wrap:anywhere;margin-top:22px;font-size:clamp(16px,1.45vw,19px);font-weight:500;line-height:1.85;color:var(--sub)}
+  #s-hero .btns{margin-top:34px}
+  #s-hero .btn{min-height:56px;padding:14px 32px;font-size:16px}
+  #s-hero .btn .arr{transition:transform .35s var(--ease)}
+  #s-hero .btn:hover .arr{transform:translateY(3px)}
+  /* the two heading lines rise one after the other (slightly slower than the default reveal) */
+  html.js #s-hero .ln[data-rv]{transform:translateY(26px);transition:opacity 1.1s ease var(--d,0s),transform 1.2s var(--ease) var(--d,0s)}
+  html.js #s-hero.is-seen .ln[data-rv]{transform:none}
+  @media (max-width:640px){
+    #s-hero h1{font-size:clamp(28px,8.6vw,36px)}
+    #s-hero .hero-sub{margin-top:16px}
+    #s-hero .btns{margin-top:26px}
+    #s-hero .btn{width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js #s-hero .ln[data-rv]{transform:none}
+  }
+</style>
+<section class="slide" id="s-hero" data-title="トップ" data-stage="0">
+  <div class="s-inner hero-in">
+    <div class="hero-copy">
+      <span class="eyebrow" data-rv>RECRUIT</span>
+      <h1><span class="ln" data-rv style="--d:.15s">一緒に働く仲間を</span><span class="ln" data-rv style="--d:.32s">募集しています。</span></h1>
+      <p class="hero-sub" data-rv style="--d:.55s">在宅ワーク可、高時給、<wbr>柔軟な働き方が可能です。</p>
+      <div class="btns" data-rv style="--d:.75s"><a class="btn" href="#s-positions">募集ポジションを見る <span class="arr" aria-hidden="true">↓</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-positions (careers/positions.html) ===== -->
+<!-- careers ② 募集ポジション — the 3 positions with every tag, exactly as cur/text_recruit.txt. -->
+<style>
+  #s-positions .pos-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px}
+  #s-positions .s-title{margin-bottom:0}
+  #s-positions .cards{margin-top:30px;gap:20px;align-items:stretch}
+  #s-positions .job{display:flex;flex-direction:column;padding:26px 24px 24px;background:var(--card-bg-strong);overflow:hidden}
+  #s-positions .job::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--sky))}
+  #s-positions .job .num{margin-bottom:12px}
+  #s-positions .job h3{font-size:clamp(19px,1.6vw,22px);font-weight:900;margin:0}
+  #s-positions .pay{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--pale);color:var(--navy);font-weight:700;font-size:14px;line-height:1.5}
+  #s-positions .pay .amt{display:block;font:800 clamp(20px,1.75vw,24px)/1.35 var(--font-en);letter-spacing:.01em;color:var(--blue);margin-top:2px}
+  #s-positions .tags{margin-top:16px;gap:8px}
+  #s-positions .tags li{font-size:13px;padding:4px 12px;background:#fff;border-color:var(--chip-line)}
+  /* tags pop in one after another the first time the slide is entered */
+  html.js #s-positions .tags li{opacity:0;transform:translateY(8px) scale(.94);transition:opacity .6s ease,transform .7s var(--ease)}
+  html.js #s-positions.is-seen .tags li{opacity:1;transform:none;transition-delay:calc(var(--d,0s) + .45s + var(--i) * 90ms)}
+  @media (max-width:900px){
+    #s-positions .cards.c3{grid-template-columns:minmax(0,1fr)}
+    #s-positions .job{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;align-items:start}
+    #s-positions .job .num,#s-positions .job h3{grid-column:1}
+    #s-positions .pay{grid-column:2;grid-row:1 / span 2;margin:0;text-align:right}
+    #s-positions .tags{grid-column:1 / -1}
+  }
+  @media (max-width:640px){
+    #s-positions .cards{margin-top:22px;gap:14px}
+    #s-positions .job{display:flex;align-items:stretch;padding:22px 18px 20px}
+    #s-positions .pay{margin-top:12px;text-align:left}
+    #s-positions .pos-head .btn-outline{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js #s-positions .tags li{opacity:1;transform:none}
+  }
+</style>
+<section class="slide" id="s-positions" data-title="募集ポジション" data-stage="4">
+  <div class="s-inner">
+    <div class="pos-head">
+      <div>
+        <span class="eyebrow" data-rv>POSITIONS</span>
+        <h2 class="s-title" data-rv style="--d:.1s">募集ポジション</h2>
+      </div>
+      <a class="btn-outline sm" href="#s-apply" data-rv style="--d:.2s">応募方法 <span class="arr" aria-hidden="true">→</span></a>
+    </div>
+    <div class="cards c3">
+      <article class="card job" data-rv style="--d:.2s">
+        <span class="num">01</span>
+        <h3>インサイドセールス</h3>
+        <p class="pay">時給: <span class="amt">1,500円〜3,000円</span></p>
+        <ul class="tags" aria-label="条件">
+          <li style="--i:0">在宅ワーク可能</li><li style="--i:1">週2日〜OK</li><li style="--i:2">実績に応じて昇給あり</li><li style="--i:3">インセンティブあり</li>
+        </ul>
+      </article>
+      <article class="card job" data-rv style="--d:.34s">
+        <span class="num">02</span>
+        <h3>フィールドセールス</h3>
+        <p class="pay">月給: <span class="amt">30万円〜50万円</span></p>
+        <ul class="tags" aria-label="条件">
+          <li style="--i:0">商談経験者優遇</li><li style="--i:1">フルリモート可能</li><li style="--i:2">インセンティブあり</li><li style="--i:3">キャリアアップ支援</li>
+        </ul>
+      </article>
+      <article class="card job" data-rv style="--d:.48s">
+        <span class="num">03</span>
+        <h3>ディレクター</h3>
+        <p class="pay">月給: <span class="amt">5万円〜20万円</span></p>
+        <ul class="tags" aria-label="条件">
+          <li style="--i:0">営業経験3年以上</li><li style="--i:1">マネジメント経験者優遇</li><li style="--i:2">リモート中心</li><li style="--i:3">業績賞与あり</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-merits (careers/merits.html) ===== -->
+<!-- careers ③ 働く魅力 — the 4 items exactly as cur/text_recruit.txt. The numbers sit in small glossy speech bubbles (D3 motif). -->
+<style>
+  #s-merits .cards{margin-top:30px;gap:18px}
+  #s-merits .merit{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:22px;align-items:start;padding:26px 26px 26px 22px;background:var(--card-bg-strong)}
+  #s-merits .bub{position:relative;display:flex;align-items:center;justify-content:center;width:64px;height:52px;margin-top:2px;border-radius:16px;
+    background:linear-gradient(180deg,#4db3ff 0%,#1976f6 100%);color:#fff;font:800 19px/1 var(--font-en);letter-spacing:.04em;
+    box-shadow:0 10px 22px rgba(25,118,246,.28),inset 0 1px 0 rgba(255,255,255,.55)}
+  #s-merits .bub::before{content:"";position:absolute;left:13px;bottom:-9px;width:16px;height:12px;background:#1976f6;clip-path:polygon(0 0,100% 0,8% 100%)}
+  #s-merits .bub::after{content:"";position:absolute;left:6px;right:6px;top:4px;height:40%;border-radius:12px 12px 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));pointer-events:none}
+  #s-merits .merit:nth-child(even) .bub{background:linear-gradient(180deg,#75d4ff 0%,#4db3ff 100%)}
+  #s-merits .merit:nth-child(even) .bub::before{background:#4db3ff}
+  #s-merits .merit h3{font-size:clamp(19px,1.7vw,23px);font-weight:900;margin:0 0 6px}
+  #s-merits .merit p{font-size:15px;line-height:1.85}
+  /* the number bubbles pop in after their card rises (first entry only) */
+  html.js #s-merits .bub{opacity:0;transform:scale(.5);transform-origin:20% 100%}
+  html.js #s-merits.is-seen .bub{animation:merits-pop .6s cubic-bezier(.3,1.4,.5,1) calc(var(--d,0s) + .35s) both}
+  @keyframes merits-pop{0%{opacity:0;transform:scale(.5)}60%{opacity:1;transform:scale(1.06)}100%{opacity:1;transform:scale(1)}}
+  @media (max-width:900px){
+    #s-merits .cards.c2{grid-template-columns:minmax(0,1fr)}
+  }
+  @media (max-width:640px){
+    #s-merits .cards{margin-top:22px;gap:12px}
+    #s-merits .merit{column-gap:16px;padding:20px 18px 20px 16px}
+    #s-merits .bub{width:54px;height:44px;font-size:16px;border-radius:14px}
+    #s-merits .bub::before{left:11px;bottom:-8px;width:14px;height:10px}
+    #s-merits .merit p{font-size:14.5px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js #s-merits .bub,html.js #s-merits.is-seen .bub{opacity:1;transform:none;animation:none}
+  }
+</style>
+<section class="slide" id="s-merits" data-title="働く魅力">
+  <div class="s-inner">
+    <span class="eyebrow" data-rv>BENEFITS</span>
+    <h2 class="s-title" data-rv style="--d:.1s">働く魅力</h2>
+    <div class="cards c2">
+      <article class="card merit" data-rv style="--d:.2s">
+        <span class="bub" aria-hidden="true">01</span>
+        <div><h3>高時給</h3><p>業界トップクラスの時給水準。実績に応じた昇給制度あり。</p></div>
+      </article>
+      <article class="card merit" data-rv style="--d:.32s">
+        <span class="bub" aria-hidden="true">02</span>
+        <div><h3>柔軟な働き方</h3><p>在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。</p></div>
+      </article>
+      <article class="card merit" data-rv style="--d:.44s">
+        <span class="bub" aria-hidden="true">03</span>
+        <div><h3>福利厚生</h3><p>業務委託の方向けに税理士の紹介、Barの割引、資産形成のサポートなど充実。</p></div>
+      </article>
+      <article class="card merit" data-rv style="--d:.56s">
+        <span class="bub" aria-hidden="true">04</span>
+        <div><h3>成長企業</h3><p>急成長中の企業で、早期からマネジメントに挑戦できるチャンスあり。</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-members (careers/members.html) ===== -->
+<!-- careers ④ 社員紹介 — layout P3 「吹き出しで話す」 ported from v5parts/staff.html (P3 only; no switchers, no V5 helper).
+     Words under the heading = M2 with 150人. 3 members, each with ONLY these items in this order (all placeholders for now):
+     ① 顔写真  ② イニシャル  ③ 働くことになったきっかけ  ④ 今の仕事内容  ⑤ Insupで良かったこと.
+     No 社歴 / ひとことコメント / 「ほかにもメンバーがいます」.
+     Entrance (first time the slide is entered): the office band opens, then per member the face pops in,
+     a 「…」 typing bubble shows, and the speech bubble pops out — one member after another. -->
+<style>
+  #s-members .mb-head .s-title{margin-bottom:0}
+  /* 「一部をご紹介」の言葉（見出しのすぐ下） */
+  #s-members .mb-msg{display:flex;align-items:flex-start;gap:12px;margin-top:10px;font-size:clamp(15px,1.3vw,18px);font-weight:700;line-height:1.5;color:var(--heading);letter-spacing:.02em}
+  #s-members .mb-msg::before{content:"";flex:0 0 auto;margin-top:.72em;width:28px;height:3px;border-radius:9px;background:linear-gradient(90deg,var(--blue),var(--sky))}
+  #s-members .mb-msg .tx{word-break:keep-all;overflow-wrap:anywhere}
+
+  #s-members .mb-stage{position:relative;margin-top:20px;padding:20px 0 6px}
+  /* soft office-atmosphere band behind the chat (photo placeholder) */
+  #s-members .band{position:absolute;z-index:0;top:0;bottom:-28px;left:calc(50% - 50vw);right:calc(50% - 50vw);overflow:hidden;pointer-events:none;
+    border-top:1.5px dashed rgba(11,45,107,.22);
+    background:linear-gradient(180deg,rgba(214,232,255,.75) 0%,rgba(214,232,255,.55) 70%,rgba(255,255,255,0) 100%),repeating-linear-gradient(135deg,rgba(255,255,255,.45) 0 14px,rgba(255,255,255,0) 14px 28px)}
+  #s-members .band::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 65%);transform:translateX(-100%)}
+  #s-members .lbl{position:absolute;z-index:1;right:0;bottom:4px;font-weight:700;font-size:13px;line-height:1.5;color:var(--navy);background:rgba(255,255,255,.85);border:1.5px dashed rgba(11,45,107,.38);border-radius:99px;padding:5px 16px;white-space:nowrap}
+
+  /* chat */
+  #s-members .chat{position:relative;z-index:1;width:min(100%,920px);margin:0 auto;display:flex;flex-direction:column;gap:16px;list-style:none;padding:0}
+  #s-members .row{display:flex;align-items:flex-end;gap:18px}
+  #s-members .row.r{flex-direction:row-reverse}
+  #s-members .av{flex:0 0 96px;width:96px;height:96px;aspect-ratio:1;padding:6px;border-radius:50%;font-size:13px;gap:0;line-height:1.35;
+    border:1.5px dashed rgba(11,45,107,.38);background:repeating-linear-gradient(135deg,rgba(255,255,255,.92) 0 10px,rgba(229,240,255,.92) 10px 20px);color:var(--navy);
+    box-shadow:0 0 0 5px #fff,0 8px 20px rgba(11,45,107,.16)}
+  #s-members .av small{font-size:.8em}
+  #s-members .bw{position:relative;min-width:0;flex:0 1 700px}
+  /* glossy CSS speech bubble */
+  #s-members .say{position:relative;background:linear-gradient(180deg,#fbfdff 0%,#e4f0ff 100%);border:1px solid #c9ddf7;border-radius:18px;
+    box-shadow:0 8px 22px rgba(25,118,246,.14),inset 0 1px 0 #fff;color:var(--navy);padding:14px 24px 16px;transform-origin:0 100%}
+  #s-members .say::before{content:"";position:absolute;width:15px;height:15px;left:-8px;bottom:30px;background:#eef5ff;border:1px solid #c9ddf7;border-top:0;border-right:0;transform:rotate(45deg)}
+  #s-members .say::after{content:"";position:absolute;left:8px;right:8px;top:3px;height:42%;border-radius:15px 15px 40% 40%;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,0));pointer-events:none}
+  #s-members .row.r .say{transform-origin:100% 100%;background:linear-gradient(180deg,#f0f7ff 0%,#cfe4ff 100%)}
+  #s-members .row.r .say::before{left:auto;right:-8px;border:1px solid #c9ddf7;border-left:0;border-bottom:0;background:#dcebff}
+  #s-members .say .in{position:relative;z-index:1;display:block}
+  #s-members .nm{display:block;font-weight:900;font-size:18px;line-height:1.4;letter-spacing:.03em}
+  #s-members .qa{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1.15fr);gap:10px 16px;margin:8px 0 0}
+  #s-members .qa > div{min-width:0}
+  #s-members .qa dt{font-size:12.5px;font-weight:700;line-height:1.5;color:var(--blue);letter-spacing:.02em}
+  #s-members .qa dt i{font:800 13px var(--font-en);font-style:normal;margin-right:.3em}
+  #s-members .qa dd{margin:4px 0 0;font-size:14px;font-weight:700;line-height:1.5;color:#33415e;padding:4px 10px;border:1.5px dashed rgba(11,45,107,.3);border-radius:8px;background:rgba(255,255,255,.6)}
+  /* 「…」 typing bubble shown just before each speech bubble */
+  #s-members .typing{position:absolute;bottom:0;left:0;display:flex;gap:6px;padding:13px 18px;background:#fff;border:1px solid #c9ddf7;border-radius:16px;box-shadow:0 5px 13px rgba(25,118,246,.12);opacity:0;transform-origin:0 100%}
+  #s-members .row.r .typing{left:auto;right:0;transform-origin:100% 100%}
+  #s-members .typing i{width:8px;height:8px;border-radius:50%;background:var(--blue);opacity:.35}
+
+  /* ---------- entrance (first entry only) ---------- */
+  #s-members.mb-pre .anim{opacity:0}
+  #s-members.mb-run .band{animation:members-band 1s cubic-bezier(.2,.8,.2,1) both}
+  #s-members.mb-run .band::after{animation:members-shine 7s ease-in-out 1.5s infinite}
+  #s-members.mb-run:not(.is-active) .band::after{animation-play-state:paused}
+  #s-members.mb-run .lbl{animation:members-fade .8s ease-out .5s both}
+  #s-members.mb-run .av{animation:members-pop .55s cubic-bezier(.3,1.4,.5,1) var(--d) both}
+  #s-members.mb-run .typing{animation:members-typing .95s ease-out calc(var(--d) + .2s) both}
+  #s-members.mb-run .typing i{animation:members-dot 1s ease-in-out calc(var(--d) + .2s) 2}
+  #s-members.mb-run .typing i:nth-child(2){animation-delay:calc(var(--d) + .35s)}
+  #s-members.mb-run .typing i:nth-child(3){animation-delay:calc(var(--d) + .5s)}
+  #s-members.mb-run .say{animation:members-pop .6s cubic-bezier(.3,1.4,.5,1) calc(var(--d) + 1.05s) both}
+
+  @keyframes members-pop{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.05)}100%{opacity:1;transform:scale(1)}}
+  @keyframes members-fade{from{opacity:0}to{opacity:1}}
+  @keyframes members-typing{0%{opacity:0;transform:scale(.6)}18%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.85)}}
+  @keyframes members-dot{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-4px);opacity:1}}
+  @keyframes members-band{from{opacity:0;transform:scaleX(.75)}to{opacity:1;transform:none}}
+  @keyframes members-shine{0%{transform:translateX(-100%)}45%,100%{transform:translateX(100%)}}
+
+  /* shorter desktop screens: tighten so the whole chat fits on one screen */
+  @media (min-width:901px) and (max-height:860px){
+    #s-members .mb-stage{margin-top:14px;padding-top:16px}
+    #s-members .chat{gap:12px}
+    #s-members .av{flex-basis:84px;width:84px;height:84px;font-size:12px}
+    #s-members .say{padding:11px 22px 13px}
+    #s-members .nm{font-size:16.5px}
+    #s-members .qa{margin-top:5px}
+    #s-members .qa dd{padding:3px 10px}
+  }
+  /* tablet / phone: the three questions stack inside each bubble */
+  @media (max-width:900px){
+    #s-members .qa{grid-template-columns:minmax(0,1fr);gap:8px}
+    #s-members .bw{flex:1 1 auto}
+    #s-members .lbl{right:50%;transform:translateX(50%);bottom:-20px}
+    #s-members .mb-stage{padding-bottom:40px}
+  }
+  @media (max-width:640px){
+    #s-members .mb-msg{gap:9px;font-size:15px}
+    #s-members .mb-msg::before{width:20px}
+    #s-members .mb-stage{margin-top:16px;padding:16px 0 44px}
+    #s-members .band{bottom:-12px}
+    #s-members .lbl{font-size:12px;padding:4px 13px}
+    #s-members .chat{gap:14px}
+    #s-members .row{gap:10px}
+    #s-members .av{flex-basis:62px;width:62px;height:62px;padding:4px;font-size:10.5px;box-shadow:0 0 0 4px #fff,0 6px 14px rgba(11,45,107,.16)}
+    #s-members .av small{display:block;font-size:.85em;line-height:1.2}
+    #s-members .say{padding:12px 14px 14px;border-radius:14px}
+    #s-members .say::before{width:12px;height:12px;left:-7px;bottom:22px}
+    #s-members .row.r .say::before{right:-7px}
+    #s-members .nm{font-size:15.5px}
+    #s-members .qa dt{font-size:12px}
+    #s-members .qa dd{font-size:13px;padding:3px 9px}
+    #s-members .typing{padding:11px 14px}
+    #s-members .typing i{width:7px;height:7px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #s-members.mb-pre .anim{opacity:1}
+    #s-members .band::after,#s-members .typing{animation:none!important;opacity:0}
+  }
+</style>
+<section class="slide" id="s-members" data-title="社員紹介" data-stage="3">
+  <div class="s-inner wide">
+    <div class="mb-head">
+      <span class="eyebrow" data-rv>OUR MEMBERS</span>
+      <h2 class="s-title" data-rv style="--d:.1s">在宅で働くメンバー</h2>
+      <p class="mb-msg" data-rv style="--d:.2s"><span class="tx">業務委託を含む150人のメンバーから、<wbr>一部をご紹介します。</span></p>
+    </div>
+    <div class="mb-stage">
+      <div class="band anim" aria-hidden="true"></div>
+      <span class="lbl anim">写真入る（オフィスの雰囲気）</span>
+      <ul class="chat" aria-label="メンバー紹介"><!--MEMBERS--></ul>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  /* ===== メンバー（まだ無いので仮の枠）— 人数を変えるときはここを増減。項目と順番は決定どおり ===== */
+  const MEMBERS = [
+    { initial: 'イニシャル入る', reason: '働くことになったきっかけ入る', work: '今の仕事内容入る', good: 'Insupで良かったこと入る' },
+    { initial: 'イニシャル入る', reason: '働くことになったきっかけ入る', work: '今の仕事内容入る', good: 'Insupで良かったこと入る' },
+    { initial: 'イニシャル入る', reason: '働くことになったきっかけ入る', work: '今の仕事内容入る', good: 'Insupで良かったこと入る' },
+  ];
+  const Q = [['reason', '働くことになったきっかけ'], ['work', '今の仕事内容'], ['good', 'Insupで良かったこと']];
+
+  const sec = document.getElementById('s-members');
+  if (!sec) return;
+  const chat = sec.querySelector('.chat');
+  chat.innerHTML = MEMBERS.map((m, i) => `
+    <li class="row${i % 2 ? ' r' : ''}" style="--d:${(0.35 + i * 1.3).toFixed(2)}s">
+      <div class="ph round av anim">写真入る<small>（顔写真）</small></div>
+      <div class="bw">
+        <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="say anim"><span class="in">
+          <span class="nm">${m.initial}</span>
+          <dl class="qa">${Q.map(([k, q]) => `<div><dt><i>Q.</i>${q}</dt><dd>${m[k]}</dd></div>`).join('')}</dl>
+        </span></div>
+      </div>
+    </li>`).join('');
+
+  const reduced = () => !!(window.InsupSite && InsupSite.reduced);
+  if (!reduced()) sec.classList.add('mb-pre');
+  sec.addEventListener('slide:enter', e => {
+    if (!e.detail || !e.detail.first) return;
+    sec.classList.remove('mb-pre');
+    if (reduced()) return;
+    void sec.offsetWidth;
+    sec.classList.add('mb-run');
+  });
+})();
+</script>
+
+<!-- ===== slide s-numbers (shared/numbers.html) ===== -->
+<!-- shared: 実績の数字 (business #3 / careers #5) — count-up on first enter -->
+<style>
+  #s-numbers .s-title{margin-bottom:0}
+  #s-numbers .nb-stats{list-style:none;margin:clamp(18px,3.6vh,36px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
+  #s-numbers .nb-stat{position:relative;overflow:hidden;text-align:center;padding:clamp(20px,3.6vh,36px) 14px clamp(18px,3vh,28px);
+    background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  #s-numbers .nb-v{display:block;font:800 clamp(46px,6.2vw,86px)/1.05 var(--font-en);letter-spacing:-.015em;font-variant-numeric:tabular-nums;white-space:nowrap}
+  #s-numbers .nb-v > span,#s-numbers .nb-v > small{background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  #s-numbers .nb-v .n{display:inline-block;text-align:right}
+  #s-numbers .nb-v small{font-size:.5em;font-weight:800;margin-left:.04em}
+  /* thin bar under the number, grows once the count has finished */
+  #s-numbers .nb-bar{display:block;width:44px;height:3px;margin:clamp(12px,2vh,18px) auto clamp(10px,1.6vh,14px);border-radius:3px;background:var(--em-grad);transform-origin:50% 50%}
+  #s-numbers .nb-l{display:block;font-weight:700;font-size:clamp(14px,1.2vw,16px);color:var(--fg);letter-spacing:.04em}
+  #s-numbers .nb-txt{margin:clamp(16px,3vh,30px) auto 0;max-width:640px;text-align:center;padding:clamp(14px,2.4vh,22px) clamp(18px,2.4vw,32px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-numbers .nb-txt p{font-size:clamp(14px,1.15vw,16px);line-height:1.95;color:var(--sub)}
+  #s-numbers .nb-txt p.nb-key{margin-top:clamp(10px,1.6vh,14px);color:var(--fg);font-weight:700}
+
+  /* count-up states (set by the script; without JS / with reduced motion the final values simply show) */
+  #s-numbers.nb-wait .nb-bar{transform:scaleX(0)}
+  #s-numbers.nb-run .nb-bar{transform:scaleX(1);transition:transform .9s var(--ease) calc(var(--i) * .16s + 1.5s)}
+
+  @media (max-width:900px){
+    #s-numbers .nb-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media (max-width:640px){
+    #s-numbers .nb-stats{grid-template-columns:minmax(0,1fr);gap:10px}
+    #s-numbers .nb-stat{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px 16px;text-align:left;padding:16px 18px}
+    #s-numbers .nb-v{font-size:44px;grid-row:1/3}
+    #s-numbers .nb-bar{margin:0;width:32px;align-self:end}
+    #s-numbers .nb-l{align-self:start;font-size:14.5px}
+    #s-numbers .nb-txt{text-align:left;padding:16px 18px}
+    #s-numbers .nb-txt p{font-size:14.5px}
+    #s-numbers .nb-txt br{display:none}
+  }
+</style>
+<section class="slide" id="s-numbers" data-title="実績の数字">
+  <div class="s-inner center">
+    <span class="eyebrow" data-rv>ACHIEVEMENTS</span>
+    <h2 class="s-title" data-rv style="--d:.08s">実績</h2>
+    <ul class="nb-stats">
+      <li class="nb-stat" data-rv style="--d:.18s;--i:0"><span class="nb-v" data-to="1500"><span class="n">1,500</span></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">登録アポインター数</span></li>
+      <li class="nb-stat" data-rv style="--d:.3s;--i:1"><span class="nb-v" data-to="220"><span class="n">220</span><small>%</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">最大アポ率改善</span></li>
+      <li class="nb-stat" data-rv style="--d:.42s;--i:2"><span class="nb-v" data-to="100"><span class="n">100</span><small>+</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">取引実績企業数</span></li>
+    </ul>
+    <div class="nb-txt" data-rv style="--d:.7s">
+      <p>人材系企業、SaaS・DX支援ツール、<br>営業代行会社、インサイドセールス支援、<br>メディア・広報・PR、Web制作・広告など、<br>幅広い業界での実績がございます。</p>
+      <p class="nb-key">東証プライム上場企業やDMMグループをはじめ、<br>100社以上の企業様にサービスをご提供しています。</p>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-numbers');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  const vals = [...sec.querySelectorAll('.nb-v')].map(v => ({ v, n: v.querySelector('.n'), to: +v.dataset.to, fin: v.querySelector('.n').textContent }));
+  const fmt = x => x.toLocaleString('en-US');
+  let started = false;
+
+  if (site.reduced) return;              /* reduced motion: final numbers, no counting */
+  sec.classList.add('nb-wait');
+  /* keep each number's final width so nothing shifts while counting */
+  const lock = () => vals.forEach(o => { o.n.style.minWidth = ''; o.n.textContent = o.fin; o.n.style.minWidth = o.n.getBoundingClientRect().width + 'px'; if (!started) o.n.textContent = '0'; });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!started) lock(); });
+  lock();
+  window.addEventListener('resize', () => {
+    if (!started) lock();
+    else if (sec.classList.contains('nb-done')) vals.forEach(o => { o.n.style.minWidth = ''; });
+  });
+
+  function run() {
+    if (started) return;
+    started = true;
+    if (site.reduced) { vals.forEach(o => { o.n.textContent = o.fin; }); sec.classList.remove('nb-wait'); return; }
+    sec.classList.remove('nb-wait');
+    sec.classList.add('nb-run');
+    const t0 = performance.now(), dur = 1900;
+    let left = vals.length;
+    vals.forEach((o, i) => {
+      const delay = 350 + i * 160;
+      const step = now => {
+        const t = Math.min(1, Math.max(0, (now - t0 - delay) / dur));
+        const e = 1 - Math.pow(1 - t, 4);
+        o.n.textContent = t >= 1 ? o.fin : fmt(Math.round(o.to * e));
+        if (t < 1) requestAnimationFrame(step);
+        else if (--left === 0) sec.classList.add('nb-done');
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  sec.addEventListener('slide:enter', run);
+})();
+</script>
+
+<!-- ===== slide s-company (shared/company.html) ===== -->
+<!-- shared: 会社概要 (business #10 / careers #6) — decided facts (new address, 業務委託を含む150人) -->
+<style>
+  #s-company .co{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
+  #s-company .s-title{margin-bottom:0}
+  #s-company .s-title small{margin-top:12px;line-height:1.7;font-size:clamp(13.5px,1.15vw,15px);letter-spacing:.02em}
+  #s-company .nw{white-space:nowrap}
+  #s-company .co-plate{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(22px,4vh,36px);background:#fff;border-radius:16px;padding:12px 20px 12px 14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);line-height:0}
+  #s-company .co-plate img{height:44px;width:auto}
+  #s-company .co-plate img.type{height:27px}
+  #s-company .co-card{padding:clamp(6px,1vh,10px) clamp(20px,2.4vw,34px)}
+  #s-company .kv{margin:0;border-top:0}
+  #s-company .kv > div{grid-template-columns:8.5em minmax(0,1fr);padding:clamp(11px,1.9vh,16px) 2px;align-items:baseline}
+  #s-company .kv > div:last-child{border-bottom:0}
+  #s-company .kv dt{position:relative;padding-left:14px}
+  #s-company .kv dt::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  #s-company .kv dd{font-size:clamp(14.5px,1.2vw,16px);line-height:1.75}
+  #s-company .kv dd a{color:var(--accent);text-underline-offset:3px;word-break:break-all}
+  #s-company .co-num{font:800 1.3em var(--font-en);background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding:0 .08em}
+  @media (max-width:900px){
+    #s-company .co{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-company .co-plate{margin-top:18px;padding:10px 16px 10px 12px}
+    #s-company .co-plate img{height:34px}
+    #s-company .co-plate img.type{height:21px}
+  }
+  @media (max-width:640px){
+    #s-company .co-card{padding:4px 18px}
+    #s-company .kv > div{grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 0}
+    #s-company .kv dt{font-size:13px}
+    #s-company .co-plate{display:none}
+  }
+</style>
+<section class="slide" id="s-company" data-title="会社概要">
+  <div class="s-inner">
+    <div class="co">
+      <div class="co-head">
+        <span class="eyebrow" data-rv>COMPANY</span>
+        <h2 class="s-title" data-rv style="--d:.08s">会社概要<small>テレアポ代行・テレアポ人材マッチングのプロフェッショナル</small></h2>
+        <div class="co-plate" data-rv style="--d:.2s"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></div>
+      </div>
+      <div class="card co-card" data-rv style="--d:.25s">
+        <dl class="kv">
+          <div data-rv style="--d:.35s"><dt>商号</dt><dd>株式会社Insup</dd></div>
+          <div data-rv style="--d:.43s"><dt>代表者</dt><dd>佐藤 光</dd></div>
+          <div data-rv style="--d:.51s"><dt>本社所在地</dt><dd>〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 <span class="nw">サザンクロス札幌 9F</span></dd></div>
+          <div data-rv style="--d:.59s"><dt>従業員数</dt><dd>業務委託を含む<span class="co-num">150</span>人</dd></div>
+          <div data-rv style="--d:.67s"><dt>事業内容</dt><dd>インサイドセールス支援<br>Bar事業<br>マーケティング支援</dd></div>
+          <div data-rv style="--d:.75s"><dt>メールアドレス</dt><dd><a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-remote (careers/remote.html) ===== -->
+<style>
+  /* careers「フルリモート」— headline W1, motion W1-4 (ported from v5parts/w1.html) with the big
+     centered emphasis on the whole phrase「通勤ゼロ」. Everything scoped to #s-remote. */
+  #s-remote .rm-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
+  #s-remote .rm-copy{position:relative;z-index:2;min-width:0}
+  #s-remote .rm-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(28px,3.7vw,52px);font-weight:900;line-height:1.32;
+    letter-spacing:.02em;color:var(--heading);margin:4px 0 10px}
+  #s-remote .ln{position:relative;display:inline-block;white-space:nowrap}
+  #s-remote .ln1{z-index:2}
+  #s-remote .zero{position:relative;z-index:3;display:inline-block;transform-origin:50% 50%;will-change:transform}
+  #s-remote .tl{display:inline-block}
+  #s-remote .rm-en{font:600 clamp(11px,1vw,13px)/1.6 var(--font-en);letter-spacing:.18em;color:var(--sub)}
+  #s-remote .rm-body{font-size:clamp(15px,1.25vw,17px);line-height:1.9;color:var(--sub);margin:18px 0 0;max-width:30em}
+  #s-remote .pts > span{background:var(--card-bg-strong)}
+  #s-remote .rm-ph{background:var(--card-bg);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  /* before the first entrance the headline waits hidden (only while JS runs) */
+  html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:0}
+  @media (max-width:900px){
+    #s-remote .rm-grid{grid-template-columns:minmax(0,1fr);gap:26px}
+    #s-remote .rm-ph{aspect-ratio:16/9;max-width:560px}
+  }
+  @media (max-width:640px){
+    #s-remote .rm-body{margin-top:14px}
+    #s-remote .pts{gap:8px;margin-top:18px}
+    #s-remote .pts > span{font-size:13.5px;padding:7px 12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:1}
+  }
+</style>
+<section class="slide rm-wait" id="s-remote" data-title="フルリモート">
+  <div class="s-inner">
+    <div class="rm-grid">
+      <div class="rm-copy">
+        <span class="eyebrow" data-rv>FULL REMOTE</span>
+        <h2 class="rm-title"><span class="ln ln1"><span class="zero">通勤ゼロ</span><span class="tl">で、</span></span><br><span class="ln ln2">トップセールスへ。</span></h2>
+        <p class="rm-en">ZERO COMMUTE. TOP RESULTS.</p>
+        <p class="rm-body" data-rv style="--d:1.55s">在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。</p>
+        <div class="pts" data-rv style="--d:1.75s"><span><b>REMOTE</b>在宅ワーク可能</span><span><b>DAYS</b>週2日〜OK</span><span><b>PAY</b>時給 1,500円〜3,000円</span></div>
+      </div>
+      <div class="ph rm-ph" data-rv style="--d:1.45s">写真入る<small>オフィスの雰囲気</small></div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-remote');
+  if (!sec) return;
+  const $ = s => sec.querySelector(s);
+  const title = $('.rm-title'), zero = $('.zero'), tl = $('.tl'), ln2 = $('.ln2'), en = $('.rm-en');
+  const mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  const reduced = () => !!((window.InsupSite && InsupSite.reduced) || mq.matches);
+  const OUT = 'cubic-bezier(.2,.8,.2,1)';
+  const GLOW = '0 0 .25em rgba(255,255,255,.95)', NOGLOW = '0 0 0 rgba(255,255,255,0)';
+  let played = false;
+
+  /* animations are created paused and driven by our own clock (rAF, with a timer fallback when frames are throttled) — as in w1.html */
+  let running = [], t0 = 0, endAt = 0, raf = 0, iv = 0, lastTick = 0;
+  const A = (node, frames, o) => { const a = node.animate(frames, Object.assign({ fill: 'backwards', easing: 'linear' }, o)); a.pause(); a.currentTime = 0; running.push(a); return a; };
+  function stop() { cancelAnimationFrame(raf); clearInterval(iv); running.forEach(a => a.cancel()); running = []; }
+  function tick() {
+    const now = performance.now(); lastTick = now;
+    const el = now - t0;
+    running.forEach(a => { a.currentTime = el; });
+    if (el > endAt + 60) { stop(); return; }
+    raf = requestAnimationFrame(tick);
+  }
+  function drive() {
+    endAt = running.reduce((m, a) => Math.max(m, a.effect.getComputedTiming().endTime), 0);
+    t0 = performance.now(); lastTick = t0;
+    raf = requestAnimationFrame(tick);
+    iv = setInterval(() => { if (performance.now() - lastTick > 90) { cancelAnimationFrame(raf); tick(); } }, 40);
+  }
+
+  /* W1-4: 「通勤ゼロ」 appears big in the middle, then shrinks into its place in the sentence.
+     「で、」 and the 2nd line only slide in once it has landed, so the big text never covers them. */
+  function play() {
+    const s = sec.getBoundingClientRect(), z = zero.getBoundingClientRect(), cp = title.getBoundingClientRect();
+    if (!z.width || !s.width) return;
+    const narrow = s.width / s.height < .9;                 /* phone: show it over the (still empty) headline area */
+    const cx = s.left + s.width / 2;
+    const cy = narrow ? cp.top + cp.height / 2 : s.top + s.height * .47;
+    const dx = cx - (z.left + z.width / 2), dy = cy - (z.top + z.height / 2);
+    const S = Math.max(1.3, Math.min(3, s.width * (narrow ? .72 : .46) / z.width));
+    const at = `translate(${dx}px,${dy}px)`, big = `${at} scale(${S})`;
+    const blue = '#1976f6', ink = getComputedStyle(title).color;
+    A(zero, [
+      { opacity: 0, transform: `${at} scale(${S * .55})`, color: blue, textShadow: GLOW, easing: 'cubic-bezier(.3,1.4,.5,1)' },
+      { opacity: 1, transform: big, color: blue, textShadow: GLOW, offset: .28 },
+      { opacity: 1, transform: big, color: blue, textShadow: GLOW, offset: .52, easing: 'cubic-bezier(.7,0,.25,1)' },
+      { opacity: 1, transform: 'none', color: ink, textShadow: NOGLOW }
+    ], { delay: 100, duration: 1650 });
+    [[tl, 1720], [ln2, 1800]].forEach(([n, d]) =>
+      A(n, [{ opacity: 0, transform: 'translateX(-1.2em)' }, { opacity: 1, transform: 'none' }], { delay: d, duration: 700, easing: OUT }));
+    A(en, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { delay: 1950, duration: 600, easing: OUT });
+  }
+
+  function start() {
+    if (played) return;
+    played = true;
+    if (!reduced()) { try { play(); drive(); } catch (err) { stop(); /* never leave the headline hidden */ } }
+    sec.classList.remove('rm-wait');
+  }
+  /* as in w1.html: on tall (phone) screens use glass stage 1, which keeps the 3D bubbles at the edges, clear of the headline */
+  const fitStage = () => { sec.dataset.stage = innerWidth / innerHeight < .9 ? '1' : '0'; };
+  fitStage();
+  addEventListener('resize', fitStage);
+  if (reduced()) sec.classList.remove('rm-wait');
+  sec.addEventListener('slide:enter', start);
+})();
+</script>
+
+<!-- ===== slide s-ceo (shared/ceo.html) ===== -->
+<!-- shared: 代表挨拶 (business #8 / careers #8) — full text from the current about page, every line in order -->
+<style>
+  #s-ceo .ceo{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,1fr);grid-template-areas:"fig head" "fig msg";column-gap:clamp(28px,4.4vw,64px);align-items:center;align-content:center}
+  #s-ceo .ceo-head{grid-area:head;align-self:end}
+  #s-ceo .ceo-msg{grid-area:msg;align-self:start}
+  #s-ceo .ceo-fig{grid-area:fig;margin:0}
+  #s-ceo .ceo-fig .ph{aspect-ratio:3/4}
+  #s-ceo .ceo-name{display:flex;align-items:baseline;gap:12px;margin-top:14px;padding-left:2px}
+  #s-ceo .ceo-name span{font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.12em}
+  #s-ceo .ceo-name b{font-size:22px;font-weight:900;letter-spacing:.14em;color:var(--heading)}
+  #s-ceo .s-title{font-size:clamp(26px,2.9vw,40px);margin-bottom:clamp(12px,2vh,20px)}
+  #s-ceo .ceo-msg{font-size:14.5px;line-height:1.85;color:var(--fg);padding:clamp(18px,2.6vh,26px) clamp(20px,2.2vw,30px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-ceo .ceo-msg p{margin:0 0 .85em;break-inside:avoid}
+  #s-ceo .ceo-msg p:last-child{margin-bottom:0;font-weight:700}
+  /* wide screens: the message in two text columns so it fits on one screen */
+  @media (min-width:1100px){
+    #s-ceo .ceo-txt{columns:2;column-gap:clamp(32px,3.4vw,48px);column-rule:1px solid var(--line)}
+  }
+  @media (min-width:1100px) and (max-height:800px){
+    #s-ceo .ceo-msg{font-size:14px;line-height:1.75}
+    #s-ceo .ceo-msg p{margin-bottom:.7em}
+  }
+  /* medium desktop: one column with a soft-fade inner scroll */
+  @media (min-width:901px) and (max-width:1099.98px){
+    #s-ceo .ceo-txt{max-height:min(54vh,480px);overflow-y:auto;padding:0 10px 36px 0;scrollbar-width:thin;
+      -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%)}
+  }
+  @media (max-width:900px){
+    #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0}
+    #s-ceo .ceo-fig{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:end;gap:16px;margin-bottom:22px}
+    #s-ceo .ceo-fig .ph{font-size:13px;border-radius:14px}
+    #s-ceo .ceo-name{margin:0 0 4px;flex-direction:column;gap:2px}
+    #s-ceo .ceo-msg{font-size:15px;line-height:1.95;padding:18px 18px}
+  }
+</style>
+<section class="slide" id="s-ceo" data-title="代表挨拶">
+  <div class="s-inner">
+    <div class="ceo">
+      <figure class="ceo-fig" data-rv style="--d:.15s">
+        <div class="ph">写真入る<small>代表写真</small></div>
+        <figcaption class="ceo-name"><span>代表</span><b>佐藤 光</b></figcaption>
+      </figure>
+      <div class="ceo-head">
+        <span class="eyebrow" data-rv>MESSAGE</span>
+        <h2 class="s-title" data-rv style="--d:.08s">代表挨拶</h2>
+      </div>
+        <div class="ceo-msg"><div class="ceo-txt">
+          <p data-rv style="--d:.25s">11年前、通信商材を扱う会社で社内1位を取って、当時はただ「数字を追うこと」が全てだと思っていた。</p>
+          <p data-rv style="--d:.32s">でも、月日が経つにつれて<br>"嘘をつかないと契約が取れない"<br>そんな現実に嫌気がさして、<br>一度はこの業界を離れました。</p>
+          <p data-rv style="--d:.39s">それでも、僕の地元・北海道には今も同じような環境で頑張っている営業マンがたくさんいます。</p>
+          <p data-rv style="--d:.46s">だけど——<br>商材も手法も、10年前と何も変わっていない。</p>
+          <p data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
+          <p data-rv style="--d:.6s">だから僕は、もう一度この業界に戻ることを決めました。</p>
+          <p data-rv style="--d:.67s">東京で扱われているSaaS商材を、北海道に"輸入"するような形で届けたい。</p>
+          <p data-rv style="--d:.74s">フルリモートという新しい働き方を、経験のある人たちにもう一度手渡したい。</p>
+          <p data-rv style="--d:.81s">環境のせいで挑戦をやめてしまった人に、「再スタートのきっかけ」を届けたい。</p>
+          <p data-rv style="--d:.88s">これが、僕が新しく立ち上げた"株式会社Insup"の原点です。</p>
+        </div></div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  /* medium desktop widths show the message in an inner scroll box: make it reachable by keyboard only then */
+  const box = document.querySelector('#s-ceo .ceo-txt');
+  if (!box) return;
+  const sync = () => {
+    const scrolls = getComputedStyle(box).overflowY !== 'visible' && box.scrollHeight > box.clientHeight + 2;
+    if (scrolls) { box.tabIndex = 0; box.setAttribute('role', 'region'); box.setAttribute('aria-label', '代表挨拶'); }
+    else { box.removeAttribute('tabindex'); box.removeAttribute('role'); box.removeAttribute('aria-label'); }
+  };
+  window.addEventListener('resize', sync);
+  if (window.InsupSite && InsupSite.ready) InsupSite.ready(sync); else window.addEventListener('load', sync);
+})();
+</script>
+
+<!-- ===== slide s-lounge (shared/lounge.html) ===== -->
+<!-- shared: ラウンジ (business #11 / careers #9)
+     photo motion LB (slow zoom/pan + mouse parallax + hover light sweep) and
+     headline L1-3 「ブラインドが開く」 — both ported from v5parts/lounge.html (candidate switcher removed). -->
+<style>
+  #s-lounge .lg{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:clamp(26px,3.6vw,56px);align-items:center}
+
+  /* ---- LB gallery ---- */
+  #s-lounge .gal{height:clamp(340px,60vh,560px);display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:8px;min-height:0}
+  #s-lounge .gal .t{position:relative;overflow:hidden;border-radius:14px;background:#cfdcef;box-shadow:var(--card-shadow)}
+  body.theme-dark #s-lounge .gal .t{background:#14306a}
+  #s-lounge .gal .t.a{grid-row:1/3}
+  #s-lounge .gal .zm{position:absolute;inset:0;transform-origin:50% 50%}
+  #s-lounge .gal .par{position:absolute;inset:-6%;transition:transform .25s ease-out}
+  #s-lounge .gal .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;will-change:transform}
+  #s-lounge .kb .t.a .img{animation:lounge-kbA 16s ease-in-out infinite alternate}
+  #s-lounge .kb .t.b .img{animation:lounge-kbB 14s ease-in-out infinite alternate}
+  #s-lounge .kb .t.c .img{animation:lounge-kbC 15s ease-in-out infinite alternate}
+  @keyframes lounge-kbA{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.22) translate(-4%,2%)}}
+  @keyframes lounge-kbB{from{transform:scale(1.12) translate(4%,0)}to{transform:scale(1.12) translate(-4%,0)}}
+  @keyframes lounge-kbC{from{transform:scale(1.25) translate(-3%,2%)}to{transform:scale(1.08) translate(2%,-1%)}}
+  /* the slow photo motion rests while the slide is off screen */
+  #s-lounge:not(.is-active) .kb .t .img{animation-play-state:paused}
+  #s-lounge .gal .t::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 70%);transform:translateX(-120%);transition:transform 1s;pointer-events:none}
+  #s-lounge .kb .t:hover::after{transform:translateX(120%)}
+
+  /* ---- text ---- */
+  #s-lounge .txt{min-width:0;position:relative;z-index:1;padding:clamp(20px,3.2vh,34px) clamp(20px,2.4vw,34px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-lounge .kicker{margin-bottom:6px}
+  #s-lounge .s-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(24px,2.7vw,38px);line-height:1.5;margin:0 0 clamp(12px,2vh,18px)}
+  #s-lounge .s-title .ln{display:inline-block}
+  #s-lounge .body{font-size:clamp(14px,1.15vw,16px);line-height:1.9;color:var(--sub);margin:0}
+  #s-lounge .tags{margin:clamp(12px,2vh,18px) 0 0}
+  #s-lounge .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:clamp(12px,2vh,18px) 0 0;padding:0}
+  #s-lounge .facts > div{min-width:0;background:var(--chip-bg);border:1px solid var(--chip-line);border-radius:12px;padding:9px 14px}
+  #s-lounge .facts dt{font:700 10.5px/1.5 var(--font-en);letter-spacing:.16em;color:var(--accent-2)}
+  body.theme-light #s-lounge .facts dt{color:var(--accent)}
+  #s-lounge .facts .nw{white-space:nowrap}
+  #s-lounge .facts dd{margin:0;font-size:14px;font-weight:700;color:var(--fg);line-height:1.55}
+
+  /* ---- entrance (calm follow-up stagger, from v5) ---- */
+  #s-lounge .lg{--d:1.55s}
+  @keyframes lounge-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes lounge-fade{from{opacity:0}to{opacity:1}}
+  #s-lounge .lg.play .kicker{animation:lounge-fade .7s ease-out .1s both}
+  #s-lounge .lg.play .body{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) var(--d) both}
+  #s-lounge .lg.play .tags{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .18s) both}
+  #s-lounge .lg.play .facts > div{animation:lounge-up .7s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .34s + var(--i) * .09s) both}
+  /* until the slide is reached, everything waits on its first frame (blinds closed) */
+  #s-lounge .lg.wait.play *,#s-lounge .lg.wait.play *::before,#s-lounge .lg.wait.play *::after,#s-lounge .lg.wait.play{animation-play-state:paused!important}
+
+  /* ---- L1-3 ブラインドが開く ---- */
+  #s-lounge{--sl-a:#ffffff;--sl-b:#f4f7fb;--sl-c:#dbe5f2;--sl-d:#bccde6;--sl-sh:rgba(11,45,107,.16);--rail-a:#d4e0f1;--rail-b:#a9bedd;--cord:#c3d2e8}
+  body.theme-dark #s-lounge{--sl-a:#1d3f80;--sl-b:#16346e;--sl-c:#0f2858;--sl-d:#0a1e47;--sl-sh:rgba(0,0,0,.45);--rail-a:#3a5d9e;--rail-b:#22417c;--cord:#3a5d9e}
+  #s-lounge .blinds{position:absolute;inset:3px -10px -4px -8px;display:none;flex-direction:column;pointer-events:none;perspective:700px}
+  #s-lounge .blinds i{flex:1;display:block;transform-origin:50% 50%;
+    background:linear-gradient(180deg,var(--sl-a) 0%,var(--sl-b) 38%,var(--sl-c) 78%,var(--sl-d) 100%);box-shadow:0 1px 1px var(--sl-sh)}
+  #s-lounge .blinds::before{content:"";position:absolute;left:-3px;right:-3px;top:-2px;height:5px;border-radius:3px;background:linear-gradient(var(--rail-a),var(--rail-b));z-index:1}
+  #s-lounge .blinds::after{content:"";position:absolute;right:14px;top:0;bottom:-10px;width:2px;background:var(--cord);border-radius:2px}
+  #s-lounge .lg.play .blinds{display:flex;animation:lounge-blindsOut .35s ease-out 1.85s both}
+  #s-lounge .lg.play .blinds i{animation:lounge-slat .95s cubic-bezier(.55,0,.25,1) calc(.45s + var(--i) * .06s) both}
+  @keyframes lounge-slat{0%{transform:rotateX(0)}100%{transform:rotateX(86deg)}}
+  @keyframes lounge-blindsOut{from{opacity:1}to{opacity:0}}
+
+  /* ---- phone / narrow ---- */
+  @media (max-width:900px){
+    #s-lounge .lg{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-lounge .gal{height:clamp(260px,64vw,400px);grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr;gap:6px}
+    #s-lounge .gal .t{border-radius:12px}
+    #s-lounge .gal .t.a{grid-row:auto;grid-column:1/3}
+    #s-lounge .s-title{font-size:clamp(24px,6.6vw,32px)}
+  }
+  @media (max-width:640px){
+    #s-lounge .facts dd{font-size:13px}
+    #s-lounge .facts > div{padding:8px 11px}
+    #s-lounge .txt{padding:20px 16px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #s-lounge .kb .t .img{animation:none;transform:scale(1.1)}
+    #s-lounge .gal .par{transition:none}
+    #s-lounge .blinds{display:none!important}
+  }
+</style>
+<section class="slide" id="s-lounge" data-title="ラウンジ">
+  <div class="s-inner wide">
+    <div class="lg">
+      <div class="gal kb">
+        <div class="t a" role="img" aria-label="ラウンジの様子"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-main.jpg)"></div></div></div></div>
+        <div class="t b" role="img" aria-label="窓ぎわの席が並ぶラウンジ"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-work.jpg)"></div></div></div></div>
+        <div class="t c" role="img" aria-label="窓ぎわのカウンター席"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-counter.jpg)"></div></div></div></div>
+      </div>
+      <div class="txt">
+        <span class="eyebrow kicker">LOUNGE</span>
+        <h2 class="s-title"><span class="ln l1">打ち合わせは、</span><br><span class="ln l2">眺めのいいラウンジで。</span><span class="blinds" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></span></h2>
+        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+        <ul class="tags"><li>ご来社</li><li>ご訪問</li><li>商談</li></ul>
+        <dl class="facts">
+          <div style="--i:0"><dt>HOURS</dt><dd>8:00〜20:00</dd></div>
+          <div style="--i:1"><dt>BOOTH</dt><dd>テレフォンブース <span class="nw">2台</span></dd></div>
+          <div style="--i:2"><dt>POWER</dt><dd>全席コンセント完備</dd></div>
+          <div style="--i:3"><dt>DRINK</dt><dd>自動販売機 <span class="nw">2台</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-lounge');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  const box = sec.querySelector('.lg');
+
+  /* L1-3: blinds wait closed until the slide is reached, then open once */
+  if (!site.reduced) box.classList.add('play', 'wait');
+  sec.addEventListener('slide:enter', () => {
+    if (!box.classList.contains('wait')) return;
+    if (site.reduced) { box.classList.remove('play', 'wait'); return; }
+    box.classList.remove('wait');
+  });
+
+  /* LB: mouse parallax (same as v4 / v5) */
+  const pars = [...box.querySelectorAll('.par')];
+  box.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch' || site.reduced) return;
+    const r = box.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    pars.forEach((p, i) => { const d = [1, 1.6, 2.2][i]; p.style.transform = `translate(${-x * 3 * d}%, ${-y * 3 * d}%)`; });
+  });
+  box.addEventListener('pointerleave', () => pars.forEach(p => { p.style.transform = ''; }));
+})();
+</script>
+
+<!-- ===== slide s-access (shared/access.html) ===== -->
+<!-- shared: アクセス (business #12 / careers #10) — new address, stations, map button, building photo -->
+<style>
+  #s-access .ac{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,4.6vw,68px);align-items:center}
+  #s-access .ac-pic{position:relative;margin:0;height:clamp(320px,62vh,560px);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);background:#14306a}
+  #s-access .ac-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform-origin:50% 70%}
+  #s-access .ac-pic::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(180deg,rgba(6,24,61,0),rgba(6,24,61,.55));pointer-events:none}
+  #s-access .ac-pic figcaption{position:absolute;left:16px;bottom:14px;z-index:1;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+  /* slow settle of the photo the first time the slide is reached */
+  #s-access.ac-go .ac-pic img{animation:access-settle 2.8s var(--ease) both}
+  @keyframes access-settle{from{transform:scale(1.1)}to{transform:scale(1)}}
+
+  #s-access .ac-txt{padding:clamp(22px,3.4vh,36px) clamp(22px,2.6vw,40px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-access .s-title{margin-bottom:clamp(14px,2.4vh,22px)}
+  #s-access .ac-addr{font-style:normal;font-size:clamp(15px,1.3vw,17px);line-height:1.85;color:var(--fg)}
+  #s-access .ac-addr .zip{font-family:var(--font-en);font-weight:600;color:var(--sub)}
+  #s-access .ac-addr .bld{display:inline-block;margin-top:2px;font-weight:900;font-size:1.22em;letter-spacing:.04em;color:var(--heading)}
+  #s-access .ac-st{list-style:none;margin:clamp(16px,2.8vh,24px) 0 0;padding:0;display:grid;gap:10px;max-width:460px}
+  #s-access .ac-st li{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:12px;background:var(--chip-bg);border:1px solid var(--chip-line);font-size:clamp(14.5px,1.2vw,16px);font-weight:700;color:var(--fg)}
+  #s-access .ac-st .ln{flex:0 0 auto;font-size:11.5px;font-weight:700;line-height:1.6;padding:2px 9px;border-radius:6px;background:var(--blue);color:#fff}
+  #s-access .ac-st .min{margin-left:auto;white-space:nowrap;font-size:13px;color:var(--sub)}
+  #s-access .ac-st .min b{font:800 clamp(20px,1.8vw,24px)/1 var(--font-en);color:var(--accent-2);margin:0 2px 0 6px}
+  body.theme-light #s-access .ac-st .min b{color:var(--accent)}
+  #s-access .btns{margin-top:clamp(18px,3vh,28px)}
+
+  @media (max-width:900px){
+    #s-access .ac{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-access .ac-pic{height:clamp(220px,62vw,340px)}
+    #s-access .ac-pic img{object-position:50% 30%}
+    #s-access .ac-st{max-width:none}
+  }
+  @media (max-width:640px){
+    #s-access .ac-txt{padding:20px 18px}
+    #s-access .ac-st li{padding:9px 13px;gap:10px}
+    #s-access .btns .btn{width:100%}
+  }
+</style>
+<section class="slide" id="s-access" data-title="アクセス">
+  <div class="s-inner">
+    <div class="ac">
+      <figure class="ac-pic" data-rv>
+        <img src="assets/img/building.jpg" alt="サザンクロス札幌の外観" width="853" height="1280" decoding="async">
+        <figcaption>サザンクロス札幌</figcaption>
+      </figure>
+      <div class="ac-txt">
+        <span class="eyebrow" data-rv style="--d:.1s">ACCESS</span>
+        <h2 class="s-title" data-rv style="--d:.18s">アクセス</h2>
+        <address class="ac-addr" data-rv style="--d:.28s"><span class="zip">〒060-0063</span><br>北海道札幌市中央区南三条西3丁目11-1<br><span class="bld">サザンクロス札幌 9F</span></address>
+        <ul class="ac-st">
+          <li data-rv style="--d:.4s"><span class="ln">地下鉄</span>すすきの駅<span class="min">徒歩<b>3</b>分</span></li>
+          <li data-rv style="--d:.5s"><span class="ln">地下鉄</span>大通駅<span class="min">徒歩<b>5</b>分</span></li>
+        </ul>
+        <div class="btns" data-rv style="--d:.62s"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%82%B6%E3%83%B3%E3%82%AF%E3%83%AD%E3%82%B9%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">Googleマップで見る <span class="arr" aria-hidden="true">↗</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-access');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  sec.addEventListener('slide:enter', e => {
+    if (e.detail.first && !site.reduced) sec.classList.add('ac-go');
+  });
+})();
+</script>
+
+<!-- ===== slide s-apply (careers/apply.html) ===== -->
+<style>
+  /* careers「応募方法」— 4 big tappable cards (text + links from cur/text_recruit.txt). Scoped to #s-apply. */
+  #s-apply .ap-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:34px}
+  #s-apply .ap{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:6px;min-height:200px;padding:26px 24px 24px;
+    border-radius:var(--radius);border:1px solid var(--card-line);background:var(--card-bg);box-shadow:var(--card-shadow);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--fg);text-decoration:none;
+    transition:transform .35s var(--ease),border-color .35s,box-shadow .35s}
+  #s-apply .ap:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 22px 44px rgba(25,118,246,.18)}
+  #s-apply .ap .ic{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:16px;margin-bottom:12px;
+    background:var(--pale);color:var(--blue)}
+  #s-apply .ap .ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  #s-apply .ap h3{font-size:19px;margin:0}
+  #s-apply .ap .act{font-size:15px;font-weight:700;color:var(--accent);line-height:1.5}
+  #s-apply .ap .act.mail{font-family:var(--font-en);font-size:14px;font-weight:600;word-break:break-all}
+  #s-apply .ap .arr{position:absolute;right:20px;top:22px;font:600 18px var(--font-en);color:var(--accent);opacity:.75;transition:transform .35s var(--ease)}
+  #s-apply .ap:hover .arr{transform:translate(2px,-2px)}
+  /* LINE = the main way: filled card */
+  #s-apply .ap.main{background:linear-gradient(140deg,#1976f6,#4db3ff);border-color:transparent;color:#fff;box-shadow:0 18px 40px rgba(25,118,246,.32)}
+  #s-apply .ap.main h3,#s-apply .ap.main .act,#s-apply .ap.main .arr{color:#fff}
+  #s-apply .ap.main .ic{background:rgba(255,255,255,.2);color:#fff}
+  #s-apply .ap.main .act{display:inline-flex;align-items:center;margin-top:auto;padding:8px 18px;border-radius:99px;background:#fff;color:var(--blue)}
+  @media (max-width:1000px){
+    #s-apply .ap-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+    #s-apply .ap{min-height:0}
+  }
+  @media (max-width:640px){
+    #s-apply .ap-cards{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:24px}
+    #s-apply .ap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:14px;row-gap:2px;align-items:center;padding:16px 44px 16px 16px}
+    #s-apply .ap .ic{grid-row:1/3;width:46px;height:46px;border-radius:14px;margin:0}
+    #s-apply .ap .ic svg{width:24px;height:24px}
+    #s-apply .ap h3{font-size:17px}
+    #s-apply .ap .act{font-size:14px}
+    #s-apply .ap.main .act{margin-top:4px;padding:5px 14px;justify-self:start}
+    #s-apply .ap .arr{top:50%;right:16px;transform:translateY(-50%)}
+    #s-apply .ap:hover .arr{transform:translateY(-50%)}
+  }
+</style>
+<section class="slide" id="s-apply" data-title="応募方法・お問い合わせ">
+  <div class="s-inner">
+    <span class="eyebrow" data-rv>HOW TO APPLY</span>
+    <h2 class="s-title" data-rv style="--d:.1s">応募方法</h2>
+    <p class="lead" data-rv style="--d:.2s">下記のいずれかの方法でご応募ください。</p>
+    <div class="ap-cards">
+      <a class="ap main" href="https://lin.ee/XIZn82k" target="_blank" rel="noopener" data-rv style="--d:.3s">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4C7 4 3 7.2 3 11.1c0 3.5 3.1 6.4 7.4 7l-.5 2.4c-.1.4.3.6.6.4l3.3-2.6c4.6-.4 8.2-3.4 8.2-7.2C22 7.2 17 4 12 4z"/><path d="M8 9.5v3.4h1.8M11.4 9.5v3.4M13.6 12.9V9.5l2.3 3.4V9.5"/></svg></span>
+        <h3>公式LINE</h3>
+        <span class="act">LINEで応募する</span>
+        <span class="arr" aria-hidden="true">↗</span>
+      </a>
+      <a class="ap" href="https://www.instagram.com/insup_official/" target="_blank" rel="noopener" data-rv style="--d:.4s">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6" fill="currentColor"/></svg></span>
+        <h3>Instagram</h3>
+        <span class="act">@insup_official</span>
+        <span class="arr" aria-hidden="true">↗</span>
+      </a>
+      <a class="ap" href="https://www.tiktok.com/@insup2025" target="_blank" rel="noopener" data-rv style="--d:.5s">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13.5 4v10.6a3.1 3.1 0 1 1-3.1-3.1"/><path d="M13.5 4c.3 2.4 2 4.2 4.5 4.4"/></svg></span>
+        <h3>TikTok</h3>
+        <span class="act">@insup2025</span>
+        <span class="arr" aria-hidden="true">↗</span>
+      </a>
+      <a class="ap" href="mailto:insup2025sapporo@gmail.com" data-rv style="--d:.6s">
+        <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M4.5 7.5l7.5 5.5 7.5-5.5"/></svg></span>
+        <h3>メール</h3>
+        <span class="act mail">insup2025sapporo@gmail.com</span>
+        <span class="arr" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer (shared/footer.html) ===== -->
+<footer class="site-ft" id="site-footer">
+  <div class="ft-in">
+    <div class="ft-co">
+      <a class="plate ft-plate" href="index.html" aria-label="株式会社Insup トップ（入口）へ"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></a>
+      <p class="ft-name">株式会社Insup</p>
+      <address class="ft-addr">〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 サザンクロス札幌 9F<br>Email: <a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></address>
+    </div>
+    <ul class="ft-sns">
+      <li><a href="https://lin.ee/XIZn82k" target="_blank" rel="noopener">LINE</a></li>
+      <li><a href="https://www.instagram.com/insup_official/" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.tiktok.com/@insup2025" target="_blank" rel="noopener">TikTok</a></li>
+    </ul>
+  </div>
+  <div class="ft-bottom">
+    <a href="privacy.html">プライバシーポリシー</a>
+    <small>© 2025 Insup All Rights Reserved.</small>
+  </div>
+</footer>
+
+</main>
+
+<nav class="tabbar" aria-label="ページ内の移動" data-pin="positions" data-pin-label="応募・ご相談はこちら" data-items="merits:働く魅力,members:社員紹介,numbers:実績の数字,company:会社概要"></nav>
+</body>
+</html>
