@@ -13,11 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=4723546c0a">
+<link rel="stylesheet" href="assets/css/site.css?v=c814182454">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=4723546c0a"></script>
-<script src="assets/js/careers.js?v=4723546c0a" defer></script>
+<script src="assets/js/site.js?v=c814182454"></script>
+<script src="assets/js/careers.js?v=c814182454" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -367,44 +367,95 @@
 <!-- shared: 実績の数字 (business #3 / careers #5) — count-up on first enter -->
 <style>
   #s-numbers .s-title{margin-bottom:0}
-  #s-numbers .nb-stats{list-style:none;margin:clamp(18px,3.6vh,36px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
-  #s-numbers .nb-stat{position:relative;overflow:hidden;text-align:center;padding:clamp(20px,3.6vh,36px) 14px clamp(18px,3vh,28px);
-    background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-  #s-numbers .nb-v{display:block;font:800 clamp(46px,6.2vw,86px)/1.05 var(--font-en);letter-spacing:-.015em;font-variant-numeric:tabular-nums;white-space:nowrap}
-  #s-numbers .nb-v > span,#s-numbers .nb-v > small{background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  /* ---- 実績: light "picture cards" (same look on the dark business page and the light careers page).
+     Each illustration is the card's background; the number + label sit ON the picture, bottom-left.
+     Readability: a white→clear scrim from the text corner, deeper blue numbers with a soft white halo,
+     and a translucent white pill behind the small label. */
+  #s-numbers{--nb-h:clamp(206px,33vh,272px);
+    --nb-ink:#0b1d40;
+    --nb-num:linear-gradient(100deg,#0d4fc4 0%,#1976f6 55%,#2a8af6 100%);
+    --nb-glow:0 18px 40px rgba(11,45,107,.12)}
+  #s-numbers .nb-stats{list-style:none;margin:clamp(14px,2.4vh,26px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
+  #s-numbers .nb-stat{position:relative;overflow:hidden;isolation:isolate;height:var(--nb-h);
+    display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;text-align:left;
+    padding:clamp(16px,2.4vh,22px) clamp(18px,1.9vw,24px);
+    background:linear-gradient(160deg,#ffffff 0%,#f4f9ff 45%,#eaf3ff 100%);
+    border:1px solid #d6e4f7;border-radius:var(--radius);box-shadow:var(--nb-glow)}
+  /* the picture: full colour, a little softened, anchored so the subject stays in the open (top/right) area */
+  #s-numbers .nb-ill{position:absolute;inset:0;z-index:-2;display:block;
+    background:var(--nb-img) var(--nb-pos,right top)/var(--nb-size,auto 100%) no-repeat;
+    opacity:.86;transform-origin:70% 30%}
+  #s-numbers .nb-ill.a{--nb-img:url(assets/img/illust/num-appointers-color.webp)}
+  #s-numbers .nb-ill.r{--nb-img:url(assets/img/illust/num-rate-color.webp)}
+  #s-numbers .nb-ill.c{--nb-img:url(assets/img/illust/num-clients-color.webp)}
+  /* scrim: white where the text is (bottom-left), clear where the picture is (top-right) */
+  #s-numbers .nb-stat::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      linear-gradient(to top,rgba(255,255,255,.9) 0%,rgba(255,255,255,.72) 26%,rgba(255,255,255,.22) 50%,rgba(255,255,255,0) 66%),
+      linear-gradient(80deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.2) 40%,rgba(255,255,255,0) 60%),
+      linear-gradient(0deg,rgba(234,243,255,.18),rgba(234,243,255,.18))}
+  #s-numbers .nb-v{display:block;font:800 clamp(46px,4.9vw,66px)/1 var(--font-en);letter-spacing:-.015em;font-variant-numeric:tabular-nums;white-space:nowrap;
+    filter:drop-shadow(0 0 1px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.9))}
+  #s-numbers .nb-v > span,#s-numbers .nb-v > small{background:var(--nb-num);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
   #s-numbers .nb-v .n{display:inline-block;text-align:right}
   #s-numbers .nb-v small{font-size:.5em;font-weight:800;margin-left:.04em}
   /* thin bar under the number, grows once the count has finished */
-  #s-numbers .nb-bar{display:block;width:44px;height:3px;margin:clamp(12px,2vh,18px) auto clamp(10px,1.6vh,14px);border-radius:3px;background:var(--em-grad);transform-origin:50% 50%}
-  #s-numbers .nb-l{display:block;font-weight:700;font-size:clamp(14px,1.2vw,16px);color:var(--fg);letter-spacing:.04em}
-  #s-numbers .nb-txt{margin:clamp(16px,3vh,30px) auto 0;max-width:640px;text-align:center;padding:clamp(14px,2.4vh,22px) clamp(18px,2.4vw,32px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-  #s-numbers .nb-txt p{font-size:clamp(14px,1.15vw,16px);line-height:1.95;color:var(--sub)}
+  #s-numbers .nb-bar{display:block;width:40px;height:3px;margin:clamp(8px,1.3vh,12px) 0 clamp(8px,1.2vh,10px) 2px;border-radius:3px;background:var(--nb-num);transform-origin:0 50%}
+  /* small label: dark navy on a translucent white pill, so it never sits directly on the drawing's lines */
+  #s-numbers .nb-l{display:inline-block;font-weight:700;font-size:clamp(14px,1.2vw,16px);line-height:1.4;color:var(--nb-ink);letter-spacing:.04em;
+    padding:4px 12px;margin-left:-2px;border-radius:99px;background:rgba(255,255,255,.82);
+    box-shadow:0 0 0 1px rgba(11,45,107,.06),0 4px 14px rgba(11,45,107,.08);
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+
+  /* dark business page: the light cards are lit deliberately — a soft cyan rim + blue glow lifts them off the navy */
+  body.theme-dark #s-numbers{--nb-glow:0 0 0 1px rgba(117,242,255,.28),0 22px 48px rgba(0,8,30,.5),0 0 46px rgba(77,179,255,.2)}
+  body.theme-dark #s-numbers .nb-stat{border-color:rgba(255,255,255,.7)}
+
+  #s-numbers .nb-txt{margin:clamp(12px,2vh,22px) auto 0;max-width:640px;text-align:center;padding:clamp(12px,2vh,20px) clamp(18px,2.4vw,32px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-numbers .nb-txt p{font-size:clamp(14px,1.15vw,16px);line-height:1.8;color:var(--sub)}
   #s-numbers .nb-txt p.nb-key{margin-top:clamp(10px,1.6vh,14px);color:var(--fg);font-weight:700}
+
+  /* per-picture framing (desktop): keep the face / clipboard / trophy in the clear top-right part */
+  #s-numbers .nb-ill.a{--nb-size:auto 90%;--nb-pos:42% 2px}
+  #s-numbers .nb-ill.r{--nb-size:auto 104%;--nb-pos:right -4% top -6%}
+  #s-numbers .nb-ill.c{--nb-size:auto 100%;--nb-pos:right -16% top -4%}
 
   /* count-up states (set by the script; without JS / with reduced motion the final values simply show) */
   #s-numbers.nb-wait .nb-bar{transform:scaleX(0)}
   #s-numbers.nb-run .nb-bar{transform:scaleX(1);transition:transform .9s var(--ease) calc(var(--i) * .16s + 1.5s)}
+  /* the picture settles gently while the number counts up */
+  #s-numbers.nb-wait .nb-ill{transform:scale(1.06)}
+  #s-numbers.nb-run .nb-ill{transform:none;transition:transform 2.2s var(--ease) calc(var(--i) * .16s + .2s)}
+  #s-numbers.is-passed .nb-ill{transform:none;transition:none}
 
   /* short desktop screens (e.g. a 1280x800 laptop = ~713px of viewport): keep the slide within one screen */
   @media (min-width:641px) and (max-height:760px){
-    #s-numbers .nb-stats{margin-top:16px}
-    #s-numbers .nb-stat{padding:16px 14px 14px}
-    #s-numbers .nb-v{font-size:clamp(44px,5vw,64px)}
-    #s-numbers .nb-bar{margin:10px auto 8px}
-    #s-numbers .nb-txt{margin-top:16px;padding:12px clamp(18px,2.4vw,32px)}
+    #s-numbers{--nb-h:clamp(190px,30vh,220px)}
+    #s-numbers .nb-stats{margin-top:12px}
+    #s-numbers .nb-v{font-size:clamp(42px,4.4vw,56px)}
+    #s-numbers .nb-ill.a{--nb-size:auto 84%}
+    #s-numbers .nb-txt{margin-top:14px;padding:12px clamp(18px,2.4vw,32px)}
     #s-numbers .nb-txt p{line-height:1.75}
     #s-numbers .nb-txt p.nb-key{margin-top:8px}
   }
-  @media (max-width:900px){
-    #s-numbers .nb-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media (max-width:900px) and (min-width:641px){
+    #s-numbers .nb-l{font-size:13.5px;padding:3px 10px;letter-spacing:.02em}
   }
   @media (max-width:640px){
-    #s-numbers .nb-stats{grid-template-columns:minmax(0,1fr);gap:10px}
-    #s-numbers .nb-stat{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px 16px;text-align:left;padding:16px 18px}
-    #s-numbers .nb-v{font-size:44px;grid-row:1/3}
-    #s-numbers .nb-bar{margin:0;width:32px;align-self:end}
-    #s-numbers .nb-l{align-self:start;font-size:14.5px}
+    /* phone: stacked wide cards, number + label bottom-left, the picture fills the right side behind them */
+    #s-numbers{--nb-h:172px}
+    #s-numbers .nb-stats{grid-template-columns:minmax(0,1fr);gap:12px}
+    #s-numbers .nb-stat{padding:16px 18px}
+    #s-numbers .nb-stat::before{background:
+      linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.7) 34%,rgba(255,255,255,.2) 56%,rgba(255,255,255,0) 70%),
+      linear-gradient(to top,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 45%),
+      linear-gradient(0deg,rgba(234,243,255,.18),rgba(234,243,255,.18))}
+    #s-numbers .nb-ill.a{--nb-size:auto 100%;--nb-pos:right -34px top 0}
+    #s-numbers .nb-ill.r{--nb-size:auto 112%;--nb-pos:right -6px top -6px}
+    #s-numbers .nb-ill.c{--nb-size:auto 106%;--nb-pos:right -26px top -4px}
+    #s-numbers .nb-v{font-size:44px}
+    #s-numbers .nb-bar{margin:8px 0 8px 2px;width:32px}
+    #s-numbers .nb-l{font-size:14.5px}
     #s-numbers .nb-txt{text-align:left;padding:16px 18px}
     #s-numbers .nb-txt p{font-size:14.5px}
     #s-numbers .nb-txt br{display:none}
@@ -415,9 +466,9 @@
     <span class="eyebrow" data-rv>ACHIEVEMENTS</span>
     <h2 class="s-title" data-rv style="--d:.08s">実績</h2>
     <ul class="nb-stats">
-      <li class="nb-stat" data-rv style="--d:.18s;--i:0"><span class="nb-v" data-to="1500"><span class="n">1,500</span></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">登録アポインター数</span></li>
-      <li class="nb-stat" data-rv style="--d:.3s;--i:1"><span class="nb-v" data-to="220"><span class="n">220</span><small>%</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">最大アポ率改善</span></li>
-      <li class="nb-stat" data-rv style="--d:.42s;--i:2"><span class="nb-v" data-to="100"><span class="n">100</span><small>+</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">取引実績企業数</span></li>
+      <li class="nb-stat" data-rv style="--d:.18s;--i:0"><span class="nb-ill a" aria-hidden="true"></span><span class="nb-v" data-to="1500"><span class="n">1,500</span></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">登録アポインター数</span></li>
+      <li class="nb-stat" data-rv style="--d:.3s;--i:1"><span class="nb-ill r" aria-hidden="true"></span><span class="nb-v" data-to="220"><span class="n">220</span><small>%</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">最大アポ率改善</span></li>
+      <li class="nb-stat" data-rv style="--d:.42s;--i:2"><span class="nb-ill c" aria-hidden="true"></span><span class="nb-v" data-to="100"><span class="n">100</span><small>+</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">取引実績企業数</span></li>
     </ul>
     <div class="nb-txt" data-rv style="--d:.7s">
       <p>人材系企業、SaaS・DX支援ツール、<br>営業代行会社、インサイドセールス支援、<br>メディア・広報・PR、Web制作・広告など、<br>幅広い業界での実績がございます。</p>

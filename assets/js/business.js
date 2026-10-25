@@ -260,7 +260,7 @@
   .t1-back .t1-lay{position:absolute;inset:0}
   .t1-back .t1-leak{background:radial-gradient(55% 65% at 100% 0%,rgba(255,255,255,.78) 0%,rgba(235,250,255,.38) 32%,rgba(117,242,255,.08) 55%,rgba(255,255,255,0) 72%),radial-gradient(45% 40% at 0% 100%,rgba(235,244,255,.35),rgba(235,244,255,0) 70%)}
   .t1-back .t1-shade{background:linear-gradient(180deg,rgba(255,255,255,0) 58%,rgba(244,250,255,.6) 84%,rgba(244,250,255,.85) 100%)}
-  .t1-ui{position:fixed;inset:0;z-index:70;pointer-events:none;display:flex;flex-direction:column;color:#fff;font-family:"Noto Sans JP",system-ui,-apple-system,"Hiragino Sans",sans-serif;line-height:1.7;
+  .t1-ui{position:fixed;inset:0;z-index:70;pointer-events:none;display:flex;flex-direction:column;color:#fff;font-family:var(--font-ja);line-height:1.7;
     padding:clamp(16px,2.6vw,32px) clamp(16px,3.2vw,44px) calc(clamp(14px,2.2vw,26px) + env(safe-area-inset-bottom,0px));will-change:opacity}
   .t1-ui p{margin:0}
   .t1-ui .t1-bar{display:flex;align-items:center;justify-content:space-between}
@@ -268,19 +268,19 @@
   .t1-ui .t1-plate img{height:26px;width:auto}
   .t1-ui .t1-plate img.type{height:16px}
   .t1-ui .t1-entry{margin-top:auto}
-  .t1-ui .t1-tag{font:600 12px Inter,sans-serif;letter-spacing:.3em;color:#0b2d6b;text-shadow:0 0 10px rgba(255,255,255,.95),0 0 2px rgba(255,255,255,.9)}
+  .t1-ui .t1-tag{font:600 12px var(--font-en);letter-spacing:.3em;color:#0b2d6b;text-shadow:0 0 10px rgba(255,255,255,.95),0 0 2px rgba(255,255,255,.9)}
   .t1-ui .t1-msg{font-size:clamp(14px,1.5vw,18px);margin:4px 0 16px;color:#0b1d40;font-weight:700;text-shadow:0 0 14px rgba(255,255,255,.95),0 0 3px rgba(255,255,255,.95)}
   .t1-ui .t1-doors{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:820px}
   .t1-ui .t1-door{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 22px;border-radius:16px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .25s,box-shadow .25s}
-  .t1-ui .t1-door small{display:block;font:600 11px Inter,sans-serif;letter-spacing:.25em;opacity:.85}
+  .t1-ui .t1-door small{display:block;font:600 11px var(--font-en);letter-spacing:.25em;opacity:.85}
   .t1-ui .t1-door b{font-size:clamp(15px,1.6vw,19px)}
-  .t1-ui .t1-door .arr{font:600 19px Inter,sans-serif}
+  .t1-ui .t1-door .arr{font:600 19px var(--font-en)}
   .t1-ui .t1-door.biz{background:linear-gradient(100deg,#1976f6,#4db3ff);color:#fff;box-shadow:0 8px 22px rgba(25,118,246,.26)}
   .t1-ui .t1-door.biz.press{transform:scale(.97);box-shadow:0 0 0 3px rgba(117,242,255,.75),0 0 34px rgba(77,179,255,.95)}
   .t1-ui .t1-door.car{background:rgba(255,255,255,.95);color:#0b2d6b;box-shadow:0 8px 22px rgba(11,45,107,.12);border:1px solid rgba(11,45,107,.08)}
   .t1-ui .t1-door.car small{color:#1976f6;opacity:1}
   .t1-ui .t1-fine{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;margin:14px 0 0;font-size:12px;color:#3e4f70}
-  .t1-ui .t1-fine small{font:500 11.5px Inter,sans-serif}
+  .t1-ui .t1-fine small{font:500 11.5px var(--font-en)}
   .t1-ui .t1-fine span{color:#0b2d6b;text-decoration:underline;text-underline-offset:3px}
   @media (max-width:700px){
     .t1-ui .t1-doors{grid-template-columns:1fr;gap:10px}

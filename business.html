@@ -13,11 +13,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=4723546c0a">
+<link rel="stylesheet" href="assets/css/site.css?v=c814182454">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=4723546c0a"></script>
-<script src="assets/js/business.js?v=4723546c0a" defer></script>
+<script src="assets/js/site.js?v=c814182454"></script>
+<script src="assets/js/business.js?v=c814182454" defer></script>
 </head>
 <body class="theme-dark page-business">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -35,15 +35,17 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (business/hero.html) ===== -->
 <style>
-  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=4723546c0a */
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=c814182454 */
   #s-hero{align-items:stretch}
   #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
-    background:linear-gradient(90deg,rgba(2,11,34,.55) 0%,rgba(2,11,34,.22) 45%,rgba(2,11,34,0) 72%)}
-  #s-hero .hero-copy{position:relative;max-width:900px}
+    background:radial-gradient(ellipse 62% 52% at 50% 50%,rgba(2,11,34,.58) 0%,rgba(2,11,34,.3) 55%,rgba(2,11,34,0) 100%)}
+  /* text block centred horizontally (same height as before) */
+  #s-hero .hero-copy{position:relative;max-width:900px;margin:0 auto;text-align:center}
+  #s-hero .hero-copy .eyebrow{padding-left:.35em} /* balance the trailing letter-spacing so it sits truly centred */
   #s-hero .hero-h{font-size:clamp(30px,4.5vw,64px);font-weight:900;line-height:1.36;letter-spacing:.02em;margin:4px 0 14px;word-break:keep-all}
   #s-hero .hero-h em{font-style:normal;background:linear-gradient(90deg,#9fdcff,#4db3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
   #s-hero .hero-sub{font-size:clamp(15px,1.45vw,20px);font-weight:500;color:var(--fg);opacity:.9;letter-spacing:.04em}
-  #s-hero .btns{margin-top:30px}
+  #s-hero .btns{margin-top:30px;justify-content:center}
   /* SCROLL cue (desktop) */
   #s-hero .hero-scroll{position:absolute;left:var(--gutter);bottom:30px;display:flex;flex-direction:column;align-items:center;gap:10px;
     font:600 10.5px var(--font-en);letter-spacing:.3em;color:var(--sub);writing-mode:vertical-rl;opacity:0;transition:opacity .8s ease .9s}
@@ -106,25 +108,59 @@
 
 <!-- ===== slide s-reasons (business/reasons.html) ===== -->
 <style>
-  /* 選ばれる理由 — 4 items, text from top.html */
+  /* 選ばれる理由 — 4 items, text from top.html.
+     Each card is a light "picture card": the illustration for that reason (illust/reason-*) is the card's
+     background, sitting BEHIND the text (client: 「文字の後ろに差し込んで」). A white scrim from the text side
+     (left) keeps the small text readable; the picture stays clear on the right. */
   #s-reasons .rs-head{text-align:center}
   #s-reasons .rs-head .s-title{margin-bottom:0}
-  #s-reasons .cards{margin-top:clamp(26px,4vh,40px);gap:18px}
-  #s-reasons .card{padding:28px 24px 26px;overflow:hidden;display:flex;flex-direction:column}
-  #s-reasons .card::before{content:"";position:absolute;left:24px;right:24px;top:0;height:2px;border-radius:2px;
-    background:linear-gradient(90deg,#75f2ff,rgba(77,179,255,.5) 60%,rgba(77,179,255,0));transform-origin:left center}
-  #s-reasons .rs-num{display:block;font:800 clamp(36px,3.4vw,48px)/1 var(--font-en);letter-spacing:.02em;margin-bottom:16px;
-    background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  #s-reasons .card h3{font-size:clamp(18px,1.55vw,21px);margin-bottom:10px}
-  #s-reasons .card p{font-size:14.5px;line-height:1.9;word-break:auto-phrase;text-wrap:pretty}
+  #s-reasons .cards{margin-top:clamp(20px,3.2vh,34px);gap:18px}
+  #s-reasons .card{--ill-o:.8;padding:0;overflow:hidden;display:flex;align-items:stretch;min-height:clamp(196px,28.5vh,252px);
+    background:linear-gradient(135deg,#ffffff 0%,#f6f9ff 42%,#eaf3ff 100%);border:1px solid rgba(255,255,255,.75);color:#0b1d40;
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    /* light cards on the dark page: a soft sky glow + a deep drop shadow so they read as deliberate, lit panels */
+    box-shadow:0 0 0 1px rgba(159,220,255,.28),0 22px 48px rgba(0,6,24,.42),0 0 46px rgba(77,179,255,.2)}
+  #s-reasons .card::before{content:"";position:absolute;z-index:3;left:26px;right:26px;top:0;height:3px;border-radius:0 0 3px 3px;
+    background:linear-gradient(90deg,#1976f6,#4db3ff 55%,rgba(77,179,255,0));transform-origin:left center}
+
+  /* the illustration = card background, anchored right/bottom so the subject stays whole and visible */
+  #s-reasons .rs-art{position:absolute;inset:0;z-index:0;pointer-events:none}
+  #s-reasons .rs-art img{position:absolute;left:33%;right:8px;bottom:0;width:auto;height:calc(100% - 14px);object-fit:contain;object-position:center bottom;
+    display:block;opacity:var(--ill-o);filter:saturate(.82) contrast(.96)}
+  /* scrim: solid white where the text is, pale-blue tint over the middle, clear over the picture */
+  #s-reasons .rs-art::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.93) 30%,rgba(247,251,255,.72) 46%,rgba(240,247,255,.18) 62%,rgba(234,243,255,0) 74%)}
+
+  #s-reasons .rs-body{position:relative;z-index:1;max-width:57%;padding:24px 10px 24px 28px;display:flex;flex-direction:column;justify-content:center}
+  #s-reasons .rs-hd{display:flex;align-items:baseline;gap:12px;margin-bottom:10px}
+  #s-reasons .rs-num{display:block;flex:none;font:800 clamp(30px,2.7vw,38px)/1 var(--font-en);letter-spacing:.02em;
+    background:linear-gradient(100deg,#0b4fc4 0%,#1976f6 55%,#3a9cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #s-reasons .card h3{font-size:clamp(18px,1.55vw,21px);margin:0;color:#0b2d6b;text-shadow:0 0 6px rgba(255,255,255,.9)}
+  /* small text: dark navy + a soft white halo where it may cross a line of the drawing */
+  #s-reasons .card p{font-size:14.5px;line-height:1.85;color:#0b1d40;word-break:auto-phrase;text-wrap:pretty;
+    text-shadow:0 0 2px #fff,0 0 8px rgba(255,255,255,.95)}
+
+  /* entrance: accent line draws, the picture drifts in from the right (final state = reduced motion / passed) */
   html.js #s-reasons .card::before{transform:scaleX(0);transition:transform 1.1s var(--ease) calc(var(--d,0s) + .35s)}
-  html.js #s-reasons.is-seen .card::before{transform:scaleX(1)}
+  html.js #s-reasons.is-seen .card::before,#s-reasons.is-passed .card::before{transform:scaleX(1)}
+  html.js #s-reasons .rs-art img{opacity:0;transform:translateX(22px);
+    transition:opacity 1.2s ease calc(var(--d,0s) + .25s),transform 1.4s var(--ease) calc(var(--d,0s) + .25s)}
+  html.js #s-reasons.is-seen .rs-art img{opacity:var(--ill-o);transform:none}
+  html.js #s-reasons.is-passed .rs-art img{opacity:var(--ill-o);transform:none;transition:none}
+  @media (prefers-reduced-motion:reduce){html.js #s-reasons .rs-art img{opacity:var(--ill-o);transform:none}}
+
   @media (max-width:640px){
-    #s-reasons .card{padding:20px 18px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:16px;align-items:start}
+    #s-reasons .cards{gap:14px}
+    #s-reasons .card{min-height:0}
     #s-reasons .card::before{left:18px;right:18px}
-    #s-reasons .rs-num{font-size:30px;margin:2px 0 0;grid-row:span 2;min-width:1.45em}
-    #s-reasons .card h3{margin-bottom:6px}
-    #s-reasons .card p{font-size:14px;line-height:1.85}
+    /* phone: picture anchored bottom-right (whole subject visible), text over its left part */
+    #s-reasons .rs-art img{left:30%;right:6px;height:calc(100% - 12px);object-position:right bottom}
+    #s-reasons .rs-art::after{background:linear-gradient(90deg,rgba(255,255,255,.97) 0%,rgba(255,255,255,.94) 44%,rgba(248,251,255,.78) 58%,rgba(240,247,255,.25) 73%,rgba(234,243,255,0) 86%)}
+    #s-reasons .rs-body{max-width:66%;padding:18px 6px 20px 18px}
+    #s-reasons .rs-hd{gap:10px;margin-bottom:8px}
+    #s-reasons .rs-num{font-size:28px}
+    #s-reasons .card h3{font-size:18px}
+    #s-reasons .card p{font-size:14px;line-height:1.8}
   }
 </style>
 <section class="slide" id="s-reasons" data-title="選ばれる理由">
@@ -133,26 +169,34 @@
       <span class="eyebrow" data-rv>STRENGTHS</span>
       <h2 class="s-title" data-rv style="--d:.08s">選ばれる理由</h2>
     </div>
-    <div class="cards c4">
+    <div class="cards c2">
       <div class="card" data-rv style="--d:.18s">
-        <span class="rs-num" aria-hidden="true">01</span>
-        <h3>即戦力人材</h3>
-        <p>1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。</p>
+        <div class="rs-art" aria-hidden="true"><img src="assets/img/illust/reason-talent-color.webp" alt="" width="689" height="468" decoding="async"></div>
+        <div class="rs-body">
+          <div class="rs-hd"><span class="rs-num" aria-hidden="true">01</span><h3>即戦力人材</h3></div>
+          <p>1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。</p>
+        </div>
       </div>
       <div class="card" data-rv style="--d:.3s">
-        <span class="rs-num" aria-hidden="true">02</span>
-        <h3>業界最安水準</h3>
-        <p>初期費用無料、従量課金制で無駄なコストを削減。1ヶ月からのお試し発注も可能で、リスクを最小限に抑えます。</p>
+        <div class="rs-art" aria-hidden="true"><img src="assets/img/illust/reason-cost-color.webp" alt="" width="772" height="483" decoding="async"></div>
+        <div class="rs-body">
+          <div class="rs-hd"><span class="rs-num" aria-hidden="true">02</span><h3>業界最安水準</h3></div>
+          <p>初期費用無料、従量課金制で無駄なコストを削減。1ヶ月からのお試し発注も可能で、リスクを最小限に抑えます。</p>
+        </div>
       </div>
       <div class="card" data-rv style="--d:.42s">
-        <span class="rs-num" aria-hidden="true">03</span>
-        <h3>柔軟な対応</h3>
-        <p>30日前申告で解約可能、人員の差し替えも期間内無料で対応。お客様のニーズに合わせた柔軟なサービスを提供します。</p>
+        <div class="rs-art" aria-hidden="true"><img src="assets/img/illust/reason-flex-color.webp" alt="" width="668" height="501" decoding="async"></div>
+        <div class="rs-body">
+          <div class="rs-hd"><span class="rs-num" aria-hidden="true">03</span><h3>柔軟な対応</h3></div>
+          <p>30日前申告で解約可能、人員の差し替えも期間内無料で対応。お客様のニーズに合わせた柔軟なサービスを提供します。</p>
+        </div>
       </div>
       <div class="card" data-rv style="--d:.54s">
-        <span class="rs-num" aria-hidden="true">04</span>
-        <h3>確かな実績</h3>
-        <p>東証プライム上場企業やDMMグループなど、大手企業との取引実績多数。高い品質とサービスをお約束します。</p>
+        <div class="rs-art" aria-hidden="true"><img src="assets/img/illust/reason-record-color.webp" alt="" width="768" height="501" decoding="async"></div>
+        <div class="rs-body">
+          <div class="rs-hd"><span class="rs-num" aria-hidden="true">04</span><h3>確かな実績</h3></div>
+          <p>東証プライム上場企業やDMMグループなど、大手企業との取引実績多数。高い品質とサービスをお約束します。</p>
+        </div>
       </div>
     </div>
   </div>
@@ -162,44 +206,95 @@
 <!-- shared: 実績の数字 (business #3 / careers #5) — count-up on first enter -->
 <style>
   #s-numbers .s-title{margin-bottom:0}
-  #s-numbers .nb-stats{list-style:none;margin:clamp(18px,3.6vh,36px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
-  #s-numbers .nb-stat{position:relative;overflow:hidden;text-align:center;padding:clamp(20px,3.6vh,36px) 14px clamp(18px,3vh,28px);
-    background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-  #s-numbers .nb-v{display:block;font:800 clamp(46px,6.2vw,86px)/1.05 var(--font-en);letter-spacing:-.015em;font-variant-numeric:tabular-nums;white-space:nowrap}
-  #s-numbers .nb-v > span,#s-numbers .nb-v > small{background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  /* ---- 実績: light "picture cards" (same look on the dark business page and the light careers page).
+     Each illustration is the card's background; the number + label sit ON the picture, bottom-left.
+     Readability: a white→clear scrim from the text corner, deeper blue numbers with a soft white halo,
+     and a translucent white pill behind the small label. */
+  #s-numbers{--nb-h:clamp(206px,33vh,272px);
+    --nb-ink:#0b1d40;
+    --nb-num:linear-gradient(100deg,#0d4fc4 0%,#1976f6 55%,#2a8af6 100%);
+    --nb-glow:0 18px 40px rgba(11,45,107,.12)}
+  #s-numbers .nb-stats{list-style:none;margin:clamp(14px,2.4vh,26px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.8vw,22px)}
+  #s-numbers .nb-stat{position:relative;overflow:hidden;isolation:isolate;height:var(--nb-h);
+    display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;text-align:left;
+    padding:clamp(16px,2.4vh,22px) clamp(18px,1.9vw,24px);
+    background:linear-gradient(160deg,#ffffff 0%,#f4f9ff 45%,#eaf3ff 100%);
+    border:1px solid #d6e4f7;border-radius:var(--radius);box-shadow:var(--nb-glow)}
+  /* the picture: full colour, a little softened, anchored so the subject stays in the open (top/right) area */
+  #s-numbers .nb-ill{position:absolute;inset:0;z-index:-2;display:block;
+    background:var(--nb-img) var(--nb-pos,right top)/var(--nb-size,auto 100%) no-repeat;
+    opacity:.86;transform-origin:70% 30%}
+  #s-numbers .nb-ill.a{--nb-img:url(assets/img/illust/num-appointers-color.webp)}
+  #s-numbers .nb-ill.r{--nb-img:url(assets/img/illust/num-rate-color.webp)}
+  #s-numbers .nb-ill.c{--nb-img:url(assets/img/illust/num-clients-color.webp)}
+  /* scrim: white where the text is (bottom-left), clear where the picture is (top-right) */
+  #s-numbers .nb-stat::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      linear-gradient(to top,rgba(255,255,255,.9) 0%,rgba(255,255,255,.72) 26%,rgba(255,255,255,.22) 50%,rgba(255,255,255,0) 66%),
+      linear-gradient(80deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.2) 40%,rgba(255,255,255,0) 60%),
+      linear-gradient(0deg,rgba(234,243,255,.18),rgba(234,243,255,.18))}
+  #s-numbers .nb-v{display:block;font:800 clamp(46px,4.9vw,66px)/1 var(--font-en);letter-spacing:-.015em;font-variant-numeric:tabular-nums;white-space:nowrap;
+    filter:drop-shadow(0 0 1px rgba(255,255,255,.95)) drop-shadow(0 0 10px rgba(255,255,255,.9))}
+  #s-numbers .nb-v > span,#s-numbers .nb-v > small{background:var(--nb-num);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
   #s-numbers .nb-v .n{display:inline-block;text-align:right}
   #s-numbers .nb-v small{font-size:.5em;font-weight:800;margin-left:.04em}
   /* thin bar under the number, grows once the count has finished */
-  #s-numbers .nb-bar{display:block;width:44px;height:3px;margin:clamp(12px,2vh,18px) auto clamp(10px,1.6vh,14px);border-radius:3px;background:var(--em-grad);transform-origin:50% 50%}
-  #s-numbers .nb-l{display:block;font-weight:700;font-size:clamp(14px,1.2vw,16px);color:var(--fg);letter-spacing:.04em}
-  #s-numbers .nb-txt{margin:clamp(16px,3vh,30px) auto 0;max-width:640px;text-align:center;padding:clamp(14px,2.4vh,22px) clamp(18px,2.4vw,32px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-  #s-numbers .nb-txt p{font-size:clamp(14px,1.15vw,16px);line-height:1.95;color:var(--sub)}
+  #s-numbers .nb-bar{display:block;width:40px;height:3px;margin:clamp(8px,1.3vh,12px) 0 clamp(8px,1.2vh,10px) 2px;border-radius:3px;background:var(--nb-num);transform-origin:0 50%}
+  /* small label: dark navy on a translucent white pill, so it never sits directly on the drawing's lines */
+  #s-numbers .nb-l{display:inline-block;font-weight:700;font-size:clamp(14px,1.2vw,16px);line-height:1.4;color:var(--nb-ink);letter-spacing:.04em;
+    padding:4px 12px;margin-left:-2px;border-radius:99px;background:rgba(255,255,255,.82);
+    box-shadow:0 0 0 1px rgba(11,45,107,.06),0 4px 14px rgba(11,45,107,.08);
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+
+  /* dark business page: the light cards are lit deliberately — a soft cyan rim + blue glow lifts them off the navy */
+  body.theme-dark #s-numbers{--nb-glow:0 0 0 1px rgba(117,242,255,.28),0 22px 48px rgba(0,8,30,.5),0 0 46px rgba(77,179,255,.2)}
+  body.theme-dark #s-numbers .nb-stat{border-color:rgba(255,255,255,.7)}
+
+  #s-numbers .nb-txt{margin:clamp(12px,2vh,22px) auto 0;max-width:640px;text-align:center;padding:clamp(12px,2vh,20px) clamp(18px,2.4vw,32px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-numbers .nb-txt p{font-size:clamp(14px,1.15vw,16px);line-height:1.8;color:var(--sub)}
   #s-numbers .nb-txt p.nb-key{margin-top:clamp(10px,1.6vh,14px);color:var(--fg);font-weight:700}
+
+  /* per-picture framing (desktop): keep the face / clipboard / trophy in the clear top-right part */
+  #s-numbers .nb-ill.a{--nb-size:auto 90%;--nb-pos:42% 2px}
+  #s-numbers .nb-ill.r{--nb-size:auto 104%;--nb-pos:right -4% top -6%}
+  #s-numbers .nb-ill.c{--nb-size:auto 100%;--nb-pos:right -16% top -4%}
 
   /* count-up states (set by the script; without JS / with reduced motion the final values simply show) */
   #s-numbers.nb-wait .nb-bar{transform:scaleX(0)}
   #s-numbers.nb-run .nb-bar{transform:scaleX(1);transition:transform .9s var(--ease) calc(var(--i) * .16s + 1.5s)}
+  /* the picture settles gently while the number counts up */
+  #s-numbers.nb-wait .nb-ill{transform:scale(1.06)}
+  #s-numbers.nb-run .nb-ill{transform:none;transition:transform 2.2s var(--ease) calc(var(--i) * .16s + .2s)}
+  #s-numbers.is-passed .nb-ill{transform:none;transition:none}
 
   /* short desktop screens (e.g. a 1280x800 laptop = ~713px of viewport): keep the slide within one screen */
   @media (min-width:641px) and (max-height:760px){
-    #s-numbers .nb-stats{margin-top:16px}
-    #s-numbers .nb-stat{padding:16px 14px 14px}
-    #s-numbers .nb-v{font-size:clamp(44px,5vw,64px)}
-    #s-numbers .nb-bar{margin:10px auto 8px}
-    #s-numbers .nb-txt{margin-top:16px;padding:12px clamp(18px,2.4vw,32px)}
+    #s-numbers{--nb-h:clamp(190px,30vh,220px)}
+    #s-numbers .nb-stats{margin-top:12px}
+    #s-numbers .nb-v{font-size:clamp(42px,4.4vw,56px)}
+    #s-numbers .nb-ill.a{--nb-size:auto 84%}
+    #s-numbers .nb-txt{margin-top:14px;padding:12px clamp(18px,2.4vw,32px)}
     #s-numbers .nb-txt p{line-height:1.75}
     #s-numbers .nb-txt p.nb-key{margin-top:8px}
   }
-  @media (max-width:900px){
-    #s-numbers .nb-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media (max-width:900px) and (min-width:641px){
+    #s-numbers .nb-l{font-size:13.5px;padding:3px 10px;letter-spacing:.02em}
   }
   @media (max-width:640px){
-    #s-numbers .nb-stats{grid-template-columns:minmax(0,1fr);gap:10px}
-    #s-numbers .nb-stat{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px 16px;text-align:left;padding:16px 18px}
-    #s-numbers .nb-v{font-size:44px;grid-row:1/3}
-    #s-numbers .nb-bar{margin:0;width:32px;align-self:end}
-    #s-numbers .nb-l{align-self:start;font-size:14.5px}
+    /* phone: stacked wide cards, number + label bottom-left, the picture fills the right side behind them */
+    #s-numbers{--nb-h:172px}
+    #s-numbers .nb-stats{grid-template-columns:minmax(0,1fr);gap:12px}
+    #s-numbers .nb-stat{padding:16px 18px}
+    #s-numbers .nb-stat::before{background:
+      linear-gradient(90deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.7) 34%,rgba(255,255,255,.2) 56%,rgba(255,255,255,0) 70%),
+      linear-gradient(to top,rgba(255,255,255,.55) 0%,rgba(255,255,255,0) 45%),
+      linear-gradient(0deg,rgba(234,243,255,.18),rgba(234,243,255,.18))}
+    #s-numbers .nb-ill.a{--nb-size:auto 100%;--nb-pos:right -34px top 0}
+    #s-numbers .nb-ill.r{--nb-size:auto 112%;--nb-pos:right -6px top -6px}
+    #s-numbers .nb-ill.c{--nb-size:auto 106%;--nb-pos:right -26px top -4px}
+    #s-numbers .nb-v{font-size:44px}
+    #s-numbers .nb-bar{margin:8px 0 8px 2px;width:32px}
+    #s-numbers .nb-l{font-size:14.5px}
     #s-numbers .nb-txt{text-align:left;padding:16px 18px}
     #s-numbers .nb-txt p{font-size:14.5px}
     #s-numbers .nb-txt br{display:none}
@@ -210,9 +305,9 @@
     <span class="eyebrow" data-rv>ACHIEVEMENTS</span>
     <h2 class="s-title" data-rv style="--d:.08s">実績</h2>
     <ul class="nb-stats">
-      <li class="nb-stat" data-rv style="--d:.18s;--i:0"><span class="nb-v" data-to="1500"><span class="n">1,500</span></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">登録アポインター数</span></li>
-      <li class="nb-stat" data-rv style="--d:.3s;--i:1"><span class="nb-v" data-to="220"><span class="n">220</span><small>%</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">最大アポ率改善</span></li>
-      <li class="nb-stat" data-rv style="--d:.42s;--i:2"><span class="nb-v" data-to="100"><span class="n">100</span><small>+</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">取引実績企業数</span></li>
+      <li class="nb-stat" data-rv style="--d:.18s;--i:0"><span class="nb-ill a" aria-hidden="true"></span><span class="nb-v" data-to="1500"><span class="n">1,500</span></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">登録アポインター数</span></li>
+      <li class="nb-stat" data-rv style="--d:.3s;--i:1"><span class="nb-ill r" aria-hidden="true"></span><span class="nb-v" data-to="220"><span class="n">220</span><small>%</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">最大アポ率改善</span></li>
+      <li class="nb-stat" data-rv style="--d:.42s;--i:2"><span class="nb-ill c" aria-hidden="true"></span><span class="nb-v" data-to="100"><span class="n">100</span><small>+</small></span><span class="nb-bar" aria-hidden="true"></span><span class="nb-l">取引実績企業数</span></li>
     </ul>
     <div class="nb-txt" data-rv style="--d:.7s">
       <p>人材系企業、SaaS・DX支援ツール、<br>営業代行会社、インサイドセールス支援、<br>メディア・広報・PR、Web制作・広告など、<br>幅広い業界での実績がございます。</p>

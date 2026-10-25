@@ -12,6 +12,8 @@
   --ink:#0b1d40;
   --font-ja:"Noto Sans JP",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
   --font-en:Inter,"Noto Sans JP",system-ui,sans-serif;
+  --font-head:var(--font-ja); /* headings (slide titles, h1–h3). Fonts are switched ONLY through these three variables
+                                 (see site/proposals/fonts.html); the Google Fonts <link> in each page loads them. */
   --d5-bg:linear-gradient(180deg,#020b22 0%,#06183d 100%);
   --d3-bg:linear-gradient(160deg,#ffffff 0%,#ebf4ff 55%,#d6e8ff 100%);
   --hd-h:72px;            /* space kept free for the fixed header */
@@ -75,6 +77,9 @@ img{height:auto}
 a{color:var(--accent)}
 button{font:inherit;color:inherit}
 h1,h2,h3,h4{margin:0;line-height:1.4;color:var(--heading);font-weight:700}
+/* heading font hook — element/class selectors with low specificity, so any component rule that sets its own
+   font (e.g. the menu's English h3, numbers in var(--font-en)) still wins */
+h1,h2,h3,.s-title,.ct-hl{font-family:var(--font-head)}
 p{margin:0}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Insup リニューアル｜フォントの候補</title>
+<link rel="icon" href="../assets/img/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- this page's own UI font (same as the earlier proposal pages); the candidates are loaded on demand by the script below -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b2d6b; --blue:#1976f6; --sky:#4db3ff; --pale:#ebf4ff; --deep:#06183d; --ice:#75f2ff;
+    --bg:#f4f7fc; --card:#fff; --ink:#0b1d40; --sub:#5b6884; --line:#d9e2f0;
+    --ui:"Noto Sans JP",system-ui,-apple-system,"Hiragino Sans",sans-serif;
+    --ui-en:Inter,"Noto Sans JP",system-ui,sans-serif;
+    --bar-h:64px;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);line-height:1.7;font-size:15px;overflow-x:hidden;
+    padding-bottom:calc(var(--bar-h) + 24px + env(safe-area-inset-bottom,0px))}
+  @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+  a{color:var(--blue)}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+  .wrap{max-width:1240px;margin:0 auto;padding:36px 16px 40px}
+  .top{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .top img{height:44px;width:auto}
+  h1{font-size:24px;margin:0}
+  h2.sec{font-size:21px;margin:56px 0 4px;padding-top:16px;border-top:2px solid var(--ink)}
+  h2.sec small{font-size:13px;color:var(--sub);font-weight:500;margin-left:8px}
+  .lead{color:var(--sub);margin:0 0 6px}
+  .note{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:16px 0;font-size:14px}
+
+  /* ---------- specimen cards ---------- */
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:18px}
+  @media (max-width:860px){ .grid{grid-template-columns:minmax(0,1fr)} }
+  .fc{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+    transition:border-color .25s,box-shadow .25s}
+  .fc.on{border-color:var(--blue);box-shadow:0 0 0 3px rgba(25,118,246,.16)}
+  .fc-hd{padding:16px 20px 12px}
+  .fc-hd .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .k{font:700 12px var(--ui-en);letter-spacing:.06em;color:#fff;background:var(--ink);border-radius:99px;padding:2px 10px;white-space:nowrap}
+  .fc.on .k{background:var(--blue)}
+  .fc.cur .k{background:#8a94a8}
+  .fc-hd h3{font-size:17px;margin:0;line-height:1.5}
+  .fc-hd .desc{margin:6px 0 0;font-size:14px;color:var(--ink)}
+  .fc-hd .nt{margin:6px 0 0;font-size:13px;line-height:1.7;color:#7a4b00;background:#fff6e5;border-radius:8px;padding:6px 10px}
+  .fc-hd .fn{margin:4px 0 0;font-size:12.5px;color:var(--sub)}
+
+  /* the specimen itself: uses ONLY the candidate's three fonts (--ja / --en / --hd on the card) */
+  .sp{font-family:var(--ja);flex:1;display:flex;flex-direction:column}
+  .sp-dark{background:linear-gradient(180deg,#020b22 0%,#06183d 100%);color:#fff;padding:22px 22px 24px;position:relative;overflow:hidden}
+  .sp-dark::after{content:"";position:absolute;right:-60px;top:-80px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(closest-side,rgba(77,179,255,.28),rgba(77,179,255,0));pointer-events:none}
+  .sp-eb{display:block;font:700 11.5px/1.6 var(--en);letter-spacing:.35em;color:#75f2ff;margin-bottom:8px}
+  .sp-h{font-family:var(--hd);font-size:clamp(21px,2.3vw,29px);font-weight:900;line-height:1.4;letter-spacing:.02em;margin:0;word-break:keep-all;overflow-wrap:anywhere}
+  .sp-h em{font-style:normal;background:linear-gradient(90deg,#9fdcff,#4db3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sp-light{background:linear-gradient(160deg,#ffffff 0%,#ebf4ff 60%,#dcebff 100%);color:var(--navy);padding:20px 22px 22px;flex:1}
+  .sp-h2{font-family:var(--hd);font-size:clamp(19px,1.9vw,24px);font-weight:900;line-height:1.45;margin:0 0 8px;color:#0b2d6b}
+  .sp-body{font-size:14.5px;line-height:1.95;margin:0;color:#33476e;font-weight:400}
+  .sp-nums{list-style:none;margin:16px 0 0;padding:14px 0 0;border-top:1px solid rgba(11,45,107,.12);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
+  .sp-nums b{display:block;font:800 clamp(26px,2.6vw,34px)/1.1 var(--en);letter-spacing:.01em;color:#1976f6}
+  .fc[data-lining] .sp *{font-variant-numeric:lining-nums}
+  .sp-nums b small{font-size:.55em;margin-left:1px}
+  .sp-nums span{display:block;font-size:clamp(10.5px,2.8vw,12px);font-weight:700;line-height:1.5;margin-top:4px;color:#0b2d6b}
+  @media (max-width:480px){ .sp-dark,.sp-light{padding-left:16px;padding-right:16px} h2.sec small{display:block;margin:2px 0 0} }
+  .fc-go{margin:0;border:0;border-top:1px solid var(--line);background:#fff;color:var(--blue);font:700 14px var(--ui);padding:13px 16px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+  .fc-go:hover{background:#f2f7ff}
+  .fc.on .fc-go{background:#e8f1ff}
+
+  /* ---------- live preview ---------- */
+  .picker{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 18px;margin-top:18px}
+  .prow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line)}
+  .prow:last-child{border:0}
+  .prow > b{flex:0 0 78px;font-size:13px;padding-top:7px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opts button{font:500 13px var(--ui);background:#f6f9ff;border:1.5px solid var(--line);border-radius:10px;padding:6px 12px;cursor:pointer;color:var(--ink);
+    display:flex;align-items:center;gap:8px;text-align:left;min-height:40px}
+  .opts button.on{border-color:var(--blue);background:#e8f1ff;box-shadow:0 0 0 2px rgba(25,118,246,.15)}
+  .opts button .k{font-size:11px;padding:1px 7px}
+  .opts button.on .k{background:var(--blue)}
+  @media (max-width:700px){ .prow{flex-direction:column;gap:6px} .prow > b{padding:0;flex:none} }
+
+  .stage{margin-top:16px;background:#e7edf7;border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;justify-content:center}
+  .screen{position:relative;overflow:hidden;background:#fff;box-shadow:0 10px 30px rgba(11,45,107,.16);border-radius:10px;flex:none}
+  .screen.sp-mode{border-radius:26px;box-shadow:0 0 0 6px #0b1d40,0 10px 30px rgba(11,45,107,.2);margin:6px 0} /* frame drawn outside, so the page is not covered */
+  .screen iframe{position:absolute;left:0;top:0;border:0;transform-origin:0 0;background:#fff;display:block}
+  .screen .ld{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(244,247,252,.92);
+    font-size:14px;color:var(--sub);opacity:0;pointer-events:none;transition:opacity .25s}
+  .screen.loading .ld{opacity:1}
+  .hint{font-size:13px;color:var(--sub);margin:10px 0 0}
+
+  /* ---------- bottom bar ---------- */
+  .nowbar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--navy);color:#fff;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 24px rgba(6,24,61,.25)}
+  .nowbar .in{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:12px}
+  .nowbar p{margin:0;flex:1;min-width:0;font-size:14px;line-height:1.6}
+  .nowbar p b{color:#9fdcff}
+  .nowbar p .nw{white-space:nowrap} /* a line only breaks at ／, never inside パソコン etc. */
+  .nowbar button{flex:none;font:700 13px var(--ui);background:#fff;color:var(--navy);border:0;border-radius:99px;padding:8px 16px;cursor:pointer;min-height:40px}
+  .nowbar button:hover{background:#e8f1ff}
+  @media (max-width:560px){ .nowbar p{font-size:13px} .nowbar p .fn{display:none} .nowbar button{padding:8px 12px} }
+  footer{margin-top:36px;color:var(--sub);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><img src="../assets/img/logo-mark.png" alt="Insup"><h1>フォントの候補</h1></div>
+  <p class="lead">いまの文字（Noto Sans JP と Inter）は、とても多くのサイトで使われている定番の組み合わせです。もう少し個性が出る文字を6つ選びました。<a href="index.html">← 提案一覧</a></p>
+  <div class="note">まず下の見本で雰囲気を見比べてください。気になる候補があれば「この文字で実際のページを見る」を押すと、本番のページにその文字を当てはめて確認できます。どの候補も、無料で使える Google Fonts の文字です。ページ下の紺色の枠に「いま表示中：…」と出るので、その文をそのまま送っていただければ大丈夫です。</div>
+
+  <h2 class="sec">見本で見比べる<small>同じ文章を、それぞれの文字で表示しています</small></h2>
+  <div class="grid" id="grid"></div>
+
+  <h2 class="sec" id="live">実際のページで見る<small>本番のページに、選んだ文字を当てはめて表示します</small></h2>
+  <div class="picker">
+    <div class="prow"><b>文字</b><div class="opts" id="optFont"></div></div>
+    <div class="prow"><b>ページ</b><div class="opts" id="optPage"></div></div>
+    <div class="prow"><b>画面の幅</b><div class="opts" id="optWidth"></div></div>
+  </div>
+  <div class="stage" id="stage">
+    <div class="screen" id="screen">
+      <iframe id="frame" title="選んだ文字で表示した本番のページ"></iframe>
+      <div class="ld" aria-hidden="true">読み込み中…</div>
+    </div>
+  </div>
+  <p class="hint">表示の中でも、ふつうのページと同じようにスクロールやクリックができます。</p>
+
+  <footer>株式会社Insup　ホームページリニューアル　確認用ページ</footer>
+</div>
+
+<div class="nowbar" id="nowbar" role="status" aria-live="polite">
+  <div class="in"><p id="nowtext">いま表示中：</p><button type="button" id="copy">文をコピー</button></div>
+</div>
+
+<script>
+(() => {
+  /* ---------- candidates ---------- */
+  const TAIL = 'system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif';
+  const C = [
+    { key: 'cur', id: '現在', name: 'いまの文字（比較用）', ja: 'Noto Sans JP', en: 'Inter', head: null,
+      desc: '多くのサイトで使われている、整った標準的な文字です。',
+      css: 'family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;600;700;800' },
+    { key: 'f1', id: 'F1', name: '上品・やわらかい', ja: 'Zen Kaku Gothic New', en: 'Jost', head: null,
+      desc: '線がやわらかく上品な印象。英字は丸と直線でできた、すっきりした形です。',
+      css: 'family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Jost:wght@400;500;600;700;800' },
+    { key: 'f2', id: 'F2', name: 'きちんと・信頼感', ja: 'IBM Plex Sans JP', en: 'IBM Plex Sans', head: null,
+      desc: 'かっちり整った、まじめで信頼感のある印象です。',
+      css: 'family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700' },
+    { key: 'f3', id: 'F3', name: '親しみ・力強い', ja: 'LINE Seed JP', en: 'LINE Seed JP', head: null,
+      desc: '親しみやすく、太い文字に力強さがある印象です。日本語も英字も同じ文字です。',
+      css: 'family=LINE+Seed+JP:wght@400;700;800' },
+    { key: 'f4', id: 'F4', name: 'すっきり・モダン', ja: 'M PLUS 2', en: 'Outfit', head: null,
+      desc: 'すっきりとして、新しさのある今どきの印象です。',
+      css: 'family=M+PLUS+2:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800' },
+    { key: 'f5', id: 'F5', name: 'シャープ・個性的', ja: 'Murecho', en: 'Archivo', head: null,
+      desc: '角がシャープで、ほかのサイトと差がつく個性的な印象です。',
+      css: 'family=Murecho:wght@400;500;600;700;800;900&family=Archivo:wght@400;500;600;700;800' },
+    { key: 'f6', id: 'F6', name: '上質・落ち着き（見出しが明朝）', ja: 'Zen Kaku Gothic New', en: 'Cormorant Garamond', head: 'Zen Old Mincho',
+      desc: '見出しだけ明朝体（筆の形が残る文字）にした、落ち着いた上質な印象です。',
+      note: '英字の線が細いため、「FOR BUSINESS」などの小さな英字は少し読みにくくなります。この候補に決まった場合は、小さな英字を少し大きく・太くして読みやすく調整します。',
+      css: 'family=Zen+Old+Mincho:wght@400;500;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@400;500;600;700',
+      lining: true /* Cormorant's default numbers dip below the line (1,500 / 100 look uneven) — use same-height numbers */ }
+  ];
+  const q = s => '"' + s + '"';
+  C.forEach(c => {
+    c.vja = q(c.ja) + ',' + TAIL;
+    c.ven = (c.en === c.ja ? q(c.en) : q(c.en) + ',' + q(c.ja)) + ',' + TAIL;
+    c.vhead = c.head ? q(c.head) + ',"Hiragino Mincho ProN","Yu Mincho",serif' : c.vja;
+    c.label = c.key === 'cur' ? 'いまの文字（比較用）' : c.id + '「' + c.name + '」';
+    c.fonts = c.head ? '見出し ' + c.head + '／本文 ' + c.ja + '／英字・数字 ' + c.en
+            : c.en === c.ja ? '日本語・英字・数字とも ' + c.ja : '日本語 ' + c.ja + '／英字・数字 ' + c.en;
+  });
+  const byKey = k => C.find(c => c.key === k) || C[0];
+  const GF = 'https://fonts.googleapis.com/css2?';
+  const PAGES = [
+    { key: 'index', label: '入口', url: '../index.html' },
+    { key: 'business', label: '企業様向け', url: '../business.html' },
+    { key: 'careers', label: '働きたい方向け', url: '../careers.html' }
+  ];
+  const PAGE_NAMES = { 'index.html': '入口ページ', 'business.html': '企業様向けページ', 'careers.html': '働きたい方向けページ', 'privacy.html': 'プライバシーポリシー' };
+  const WIDTHS = [
+    { key: 'pc', label: 'パソコン', w: 1280, h: 800 },
+    { key: 'sp', label: 'スマホ', w: 390, h: 844 }
+  ];
+
+  /* ---------- state (also kept in the address, so a link reopens the same view) ---------- */
+  const params = new URLSearchParams(location.search);
+  const S = {
+    font: byKey((params.get('f') || 'cur').toLowerCase()).key,
+    page: (PAGES.find(p => p.key === params.get('p')) || PAGES[1]).key,
+    width: (WIDTHS.find(w => w.key === params.get('w')) || (innerWidth < 700 ? WIDTHS[1] : WIDTHS[0])).key,
+    shownPage: ''
+  };
+  function saveUrl() {
+    try { history.replaceState(null, '', '?f=' + S.font + '&p=' + S.page + '&w=' + S.width + location.hash); } catch (_) {}
+  }
+
+  /* ---------- specimen cards ---------- */
+  const grid = document.getElementById('grid');
+  const SPEC = `
+    <div class="sp-dark"><span class="sp-eb">FOR BUSINESS</span>
+      <p class="sp-h">即戦力テレアポ人材の確保なら<br><em>レンタルプロアポインター</em></p></div>
+    <div class="sp-light">
+      <p class="sp-h2">通勤ゼロで、トップセールスへ。</p>
+      <p class="sp-body">1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。</p>
+      <ul class="sp-nums">
+        <li><b>1,500</b><span>登録アポインター数</span></li>
+        <li><b>220<small>%</small></b><span>最大アポ率改善</span></li>
+        <li><b>100<small>+</small></b><span>取引実績企業数</span></li>
+      </ul></div>`;
+  C.forEach(c => {
+    const a = document.createElement('article');
+    a.className = 'fc' + (c.key === 'cur' ? ' cur' : '');
+    a.dataset.k = c.key;
+    a.style.cssText = '--ja:' + c.vja + ';--en:' + c.ven + ';--hd:' + c.vhead;
+    if (c.lining) a.dataset.lining = '';
+    a.innerHTML = `<div class="fc-hd"><div class="row"><span class="k">${c.id}</span><h3>${c.key === 'cur' ? c.name : '「' + c.name + '」'}</h3></div>
+      <p class="desc">${c.desc}</p>${c.note ? '<p class="nt">' + c.note + '</p>' : ''}<p class="fn">${c.fonts}</p></div>
+      <div class="sp" aria-label="${c.label}の見本">${SPEC}</div>
+      <button type="button" class="fc-go">この文字で実際のページを見る <span aria-hidden="true">↓</span></button>`;
+    a.querySelector('.fc-go').addEventListener('click', () => { setFont(c.key); document.getElementById('live').scrollIntoView({ block: 'start' }); });
+    grid.appendChild(a);
+  });
+
+  /* specimen fonts: loaded only when a card comes near the screen, and only the letters the specimen uses (small download) */
+  const chars = [...new Set(grid.querySelector('.sp').textContent.replace(/\s+/g, ''))].join('');
+  const loaded = new Set(['cur']); /* the current fonts are already loaded by this page */
+  function loadSpecimen(c) {
+    if (loaded.has(c.key)) return; loaded.add(c.key);
+    const l = document.createElement('link'); l.rel = 'stylesheet';
+    l.href = GF + c.css + '&text=' + encodeURIComponent(chars) + '&display=swap';
+    document.head.appendChild(l);
+  }
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { loadSpecimen(byKey(e.target.dataset.k)); io.unobserve(e.target); } }), { rootMargin: '400px 0px' });
+    grid.querySelectorAll('.fc').forEach(el => io.observe(el));
+  } else C.forEach(loadSpecimen);
+
+  /* ---------- buttons ---------- */
+  function buttons(host, list, cur, onPick, inner) {
+    host.innerHTML = '';
+    list.forEach(it => {
+      const b = document.createElement('button'); b.type = 'button'; b.dataset.k = it.key;
+      b.innerHTML = inner(it); b.setAttribute('aria-pressed', String(it.key === cur));
+      if (it.key === cur) b.classList.add('on');
+      b.addEventListener('click', () => onPick(it.key));
+      host.appendChild(b);
+    });
+  }
+  function mark(host, k) { host.querySelectorAll('button').forEach(b => { const on = b.dataset.k === k; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); }); }
+  const optFont = document.getElementById('optFont'), optPage = document.getElementById('optPage'), optWidth = document.getElementById('optWidth');
+  buttons(optFont, C, S.font, setFont, c => `<span class="k">${c.id}</span>${c.key === 'cur' ? 'いまの文字' : c.name}`);
+  buttons(optPage, PAGES, S.page, setPage, p => p.label);
+  buttons(optWidth, WIDTHS, S.width, setWidth, w => w.label);
+
+  /* ---------- live preview ---------- */
+  const frame = document.getElementById('frame'), screen = document.getElementById('screen'), stage = document.getElementById('stage');
+
+  /* put the chosen fonts into the page shown in the frame (same site, so we can reach into it) */
+  function inject(doc) {
+    if (!doc || !doc.head || !doc.documentElement) return false;
+    const c = byKey(S.font);
+    let l = doc.getElementById('fp-fonts'), s = doc.getElementById('fp-vars');
+    if (c.key === 'cur') { if (l) l.remove(); if (s) s.remove(); doc.documentElement.dataset.fp = 'cur'; return true; }
+    if (!l) { l = doc.createElement('link'); l.id = 'fp-fonts'; l.rel = 'stylesheet'; }
+    const href = GF + c.css + '&display=swap';
+    if (l.getAttribute('href') !== href) l.href = href;
+    if (!s) { s = doc.createElement('style'); s.id = 'fp-vars'; }
+    s.textContent = 'html:root{--font-ja:' + c.vja + ';--font-en:' + c.ven + ';--font-head:' + c.vhead + '}'
+      + (c.lining ? 'html:root *{font-variant-numeric:lining-nums!important}' : ''); /* the `font:` shorthand used by many parts resets it, hence * and !important */
+    doc.head.appendChild(l); doc.head.appendChild(s); /* html:root beats the page's own :root values wherever they sit */
+    doc.documentElement.dataset.fp = c.key;
+    return true;
+  }
+  function frameDoc() { try { return frame.contentDocument; } catch (_) { return null; } }
+  function currentPageName() {
+    try {
+      const f = (frame.contentWindow.location.pathname.split('/').pop() || 'index.html');
+      return PAGE_NAMES[f] || '';
+    } catch (_) { return ''; }
+  }
+  /* pages opened by clicking inside the frame get the fonts as early as possible too */
+  setInterval(() => {
+    const d = frameDoc();
+    if (d && d.head && d.URL !== 'about:blank' && d.documentElement.dataset.fp !== S.font) inject(d);
+    const n = screen.classList.contains('loading') ? '' : currentPageName();
+    if (n && n !== S.shownPage) { S.shownPage = n; const p = PAGES.find(p => PAGE_NAMES[p.key + '.html'] === n); if (p && p.key !== S.page) { S.page = p.key; mark(optPage, p.key); saveUrl(); } render(); }
+  }, 60);
+
+  let loadTimer = 0;
+  function reveal() {
+    const d = frameDoc(); clearTimeout(loadTimer);
+    const done = () => screen.classList.remove('loading');
+    if (!d || !d.fonts) return done();
+    loadTimer = setTimeout(done, 3000);
+    d.fonts.ready.then(() => { clearTimeout(loadTimer); done(); }, done);
+  }
+  frame.addEventListener('load', () => { inject(frameDoc()); reveal(); });
+
+  function loadPage() {
+    const p = PAGES.find(p => p.key === S.page);
+    screen.classList.add('loading');
+    frame.src = p.url;
+  }
+  function fit() {
+    const w = WIDTHS.find(w => w.key === S.width);
+    const pad = 32 + (w.key === 'sp' ? 12 : 0);
+    const avail = Math.max(200, stage.clientWidth - pad);
+    /* fit the width, and keep the whole screen visible above the bottom bar when the window is tall enough */
+    const barH = document.getElementById('nowbar').offsetHeight;
+    let k = Math.min(1, avail / w.w);
+    k = Math.min(k, Math.max(w.key === 'sp' ? .6 : .45, (innerHeight - barH - 56) / w.h));
+    frame.style.width = w.w + 'px'; frame.style.height = w.h + 'px';
+    frame.style.transform = 'scale(' + k + ')';
+    screen.style.width = Math.round(w.w * k) + 'px'; screen.style.height = Math.round(w.h * k) + 'px';
+    screen.classList.toggle('sp-mode', w.key === 'sp');
+  }
+  addEventListener('resize', fit);
+
+  function setFont(k) {
+    S.font = k; mark(optFont, k);
+    grid.querySelectorAll('.fc').forEach(el => el.classList.toggle('on', el.dataset.k === k));
+    const d = frameDoc();
+    if (d && d.head && d.URL !== 'about:blank') { inject(d); }
+    saveUrl(); render();
+  }
+  function setPage(k) { S.page = k; mark(optPage, k); S.shownPage = ''; saveUrl(); loadPage(); render(); }
+  function setWidth(k) { S.width = k; mark(optWidth, k); fit(); saveUrl(); render(); }
+
+  /* ---------- bottom bar ---------- */
+  const nowtext = document.getElementById('nowtext');
+  function summary() {
+    const c = byKey(S.font), w = WIDTHS.find(w => w.key === S.width);
+    const page = S.shownPage || PAGE_NAMES[S.page + '.html'];
+    return 'いま表示中：' + c.label + '（' + c.fonts + '）／' + page + '／' + w.label;
+  }
+  function render() {
+    const c = byKey(S.font), w = WIDTHS.find(w => w.key === S.width);
+    const page = S.shownPage || PAGE_NAMES[S.page + '.html'];
+    nowtext.innerHTML = 'いま表示中：<b>' + c.label + '</b><span class="fn">（' + c.fonts + '）</span>／<span class="nw">' + page + '</span>／<span class="nw">' + w.label + '</span>';
+    document.documentElement.style.setProperty('--bar-h', document.getElementById('nowbar').offsetHeight + 'px');
+  }
+  const copyBtn = document.getElementById('copy');
+  copyBtn.addEventListener('click', async () => {
+    const text = summary();
+    let ok = false;
+    try { await navigator.clipboard.writeText(text); ok = true; } catch (_) {
+      try { const t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); ok = document.execCommand('copy'); t.remove(); } catch (_) {}
+    }
+    copyBtn.textContent = ok ? 'コピーしました' : 'コピーできませんでした';
+    setTimeout(() => { copyBtn.textContent = '文をコピー'; }, 1800);
+  });
+  addEventListener('resize', render);
+
+  setFont(S.font); fit(); loadPage(); render();
+})();
+</script>
+</body>
+</html>
