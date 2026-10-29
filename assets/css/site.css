@@ -10,10 +10,12 @@
 :root{
   --navy:#0b2d6b; --blue:#1976f6; --sky:#4db3ff; --pale:#ebf4ff; --deep:#06183d; --ice:#75f2ff;
   --ink:#0b1d40;
-  --font-ja:"Noto Sans JP",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
-  --font-en:Inter,"Noto Sans JP",system-ui,sans-serif;
-  --font-head:var(--font-ja); /* headings (slide titles, h1–h3). Fonts are switched ONLY through these three variables
-                                 (see site/proposals/fonts.html); the Google Fonts <link> in each page loads them. */
+  /* fonts — client decision 2026-10-26 (site/proposals/fonts.html): default = F6 「上質・落ち着き」
+     (企業様向け・入口・プライバシーポリシー); the careers page switches to F3 with <html class="ff-f3">.
+     Fonts are switched ONLY through these three variables; the Google Fonts <link> in each page loads them. */
+  --font-ja:"Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
+  --font-en:"Cormorant Garamond","Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
+  --font-head:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif; /* headings (slide titles, h1–h3) */
   --d5-bg:linear-gradient(180deg,#020b22 0%,#06183d 100%);
   --d3-bg:linear-gradient(160deg,#ffffff 0%,#ebf4ff 55%,#d6e8ff 100%);
   --hd-h:72px;            /* space kept free for the fixed header */
@@ -22,6 +24,14 @@
   --radius:18px;
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-io:cubic-bezier(.45,0,.55,1);
+}
+
+/* F3 「親しみ・力強い」 (働きたい方向けページ): LINE Seed JP for Japanese, Latin and numbers.
+   html.ff-xx has the same weight as the html:root block fonts.html injects, so its preview can still override it. */
+html.ff-f3{
+  --font-ja:"LINE Seed JP",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
+  --font-en:"LINE Seed JP",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
+  --font-head:var(--font-ja);
 }
 
 /* ---------- 2. themes ---------- */
@@ -81,6 +91,9 @@ h1,h2,h3,h4{margin:0;line-height:1.4;color:var(--heading);font-weight:700}
    font (e.g. the menu's English h3, numbers in var(--font-en)) still wins */
 h1,h2,h3,.s-title,.ct-hl{font-family:var(--font-head)}
 p{margin:0}
+/* line breaks between phrases (Chrome/Edge; others ignore it) — after the 2026-10 font change several texts left
+   1–2 characters such as 「す。」「対応」 alone on the last line; element selectors, so any component rule still wins */
+p,li,dd,.s-title small{text-wrap:pretty;word-break:auto-phrase}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
 .sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .skip{position:fixed;left:12px;top:-100px;z-index:200;background:#fff;color:#0b2d6b;padding:8px 14px;border-radius:10px;font-weight:700;text-decoration:none}
@@ -274,6 +287,41 @@ ul.pts{padding:0;margin-bottom:0}
 .scroll-fade{max-height:min(56vh,520px);overflow-y:auto;padding-right:10px;scrollbar-width:thin;
   -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%);padding-bottom:40px}
 
+/* ---------- 8b. F6 fine-tuning (<html class="ff-f6">: 企業様向け・プライバシーポリシー; 入口 has its own copy inline) ----------
+   Cormorant Garamond (--font-en) has old-style figures by default (1,500 / 100 dip below the line) and thin strokes
+   at small sizes. Many parts use the `font:` shorthand, which resets font-variant-numeric, hence * and !important. */
+html.ff-f6 *,html.ff-f6 *::before,html.ff-f6 *::after{font-variant-numeric:lining-nums!important}
+html.ff-f6 #s-numbers .nb-v{font-variant-numeric:lining-nums tabular-nums!important}
+/* small spaced Latin labels: a little larger and bolder so they stay readable */
+html.ff-f6 .eyebrow{font-size:14px;font-weight:700;letter-spacing:.3em}
+html.ff-f6 .menu-btn{font-size:14px;letter-spacing:.2em}
+html.ff-f6 .menu-list a .n{font-size:14px;font-weight:700}
+html.ff-f6 .menu-side h3{font-size:13.5px;letter-spacing:.26em}
+html.ff-f6 .card .num{font-size:15px;font-weight:700}
+html.ff-f6 .pts > span b,html.ff-f6 .pts > li b{font-size:13px;letter-spacing:.12em}
+html.ff-f6 .ft-sns a{font-size:14.5px;font-weight:700}
+html.ff-f6 .ft-bottom small{font-size:13px;font-weight:600}
+html.ff-f6 #s-hero .hero-scroll{font-size:13px;font-weight:700}
+html.ff-f6 #s-remote .en{font-size:clamp(12.5px,1.1vw,15px);font-weight:700;letter-spacing:.16em}
+html.ff-f6 #s-flow .mk{font-size:13px;font-weight:700;letter-spacing:.06em}
+html.ff-f6 #s-flow .mk b{font-size:22px;font-weight:700}
+html.ff-f6 #s-services .pos .ic{font-size:13px;font-weight:700}
+html.ff-f6 #s-lounge .facts dt{font-size:13px;font-weight:700;letter-spacing:.14em}
+html.ff-f6 #s-access .ac-addr .zip{font-weight:700}
+/* SNS handles / mail address in the contact cards: Cormorant is small for its size — a little larger */
+html.ff-f6 #s-contact .mt .go .en{font-size:16px}
+html.ff-f6 #s-contact .mt .go .mail{font-size:15px;letter-spacing:0}
+/* the T1 entrance copy shown on arrival from 入口 (business.js) — same sizes as index.html */
+html.ff-f6 .t1-ui .t1-tag{font-size:14px;font-weight:700}
+html.ff-f6 .t1-ui .t1-door small{font-size:13px;font-weight:700}
+html.ff-f6 .t1-ui .t1-door.biz small{opacity:1;font-size:13.5px;text-shadow:0 1px 2px rgba(11,45,107,.6),0 0 6px rgba(11,45,107,.35)}
+html.ff-f6 .t1-ui .t1-fine small{font-size:13px;font-weight:600}
+/* 企業様向けページ: the よくあるご質問 questions use the heading font (明朝) — client decision 2026-10-26 */
+body.page-business #s-faq .q .qt{font-family:var(--font-head)}
+/* phones: 明朝 is a little wider — keep 「Q. 稼働開始までどのくらいかかりますか？」 on one line at 390px, and on narrower
+   screens break between phrases (never 「か？」 alone) */
+@media (max-width:480px){body.page-business #s-faq .q .qt{font-size:14px;word-break:auto-phrase;text-wrap:pretty}}
+
 /* ---------- 9. footer ---------- */
 .site-ft{position:relative;z-index:1;scroll-snap-align:end;padding:48px var(--gutter) calc(var(--tab-h) + 8px);
   background:var(--ft-bg,rgba(2,9,28,.72));color:var(--ft-fg,rgba(226,236,255,.85));border-top:1px solid var(--line);font-size:14px;line-height:1.8}
@@ -282,6 +330,7 @@ body.theme-light{--ft-bg:rgba(255,255,255,.78);--ft-fg:#3e4f70}
 .ft-plate{margin-bottom:12px}
 .ft-name{font-weight:700;color:var(--fg);font-size:15px}
 .ft-addr{font-style:normal}
+.ft-addr .nw{white-space:nowrap}
 .site-ft a{color:inherit;text-underline-offset:3px}
 .site-ft a:hover{color:var(--accent)}
 .ft-sns{list-style:none;margin:0;padding:0;display:flex;gap:10px;flex-wrap:wrap}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="ff-f3">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -12,12 +12,13 @@
 <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=c814182454">
+<!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
+<link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=83527603f0">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=c814182454"></script>
-<script src="assets/js/careers.js?v=c814182454" defer></script>
+<script src="assets/js/site.js?v=83527603f0"></script>
+<script src="assets/js/careers.js?v=83527603f0" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -678,11 +679,23 @@
     A(en, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { delay: 1950, duration: 600, easing: OUT });
   }
 
+  /* play() measures the headline, so it must run with the page fonts in place (LINE Seed JP is wider than the
+     fallback): wait for the headline's font (at most ~1.2s, then play with whatever is there) */
+  function fontsIn() {
+    const f = document.fonts;
+    if (!f || !f.load) return Promise.resolve();
+    const cs = getComputedStyle(title);
+    const want = Promise.all([f.load(cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily, title.textContent), f.ready]);
+    return Promise.race([want, new Promise(r => setTimeout(r, 1200))]).catch(() => {});
+  }
   function start() {
     if (played) return;
     played = true;
-    if (!reduced()) { try { play(); drive(); } catch (err) { stop(); /* never leave the headline hidden */ } }
-    sec.classList.remove('rm-wait');
+    if (reduced()) { sec.classList.remove('rm-wait'); return; }
+    fontsIn().then(() => {
+      try { play(); drive(); } catch (err) { stop(); /* never leave the headline hidden */ }
+      sec.classList.remove('rm-wait');
+    });
   }
   /* portrait (phone) screens: careers.js stage 3, whose portrait layout keeps the 3D bubbles small in the top-right
      corner, clear of the headline, body and chips. Landscape: glass stage 0 (bubbles on the right, behind the photo). */
@@ -709,6 +722,7 @@
   #s-ceo .ceo-msg{font-size:14.5px;line-height:1.85;color:var(--fg);padding:clamp(18px,2.6vh,26px) clamp(20px,2.2vw,30px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
   #s-ceo .ceo-msg p{margin:0 0 .85em;break-inside:avoid}
   #s-ceo .ceo-msg p:last-child{margin-bottom:0;font-weight:700}
+  #s-ceo .ceo-msg .nw{white-space:nowrap} /* keeps the quoted words in one piece (phrase line breaks split them) */
   /* wide screens: the message in two text columns so it fits on one screen */
   @media (min-width:1100px){
     #s-ceo .ceo-txt{columns:2;column-gap:clamp(32px,3.4vw,48px);column-rule:1px solid var(--line)}
@@ -752,10 +766,10 @@
           <p data-rv style="--d:.46s">だけど——<br>商材も手法も、10年前と何も変わっていない。</p>
           <p data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
           <p data-rv style="--d:.6s">だから僕は、もう一度この業界に戻ることを決めました。</p>
-          <p data-rv style="--d:.67s">東京で扱われているSaaS商材を、北海道に"輸入"するような形で届けたい。</p>
+          <p data-rv style="--d:.67s">東京で扱われているSaaS商材を、北海道に<span class="nw">"輸入"</span>するような形で届けたい。</p>
           <p data-rv style="--d:.74s">フルリモートという新しい働き方を、経験のある人たちにもう一度手渡したい。</p>
           <p data-rv style="--d:.81s">環境のせいで挑戦をやめてしまった人に、「再スタートのきっかけ」を届けたい。</p>
-          <p data-rv style="--d:.88s">これが、僕が新しく立ち上げた"株式会社Insup"の原点です。</p>
+          <p data-rv style="--d:.88s">これが、僕が新しく立ち上げた<span class="nw">"株式会社Insup"</span>の原点です。</p>
         </div></div>
     </div>
   </div>
@@ -848,9 +862,17 @@
     #s-lounge .s-title{font-size:clamp(24px,6.6vw,32px)}
   }
   @media (max-width:640px){
-    #s-lounge .facts dd{font-size:13px}
-    #s-lounge .facts > div{padding:8px 11px}
+    #s-lounge .facts dd{font-size:13px;letter-spacing:-.01em}
+    #s-lounge .facts > div{padding:8px 9px}
     #s-lounge .txt{padding:20px 16px}
+  }
+  @media (max-width:375px){
+    #s-lounge .facts{gap:6px}
+    #s-lounge .facts > div{padding:8px 7px}
+    #s-lounge .facts dd{font-size:12px;letter-spacing:-.03em}
+  }
+  @media (max-width:340px){
+    #s-lounge .facts{grid-template-columns:minmax(0,1fr)}
   }
   @media (prefers-reduced-motion:reduce){
     #s-lounge .kb .t .img{animation:none;transform:scale(1.1)}
@@ -989,7 +1011,7 @@
   #s-apply .ap .ic svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   #s-apply .ap h3{font-size:19px;margin:0}
   #s-apply .ap .act{font-size:15px;font-weight:700;color:var(--accent);line-height:1.5}
-  #s-apply .ap .act.mail{font-family:var(--font-en);font-size:14px;font-weight:600;word-break:break-all}
+  #s-apply .ap .act.mail{font-family:var(--font-en);font-size:14px;font-weight:600;word-break:normal;overflow-wrap:anywhere}
   #s-apply .ap .arr{position:absolute;right:20px;top:22px;font:600 18px var(--font-en);color:var(--accent);opacity:.75;transition:transform .35s var(--ease)}
   #s-apply .ap:hover .arr{transform:translate(2px,-2px)}
   /* LINE = the main way: filled card */
@@ -1040,7 +1062,7 @@
       <a class="ap" href="mailto:insup2025sapporo@gmail.com" data-rv style="--d:.6s">
         <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="M4.5 7.5l7.5 5.5 7.5-5.5"/></svg></span>
         <h3>メール</h3>
-        <span class="act mail">insup2025sapporo@gmail.com</span>
+        <span class="act mail">insup2025sapporo<wbr>@gmail.com</span>
         <span class="arr" aria-hidden="true">→</span>
       </a>
     </div>
@@ -1053,7 +1075,7 @@
     <div class="ft-co">
       <a class="plate ft-plate" href="index.html" aria-label="株式会社Insup トップ（入口）へ"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></a>
       <p class="ft-name">株式会社Insup</p>
-      <address class="ft-addr">〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 サザンクロス札幌 9F<br>Email: <a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></address>
+      <address class="ft-addr">〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 <span class="nw">サザンクロス札幌 9F</span><br>Email: <a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></address>
     </div>
     <ul class="ft-sns">
       <li><a href="https://lin.ee/XIZn82k" target="_blank" rel="noopener">LINE</a></li>
