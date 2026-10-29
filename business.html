@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F6 「上質・落ち着き」 (client decision 2026-10-26) — headings Zen Old Mincho / body Zen Kaku Gothic New / Latin Cormorant Garamond -->
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=83527603f0">
+<link rel="stylesheet" href="assets/css/site.css?v=a02eb4da73">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=83527603f0"></script>
-<script src="assets/js/business.js?v=83527603f0" defer></script>
+<script src="assets/js/site.js?v=a02eb4da73"></script>
+<script src="assets/js/business.js?v=a02eb4da73" defer></script>
 </head>
 <body class="theme-dark page-business">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -36,7 +36,7 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (business/hero.html) ===== -->
 <style>
-  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=83527603f0 */
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=a02eb4da73 */
   #s-hero{align-items:stretch}
   #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
     background:radial-gradient(ellipse 62% 52% at 50% 50%,rgba(2,11,34,.58) 0%,rgba(2,11,34,.3) 55%,rgba(2,11,34,0) 100%)}
@@ -494,16 +494,20 @@
   #s-services .sv::before{content:"";position:absolute;z-index:3;left:22px;right:22px;top:0;height:3px;border-radius:0 0 3px 3px;
     background:linear-gradient(90deg,#1976f6,#4db3ff 55%,rgba(77,179,255,0));transform-origin:left center}
 
-  /* the scene: card background at the top, fading softly into the card body */
-  #s-services .sv-art{position:relative;z-index:0;flex:none;height:var(--art-h);overflow:hidden;pointer-events:none}
+  /* the scene: card background at the top, fading softly into the card body. The picture takes all the height the
+     text does not need (min --art-h): the tallest card (SERVICE 01) keeps the minimum, and in SERVICE 02/03 the scene
+     grows so their text block ends at the card bottom too (text is bottom-aligned in all three cards). */
+  #s-services .sv-art{position:relative;z-index:0;flex:1 0 var(--art-h);height:auto;min-height:var(--art-h);overflow:hidden;pointer-events:none}
   #s-services .sv-art img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:var(--pos,50% 30%);
     --fade:linear-gradient(180deg,#000 0%,#000 var(--f0,62%),rgba(0,0,0,.35) var(--f1,88%),transparent 100%);
     -webkit-mask-image:var(--fade);mask-image:var(--fade)}
   #s-services .sv-art.is{--pos:62% 26%}
-  #s-services .sv-art.bar{--pos:50% 14%;--f0:72%;--f1:92%}
-  #s-services .sv-art.mk{--pos:12% 40%}
-  /* the marketing crop has a thin dark smudge along its top-right edge: hide the top few px */
-  #s-services .sv-art.mk img{top:-9px;height:calc(100% + 9px)}
+  #s-services .sv-art.bar{--pos:62% 40%;--f0:72%;--f1:92%}
+  #s-services .sv-art.mk{--pos:8% 40%}
+  /* the marketing scene is very wide: when its card gives it a tall area, a full-height cover crop would show only a
+     slice (lettering or face cut). Cap the picture at a 620:453 window (lettering + the woman at her laptop) and let
+     its soft fade end where the title tab starts; on short/narrow areas it is a normal cover crop (max-height). */
+  #s-services .sv-art.mk img{bottom:auto;height:auto;aspect-ratio:620/453;max-height:100%}
 
   /* label + title on a white tab that rises into the picture */
   #s-services .sv-cap{position:relative;z-index:1;align-self:flex-start;max-width:calc(100% - 18px);margin-top:calc(-1 * var(--cap-ov));
@@ -512,7 +516,7 @@
   #s-services .sv .num{color:var(--sv-blue);margin-bottom:2px}
   #s-services .sv h3{font-size:clamp(17px,1.45vw,20px);margin:0;color:#0b2d6b}
 
-  #s-services .sv-body{position:relative;z-index:1;display:flex;flex-direction:column;flex:1 1 auto;padding:8px 22px 16px}
+  #s-services .sv-body{position:relative;z-index:1;display:flex;flex-direction:column;flex:0 0 auto;padding:8px 22px 16px}
   #s-services .sv .desc{font-size:13.5px;line-height:1.8;color:var(--sv-sub)}
   #s-services .sv ul{list-style:none;margin:10px 0 0;padding:10px 0 0;border-top:1px solid rgba(11,45,107,.14);display:grid;gap:5px}
   #s-services .sv li{position:relative;padding-left:22px;font-size:13.5px;line-height:1.6;font-weight:500;color:var(--sv-ink)}
@@ -546,6 +550,7 @@
     #s-services .sv.main{grid-column:1/-1}
     #s-services .sv.main{--art-h:clamp(170px,24vw,240px)}
     #s-services .sv-art.is{--pos:60% 24%}
+    #s-services .sv-art.bar{--pos:50% 14%} /* shorter picture here: keep the neon sign in view */
   }
   @media (max-width:640px){
     #s-services{--art-h:clamp(150px,48vw,210px);--cap-ov:44px}
@@ -642,7 +647,7 @@
       </article>
 
       <article class="card sv" data-rv style="--d:.48s">
-        <div class="sv-art mk" aria-hidden="true"><img src="assets/img/illust/svc-marketing.webp" alt="" width="1415" height="465" decoding="async"></div>
+        <div class="sv-art mk" aria-hidden="true"><img src="assets/img/illust/svc-marketing.webp" alt="" width="1415" height="453" decoding="async"></div>
         <div class="sv-cap">
           <span class="num">SERVICE 03</span>
           <h3>マーケティング支援</h3>
@@ -669,6 +674,10 @@
   #s-remote .en{display:block;font:600 clamp(11px,1vw,13px)/1.6 var(--font-en);letter-spacing:.18em;color:var(--sub)}
   #s-remote .body{font-size:clamp(15px,1.25vw,17px);line-height:1.95;color:var(--sub);margin:14px 0 0;max-width:34em}
   #s-remote .pts{margin-top:20px}
+
+  /* photo: the entrance page's reception photo, shown as a plain still (no motion, no light effects) */
+  #s-remote .rm-pic{position:relative;margin:0;width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);border:1px solid var(--card-line);background:#14306a}
+  #s-remote .rm-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 50%;display:block}
 
   /* headline pieces */
   #s-remote .copy .ln{display:block}
@@ -721,7 +730,8 @@
 
   @media (max-width:900px){
     #s-remote .rm-grid{grid-template-columns:minmax(0,1fr);gap:28px}
-    #s-remote .ph{aspect-ratio:16/9}
+    #s-remote .rm-pic{aspect-ratio:16/9}
+    #s-remote .rm-pic img{object-position:42% 50%}
   }
   @media (max-width:640px){
     #s-remote .copy{font-size:clamp(26px,7.4vw,32px)}
@@ -737,7 +747,7 @@
         <p class="body fol">1,500名を超える登録アポインターの中から、厳選された即戦力人材をご提供。最短即日で稼働開始が可能です。</p>
         <div class="pts fol"><span><b>INITIAL COST</b>初期費用 無料</span><span><b>START</b>最短稼働 即日〜</span><span><b>TRIAL</b>お試し期間 1ヶ月〜</span></div>
       </div>
-      <div class="ph" data-rv style="--d:.4s">写真入る<small>オフィスの雰囲気</small></div>
+      <figure class="rm-pic"><img src="assets/img/reception.jpg" alt="Insupの受付" width="2400" height="1174" decoding="async"></figure>
     </div>
   </div>
 </section>
@@ -866,12 +876,14 @@
 <!-- ===== slide s-ceo (shared/ceo.html) ===== -->
 <!-- shared: 代表挨拶 (business #8 / careers #8) — full text from the current about page, every line in order -->
 <style>
-  #s-ceo .ceo{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,1fr);grid-template-areas:"fig head" "fig msg";column-gap:clamp(28px,4.4vw,64px);align-items:center;align-content:center}
+  /* desktop: the photo frame sits beside the message panel and is exactly as tall as it (top and bottom aligned);
+     the name plate lives inside the bottom of the frame so it never breaks that alignment */
+  #s-ceo .ceo{display:grid;grid-template-columns:clamp(230px,20vw,340px) minmax(0,1fr);grid-template-areas:". head" "fig msg";column-gap:clamp(28px,4vw,60px);align-items:stretch;align-content:center}
   #s-ceo .ceo-head{grid-area:head;align-self:end}
-  #s-ceo .ceo-msg{grid-area:msg;align-self:start}
-  #s-ceo .ceo-fig{grid-area:fig;margin:0}
-  #s-ceo .ceo-fig .ph{aspect-ratio:3/4}
-  #s-ceo .ceo-name{display:flex;align-items:baseline;gap:12px;margin-top:14px;padding-left:2px}
+  #s-ceo .ceo-msg{grid-area:msg}
+  #s-ceo .ceo-fig{grid-area:fig;margin:0;position:relative;display:flex;min-height:0}
+  #s-ceo .ceo-fig .ph{aspect-ratio:auto;height:100%;min-height:300px;padding-bottom:72px}
+  #s-ceo .ceo-name{position:absolute;left:2px;right:2px;bottom:2px;display:flex;align-items:baseline;justify-content:center;gap:12px;margin:0;padding:16px 12px 22px}
   #s-ceo .ceo-name span{font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.12em}
   #s-ceo .ceo-name b{font-size:22px;font-weight:900;letter-spacing:.14em;color:var(--heading)}
   #s-ceo .s-title{font-size:clamp(26px,2.9vw,40px);margin-bottom:clamp(12px,2vh,20px)}
@@ -882,6 +894,8 @@
   /* wide screens: the message in two text columns so it fits on one screen */
   @media (min-width:1100px){
     #s-ceo .ceo-txt{columns:2;column-gap:clamp(32px,3.4vw,48px);column-rule:1px solid var(--line)}
+    /* the one long paragraph may continue in the next column, so both columns end at about the same height */
+    #s-ceo .ceo-txt p.split{break-inside:auto;orphans:2;widows:2}
   }
   @media (min-width:1100px) and (max-height:800px){
     #s-ceo .ceo-msg{font-size:14px;line-height:1.75}
@@ -897,15 +911,15 @@
       -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%)}
   }
   @media (max-width:900px){
-    #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0}
+    #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0;align-items:start}
     #s-ceo .ceo-fig{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:end;gap:16px;margin-bottom:22px}
-    #s-ceo .ceo-fig .ph{font-size:13px;border-radius:14px}
-    #s-ceo .ceo-name{margin:0 0 4px;flex-direction:column;gap:2px}
+    #s-ceo .ceo-fig .ph{aspect-ratio:3/4;height:auto;min-height:0;padding:12px;font-size:13px;border-radius:14px}
+    #s-ceo .ceo-name{position:static;margin:0 0 4px;padding:0 0 0 2px;flex-direction:column;align-items:flex-start;gap:2px}
     #s-ceo .ceo-msg{font-size:15px;line-height:1.95;padding:18px 18px}
   }
 </style>
 <section class="slide" id="s-ceo" data-title="代表挨拶">
-  <div class="s-inner">
+  <div class="s-inner wide">
     <div class="ceo">
       <figure class="ceo-fig" data-rv style="--d:.15s">
         <div class="ph">写真入る<small>代表写真</small></div>
@@ -920,7 +934,7 @@
           <p data-rv style="--d:.32s">でも、月日が経つにつれて<br>"嘘をつかないと契約が取れない"<br>そんな現実に嫌気がさして、<br>一度はこの業界を離れました。</p>
           <p data-rv style="--d:.39s">それでも、僕の地元・北海道には今も同じような環境で頑張っている営業マンがたくさんいます。</p>
           <p data-rv style="--d:.46s">だけど——<br>商材も手法も、10年前と何も変わっていない。</p>
-          <p data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
+          <p class="split" data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
           <p data-rv style="--d:.6s">だから僕は、もう一度この業界に戻ることを決めました。</p>
           <p data-rv style="--d:.67s">東京で扱われているSaaS商材を、北海道に<span class="nw">"輸入"</span>するような形で届けたい。</p>
           <p data-rv style="--d:.74s">フルリモートという新しい働き方を、経験のある人たちにもう一度手渡したい。</p>

@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=83527603f0">
+<link rel="stylesheet" href="assets/css/site.css?v=a02eb4da73">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=83527603f0"></script>
-<script src="assets/js/careers.js?v=83527603f0" defer></script>
+<script src="assets/js/site.js?v=a02eb4da73"></script>
+<script src="assets/js/careers.js?v=a02eb4da73" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -710,12 +710,14 @@
 <!-- ===== slide s-ceo (shared/ceo.html) ===== -->
 <!-- shared: 代表挨拶 (business #8 / careers #8) — full text from the current about page, every line in order -->
 <style>
-  #s-ceo .ceo{display:grid;grid-template-columns:minmax(200px,250px) minmax(0,1fr);grid-template-areas:"fig head" "fig msg";column-gap:clamp(28px,4.4vw,64px);align-items:center;align-content:center}
+  /* desktop: the photo frame sits beside the message panel and is exactly as tall as it (top and bottom aligned);
+     the name plate lives inside the bottom of the frame so it never breaks that alignment */
+  #s-ceo .ceo{display:grid;grid-template-columns:clamp(230px,20vw,340px) minmax(0,1fr);grid-template-areas:". head" "fig msg";column-gap:clamp(28px,4vw,60px);align-items:stretch;align-content:center}
   #s-ceo .ceo-head{grid-area:head;align-self:end}
-  #s-ceo .ceo-msg{grid-area:msg;align-self:start}
-  #s-ceo .ceo-fig{grid-area:fig;margin:0}
-  #s-ceo .ceo-fig .ph{aspect-ratio:3/4}
-  #s-ceo .ceo-name{display:flex;align-items:baseline;gap:12px;margin-top:14px;padding-left:2px}
+  #s-ceo .ceo-msg{grid-area:msg}
+  #s-ceo .ceo-fig{grid-area:fig;margin:0;position:relative;display:flex;min-height:0}
+  #s-ceo .ceo-fig .ph{aspect-ratio:auto;height:100%;min-height:300px;padding-bottom:72px}
+  #s-ceo .ceo-name{position:absolute;left:2px;right:2px;bottom:2px;display:flex;align-items:baseline;justify-content:center;gap:12px;margin:0;padding:16px 12px 22px}
   #s-ceo .ceo-name span{font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.12em}
   #s-ceo .ceo-name b{font-size:22px;font-weight:900;letter-spacing:.14em;color:var(--heading)}
   #s-ceo .s-title{font-size:clamp(26px,2.9vw,40px);margin-bottom:clamp(12px,2vh,20px)}
@@ -726,6 +728,8 @@
   /* wide screens: the message in two text columns so it fits on one screen */
   @media (min-width:1100px){
     #s-ceo .ceo-txt{columns:2;column-gap:clamp(32px,3.4vw,48px);column-rule:1px solid var(--line)}
+    /* the one long paragraph may continue in the next column, so both columns end at about the same height */
+    #s-ceo .ceo-txt p.split{break-inside:auto;orphans:2;widows:2}
   }
   @media (min-width:1100px) and (max-height:800px){
     #s-ceo .ceo-msg{font-size:14px;line-height:1.75}
@@ -741,15 +745,15 @@
       -webkit-mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 calc(100% - 56px),transparent 100%)}
   }
   @media (max-width:900px){
-    #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0}
+    #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0;align-items:start}
     #s-ceo .ceo-fig{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:end;gap:16px;margin-bottom:22px}
-    #s-ceo .ceo-fig .ph{font-size:13px;border-radius:14px}
-    #s-ceo .ceo-name{margin:0 0 4px;flex-direction:column;gap:2px}
+    #s-ceo .ceo-fig .ph{aspect-ratio:3/4;height:auto;min-height:0;padding:12px;font-size:13px;border-radius:14px}
+    #s-ceo .ceo-name{position:static;margin:0 0 4px;padding:0 0 0 2px;flex-direction:column;align-items:flex-start;gap:2px}
     #s-ceo .ceo-msg{font-size:15px;line-height:1.95;padding:18px 18px}
   }
 </style>
 <section class="slide" id="s-ceo" data-title="代表挨拶">
-  <div class="s-inner">
+  <div class="s-inner wide">
     <div class="ceo">
       <figure class="ceo-fig" data-rv style="--d:.15s">
         <div class="ph">写真入る<small>代表写真</small></div>
@@ -764,7 +768,7 @@
           <p data-rv style="--d:.32s">でも、月日が経つにつれて<br>"嘘をつかないと契約が取れない"<br>そんな現実に嫌気がさして、<br>一度はこの業界を離れました。</p>
           <p data-rv style="--d:.39s">それでも、僕の地元・北海道には今も同じような環境で頑張っている営業マンがたくさんいます。</p>
           <p data-rv style="--d:.46s">だけど——<br>商材も手法も、10年前と何も変わっていない。</p>
-          <p data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
+          <p class="split" data-rv style="--d:.53s">特に、子育て中のママや、冬場に街中まで通うのが大変な地方の営業職の方たち。<br>本当は優秀なのに、「環境のせいでチャンスを諦めている」人が多いんです。</p>
           <p data-rv style="--d:.6s">だから僕は、もう一度この業界に戻ることを決めました。</p>
           <p data-rv style="--d:.67s">東京で扱われているSaaS商材を、北海道に<span class="nw">"輸入"</span>するような形で届けたい。</p>
           <p data-rv style="--d:.74s">フルリモートという新しい働き方を、経験のある人たちにもう一度手渡したい。</p>
