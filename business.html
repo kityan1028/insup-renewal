@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F6 「上質・落ち着き」 (client decision 2026-10-26) — headings Zen Old Mincho / body Zen Kaku Gothic New / Latin Cormorant Garamond -->
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=1e0bd44e14">
+<link rel="stylesheet" href="assets/css/site.css?v=99a9f74503">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=1e0bd44e14"></script>
-<script src="assets/js/business.js?v=1e0bd44e14" defer></script>
+<script src="assets/js/site.js?v=99a9f74503"></script>
+<script src="assets/js/business.js?v=99a9f74503" defer></script>
 </head>
 <body class="theme-dark page-business">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -36,7 +36,7 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (business/hero.html) ===== -->
 <style>
-  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=1e0bd44e14 */
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=99a9f74503 */
   #s-hero{align-items:stretch}
   #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
     background:radial-gradient(ellipse 62% 52% at 50% 50%,rgba(2,11,34,.58) 0%,rgba(2,11,34,.3) 55%,rgba(2,11,34,0) 100%)}
@@ -1258,7 +1258,7 @@
 <!-- ===== slide s-access (shared/access.html) ===== -->
 <!-- shared: アクセス (business #12 / careers #10) — new address, stations, map button, building photo -->
 <style>
-  #s-access .ac{--ac-h:clamp(380px,calc(100svh - 236px),600px);display:grid;grid-template-columns:minmax(0,4.5fr) minmax(0,2.7fr) minmax(0,5fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
+  #s-access .ac{--ac-h:clamp(380px,calc(100svh - 236px),600px);display:grid;grid-template-columns:minmax(0,4.4fr) minmax(0,4.3fr) minmax(0,2.9fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
   #s-access .ac-pic,#s-access .ac-map{position:relative;margin:0;min-height:var(--ac-h);border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-line);box-shadow:var(--card-shadow)}
   #s-access .ac-pic{background:#14306a}
   #s-access .ac-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform-origin:50% 70%}
@@ -1286,15 +1286,15 @@
 
   /* tablet: text on top, photo + map side by side */
   @media (max-width:900px){
-    #s-access .ac{--ac-h:clamp(280px,44vw,380px);grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:18px}
+    #s-access .ac{--ac-h:clamp(360px,62vw,520px);grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:18px}
     #s-access .ac-txt{grid-column:1/-1}
     #s-access .ac-pic img{object-position:50% 30%}
   }
   /* phone: photo, text, map, one under the other */
   @media (max-width:640px){
     #s-access .ac{grid-template-columns:minmax(0,1fr);gap:16px}
-    #s-access .ac-pic{order:-1;min-height:clamp(200px,56vw,300px)}
-    #s-access .ac-map{min-height:clamp(300px,84vw,420px)}
+    #s-access .ac-pic{order:-1;min-height:0;aspect-ratio:4/5}
+    #s-access .ac-map{min-height:clamp(220px,60vw,300px)}
     #s-access .ac-txt{padding:20px 18px}
     #s-access .btns .btn{width:100%}
   }
