@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F6 「上質・落ち着き」 (client decision 2026-10-26) — headings Zen Old Mincho / body Zen Kaku Gothic New / Latin Cormorant Garamond -->
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=a02eb4da73">
+<link rel="stylesheet" href="assets/css/site.css?v=1e0bd44e14">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=a02eb4da73"></script>
-<script src="assets/js/business.js?v=a02eb4da73" defer></script>
+<script src="assets/js/site.js?v=1e0bd44e14"></script>
+<script src="assets/js/business.js?v=1e0bd44e14" defer></script>
 </head>
 <body class="theme-dark page-business">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -36,14 +36,14 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (business/hero.html) ===== -->
 <style>
-  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=a02eb4da73 */
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=1e0bd44e14 */
   #s-hero{align-items:stretch}
   #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
     background:radial-gradient(ellipse 62% 52% at 50% 50%,rgba(2,11,34,.58) 0%,rgba(2,11,34,.3) 55%,rgba(2,11,34,0) 100%)}
   /* text block centred horizontally (same height as before) */
-  #s-hero .hero-copy{position:relative;max-width:900px;margin:0 auto;text-align:center}
+  #s-hero .hero-copy{position:relative;max-width:1000px;margin:0 auto;text-align:center}
   #s-hero .hero-copy .eyebrow{padding-left:.35em} /* balance the trailing letter-spacing so it sits truly centred */
-  #s-hero .hero-h{font-size:clamp(30px,4.5vw,64px);font-weight:900;line-height:1.36;letter-spacing:.02em;margin:4px 0 14px;word-break:keep-all}
+  #s-hero .hero-h{font-family:var(--font-ja);font-size:clamp(30px,4.5vw,64px);font-weight:900;line-height:1.36;letter-spacing:.02em;margin:4px 0 14px;word-break:keep-all}
   #s-hero .hero-h em{font-style:normal;background:linear-gradient(90deg,#9fdcff,#4db3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
   #s-hero .hero-sub{font-size:clamp(15px,1.45vw,20px);font-weight:500;color:var(--fg);opacity:.9;letter-spacing:.04em}
   #s-hero .btns{margin-top:30px;justify-content:center}
@@ -876,10 +876,11 @@
 <!-- ===== slide s-ceo (shared/ceo.html) ===== -->
 <!-- shared: 代表挨拶 (business #8 / careers #8) — full text from the current about page, every line in order -->
 <style>
-  /* desktop: the photo frame sits beside the message panel and is exactly as tall as it (top and bottom aligned);
+  /* desktop: the heading sits directly above the photo frame, left-aligned with its left edge; below it the photo frame
+     sits beside the message panel and is exactly as tall as it (top and bottom aligned);
      the name plate lives inside the bottom of the frame so it never breaks that alignment */
-  #s-ceo .ceo{display:grid;grid-template-columns:clamp(230px,20vw,340px) minmax(0,1fr);grid-template-areas:". head" "fig msg";column-gap:clamp(28px,4vw,60px);align-items:stretch;align-content:center}
-  #s-ceo .ceo-head{grid-area:head;align-self:end}
+  #s-ceo .ceo{display:grid;grid-template-columns:clamp(230px,20vw,340px) minmax(0,1fr);grid-template-areas:"head head" "fig msg";column-gap:clamp(28px,4vw,60px);align-items:stretch;align-content:center}
+  #s-ceo .ceo-head{grid-area:head}
   #s-ceo .ceo-msg{grid-area:msg}
   #s-ceo .ceo-fig{grid-area:fig;margin:0;position:relative;display:flex;min-height:0}
   #s-ceo .ceo-fig .ph{aspect-ratio:auto;height:100%;min-height:300px;padding-bottom:72px}
@@ -921,14 +922,14 @@
 <section class="slide" id="s-ceo" data-title="代表挨拶">
   <div class="s-inner wide">
     <div class="ceo">
-      <figure class="ceo-fig" data-rv style="--d:.15s">
-        <div class="ph">写真入る<small>代表写真</small></div>
-        <figcaption class="ceo-name"><span>代表</span><b>佐藤 光</b></figcaption>
-      </figure>
       <div class="ceo-head">
         <span class="eyebrow" data-rv>MESSAGE</span>
         <h2 class="s-title" data-rv style="--d:.08s">代表挨拶</h2>
       </div>
+      <figure class="ceo-fig" data-rv style="--d:.15s">
+        <div class="ph">写真入る<small>代表写真</small></div>
+        <figcaption class="ceo-name"><span>代表</span><b>佐藤 光</b></figcaption>
+      </figure>
         <div class="ceo-msg"><div class="ceo-txt">
           <p data-rv style="--d:.25s">11年前、通信商材を扱う会社で社内1位を取って、当時はただ「数字を追うこと」が全てだと思っていた。</p>
           <p data-rv style="--d:.32s">でも、月日が経つにつれて<br>"嘘をつかないと契約が取れない"<br>そんな現実に嫌気がさして、<br>一度はこの業界を離れました。</p>
@@ -1257,8 +1258,9 @@
 <!-- ===== slide s-access (shared/access.html) ===== -->
 <!-- shared: アクセス (business #12 / careers #10) — new address, stations, map button, building photo -->
 <style>
-  #s-access .ac{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,4.6vw,68px);align-items:center}
-  #s-access .ac-pic{position:relative;margin:0;height:clamp(320px,62vh,560px);border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);background:#14306a}
+  #s-access .ac{--ac-h:clamp(380px,calc(100svh - 236px),600px);display:grid;grid-template-columns:minmax(0,4.5fr) minmax(0,2.7fr) minmax(0,5fr);gap:clamp(14px,1.6vw,22px);align-items:stretch}
+  #s-access .ac-pic,#s-access .ac-map{position:relative;margin:0;min-height:var(--ac-h);border-radius:var(--radius);overflow:hidden;border:1px solid var(--card-line);box-shadow:var(--card-shadow)}
+  #s-access .ac-pic{background:#14306a}
   #s-access .ac-pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%;transform-origin:50% 70%}
   #s-access .ac-pic::after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(180deg,rgba(6,24,61,0),rgba(6,24,61,.55));pointer-events:none}
   #s-access .ac-pic figcaption{position:absolute;left:16px;bottom:14px;z-index:1;color:#fff;font-size:13px;font-weight:700;letter-spacing:.06em;text-shadow:0 1px 8px rgba(0,0,0,.4)}
@@ -1266,38 +1268,40 @@
   #s-access.ac-go .ac-pic img{animation:access-settle 2.8s var(--ease) both}
   @keyframes access-settle{from{transform:scale(1.1)}to{transform:scale(1)}}
 
-  #s-access .ac-txt{padding:clamp(22px,3.4vh,36px) clamp(22px,2.6vw,40px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-access .ac-map{background:var(--card-bg-strong)}
+  #s-access .ac-map iframe{position:absolute;inset:0;display:block;width:100%;height:100%;border:0}
+
+  #s-access .ac-txt{display:flex;flex-direction:column;justify-content:center;padding:clamp(20px,3vh,32px) clamp(20px,2vw,30px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
   #s-access .s-title{margin-bottom:clamp(14px,2.4vh,22px)}
-  #s-access .ac-addr{font-style:normal;font-size:clamp(15px,1.3vw,17px);line-height:1.85;color:var(--fg)}
+  #s-access .ac-addr{font-style:normal;font-size:clamp(14.5px,1.2vw,16px);line-height:1.85;color:var(--fg)}
   #s-access .ac-addr .zip{font-family:var(--font-en);font-weight:600;color:var(--sub)}
   #s-access .ac-addr .bld{display:inline-block;margin-top:2px;font-weight:900;font-size:1.22em;letter-spacing:.04em;color:var(--heading)}
-  #s-access .ac-st{list-style:none;margin:clamp(16px,2.8vh,24px) 0 0;padding:0;display:grid;gap:10px;max-width:460px}
-  #s-access .ac-st li{display:flex;align-items:center;gap:12px;padding:10px 16px;border-radius:12px;background:var(--chip-bg);border:1px solid var(--chip-line);font-size:clamp(14.5px,1.2vw,16px);font-weight:700;color:var(--fg)}
+  #s-access .ac-st{list-style:none;margin:clamp(16px,2.8vh,24px) 0 0;padding:0;display:grid;gap:10px}
+  #s-access .ac-st li{display:flex;align-items:center;gap:10px;padding:9px 13px;border-radius:12px;background:var(--chip-bg);border:1px solid var(--chip-line);font-size:clamp(14px,1.15vw,15.5px);font-weight:700;color:var(--fg)}
   #s-access .ac-st .ln{flex:0 0 auto;font-size:11.5px;font-weight:700;line-height:1.6;padding:2px 9px;border-radius:6px;background:var(--blue);color:#fff}
   #s-access .ac-st .min{margin-left:auto;white-space:nowrap;font-size:13px;color:var(--sub)}
   #s-access .ac-st .min b{font:800 clamp(20px,1.8vw,24px)/1 var(--font-en);color:var(--accent-2);margin:0 2px 0 6px}
   body.theme-light #s-access .ac-st .min b{color:var(--accent)}
   #s-access .btns{margin-top:clamp(18px,3vh,28px)}
 
+  /* tablet: text on top, photo + map side by side */
   @media (max-width:900px){
-    #s-access .ac{grid-template-columns:minmax(0,1fr);gap:22px}
-    #s-access .ac-pic{height:clamp(220px,62vw,340px)}
+    #s-access .ac{--ac-h:clamp(280px,44vw,380px);grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:18px}
+    #s-access .ac-txt{grid-column:1/-1}
     #s-access .ac-pic img{object-position:50% 30%}
-    #s-access .ac-st{max-width:none}
   }
+  /* phone: photo, text, map, one under the other */
   @media (max-width:640px){
+    #s-access .ac{grid-template-columns:minmax(0,1fr);gap:16px}
+    #s-access .ac-pic{order:-1;min-height:clamp(200px,56vw,300px)}
+    #s-access .ac-map{min-height:clamp(300px,84vw,420px)}
     #s-access .ac-txt{padding:20px 18px}
-    #s-access .ac-st li{padding:9px 13px;gap:10px}
     #s-access .btns .btn{width:100%}
   }
 </style>
 <section class="slide" id="s-access" data-title="アクセス">
-  <div class="s-inner">
+  <div class="s-inner wide">
     <div class="ac">
-      <figure class="ac-pic" data-rv>
-        <img src="assets/img/building.jpg" alt="サザンクロス札幌の外観" width="853" height="1280" decoding="async">
-        <figcaption>サザンクロス札幌</figcaption>
-      </figure>
       <div class="ac-txt">
         <span class="eyebrow" data-rv style="--d:.1s">ACCESS</span>
         <h2 class="s-title" data-rv style="--d:.18s">アクセス</h2>
@@ -1307,6 +1311,13 @@
           <li data-rv style="--d:.5s"><span class="ln">地下鉄</span>大通駅<span class="min">徒歩<b>5</b>分</span></li>
         </ul>
         <div class="btns" data-rv style="--d:.62s"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%82%B6%E3%83%B3%E3%82%AF%E3%83%AD%E3%82%B9%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">Googleマップで見る <span class="arr" aria-hidden="true">↗</span></a></div>
+      </div>
+      <figure class="ac-pic" data-rv>
+        <img src="assets/img/building.jpg" alt="サザンクロス札幌の外観" width="853" height="1280" decoding="async">
+        <figcaption>サザンクロス札幌</figcaption>
+      </figure>
+      <div class="ac-map" data-rv style="--d:.2s">
+        <iframe src="https://www.google.com/maps?q=43.0570549,141.35437&amp;z=17&amp;hl=ja&amp;output=embed" title="サザンクロス札幌の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -1339,9 +1350,10 @@
     background:radial-gradient(120% 80% at 0% 0%,rgba(117,242,255,.16),transparent 60%);transition:opacity .4s ease}
   #s-contact .mt:hover::after,#s-contact .mt:focus-visible::after{opacity:1}
   #s-contact .mt .top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-  #s-contact .mt .ic{flex:0 0 42px;width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,#1976f6,#4db3ff);color:#fff;box-shadow:0 6px 16px rgba(25,118,246,.35)}
-  #s-contact .mt .ic svg{width:22px;height:22px}
+  /* app-icon tiles: each svg draws its own rounded tile (same art as careers #s-apply) */
+  #s-contact .mt .ic{flex:0 0 50px;width:50px;height:50px;border-radius:22.5%;display:block;
+    box-shadow:0 6px 16px rgba(2,8,28,.45),0 0 0 1px rgba(255,255,255,.1)}
+  #s-contact .mt .ic svg{display:block;width:100%;height:100%}
   #s-contact .mt h3{font-size:17px;margin:0}
   #s-contact .mt p{font-size:13.5px;line-height:1.75;color:var(--sub);flex:1}
   #s-contact .mt p .nw{white-space:nowrap} /* keeps 「お問い合わせ」 in one piece (phrase line breaks split it) */
@@ -1361,6 +1373,7 @@
   @media (max-width:640px){
     #s-contact .cm{grid-template-columns:minmax(0,1fr);gap:12px}
     #s-contact .mt{padding:18px 18px 16px}
+    #s-contact .mt .ic{flex-basis:48px;width:48px;height:48px}
     #s-contact .kp{gap:8px}
     #s-contact .kp li{padding:10px 4px}
   }
@@ -1383,22 +1396,22 @@
       <div class="cm">
         <p class="cm-hd" data-rv style="--d:.26s"><b>お問い合わせ方法</b>サービスに関するご質問やご相談など、お気軽にお問い合わせください。</p>
         <a class="card mt line" href="https://lin.ee/XIZn82k" target="_blank" rel="noopener" data-rv style="--d:.3s">
-          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5c0 4.1-4 7.5-9 7.5-1 0-2-.1-2.9-.4L5 20.5l1.1-3.6C4.2 15.5 3 13.6 3 11.5 3 7.4 7 4 12 4s9 3.4 9 7.5z"/></svg></span><h3>公式LINE</h3></div>
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 60 60"><rect width="60" height="60" rx="13.5" fill="#06C755"/><path transform="translate(7 6.5) scale(1.92)" fill="#fff" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></span><h3>公式LINE</h3></div>
           <p>LINEからお気軽に<span class="nw">お問い合わせいただけます。</span></p>
           <span class="go">LINEで問い合わせ<span class="arr" aria-hidden="true">↗</span></span>
         </a>
         <a class="card mt" href="https://www.instagram.com/insup_official/" target="_blank" rel="noopener" data-rv style="--d:.4s">
-          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></span><h3>Instagram</h3></div>
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 60 60"><defs><radialGradient id="ct-ig" gradientUnits="userSpaceOnUse" cx="18" cy="64.2" r="76.7"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285aeb"/></radialGradient></defs><rect width="60" height="60" rx="13.5" fill="url(#ct-ig)"/><path transform="translate(11.4 11.4) scale(1.55)" fill="#fff" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span><h3>Instagram</h3></div>
           <p>InstagramのDMでもお問い合わせを受け付けています。</p>
           <span class="go"><span class="en">@insup_official</span><span class="arr" aria-hidden="true">↗</span></span>
         </a>
         <a class="card mt" href="https://www.tiktok.com/@insup2025" target="_blank" rel="noopener" data-rv style="--d:.5s">
-          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.6"/></svg></span><h3>TikTok</h3></div>
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 60 60"><defs><path id="ct-tt" transform="translate(13.3 13.2) scale(1.4)" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></defs><rect width="60" height="60" rx="13.5" fill="#000"/><use href="#ct-tt" x="-1.6" y="-1.6" fill="#25F4EE"/><use href="#ct-tt" x="1.6" y="1.6" fill="#FE2C55"/><use href="#ct-tt" fill="#fff"/></svg></span><h3>TikTok</h3></div>
           <p>TikTokでもお問い合わせを受け付けています。</p>
           <span class="go"><span class="en">@insup2025</span><span class="arr" aria-hidden="true">↗</span></span>
         </a>
         <a class="card mt" href="mailto:insup2025sapporo@gmail.com" data-rv style="--d:.6s">
-          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span><h3>メール</h3></div>
+          <div class="top"><span class="ic" aria-hidden="true"><svg viewBox="0 0 60 60"><defs><linearGradient id="ct-ml" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fc3ff"/><stop offset="1" stop-color="#1463ee"/></linearGradient></defs><rect width="60" height="60" rx="13.5" fill="url(#ct-ml)"/><rect x="10.5" y="16.5" width="39" height="27" rx="4.5" fill="#fff"/><path d="M12 19l18 14 18-14" fill="none" stroke="#1f7af2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>メール</h3></div>
           <p>メールでのお問い合わせも受け付けています。</p>
           <span class="go"><span class="en mail">insup2025sapporo<wbr>@gmail.com</span><span class="arr" aria-hidden="true">→</span></span>
         </a>
