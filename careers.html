@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=f0660d722c">
+<link rel="stylesheet" href="assets/css/site.css?v=064670fb19">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=f0660d722c"></script>
-<script src="assets/js/careers.js?v=f0660d722c" defer></script>
+<script src="assets/js/site.js?v=064670fb19"></script>
+<script src="assets/js/careers.js?v=064670fb19" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -596,7 +596,7 @@
 <style>
   /* careers「フルリモート」— headline W1, motion W1-4 (ported from v5parts/w1.html) with the big
      centered emphasis on the whole phrase「通勤ゼロ」. Everything scoped to #s-remote. */
-  #s-remote .rm-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
+  #s-remote .rm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,56px);align-items:center}
   #s-remote .rm-copy{position:relative;z-index:2;min-width:0}
   #s-remote .rm-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(28px,3.7vw,52px);font-weight:900;line-height:1.32;
     letter-spacing:.02em;color:var(--heading);margin:4px 0 10px}
@@ -607,15 +607,16 @@
   #s-remote .rm-en{font:600 clamp(11px,1vw,13px)/1.6 var(--font-en);letter-spacing:.18em;color:var(--sub)}
   #s-remote .rm-body{font-size:clamp(15px,1.25vw,17px);line-height:1.9;color:var(--sub);margin:18px 0 0;max-width:30em}
   #s-remote .pts > span{background:var(--card-bg-strong)}
-  /* near-opaque so the 3D bubbles behind it do not show through as a blurry blob */
-  #s-remote .rm-ph{background:linear-gradient(var(--ph-bg),var(--ph-bg)),rgba(255,255,255,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  /* group photo: 4:3 like the source, so nobody is cut off */
+  #s-remote .rm-pic{position:relative;margin:0;width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);border:1px solid var(--card-line);background:#dfe9f6}
+  #s-remote .rm-pic img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
   /* before the first entrance the headline waits hidden (only while JS runs) */
   html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:0}
   /* glided past during a long jump (never entered): show the final headline instead of a blank area */
   html.js #s-remote.rm-wait.is-passed .rm-title,html.js #s-remote.rm-wait.is-passed .rm-en{opacity:1;transition:none}
   @media (max-width:900px){
     #s-remote .rm-grid{grid-template-columns:minmax(0,1fr);gap:26px}
-    #s-remote .rm-ph{aspect-ratio:16/9;max-width:560px}
+    #s-remote .rm-pic{max-width:560px}
   }
   @media (max-width:640px){
     #s-remote .rm-body{margin-top:14px}
@@ -636,7 +637,7 @@
         <p class="rm-body" data-rv style="--d:1.55s">在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。</p>
         <div class="pts" data-rv style="--d:1.75s"><span><b>REMOTE</b>在宅ワーク可能</span><span><b>DAYS</b>週2日〜OK</span><span><b>PAY</b>時給 1,500円〜3,000円</span></div>
       </div>
-      <div class="ph rm-ph" data-rv style="--d:1.45s">写真入る<small>オフィスの雰囲気</small></div>
+      <figure class="rm-pic" data-rv style="--d:1.45s"><img src="assets/img/team.webp" alt="メンバーの集合写真" width="1446" height="1087" decoding="async"></figure>
     </div>
   </div>
 </section>
