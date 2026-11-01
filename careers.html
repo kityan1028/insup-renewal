@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=99a9f74503">
+<link rel="stylesheet" href="assets/css/site.css?v=f68dbff775">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=99a9f74503"></script>
-<script src="assets/js/careers.js?v=99a9f74503" defer></script>
+<script src="assets/js/site.js?v=f68dbff775"></script>
+<script src="assets/js/careers.js?v=f68dbff775" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -717,10 +717,13 @@
   #s-ceo .ceo-head{grid-area:head}
   #s-ceo .ceo-msg{grid-area:msg}
   #s-ceo .ceo-fig{grid-area:fig;margin:0;position:relative;display:flex;min-height:0}
-  #s-ceo .ceo-fig .ph{aspect-ratio:auto;height:100%;min-height:300px;padding-bottom:72px}
-  #s-ceo .ceo-name{position:absolute;left:2px;right:2px;bottom:2px;display:flex;align-items:baseline;justify-content:center;gap:12px;margin:0;padding:16px 12px 22px}
-  #s-ceo .ceo-name span{font-size:13px;font-weight:700;color:var(--sub);letter-spacing:.12em}
-  #s-ceo .ceo-name b{font-size:22px;font-weight:900;letter-spacing:.14em;color:var(--heading)}
+  #s-ceo .ceo-photo{position:relative;flex:1;width:100%;height:100%;min-height:300px;overflow:hidden;border-radius:var(--radius);border:1px solid var(--card-line);box-shadow:var(--card-shadow);background:#e8eaed}
+  #s-ceo .ceo-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 10%}
+  /* soft dark band at the bottom of the photo so the name stays readable on both themes */
+  #s-ceo .ceo-photo::after{content:"";position:absolute;inset:auto 0 0 0;height:34%;background:linear-gradient(180deg,rgba(6,24,61,0),rgba(6,24,61,.78));pointer-events:none}
+  #s-ceo .ceo-name{position:absolute;left:2px;right:2px;bottom:2px;z-index:1;display:flex;align-items:baseline;justify-content:center;gap:12px;margin:0;padding:16px 12px 20px}
+  #s-ceo .ceo-name span{font-size:13px;font-weight:700;color:rgba(255,255,255,.88);letter-spacing:.12em}
+  #s-ceo .ceo-name b{font-size:22px;font-weight:900;letter-spacing:.14em;color:#fff;text-shadow:0 1px 8px rgba(6,24,61,.5)}
   #s-ceo .s-title{font-size:clamp(26px,2.9vw,40px);margin-bottom:clamp(12px,2vh,20px)}
   #s-ceo .ceo-msg{font-size:14.5px;line-height:1.85;color:var(--fg);padding:clamp(18px,2.6vh,26px) clamp(20px,2.2vw,30px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
   #s-ceo .ceo-msg p{margin:0 0 .85em;break-inside:avoid}
@@ -747,8 +750,11 @@
   }
   @media (max-width:900px){
     #s-ceo .ceo{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "fig" "msg";row-gap:0;align-items:start}
-    #s-ceo .ceo-fig{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:end;gap:16px;margin-bottom:22px}
-    #s-ceo .ceo-fig .ph{aspect-ratio:3/4;height:auto;min-height:0;padding:12px;font-size:13px;border-radius:14px}
+    #s-ceo .ceo-fig{display:grid;grid-template-columns:clamp(132px,38vw,170px) minmax(0,1fr);align-items:end;gap:16px;margin-bottom:22px}
+    #s-ceo .ceo-photo{aspect-ratio:3/4;height:auto;min-height:0;border-radius:14px}
+    #s-ceo .ceo-photo::after{display:none}
+    #s-ceo .ceo-name span{color:var(--sub)}
+    #s-ceo .ceo-name b{color:var(--heading);text-shadow:none}
     #s-ceo .ceo-name{position:static;margin:0 0 4px;padding:0 0 0 2px;flex-direction:column;align-items:flex-start;gap:2px}
     #s-ceo .ceo-msg{font-size:15px;line-height:1.95;padding:18px 18px}
   }
@@ -761,7 +767,7 @@
         <h2 class="s-title" data-rv style="--d:.08s">代表挨拶</h2>
       </div>
       <figure class="ceo-fig" data-rv style="--d:.15s">
-        <div class="ph">写真入る<small>代表写真</small></div>
+        <div class="ceo-photo"><img src="assets/img/ceo.webp" alt="代表 佐藤 光" width="1024" height="1536" loading="lazy" decoding="async"></div>
         <figcaption class="ceo-name"><span>代表</span><b>佐藤 光</b></figcaption>
       </figure>
         <div class="ceo-msg"><div class="ceo-txt">
