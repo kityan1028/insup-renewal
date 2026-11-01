@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=6e5ee3d3b5">
+<link rel="stylesheet" href="assets/css/site.css?v=f0660d722c">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=6e5ee3d3b5"></script>
-<script src="assets/js/careers.js?v=6e5ee3d3b5" defer></script>
+<script src="assets/js/site.js?v=f0660d722c"></script>
+<script src="assets/js/careers.js?v=f0660d722c" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -203,11 +203,11 @@
 </section>
 
 <!-- ===== slide s-members (careers/members.html) ===== -->
-<!-- careers ④ 社員紹介 — layout P3 「吹き出しで話す」 ported from v5parts/staff.html (P3 only; no switchers, no V5 helper).
+<!-- careers ④ 社員紹介 — layout P3 (office-photo band removed at the client's request, 2026-11-01) 「吹き出しで話す」 ported from v5parts/staff.html (P3 only; no switchers, no V5 helper).
      Words under the heading = M2 with 150人. 3 members, each with ONLY these items in this order (all placeholders for now):
      ① 顔写真  ② イニシャル  ③ 働くことになったきっかけ  ④ 今の仕事内容  ⑤ Insupで良かったこと.
      No 社歴 / ひとことコメント / 「ほかにもメンバーがいます」.
-     Entrance (first time the slide is entered): the office band opens, then per member the face pops in,
+     Entrance (first time the slide is entered): per member the face pops in,
      a 「…」 typing bubble shows, and the speech bubble pops out — one member after another. -->
 <style>
   #s-members .mb-head .s-title{margin-bottom:0}
@@ -217,12 +217,6 @@
   #s-members .mb-msg .tx{word-break:keep-all;overflow-wrap:anywhere}
 
   #s-members .mb-stage{position:relative;margin-top:20px;padding:20px 0 6px}
-  /* soft office-atmosphere band behind the chat (photo placeholder) */
-  #s-members .band{position:absolute;z-index:0;top:0;bottom:-28px;left:calc(50% - 50vw);right:calc(50% - 50vw);overflow:hidden;pointer-events:none;
-    border-top:1.5px dashed rgba(11,45,107,.22);
-    background:linear-gradient(180deg,rgba(214,232,255,.75) 0%,rgba(214,232,255,.55) 70%,rgba(255,255,255,0) 100%),repeating-linear-gradient(135deg,rgba(255,255,255,.45) 0 14px,rgba(255,255,255,0) 14px 28px)}
-  #s-members .band::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.55) 50%,rgba(255,255,255,0) 65%);transform:translateX(-100%)}
-  #s-members .lbl{position:absolute;z-index:1;right:0;bottom:4px;font-weight:700;font-size:13px;line-height:1.5;color:var(--navy);background:rgba(255,255,255,.85);border:1.5px dashed rgba(11,45,107,.38);border-radius:99px;padding:5px 16px;white-space:nowrap}
 
   /* chat */
   #s-members .chat{position:relative;z-index:1;width:min(100%,920px);margin:0 auto;display:flex;flex-direction:column;gap:16px;list-style:none;padding:0}
@@ -258,10 +252,6 @@
 
   /* ---------- entrance (first entry only) ---------- */
   #s-members.mb-pre .anim{opacity:0}
-  #s-members.mb-run .band{animation:members-band 1s cubic-bezier(.2,.8,.2,1) both}
-  #s-members.mb-run .band::after{animation:members-shine 7s ease-in-out 1.5s infinite}
-  #s-members.mb-run:not(.is-active) .band::after{animation-play-state:paused}
-  #s-members.mb-run .lbl{animation:members-fade .8s ease-out .5s both}
   #s-members.mb-run .av{animation:members-pop .55s cubic-bezier(.3,1.4,.5,1) var(--d) both}
   #s-members.mb-run .typing{animation:members-typing .95s ease-out calc(var(--d) + .2s) both}
   #s-members.mb-run .typing i{animation:members-dot 1s ease-in-out calc(var(--d) + .2s) 2}
@@ -273,19 +263,16 @@
   @keyframes members-fade{from{opacity:0}to{opacity:1}}
   @keyframes members-typing{0%{opacity:0;transform:scale(.6)}18%{opacity:1;transform:scale(1)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.85)}}
   @keyframes members-dot{0%,60%,100%{transform:translateY(0);opacity:.35}30%{transform:translateY(-4px);opacity:1}}
-  @keyframes members-band{from{opacity:0;transform:scaleX(.75)}to{opacity:1;transform:none}}
-  @keyframes members-shine{0%{transform:translateX(-100%)}45%,100%{transform:translateX(100%)}}
 
   /* desktop: heading tucked into the top-left, members use all the remaining height */
   @media (min-width:901px){
     #s-members{justify-content:flex-start;padding-top:calc(var(--hd-h) + 2px)}
     #s-members .s-inner{flex:1;display:flex;flex-direction:column;min-height:0}
-    #s-members .mb-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:26px;padding-right:300px}
+    #s-members .mb-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:26px}
     #s-members .mb-head .eyebrow{grid-column:1/-1;margin-bottom:0}
     #s-members .mb-head .s-title{font-size:clamp(26px,2.5vw,36px);line-height:1.3}
     #s-members .mb-msg{margin:0 0 5px}
     #s-members .mb-stage{--av:clamp(112px,18.5vh,190px);flex:1;display:flex;flex-direction:column;margin-top:12px;padding:14px 0 4px}
-    #s-members .lbl{top:-42px;right:0;bottom:auto}
     #s-members .chat{flex:1;width:100%;gap:12px}
     #s-members .row{flex:1;align-items:center;gap:24px}
     #s-members .av{flex:0 0 var(--av);width:var(--av);height:var(--av);font-size:15px}
@@ -322,15 +309,11 @@
     #s-members .nm{font-size:20px}
     #s-members .qa dt{font-size:14px}
     #s-members .qa dd{font-size:15.5px;padding:6px 12px}
-    #s-members .lbl{right:50%;transform:translateX(50%);bottom:-20px}
-    #s-members .mb-stage{padding-bottom:40px}
   }
   @media (max-width:640px){
     #s-members .mb-msg{gap:9px;font-size:15px}
     #s-members .mb-msg::before{width:20px}
-    #s-members .mb-stage{margin-top:16px;padding:16px 0 44px}
-    #s-members .band{bottom:-12px}
-    #s-members .lbl{font-size:12px;padding:4px 13px}
+    #s-members .mb-stage{margin-top:16px;padding:8px 0 8px}
     #s-members .chat{gap:14px}
     #s-members .row{gap:10px}
     #s-members .av{flex-basis:84px;width:84px;height:84px;padding:4px;font-size:11.5px;box-shadow:0 0 0 4px #fff,0 6px 14px rgba(11,45,107,.16)}
@@ -346,7 +329,6 @@
   }
   @media (prefers-reduced-motion:reduce){
     #s-members.mb-pre .anim{opacity:1}
-    #s-members .band::after,#s-members .typing{animation:none!important;opacity:0}
   }
 </style>
 <section class="slide" id="s-members" data-title="社員紹介" data-stage="3">
@@ -357,8 +339,6 @@
       <p class="mb-msg" data-rv style="--d:.2s"><span class="tx">業務委託を含む150人のメンバーから、<wbr>一部をご紹介します。</span></p>
     </div>
     <div class="mb-stage">
-      <div class="band anim" aria-hidden="true"></div>
-      <span class="lbl anim">写真入る（オフィスの雰囲気）</span>
       <ul class="chat" aria-label="メンバー紹介"><!--MEMBERS--></ul>
     </div>
   </div>
@@ -369,7 +349,7 @@
   const MEMBERS = [
     { initial: 'M.A', photo: 'assets/img/members/m1.jpg', reason: '社長との出会いで人としても成長していきたいと思ったから。', work: 'フランチャイズ総合代理店案件の商談担当（FS）', good: '成果が報酬に直結することで自身の成長をより実感できる環境。' },
     { initial: 'Y.E', photo: 'assets/img/members/m2.jpg', reason: '趣味やプライベートの時間を確保しながら稼ぎたいと思ったから。', work: '企業とインサイドセールス人員のマッチング事業における管理者業務（NODE事業部）', good: 'プライベートを確保しつつ、安定した報酬を稼ぎ続けられる環境であること。' },
-    { initial: 'A.Y', photo: 'assets/img/members/m3.jpg', reason: '子育てと仕事の両立が可能な会社で今までのテレアポ経験を活かしたいと思ったから。', work: 'インサイドセールス（IS）', good: '子育てと仕事の両立が叶って効率良く稼ぐことができる' },
+    { initial: 'A.Y', photo: 'assets/img/members/m3.jpg', reason: '子育てと仕事の両立が可能な会社で今までのテレアポ経験を活かしたいと思ったから。', work: 'インサイドセールス（IS）', good: '子育てと仕事の両立が叶って効率良く稼ぐことができる。' },
   ];
   const Q = [['reason', '働くことになったきっかけ'], ['work', '今の仕事内容'], ['good', 'Insupで良かったこと']];
 
