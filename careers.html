@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=69821a1c28">
+<link rel="stylesheet" href="assets/css/site.css?v=394f414e37">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=69821a1c28"></script>
-<script src="assets/js/careers.js?v=69821a1c28" defer></script>
+<script src="assets/js/site.js?v=394f414e37"></script>
+<script src="assets/js/careers.js?v=394f414e37" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -232,6 +232,8 @@
     border:1.5px dashed rgba(11,45,107,.38);background:repeating-linear-gradient(135deg,rgba(255,255,255,.92) 0 10px,rgba(229,240,255,.92) 10px 20px);color:var(--navy);
     box-shadow:0 0 0 5px #fff,0 8px 20px rgba(11,45,107,.16)}
   #s-members .av small{font-size:.8em}
+  #s-members .av.has-photo{display:block;padding:0;border:0;overflow:hidden;background:#dde6f2}
+  #s-members .av.has-photo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%}
   #s-members .bw{position:relative;min-width:0;flex:0 1 700px}
   /* glossy CSS speech bubble */
   #s-members .say{position:relative;background:linear-gradient(180deg,#fbfdff 0%,#e4f0ff 100%);border:1px solid #c9ddf7;border-radius:18px;
@@ -247,6 +249,8 @@
   #s-members .qa dt{font-size:12.5px;font-weight:700;line-height:1.5;color:var(--blue);letter-spacing:.02em}
   #s-members .qa dt i{font:800 13px var(--font-en);font-style:normal;margin-right:.3em}
   #s-members .qa dd{margin:4px 0 0;font-size:14px;font-weight:700;line-height:1.5;color:#33415e;padding:4px 10px;border:1.5px dashed rgba(11,45,107,.3);border-radius:8px;background:rgba(255,255,255,.6)}
+  /* real answers: no dashed placeholder frame */
+  #s-members .qa dd.real{padding-left:0;padding-right:0;border-color:transparent;background:none;color:var(--ink)}
   /* 「…」 typing bubble shown just before each speech bubble */
   #s-members .typing{position:absolute;bottom:0;left:0;display:flex;gap:6px;padding:13px 18px;background:#fff;border:1px solid #c9ddf7;border-radius:16px;box-shadow:0 5px 13px rgba(25,118,246,.12);opacity:0;transform-origin:0 100%}
   #s-members .row.r .typing{left:auto;right:0;transform-origin:100% 100%}
@@ -357,7 +361,7 @@
 (() => {
   /* ===== メンバー（まだ無いので仮の枠）— 人数を変えるときはここを増減。項目と順番は決定どおり ===== */
   const MEMBERS = [
-    { initial: 'イニシャル入る', reason: '働くことになったきっかけ入る', work: '今の仕事内容入る', good: 'Insupで良かったこと入る' },
+    { initial: 'M.A', photo: 'assets/img/members/m1.jpg', reason: '社長との出会いで人としても成長していきたいと思ったから。', work: 'フランチャイズ総合代理店案件の商談担当（FS）', good: '成果が報酬に直結することで自身の成長をより実感できる環境。' },
     { initial: 'イニシャル入る', reason: '働くことになったきっかけ入る', work: '今の仕事内容入る', good: 'Insupで良かったこと入る' },
     { initial: 'イニシャル入る', reason: '働くことになったきっかけ入る', work: '今の仕事内容入る', good: 'Insupで良かったこと入る' },
   ];
@@ -368,12 +372,12 @@
   const chat = sec.querySelector('.chat');
   chat.innerHTML = MEMBERS.map((m, i) => `
     <li class="row${i % 2 ? ' r' : ''}" style="--d:${(0.35 + i * 1.3).toFixed(2)}s">
-      <div class="ph round av anim">写真入る<small>（顔写真）</small></div>
+      ${m.photo ? `<div class="av has-photo anim"><img src="${m.photo}" alt="${m.initial}さん" width="370" height="370" decoding="async"></div>` : `<div class="ph round av anim">写真入る<small>（顔写真）</small></div>`}
       <div class="bw">
         <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="say anim"><span class="in">
           <span class="nm">${m.initial}</span>
-          <dl class="qa">${Q.map(([k, q]) => `<div><dt><i>Q.</i>${q}</dt><dd>${m[k]}</dd></div>`).join('')}</dl>
+          <dl class="qa">${Q.map(([k, q]) => `<div><dt><i>Q.</i>${q}</dt><dd${m.photo ? ' class="real"' : ''}>${m[k]}</dd></div>`).join('')}</dl>
         </span></div>
       </div>
     </li>`).join('');
