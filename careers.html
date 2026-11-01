@@ -14,11 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=f68dbff775">
+<link rel="stylesheet" href="assets/css/site.css?v=69821a1c28">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=f68dbff775"></script>
-<script src="assets/js/careers.js?v=f68dbff775" defer></script>
+<script src="assets/js/site.js?v=69821a1c28"></script>
+<script src="assets/js/careers.js?v=69821a1c28" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -272,20 +272,46 @@
   @keyframes members-band{from{opacity:0;transform:scaleX(.75)}to{opacity:1;transform:none}}
   @keyframes members-shine{0%{transform:translateX(-100%)}45%,100%{transform:translateX(100%)}}
 
-  /* shorter desktop screens: tighten so the whole chat fits on one screen */
-  @media (min-width:901px) and (max-height:860px){
-    #s-members .mb-stage{margin-top:14px;padding-top:16px}
-    #s-members .chat{gap:12px}
-    #s-members .av{flex-basis:84px;width:84px;height:84px;font-size:12px}
-    #s-members .say{padding:11px 22px 13px}
-    #s-members .nm{font-size:16.5px}
-    #s-members .qa{margin-top:5px}
-    #s-members .qa dd{padding:3px 10px}
+  /* desktop: heading tucked into the top-left, members use all the remaining height */
+  @media (min-width:901px){
+    #s-members{justify-content:flex-start;padding-top:calc(var(--hd-h) + 2px)}
+    #s-members .s-inner{flex:1;display:flex;flex-direction:column;min-height:0}
+    #s-members .mb-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end;column-gap:26px;padding-right:300px}
+    #s-members .mb-head .eyebrow{grid-column:1/-1;margin-bottom:0}
+    #s-members .mb-head .s-title{font-size:clamp(26px,2.5vw,36px);line-height:1.3}
+    #s-members .mb-msg{margin:0 0 5px}
+    #s-members .mb-stage{--av:clamp(112px,18.5vh,190px);flex:1;display:flex;flex-direction:column;margin-top:12px;padding:14px 0 4px}
+    #s-members .lbl{top:-42px;right:0;bottom:auto}
+    #s-members .chat{flex:1;width:100%;gap:12px}
+    #s-members .row{flex:1;align-items:center;gap:24px}
+    #s-members .av{flex:0 0 var(--av);width:var(--av);height:var(--av);font-size:15px}
+    #s-members .bw{flex:1 1 auto}
+    #s-members .say{padding:14px 28px 16px;border-radius:22px}
+    #s-members .say::before{bottom:auto;top:calc(50% - 8px)}
+    #s-members .typing{bottom:auto;top:calc(50% - 22px)}
+    #s-members .nm{font-size:clamp(19px,2.5vh,25px)}
+    #s-members .qa{gap:10px 20px;margin-top:8px}
+    #s-members .qa dt{font-size:clamp(13.5px,1.6vh,15.5px)}
+    #s-members .qa dd{font-size:clamp(15px,1.9vh,18px);line-height:1.5;min-height:calc(3em + 10px);padding:5px 12px}
+  }
+  /* short laptop windows: keep all three members on one screen */
+  @media (min-width:901px) and (max-height:760px){
+    #s-members .mb-stage{--av:clamp(96px,17vh,120px);margin-top:8px;padding:10px 0 2px}
+    #s-members .chat{gap:8px}
+    #s-members .say{padding:9px 22px 11px}
+    #s-members .qa{margin-top:4px}
+    #s-members .qa dd{min-height:0;padding:3px 10px}
   }
   /* tablet / phone: the three questions stack inside each bubble */
   @media (max-width:900px){
     #s-members .qa{grid-template-columns:minmax(0,1fr);gap:8px}
     #s-members .bw{flex:1 1 auto}
+    #s-members .av{flex-basis:128px;width:128px;height:128px;font-size:14px}
+    #s-members .row{align-items:center}
+    #s-members .say::before{bottom:auto;top:calc(50% - 8px)}
+    #s-members .nm{font-size:20px}
+    #s-members .qa dt{font-size:14px}
+    #s-members .qa dd{font-size:15.5px;padding:6px 12px}
     #s-members .lbl{right:50%;transform:translateX(50%);bottom:-20px}
     #s-members .mb-stage{padding-bottom:40px}
   }
@@ -297,14 +323,14 @@
     #s-members .lbl{font-size:12px;padding:4px 13px}
     #s-members .chat{gap:14px}
     #s-members .row{gap:10px}
-    #s-members .av{flex-basis:62px;width:62px;height:62px;padding:4px;font-size:10.5px;box-shadow:0 0 0 4px #fff,0 6px 14px rgba(11,45,107,.16)}
+    #s-members .av{flex-basis:84px;width:84px;height:84px;padding:4px;font-size:11.5px;box-shadow:0 0 0 4px #fff,0 6px 14px rgba(11,45,107,.16)}
     #s-members .av small{display:block;font-size:.85em;line-height:1.2}
     #s-members .say{padding:12px 14px 14px;border-radius:14px}
-    #s-members .say::before{width:12px;height:12px;left:-7px;bottom:22px}
+    #s-members .say::before{width:12px;height:12px;left:-7px;top:calc(50% - 6px)}
     #s-members .row.r .say::before{right:-7px}
-    #s-members .nm{font-size:15.5px}
-    #s-members .qa dt{font-size:12px}
-    #s-members .qa dd{font-size:13px;padding:3px 9px}
+    #s-members .nm{font-size:17.5px}
+    #s-members .qa dt{font-size:13px}
+    #s-members .qa dd{font-size:14.5px;padding:5px 10px}
     #s-members .typing{padding:11px 14px}
     #s-members .typing i{width:7px;height:7px}
   }
