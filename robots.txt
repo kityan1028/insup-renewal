@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://insup.co.jp/sitemap.xml

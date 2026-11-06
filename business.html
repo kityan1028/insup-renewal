@@ -1,12 +1,31 @@
 <!doctype html>
 <html lang="ja" class="ff-f6">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EY7QCT4G7S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-EY7QCT4G7S');
+  </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<!-- noindex: preview on github.io only — REMOVE this robots meta at launch -->
-<meta name="robots" content="noindex">
 <title>企業様向けページ | 株式会社Insup</title>
-<meta name="description" content="株式会社Insup - テレアポ代行、テレアポ人材マッチングのプロフェッショナル。即戦力のテレアポ人材を提供します。">
+<meta name="description" content="株式会社Insupの事業内容 - テレアポ代行、テレアポ人材マッチング、インサイドセールス支援">
+<link rel="canonical" href="https://insup.co.jp/business.html">
+<!-- share preview (Open Graph / X) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="株式会社Insup">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="企業様向けページ | 株式会社Insup">
+<meta property="og:description" content="株式会社Insupの事業内容 - テレアポ代行、テレアポ人材マッチング、インサイドセールス支援">
+<meta property="og:url" content="https://insup.co.jp/business.html">
+<meta property="og:image" content="https://insup.co.jp/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#06183d">
 <link rel="icon" href="assets/img/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/img/favicon-180.png">
@@ -14,11 +33,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F6 「上質・落ち着き」 (client decision 2026-10-26) — headings Zen Old Mincho / body Zen Kaku Gothic New / Latin Cormorant Garamond -->
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=064670fb19">
+<link rel="stylesheet" href="assets/css/site.css?v=1f026f5d31">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=064670fb19"></script>
-<script src="assets/js/business.js?v=064670fb19" defer></script>
+<script src="assets/js/site.js?v=1f026f5d31"></script>
+<script src="assets/js/business.js?v=1f026f5d31" defer></script>
 </head>
 <body class="theme-dark page-business">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -36,7 +55,7 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (business/hero.html) ===== -->
 <style>
-  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=064670fb19 */
+  /* business hero — text from top.html; arrival T1 is driven by assets/js/business.js?v=1f026f5d31 */
   #s-hero{align-items:stretch}
   #s-hero .hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .9s ease;
     background:radial-gradient(ellipse 62% 52% at 50% 50%,rgba(2,11,34,.58) 0%,rgba(2,11,34,.3) 55%,rgba(2,11,34,0) 100%)}
@@ -102,7 +121,7 @@
       setTimeout(show, 4500); /* safety net in case the transition never reports */
       return;
     }
-    if (InsupSite.reduced) show(); else setTimeout(show, 450); /* direct visit: network fades in, then the text */
+    if ((window.InsupSite && InsupSite.reduced)) show(); else setTimeout(show, 450); /* direct visit: network fades in, then the text */
   });
 })();
 </script>
@@ -767,7 +786,7 @@
     box.classList.remove('go', 'fin', 'ul');
     copy.querySelectorAll('.lit,.glow').forEach(c => c.classList.remove('lit', 'glow'));
     copy.querySelectorAll('.trk,.dot').forEach(el => el.classList.remove('on', 'fade', 'out'));
-    if (InsupSite.reduced) { box.classList.add('fin'); return; }
+    if ((window.InsupSite && InsupSite.reduced)) { box.classList.add('fin'); return; }
     box.style.setProperty('--fd', FD + 's');
     void box.offsetWidth;
     box.classList.add('go');
@@ -824,7 +843,7 @@
   let lastW = 0;
   if (window.ResizeObserver) new ResizeObserver(() => { const w = copy.clientWidth; if (w !== lastW) { if (lastW && lighting) finish(); lastW = w; } }).observe(copy);
 
-  if (InsupSite.reduced) box.classList.add('fin');
+  if ((window.InsupSite && InsupSite.reduced)) box.classList.add('fin');
   sec.addEventListener('slide:enter', () => { if (played) return; played = true; play(); });
   sec.addEventListener('slide:leave', () => { if (box.classList.contains('go')) finish(); });
 })();
@@ -1039,7 +1058,7 @@
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     it.classList.toggle('open', open);
     clearTimeout(a._t);
-    const fast = instant || InsupSite.reduced;
+    const fast = instant || (window.InsupSite && InsupSite.reduced);
     if (open) {
       a.hidden = false;
       if (fast) { a.style.height = 'auto'; return; }
