@@ -35,11 +35,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=1f026f5d31">
+<link rel="stylesheet" href="assets/css/site.css?v=b488d5265f">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=1f026f5d31"></script>
-<script src="assets/js/careers.js?v=1f026f5d31" defer></script>
+<script src="assets/js/site.js?v=b488d5265f"></script>
+<script src="assets/js/careers.js?v=b488d5265f" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -223,6 +223,146 @@
   </div>
 </section>
 
+<!-- ===== slide s-lounge (shared/lounge.html) ===== -->
+<!-- shared: ラウンジ (business #11 / careers #9)
+     photo motion LB (slow zoom/pan + mouse parallax + hover light sweep) and
+     headline L1-3 「ブラインドが開く」 — both ported from v5parts/lounge.html (candidate switcher removed). -->
+<style>
+  #s-lounge .lg{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:clamp(26px,3.6vw,56px);align-items:center}
+
+  /* ---- LB gallery ---- */
+  #s-lounge .gal{height:clamp(340px,60vh,560px);display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:8px;min-height:0}
+  #s-lounge .gal .t{position:relative;overflow:hidden;border-radius:14px;background:#cfdcef;box-shadow:var(--card-shadow)}
+  body.theme-dark #s-lounge .gal .t{background:#14306a}
+  #s-lounge .gal .t.a{grid-row:1/3}
+  #s-lounge .gal .zm{position:absolute;inset:0;transform-origin:50% 50%}
+  #s-lounge .gal .par{position:absolute;inset:-6%;transition:transform .25s ease-out}
+  #s-lounge .gal .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;will-change:transform}
+  #s-lounge .kb .t.a .img{animation:lounge-kbA 16s ease-in-out infinite alternate}
+  #s-lounge .kb .t.b .img{animation:lounge-kbB 14s ease-in-out infinite alternate}
+  #s-lounge .kb .t.c .img{animation:lounge-kbC 15s ease-in-out infinite alternate}
+  @keyframes lounge-kbA{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.22) translate(-4%,2%)}}
+  @keyframes lounge-kbB{from{transform:scale(1.12) translate(4%,0)}to{transform:scale(1.12) translate(-4%,0)}}
+  @keyframes lounge-kbC{from{transform:scale(1.25) translate(-3%,2%)}to{transform:scale(1.08) translate(2%,-1%)}}
+  /* the slow photo motion rests while the slide is off screen */
+  #s-lounge:not(.is-active) .kb .t .img{animation-play-state:paused}
+  #s-lounge .gal .t::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 70%);transform:translateX(-120%);transition:transform 1s;pointer-events:none}
+  #s-lounge .kb .t:hover::after{transform:translateX(120%)}
+
+  /* ---- text ---- */
+  #s-lounge .txt{min-width:0;position:relative;z-index:1;padding:clamp(20px,3.2vh,34px) clamp(20px,2.4vw,34px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  #s-lounge .kicker{margin-bottom:6px}
+  #s-lounge .s-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(24px,2.7vw,38px);line-height:1.5;margin:0 0 clamp(12px,2vh,18px)}
+  #s-lounge .s-title .ln{display:inline-block}
+  #s-lounge .body{font-size:clamp(14px,1.15vw,16px);line-height:1.9;color:var(--sub);margin:0}
+  #s-lounge .tags{margin:clamp(12px,2vh,18px) 0 0}
+  #s-lounge .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:clamp(12px,2vh,18px) 0 0;padding:0}
+  #s-lounge .facts > div{min-width:0;background:var(--chip-bg);border:1px solid var(--chip-line);border-radius:12px;padding:9px 14px}
+  #s-lounge .facts dt{font:700 10.5px/1.5 var(--font-en);letter-spacing:.16em;color:var(--accent-2)}
+  body.theme-light #s-lounge .facts dt{color:var(--accent)}
+  #s-lounge .facts .nw{white-space:nowrap}
+  #s-lounge .facts dd{margin:0;font-size:14px;font-weight:700;color:var(--fg);line-height:1.55}
+
+  /* ---- entrance (calm follow-up stagger, from v5) ---- */
+  #s-lounge .lg{--d:1.55s}
+  @keyframes lounge-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes lounge-fade{from{opacity:0}to{opacity:1}}
+  #s-lounge .lg.play .kicker{animation:lounge-fade .7s ease-out .1s both}
+  #s-lounge .lg.play .body{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) var(--d) both}
+  #s-lounge .lg.play .tags{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .18s) both}
+  #s-lounge .lg.play .facts > div{animation:lounge-up .7s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .34s + var(--i) * .09s) both}
+  /* until the slide is reached, everything waits on its first frame (blinds closed) */
+  #s-lounge .lg.wait.play *,#s-lounge .lg.wait.play *::before,#s-lounge .lg.wait.play *::after,#s-lounge .lg.wait.play{animation-play-state:paused!important}
+
+  /* ---- L1-3 ブラインドが開く ---- */
+  #s-lounge{--sl-a:#ffffff;--sl-b:#f4f7fb;--sl-c:#dbe5f2;--sl-d:#bccde6;--sl-sh:rgba(11,45,107,.16);--rail-a:#d4e0f1;--rail-b:#a9bedd;--cord:#c3d2e8}
+  body.theme-dark #s-lounge{--sl-a:#1d3f80;--sl-b:#16346e;--sl-c:#0f2858;--sl-d:#0a1e47;--sl-sh:rgba(0,0,0,.45);--rail-a:#3a5d9e;--rail-b:#22417c;--cord:#3a5d9e}
+  #s-lounge .blinds{position:absolute;inset:3px -10px -4px -8px;display:none;flex-direction:column;pointer-events:none;perspective:700px}
+  #s-lounge .blinds i{flex:1;display:block;transform-origin:50% 50%;
+    background:linear-gradient(180deg,var(--sl-a) 0%,var(--sl-b) 38%,var(--sl-c) 78%,var(--sl-d) 100%);box-shadow:0 1px 1px var(--sl-sh)}
+  #s-lounge .blinds::before{content:"";position:absolute;left:-3px;right:-3px;top:-2px;height:5px;border-radius:3px;background:linear-gradient(var(--rail-a),var(--rail-b));z-index:1}
+  #s-lounge .blinds::after{content:"";position:absolute;right:14px;top:0;bottom:-10px;width:2px;background:var(--cord);border-radius:2px}
+  #s-lounge .lg.play .blinds{display:flex;animation:lounge-blindsOut .35s ease-out 1.85s both}
+  #s-lounge .lg.play .blinds i{animation:lounge-slat .95s cubic-bezier(.55,0,.25,1) calc(.45s + var(--i) * .06s) both}
+  @keyframes lounge-slat{0%{transform:rotateX(0)}100%{transform:rotateX(86deg)}}
+  @keyframes lounge-blindsOut{from{opacity:1}to{opacity:0}}
+
+  /* ---- phone / narrow ---- */
+  @media (max-width:900px){
+    #s-lounge .lg{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-lounge .gal{height:clamp(260px,64vw,400px);grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr;gap:6px}
+    #s-lounge .gal .t{border-radius:12px}
+    #s-lounge .gal .t.a{grid-row:auto;grid-column:1/3}
+    #s-lounge .s-title{font-size:clamp(24px,6.6vw,32px)}
+  }
+  @media (max-width:640px){
+    #s-lounge .facts dd{font-size:13px;letter-spacing:-.01em}
+    #s-lounge .facts > div{padding:8px 9px}
+    #s-lounge .txt{padding:20px 16px}
+  }
+  @media (max-width:375px){
+    #s-lounge .facts{gap:6px}
+    #s-lounge .facts > div{padding:8px 7px}
+    #s-lounge .facts dd{font-size:12px;letter-spacing:-.03em}
+  }
+  @media (max-width:340px){
+    #s-lounge .facts{grid-template-columns:minmax(0,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    #s-lounge .kb .t .img{animation:none;transform:scale(1.1)}
+    #s-lounge .gal .par{transition:none}
+    #s-lounge .blinds{display:none!important}
+  }
+</style>
+<section class="slide" id="s-lounge" data-title="ラウンジ">
+  <div class="s-inner wide">
+    <div class="lg">
+      <div class="gal kb">
+        <div class="t a" role="img" aria-label="ラウンジの様子"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-main.jpg)"></div></div></div></div>
+        <div class="t b" role="img" aria-label="窓ぎわの席が並ぶラウンジ"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-work.jpg)"></div></div></div></div>
+        <div class="t c" role="img" aria-label="窓ぎわのカウンター席"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-counter.jpg)"></div></div></div></div>
+      </div>
+      <div class="txt">
+        <span class="eyebrow kicker">LOUNGE</span>
+        <h2 class="s-title"><span class="ln l1">打ち合わせは、</span><br><span class="ln l2">眺めのいいラウンジで。</span><span class="blinds" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></span></h2>
+        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
+        <ul class="tags"><li>ご来社</li><li>ご訪問</li><li>商談</li></ul>
+        <dl class="facts">
+          <div style="--i:0"><dt>HOURS</dt><dd>8:00〜20:00</dd></div>
+          <div style="--i:1"><dt>BOOTH</dt><dd>テレフォンブース <span class="nw">2台</span></dd></div>
+          <div style="--i:2"><dt>POWER</dt><dd>全席コンセント完備</dd></div>
+          <div style="--i:3"><dt>DRINK</dt><dd>自動販売機 <span class="nw">2台</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-lounge');
+  if (!sec) return;
+  const site = window.InsupSite || {};
+  const box = sec.querySelector('.lg');
+
+  /* L1-3: blinds wait closed until the slide is reached, then open once */
+  if (!site.reduced) box.classList.add('play', 'wait');
+  sec.addEventListener('slide:enter', () => {
+    if (!box.classList.contains('wait')) return;
+    if (site.reduced) { box.classList.remove('play', 'wait'); return; }
+    box.classList.remove('wait');
+  });
+
+  /* LB: mouse parallax (same as v4 / v5) */
+  const pars = [...box.querySelectorAll('.par')];
+  box.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch' || site.reduced) return;
+    const r = box.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+    pars.forEach((p, i) => { const d = [1, 1.6, 2.2][i]; p.style.transform = `translate(${-x * 3 * d}%, ${-y * 3 * d}%)`; });
+  });
+  box.addEventListener('pointerleave', () => pars.forEach(p => { p.style.transform = ''; }));
+})();
+</script>
+
 <!-- ===== slide s-members (careers/members.html) ===== -->
 <!-- careers ④ 社員紹介 — layout P3 (office-photo band removed at the client's request, 2026-11-01) 「吹き出しで話す」 ported from v5parts/staff.html (P3 only; no switchers, no V5 helper).
      Words under the heading = M2 with 150人. 3 members, each with ONLY these items in this order (all placeholders for now):
@@ -401,6 +541,138 @@
 })();
 </script>
 
+<!-- ===== slide s-remote (careers/remote.html) ===== -->
+<style>
+  /* careers「フルリモート」— headline W1, motion W1-4 (ported from v5parts/w1.html) with the big
+     centered emphasis on the whole phrase「通勤ゼロ」. Everything scoped to #s-remote. */
+  #s-remote .rm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,56px);align-items:center}
+  #s-remote .rm-copy{position:relative;z-index:2;min-width:0}
+  #s-remote .rm-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(28px,3.7vw,52px);font-weight:900;line-height:1.32;
+    letter-spacing:.02em;color:var(--heading);margin:4px 0 10px}
+  #s-remote .ln{position:relative;display:inline-block;white-space:nowrap}
+  #s-remote .ln1{z-index:2}
+  #s-remote .zero{position:relative;z-index:3;display:inline-block;transform-origin:50% 50%;will-change:transform}
+  #s-remote .tl{display:inline-block}
+  #s-remote .rm-en{font:600 clamp(11px,1vw,13px)/1.6 var(--font-en);letter-spacing:.18em;color:var(--sub)}
+  #s-remote .rm-body{font-size:clamp(15px,1.25vw,17px);line-height:1.9;color:var(--sub);margin:18px 0 0;max-width:30em}
+  #s-remote .pts > span{background:var(--card-bg-strong)}
+  /* group photo: 4:3 like the source, so nobody is cut off */
+  #s-remote .rm-pic{position:relative;margin:0;width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);border:1px solid var(--card-line);background:#dfe9f6}
+  #s-remote .rm-pic img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+  /* before the first entrance the headline waits hidden (only while JS runs) */
+  html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:0}
+  /* glided past during a long jump (never entered): show the final headline instead of a blank area */
+  html.js #s-remote.rm-wait.is-passed .rm-title,html.js #s-remote.rm-wait.is-passed .rm-en{opacity:1;transition:none}
+  @media (max-width:900px){
+    #s-remote .rm-grid{grid-template-columns:minmax(0,1fr);gap:26px}
+    #s-remote .rm-pic{max-width:560px}
+  }
+  @media (max-width:640px){
+    #s-remote .rm-body{margin-top:14px}
+    #s-remote .pts{gap:8px;margin-top:18px}
+    #s-remote .pts > span{font-size:13.5px;padding:7px 12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:1}
+  }
+</style>
+<section class="slide rm-wait" id="s-remote" data-title="フルリモート">
+  <div class="s-inner">
+    <div class="rm-grid">
+      <div class="rm-copy">
+        <span class="eyebrow" data-rv>FULL REMOTE</span>
+        <h2 class="rm-title"><span class="ln ln1"><span class="zero">通勤ゼロ</span><span class="tl">で、</span></span><br><span class="ln ln2">トップセールスへ。</span></h2>
+        <p class="rm-en">ZERO COMMUTE. TOP RESULTS.</p>
+        <p class="rm-body" data-rv style="--d:1.55s">在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。</p>
+        <div class="pts" data-rv style="--d:1.75s"><span><b>REMOTE</b>在宅ワーク可能</span><span><b>DAYS</b>週2日〜OK</span><span><b>PAY</b>時給 1,500円〜3,000円</span></div>
+      </div>
+      <figure class="rm-pic" data-rv style="--d:1.45s"><img src="assets/img/team.webp" alt="メンバーの集合写真" width="1446" height="1087" decoding="async"></figure>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const sec = document.getElementById('s-remote');
+  if (!sec) return;
+  const $ = s => sec.querySelector(s);
+  const title = $('.rm-title'), zero = $('.zero'), tl = $('.tl'), ln2 = $('.ln2'), en = $('.rm-en');
+  const mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  const reduced = () => !!((window.InsupSite && InsupSite.reduced) || mq.matches);
+  const OUT = 'cubic-bezier(.2,.8,.2,1)';
+  const GLOW = '0 0 .25em rgba(255,255,255,.95)', NOGLOW = '0 0 0 rgba(255,255,255,0)';
+  let played = false;
+
+  /* animations are created paused and driven by our own clock (rAF, with a timer fallback when frames are throttled) — as in w1.html */
+  let running = [], t0 = 0, endAt = 0, raf = 0, iv = 0, lastTick = 0;
+  const A = (node, frames, o) => { const a = node.animate(frames, Object.assign({ fill: 'backwards', easing: 'linear' }, o)); a.pause(); a.currentTime = 0; running.push(a); return a; };
+  function stop() { cancelAnimationFrame(raf); clearInterval(iv); running.forEach(a => a.cancel()); running = []; }
+  function tick() {
+    const now = performance.now(); lastTick = now;
+    const el = now - t0;
+    running.forEach(a => { a.currentTime = el; });
+    if (el > endAt + 60) { stop(); return; }
+    raf = requestAnimationFrame(tick);
+  }
+  function drive() {
+    endAt = running.reduce((m, a) => Math.max(m, a.effect.getComputedTiming().endTime), 0);
+    t0 = performance.now(); lastTick = t0;
+    raf = requestAnimationFrame(tick);
+    iv = setInterval(() => { if (performance.now() - lastTick > 90) { cancelAnimationFrame(raf); tick(); } }, 40);
+  }
+
+  /* W1-4: 「通勤ゼロ」 appears big in the middle, then shrinks into its place in the sentence.
+     「で、」 and the 2nd line only slide in once it has landed, so the big text never covers them. */
+  function play() {
+    const s = sec.getBoundingClientRect(), z = zero.getBoundingClientRect(), cp = title.getBoundingClientRect();
+    if (!z.width || !s.width) return;
+    const narrow = s.width / s.height < .9;                 /* phone: show it over the (still empty) headline area */
+    const cx = s.left + s.width / 2;
+    const S = Math.max(1.3, Math.min(3, s.width * (narrow ? .72 : .46) / z.width));
+    /* phone: the big phrase hangs from the top of the headline box, so it never covers the 「FULL REMOTE」 eyebrow
+       above it (the space below — 2nd line, EN line, body — is still empty at that moment) */
+    const cy = narrow ? cp.top + Math.max(cp.height * .6, S * z.height / 2 + 6) : s.top + s.height * .47;
+    const dx = cx - (z.left + z.width / 2), dy = cy - (z.top + z.height / 2);
+    const at = `translate(${dx}px,${dy}px)`, big = `${at} scale(${S})`;
+    const blue = '#1976f6', ink = getComputedStyle(title).color;
+    A(zero, [
+      { opacity: 0, transform: `${at} scale(${S * .55})`, color: blue, textShadow: GLOW, easing: 'cubic-bezier(.3,1.4,.5,1)' },
+      { opacity: 1, transform: big, color: blue, textShadow: GLOW, offset: .28 },
+      { opacity: 1, transform: big, color: blue, textShadow: GLOW, offset: .52, easing: 'cubic-bezier(.7,0,.25,1)' },
+      { opacity: 1, transform: 'none', color: ink, textShadow: NOGLOW }
+    ], { delay: 100, duration: 1650 });
+    [[tl, 1720], [ln2, 1800]].forEach(([n, d]) =>
+      A(n, [{ opacity: 0, transform: 'translateX(-1.2em)' }, { opacity: 1, transform: 'none' }], { delay: d, duration: 700, easing: OUT }));
+    A(en, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { delay: 1950, duration: 600, easing: OUT });
+  }
+
+  /* play() measures the headline, so it must run with the page fonts in place (LINE Seed JP is wider than the
+     fallback): wait for the headline's font (at most ~1.2s, then play with whatever is there) */
+  function fontsIn() {
+    const f = document.fonts;
+    if (!f || !f.load) return Promise.resolve();
+    const cs = getComputedStyle(title);
+    const want = Promise.all([f.load(cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily, title.textContent), f.ready]);
+    return Promise.race([want, new Promise(r => setTimeout(r, 1200))]).catch(() => {});
+  }
+  function start() {
+    if (played) return;
+    played = true;
+    if (reduced()) { sec.classList.remove('rm-wait'); return; }
+    fontsIn().then(() => {
+      try { play(); drive(); } catch (err) { stop(); /* never leave the headline hidden */ }
+      sec.classList.remove('rm-wait');
+    });
+  }
+  /* portrait (phone) screens: careers.js stage 3, whose portrait layout keeps the 3D bubbles small in the top-right
+     corner, clear of the headline, body and chips. Landscape: glass stage 0 (bubbles on the right, behind the photo). */
+  const fitStage = () => { sec.dataset.stage = innerWidth / innerHeight < 1 ? '3' : '0'; };
+  fitStage();
+  addEventListener('resize', fitStage);
+  if (reduced()) sec.classList.remove('rm-wait');
+  sec.addEventListener('slide:enter', start);
+})();
+</script>
+
 <!-- ===== slide s-numbers (shared/numbers.html) ===== -->
 <!-- shared: 実績の数字 (business #3 / careers #5) — count-up on first enter -->
 <style>
@@ -558,193 +830,6 @@
 })();
 </script>
 
-<!-- ===== slide s-company (shared/company.html) ===== -->
-<!-- shared: 会社概要 (business #10 / careers #6) — decided facts (new address, 業務委託を含む150人) -->
-<style>
-  #s-company .co{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
-  #s-company .s-title{margin-bottom:0}
-  #s-company .s-title small{margin-top:12px;line-height:1.7;font-size:clamp(13.5px,1.15vw,15px);letter-spacing:.02em}
-  #s-company .nw{white-space:nowrap}
-  #s-company .co-plate{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(22px,4vh,36px);background:#fff;border-radius:16px;padding:12px 20px 12px 14px;
-    box-shadow:0 10px 30px rgba(0,0,0,.18);line-height:0}
-  #s-company .co-plate img{height:44px;width:auto}
-  #s-company .co-plate img.type{height:27px}
-  #s-company .co-card{padding:clamp(6px,1vh,10px) clamp(20px,2.4vw,34px)}
-  #s-company .kv{margin:0;border-top:0}
-  #s-company .kv > div{grid-template-columns:8.5em minmax(0,1fr);padding:clamp(11px,1.9vh,16px) 2px;align-items:baseline}
-  #s-company .kv > div:last-child{border-bottom:0}
-  #s-company .kv dt{position:relative;padding-left:14px}
-  #s-company .kv dt::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
-  #s-company .kv dd{font-size:clamp(14.5px,1.2vw,16px);line-height:1.75}
-  #s-company .kv dd a{color:var(--accent);text-underline-offset:3px;word-break:break-all}
-  #s-company .co-num{font:800 1.3em var(--font-en);background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding:0 .08em}
-  @media (max-width:900px){
-    #s-company .co{grid-template-columns:minmax(0,1fr);gap:22px}
-    #s-company .co-plate{margin-top:18px;padding:10px 16px 10px 12px}
-    #s-company .co-plate img{height:34px}
-    #s-company .co-plate img.type{height:21px}
-  }
-  @media (max-width:640px){
-    #s-company .co-card{padding:4px 18px}
-    #s-company .kv > div{grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 0}
-    #s-company .kv dt{font-size:13px}
-    #s-company .co-plate{display:none}
-  }
-</style>
-<section class="slide" id="s-company" data-title="会社概要">
-  <div class="s-inner">
-    <div class="co">
-      <div class="co-head">
-        <span class="eyebrow" data-rv>COMPANY</span>
-        <h2 class="s-title" data-rv style="--d:.08s">会社概要<small>テレアポ代行・テレアポ人材マッチングのプロフェッショナル</small></h2>
-        <div class="co-plate" data-rv style="--d:.2s"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></div>
-      </div>
-      <div class="card co-card" data-rv style="--d:.25s">
-        <dl class="kv">
-          <div data-rv style="--d:.35s"><dt>商号</dt><dd>株式会社Insup</dd></div>
-          <div data-rv style="--d:.43s"><dt>代表者</dt><dd>佐藤 光</dd></div>
-          <div data-rv style="--d:.51s"><dt>本社所在地</dt><dd>〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 <span class="nw">サザンクロス札幌 9F</span></dd></div>
-          <div data-rv style="--d:.59s"><dt>従業員数</dt><dd>業務委託を含む<span class="co-num">150</span>人</dd></div>
-          <div data-rv style="--d:.67s"><dt>事業内容</dt><dd>インサイドセールス支援<br>Bar事業<br>マーケティング支援</dd></div>
-          <div data-rv style="--d:.75s"><dt>メールアドレス</dt><dd><a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></dd></div>
-        </dl>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== slide s-remote (careers/remote.html) ===== -->
-<style>
-  /* careers「フルリモート」— headline W1, motion W1-4 (ported from v5parts/w1.html) with the big
-     centered emphasis on the whole phrase「通勤ゼロ」. Everything scoped to #s-remote. */
-  #s-remote .rm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,4vw,56px);align-items:center}
-  #s-remote .rm-copy{position:relative;z-index:2;min-width:0}
-  #s-remote .rm-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(28px,3.7vw,52px);font-weight:900;line-height:1.32;
-    letter-spacing:.02em;color:var(--heading);margin:4px 0 10px}
-  #s-remote .ln{position:relative;display:inline-block;white-space:nowrap}
-  #s-remote .ln1{z-index:2}
-  #s-remote .zero{position:relative;z-index:3;display:inline-block;transform-origin:50% 50%;will-change:transform}
-  #s-remote .tl{display:inline-block}
-  #s-remote .rm-en{font:600 clamp(11px,1vw,13px)/1.6 var(--font-en);letter-spacing:.18em;color:var(--sub)}
-  #s-remote .rm-body{font-size:clamp(15px,1.25vw,17px);line-height:1.9;color:var(--sub);margin:18px 0 0;max-width:30em}
-  #s-remote .pts > span{background:var(--card-bg-strong)}
-  /* group photo: 4:3 like the source, so nobody is cut off */
-  #s-remote .rm-pic{position:relative;margin:0;width:100%;aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);border:1px solid var(--card-line);background:#dfe9f6}
-  #s-remote .rm-pic img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
-  /* before the first entrance the headline waits hidden (only while JS runs) */
-  html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:0}
-  /* glided past during a long jump (never entered): show the final headline instead of a blank area */
-  html.js #s-remote.rm-wait.is-passed .rm-title,html.js #s-remote.rm-wait.is-passed .rm-en{opacity:1;transition:none}
-  @media (max-width:900px){
-    #s-remote .rm-grid{grid-template-columns:minmax(0,1fr);gap:26px}
-    #s-remote .rm-pic{max-width:560px}
-  }
-  @media (max-width:640px){
-    #s-remote .rm-body{margin-top:14px}
-    #s-remote .pts{gap:8px;margin-top:18px}
-    #s-remote .pts > span{font-size:13.5px;padding:7px 12px}
-  }
-  @media (prefers-reduced-motion:reduce){
-    html.js #s-remote.rm-wait .rm-title,html.js #s-remote.rm-wait .rm-en{opacity:1}
-  }
-</style>
-<section class="slide rm-wait" id="s-remote" data-title="フルリモート">
-  <div class="s-inner">
-    <div class="rm-grid">
-      <div class="rm-copy">
-        <span class="eyebrow" data-rv>FULL REMOTE</span>
-        <h2 class="rm-title"><span class="ln ln1"><span class="zero">通勤ゼロ</span><span class="tl">で、</span></span><br><span class="ln ln2">トップセールスへ。</span></h2>
-        <p class="rm-en">ZERO COMMUTE. TOP RESULTS.</p>
-        <p class="rm-body" data-rv style="--d:1.55s">在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。</p>
-        <div class="pts" data-rv style="--d:1.75s"><span><b>REMOTE</b>在宅ワーク可能</span><span><b>DAYS</b>週2日〜OK</span><span><b>PAY</b>時給 1,500円〜3,000円</span></div>
-      </div>
-      <figure class="rm-pic" data-rv style="--d:1.45s"><img src="assets/img/team.webp" alt="メンバーの集合写真" width="1446" height="1087" decoding="async"></figure>
-    </div>
-  </div>
-</section>
-<script>
-(() => {
-  const sec = document.getElementById('s-remote');
-  if (!sec) return;
-  const $ = s => sec.querySelector(s);
-  const title = $('.rm-title'), zero = $('.zero'), tl = $('.tl'), ln2 = $('.ln2'), en = $('.rm-en');
-  const mq = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
-  const reduced = () => !!((window.InsupSite && InsupSite.reduced) || mq.matches);
-  const OUT = 'cubic-bezier(.2,.8,.2,1)';
-  const GLOW = '0 0 .25em rgba(255,255,255,.95)', NOGLOW = '0 0 0 rgba(255,255,255,0)';
-  let played = false;
-
-  /* animations are created paused and driven by our own clock (rAF, with a timer fallback when frames are throttled) — as in w1.html */
-  let running = [], t0 = 0, endAt = 0, raf = 0, iv = 0, lastTick = 0;
-  const A = (node, frames, o) => { const a = node.animate(frames, Object.assign({ fill: 'backwards', easing: 'linear' }, o)); a.pause(); a.currentTime = 0; running.push(a); return a; };
-  function stop() { cancelAnimationFrame(raf); clearInterval(iv); running.forEach(a => a.cancel()); running = []; }
-  function tick() {
-    const now = performance.now(); lastTick = now;
-    const el = now - t0;
-    running.forEach(a => { a.currentTime = el; });
-    if (el > endAt + 60) { stop(); return; }
-    raf = requestAnimationFrame(tick);
-  }
-  function drive() {
-    endAt = running.reduce((m, a) => Math.max(m, a.effect.getComputedTiming().endTime), 0);
-    t0 = performance.now(); lastTick = t0;
-    raf = requestAnimationFrame(tick);
-    iv = setInterval(() => { if (performance.now() - lastTick > 90) { cancelAnimationFrame(raf); tick(); } }, 40);
-  }
-
-  /* W1-4: 「通勤ゼロ」 appears big in the middle, then shrinks into its place in the sentence.
-     「で、」 and the 2nd line only slide in once it has landed, so the big text never covers them. */
-  function play() {
-    const s = sec.getBoundingClientRect(), z = zero.getBoundingClientRect(), cp = title.getBoundingClientRect();
-    if (!z.width || !s.width) return;
-    const narrow = s.width / s.height < .9;                 /* phone: show it over the (still empty) headline area */
-    const cx = s.left + s.width / 2;
-    const S = Math.max(1.3, Math.min(3, s.width * (narrow ? .72 : .46) / z.width));
-    /* phone: the big phrase hangs from the top of the headline box, so it never covers the 「FULL REMOTE」 eyebrow
-       above it (the space below — 2nd line, EN line, body — is still empty at that moment) */
-    const cy = narrow ? cp.top + Math.max(cp.height * .6, S * z.height / 2 + 6) : s.top + s.height * .47;
-    const dx = cx - (z.left + z.width / 2), dy = cy - (z.top + z.height / 2);
-    const at = `translate(${dx}px,${dy}px)`, big = `${at} scale(${S})`;
-    const blue = '#1976f6', ink = getComputedStyle(title).color;
-    A(zero, [
-      { opacity: 0, transform: `${at} scale(${S * .55})`, color: blue, textShadow: GLOW, easing: 'cubic-bezier(.3,1.4,.5,1)' },
-      { opacity: 1, transform: big, color: blue, textShadow: GLOW, offset: .28 },
-      { opacity: 1, transform: big, color: blue, textShadow: GLOW, offset: .52, easing: 'cubic-bezier(.7,0,.25,1)' },
-      { opacity: 1, transform: 'none', color: ink, textShadow: NOGLOW }
-    ], { delay: 100, duration: 1650 });
-    [[tl, 1720], [ln2, 1800]].forEach(([n, d]) =>
-      A(n, [{ opacity: 0, transform: 'translateX(-1.2em)' }, { opacity: 1, transform: 'none' }], { delay: d, duration: 700, easing: OUT }));
-    A(en, [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { delay: 1950, duration: 600, easing: OUT });
-  }
-
-  /* play() measures the headline, so it must run with the page fonts in place (LINE Seed JP is wider than the
-     fallback): wait for the headline's font (at most ~1.2s, then play with whatever is there) */
-  function fontsIn() {
-    const f = document.fonts;
-    if (!f || !f.load) return Promise.resolve();
-    const cs = getComputedStyle(title);
-    const want = Promise.all([f.load(cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily, title.textContent), f.ready]);
-    return Promise.race([want, new Promise(r => setTimeout(r, 1200))]).catch(() => {});
-  }
-  function start() {
-    if (played) return;
-    played = true;
-    if (reduced()) { sec.classList.remove('rm-wait'); return; }
-    fontsIn().then(() => {
-      try { play(); drive(); } catch (err) { stop(); /* never leave the headline hidden */ }
-      sec.classList.remove('rm-wait');
-    });
-  }
-  /* portrait (phone) screens: careers.js stage 3, whose portrait layout keeps the 3D bubbles small in the top-right
-     corner, clear of the headline, body and chips. Landscape: glass stage 0 (bubbles on the right, behind the photo). */
-  const fitStage = () => { sec.dataset.stage = innerWidth / innerHeight < 1 ? '3' : '0'; };
-  fitStage();
-  addEventListener('resize', fitStage);
-  if (reduced()) sec.classList.remove('rm-wait');
-  sec.addEventListener('slide:enter', start);
-})();
-</script>
-
 <!-- ===== slide s-ceo (shared/ceo.html) ===== -->
 <!-- shared: 代表挨拶 (business #8 / careers #8) — full text from the current about page, every line in order -->
 <style>
@@ -838,145 +923,60 @@
 })();
 </script>
 
-<!-- ===== slide s-lounge (shared/lounge.html) ===== -->
-<!-- shared: ラウンジ (business #11 / careers #9)
-     photo motion LB (slow zoom/pan + mouse parallax + hover light sweep) and
-     headline L1-3 「ブラインドが開く」 — both ported from v5parts/lounge.html (candidate switcher removed). -->
+<!-- ===== slide s-company (shared/company.html) ===== -->
+<!-- shared: 会社概要 (business #10 / careers #6) — decided facts (new address, 業務委託を含む150人) -->
 <style>
-  #s-lounge .lg{display:grid;grid-template-columns:minmax(0,58fr) minmax(0,42fr);gap:clamp(26px,3.6vw,56px);align-items:center}
-
-  /* ---- LB gallery ---- */
-  #s-lounge .gal{height:clamp(340px,60vh,560px);display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:8px;min-height:0}
-  #s-lounge .gal .t{position:relative;overflow:hidden;border-radius:14px;background:#cfdcef;box-shadow:var(--card-shadow)}
-  body.theme-dark #s-lounge .gal .t{background:#14306a}
-  #s-lounge .gal .t.a{grid-row:1/3}
-  #s-lounge .gal .zm{position:absolute;inset:0;transform-origin:50% 50%}
-  #s-lounge .gal .par{position:absolute;inset:-6%;transition:transform .25s ease-out}
-  #s-lounge .gal .img{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;will-change:transform}
-  #s-lounge .kb .t.a .img{animation:lounge-kbA 16s ease-in-out infinite alternate}
-  #s-lounge .kb .t.b .img{animation:lounge-kbB 14s ease-in-out infinite alternate}
-  #s-lounge .kb .t.c .img{animation:lounge-kbC 15s ease-in-out infinite alternate}
-  @keyframes lounge-kbA{from{transform:scale(1.06) translate(0,0)}to{transform:scale(1.22) translate(-4%,2%)}}
-  @keyframes lounge-kbB{from{transform:scale(1.12) translate(4%,0)}to{transform:scale(1.12) translate(-4%,0)}}
-  @keyframes lounge-kbC{from{transform:scale(1.25) translate(-3%,2%)}to{transform:scale(1.08) translate(2%,-1%)}}
-  /* the slow photo motion rests while the slide is off screen */
-  #s-lounge:not(.is-active) .kb .t .img{animation-play-state:paused}
-  #s-lounge .gal .t::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 70%);transform:translateX(-120%);transition:transform 1s;pointer-events:none}
-  #s-lounge .kb .t:hover::after{transform:translateX(120%)}
-
-  /* ---- text ---- */
-  #s-lounge .txt{min-width:0;position:relative;z-index:1;padding:clamp(20px,3.2vh,34px) clamp(20px,2.4vw,34px);background:var(--card-bg);border:1px solid var(--card-line);border-radius:var(--radius);box-shadow:var(--card-shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-  #s-lounge .kicker{margin-bottom:6px}
-  #s-lounge .s-title{position:relative;width:fit-content;max-width:100%;font-size:clamp(24px,2.7vw,38px);line-height:1.5;margin:0 0 clamp(12px,2vh,18px)}
-  #s-lounge .s-title .ln{display:inline-block}
-  #s-lounge .body{font-size:clamp(14px,1.15vw,16px);line-height:1.9;color:var(--sub);margin:0}
-  #s-lounge .tags{margin:clamp(12px,2vh,18px) 0 0}
-  #s-lounge .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:clamp(12px,2vh,18px) 0 0;padding:0}
-  #s-lounge .facts > div{min-width:0;background:var(--chip-bg);border:1px solid var(--chip-line);border-radius:12px;padding:9px 14px}
-  #s-lounge .facts dt{font:700 10.5px/1.5 var(--font-en);letter-spacing:.16em;color:var(--accent-2)}
-  body.theme-light #s-lounge .facts dt{color:var(--accent)}
-  #s-lounge .facts .nw{white-space:nowrap}
-  #s-lounge .facts dd{margin:0;font-size:14px;font-weight:700;color:var(--fg);line-height:1.55}
-
-  /* ---- entrance (calm follow-up stagger, from v5) ---- */
-  #s-lounge .lg{--d:1.55s}
-  @keyframes lounge-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-  @keyframes lounge-fade{from{opacity:0}to{opacity:1}}
-  #s-lounge .lg.play .kicker{animation:lounge-fade .7s ease-out .1s both}
-  #s-lounge .lg.play .body{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) var(--d) both}
-  #s-lounge .lg.play .tags{animation:lounge-up .8s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .18s) both}
-  #s-lounge .lg.play .facts > div{animation:lounge-up .7s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .34s + var(--i) * .09s) both}
-  /* until the slide is reached, everything waits on its first frame (blinds closed) */
-  #s-lounge .lg.wait.play *,#s-lounge .lg.wait.play *::before,#s-lounge .lg.wait.play *::after,#s-lounge .lg.wait.play{animation-play-state:paused!important}
-
-  /* ---- L1-3 ブラインドが開く ---- */
-  #s-lounge{--sl-a:#ffffff;--sl-b:#f4f7fb;--sl-c:#dbe5f2;--sl-d:#bccde6;--sl-sh:rgba(11,45,107,.16);--rail-a:#d4e0f1;--rail-b:#a9bedd;--cord:#c3d2e8}
-  body.theme-dark #s-lounge{--sl-a:#1d3f80;--sl-b:#16346e;--sl-c:#0f2858;--sl-d:#0a1e47;--sl-sh:rgba(0,0,0,.45);--rail-a:#3a5d9e;--rail-b:#22417c;--cord:#3a5d9e}
-  #s-lounge .blinds{position:absolute;inset:3px -10px -4px -8px;display:none;flex-direction:column;pointer-events:none;perspective:700px}
-  #s-lounge .blinds i{flex:1;display:block;transform-origin:50% 50%;
-    background:linear-gradient(180deg,var(--sl-a) 0%,var(--sl-b) 38%,var(--sl-c) 78%,var(--sl-d) 100%);box-shadow:0 1px 1px var(--sl-sh)}
-  #s-lounge .blinds::before{content:"";position:absolute;left:-3px;right:-3px;top:-2px;height:5px;border-radius:3px;background:linear-gradient(var(--rail-a),var(--rail-b));z-index:1}
-  #s-lounge .blinds::after{content:"";position:absolute;right:14px;top:0;bottom:-10px;width:2px;background:var(--cord);border-radius:2px}
-  #s-lounge .lg.play .blinds{display:flex;animation:lounge-blindsOut .35s ease-out 1.85s both}
-  #s-lounge .lg.play .blinds i{animation:lounge-slat .95s cubic-bezier(.55,0,.25,1) calc(.45s + var(--i) * .06s) both}
-  @keyframes lounge-slat{0%{transform:rotateX(0)}100%{transform:rotateX(86deg)}}
-  @keyframes lounge-blindsOut{from{opacity:1}to{opacity:0}}
-
-  /* ---- phone / narrow ---- */
+  #s-company .co{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
+  #s-company .s-title{margin-bottom:0}
+  #s-company .s-title small{margin-top:12px;line-height:1.7;font-size:clamp(13.5px,1.15vw,15px);letter-spacing:.02em}
+  #s-company .nw{white-space:nowrap}
+  #s-company .co-plate{display:inline-flex;align-items:center;gap:10px;margin-top:clamp(22px,4vh,36px);background:#fff;border-radius:16px;padding:12px 20px 12px 14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.18);line-height:0}
+  #s-company .co-plate img{height:44px;width:auto}
+  #s-company .co-plate img.type{height:27px}
+  #s-company .co-card{padding:clamp(6px,1vh,10px) clamp(20px,2.4vw,34px)}
+  #s-company .kv{margin:0;border-top:0}
+  #s-company .kv > div{grid-template-columns:8.5em minmax(0,1fr);padding:clamp(11px,1.9vh,16px) 2px;align-items:baseline}
+  #s-company .kv > div:last-child{border-bottom:0}
+  #s-company .kv dt{position:relative;padding-left:14px}
+  #s-company .kv dt::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  #s-company .kv dd{font-size:clamp(14.5px,1.2vw,16px);line-height:1.75}
+  #s-company .kv dd a{color:var(--accent);text-underline-offset:3px;word-break:break-all}
+  #s-company .co-num{font:800 1.3em var(--font-en);background:var(--em-grad);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;padding:0 .08em}
   @media (max-width:900px){
-    #s-lounge .lg{grid-template-columns:minmax(0,1fr);gap:22px}
-    #s-lounge .gal{height:clamp(260px,64vw,400px);grid-template-columns:1fr 1fr;grid-template-rows:2fr 1fr;gap:6px}
-    #s-lounge .gal .t{border-radius:12px}
-    #s-lounge .gal .t.a{grid-row:auto;grid-column:1/3}
-    #s-lounge .s-title{font-size:clamp(24px,6.6vw,32px)}
+    #s-company .co{grid-template-columns:minmax(0,1fr);gap:22px}
+    #s-company .co-plate{margin-top:18px;padding:10px 16px 10px 12px}
+    #s-company .co-plate img{height:34px}
+    #s-company .co-plate img.type{height:21px}
   }
   @media (max-width:640px){
-    #s-lounge .facts dd{font-size:13px;letter-spacing:-.01em}
-    #s-lounge .facts > div{padding:8px 9px}
-    #s-lounge .txt{padding:20px 16px}
-  }
-  @media (max-width:375px){
-    #s-lounge .facts{gap:6px}
-    #s-lounge .facts > div{padding:8px 7px}
-    #s-lounge .facts dd{font-size:12px;letter-spacing:-.03em}
-  }
-  @media (max-width:340px){
-    #s-lounge .facts{grid-template-columns:minmax(0,1fr)}
-  }
-  @media (prefers-reduced-motion:reduce){
-    #s-lounge .kb .t .img{animation:none;transform:scale(1.1)}
-    #s-lounge .gal .par{transition:none}
-    #s-lounge .blinds{display:none!important}
+    #s-company .co-card{padding:4px 18px}
+    #s-company .kv > div{grid-template-columns:minmax(0,1fr);gap:2px;padding:12px 0}
+    #s-company .kv dt{font-size:13px}
+    #s-company .co-plate{display:none}
   }
 </style>
-<section class="slide" id="s-lounge" data-title="ラウンジ">
-  <div class="s-inner wide">
-    <div class="lg">
-      <div class="gal kb">
-        <div class="t a" role="img" aria-label="ラウンジの様子"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-main.jpg)"></div></div></div></div>
-        <div class="t b" role="img" aria-label="窓ぎわの席が並ぶラウンジ"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-work.jpg)"></div></div></div></div>
-        <div class="t c" role="img" aria-label="窓ぎわのカウンター席"><div class="zm"><div class="par"><div class="img" style="background-image:url(assets/img/lounge-counter.jpg)"></div></div></div></div>
+<section class="slide" id="s-company" data-title="会社概要">
+  <div class="s-inner">
+    <div class="co">
+      <div class="co-head">
+        <span class="eyebrow" data-rv>COMPANY</span>
+        <h2 class="s-title" data-rv style="--d:.08s">会社概要<small>テレアポ代行・テレアポ人材マッチングのプロフェッショナル</small></h2>
+        <div class="co-plate" data-rv style="--d:.2s"><img src="assets/img/logo-mark.png" alt="" width="658" height="660"><img class="type" src="assets/img/logo-type.png" alt="Insup" width="977" height="368"></div>
       </div>
-      <div class="txt">
-        <span class="eyebrow kicker">LOUNGE</span>
-        <h2 class="s-title"><span class="ln l1">打ち合わせは、</span><br><span class="ln l2">眺めのいいラウンジで。</span><span class="blinds" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i></span></h2>
-        <p class="body">ご来社・ご訪問・商談の際は、サザンクロス札幌10階のラウンジスペースでお迎えします。大きな窓のある明るい空間で、ゆったりとお話しいただけます。</p>
-        <ul class="tags"><li>ご来社</li><li>ご訪問</li><li>商談</li></ul>
-        <dl class="facts">
-          <div style="--i:0"><dt>HOURS</dt><dd>8:00〜20:00</dd></div>
-          <div style="--i:1"><dt>BOOTH</dt><dd>テレフォンブース <span class="nw">2台</span></dd></div>
-          <div style="--i:2"><dt>POWER</dt><dd>全席コンセント完備</dd></div>
-          <div style="--i:3"><dt>DRINK</dt><dd>自動販売機 <span class="nw">2台</span></dd></div>
+      <div class="card co-card" data-rv style="--d:.25s">
+        <dl class="kv">
+          <div data-rv style="--d:.35s"><dt>商号</dt><dd>株式会社Insup</dd></div>
+          <div data-rv style="--d:.43s"><dt>代表者</dt><dd>佐藤 光</dd></div>
+          <div data-rv style="--d:.51s"><dt>本社所在地</dt><dd>〒060-0063<br>北海道札幌市中央区南三条西3丁目11-1 <span class="nw">サザンクロス札幌 9F</span></dd></div>
+          <div data-rv style="--d:.59s"><dt>従業員数</dt><dd>業務委託を含む<span class="co-num">150</span>人</dd></div>
+          <div data-rv style="--d:.67s"><dt>事業内容</dt><dd>インサイドセールス支援<br>Bar事業<br>マーケティング支援</dd></div>
+          <div data-rv style="--d:.75s"><dt>メールアドレス</dt><dd><a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></dd></div>
         </dl>
       </div>
     </div>
   </div>
 </section>
-<script>
-(() => {
-  const sec = document.getElementById('s-lounge');
-  if (!sec) return;
-  const site = window.InsupSite || {};
-  const box = sec.querySelector('.lg');
-
-  /* L1-3: blinds wait closed until the slide is reached, then open once */
-  if (!site.reduced) box.classList.add('play', 'wait');
-  sec.addEventListener('slide:enter', () => {
-    if (!box.classList.contains('wait')) return;
-    if (site.reduced) { box.classList.remove('play', 'wait'); return; }
-    box.classList.remove('wait');
-  });
-
-  /* LB: mouse parallax (same as v4 / v5) */
-  const pars = [...box.querySelectorAll('.par')];
-  box.addEventListener('pointermove', e => {
-    if (e.pointerType === 'touch' || site.reduced) return;
-    const r = box.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-    pars.forEach((p, i) => { const d = [1, 1.6, 2.2][i]; p.style.transform = `translate(${-x * 3 * d}%, ${-y * 3 * d}%)`; });
-  });
-  box.addEventListener('pointerleave', () => pars.forEach(p => { p.style.transform = ''; }));
-})();
-</script>
 
 <!-- ===== slide s-access (shared/access.html) ===== -->
 <!-- shared: アクセス (business #12 / careers #10) — new address, stations, map button, building photo -->
