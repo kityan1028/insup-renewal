@@ -35,11 +35,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=b488d5265f">
+<link rel="stylesheet" href="assets/css/site.css?v=062967ae46">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=b488d5265f"></script>
-<script src="assets/js/careers.js?v=b488d5265f" defer></script>
+<script src="assets/js/site.js?v=062967ae46"></script>
+<script src="assets/js/careers.js?v=062967ae46" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -57,16 +57,16 @@
 <main class="deck" id="deck">
 <!-- ===== slide s-hero (careers/hero.html) ===== -->
 <!-- careers ① hero — RECRUIT. Text from cur/text_recruit.txt. Arrival: gentle fade/rise (SPEC: no special transition).
-     The glass bubbles of the page background (careers.js, stage 0) sit on the right; the copy stays on the left. -->
+     The glass bubbles of the page background (careers.js, stage 0) sit on the right; the copy is centred (client request 2026-11). -->
 <style>
-  #s-hero .hero-in{display:flex;flex-direction:column;align-items:flex-start}
-  #s-hero .hero-copy{max-width:min(620px,100%)}
+  #s-hero .hero-in{display:flex;flex-direction:column;align-items:center;text-align:center}
+  #s-hero .hero-copy{max-width:min(760px,100%);margin:0 auto;display:flex;flex-direction:column;align-items:center}
   #s-hero .eyebrow{display:inline-flex;align-items:center;gap:12px;margin-bottom:18px}
-  #s-hero .eyebrow::after{content:"";width:44px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--sky))}
+  #s-hero .eyebrow::before,#s-hero .eyebrow::after{content:"";width:44px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--blue),var(--sky))}
   #s-hero h1{font-size:clamp(34px,5vw,66px);font-weight:900;line-height:1.3;letter-spacing:.02em;color:var(--heading);margin:0}
   #s-hero h1 .ln{display:block;white-space:nowrap}
   #s-hero .hero-sub{word-break:keep-all;overflow-wrap:anywhere;margin-top:22px;font-size:clamp(16px,1.45vw,19px);font-weight:500;line-height:1.85;color:var(--sub)}
-  #s-hero .btns{margin-top:34px}
+  #s-hero .btns{margin-top:34px;justify-content:center}
   #s-hero .btn{min-height:56px;padding:14px 32px;font-size:16px}
   #s-hero .btn .arr{transition:transform .35s var(--ease)}
   #s-hero .btn:hover .arr{transform:translateY(3px)}
@@ -83,11 +83,11 @@
     html.js #s-hero .ln[data-rv]{transform:none}
   }
 </style>
-<section class="slide" id="s-hero" data-title="トップ" data-stage="0">
+<section class="slide" id="s-hero" data-title="トップ" data-stage="5">
   <div class="s-inner hero-in">
     <div class="hero-copy">
       <span class="eyebrow" data-rv>RECRUIT</span>
-      <h1><span class="ln" data-rv style="--d:.15s">一緒に働く仲間を</span><span class="ln" data-rv style="--d:.32s">募集しています。</span></h1>
+      <h1><span class="ln" data-rv style="--d:.15s">一緒に働く仲間を</span><span class="ln" data-rv style="--d:.32s">募集しています</span></h1>
       <p class="hero-sub" data-rv style="--d:.55s">在宅ワーク可、高時給、<wbr>柔軟な働き方が可能です。</p>
       <div class="btns" data-rv style="--d:.75s"><a class="btn" href="#s-positions">募集ポジションを見る <span class="arr" aria-hidden="true">↓</span></a></div>
     </div>
