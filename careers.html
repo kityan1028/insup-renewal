@@ -368,9 +368,9 @@
 (() => {
   /* ===== メンバー（まだ無いので仮の枠）— 人数を変えるときはここを増減。項目と順番は決定どおり ===== */
   const MEMBERS = [
-    { initial: 'M.A', photo: 'assets/img/members/m1.jpg?v=2', reason: '社長との出会いで人としても成長していきたいと思ったから。', work: 'フランチャイズ総合代理店案件の商談担当（FS）', good: '成果が報酬に直結することで自身の成長をより実感できる環境。' },
-    { initial: 'Y.E', photo: 'assets/img/members/m2.jpg?v=2', reason: '趣味やプライベートの時間を確保しながら稼ぎたいと思ったから。', work: '企業とインサイドセールス人員のマッチング事業における管理者業務（NODE事業部）', good: 'プライベートを確保しつつ、安定した報酬を稼ぎ続けられる環境であること。' },
-    { initial: 'A.Y', photo: 'assets/img/members/m3.jpg?v=2', reason: '子育てと仕事の両立が可能な会社で今までのテレアポ経験を活かしたいと思ったから。', work: 'インサイドセールス（IS）', good: '子育てと仕事の両立が叶って効率良く稼ぐことができる。' },
+    { initial: '40代男性　元飲食店店員', photo: 'assets/img/members/m1.jpg?v=2', reason: '社長との出会いで人としても成長していきたいと思ったから。', work: 'フランチャイズ総合代理店案件の商談担当（FS）', good: '成果が報酬に直結することで自身の成長をより実感できる環境。' },
+    { initial: '30代女性　元保育士独身', photo: 'assets/img/members/m2.jpg?v=2', reason: '趣味やプライベートの時間を確保しながら稼ぎたいと思ったから。', work: '企業とインサイドセールス人員のマッチング事業における管理者業務（NODE事業部）', good: 'プライベートを確保しつつ、安定した報酬を稼ぎ続けられる環境であること。' },
+    { initial: '30代女性　配偶者、子供有', photo: 'assets/img/members/m3.jpg?v=2', reason: '子育てと仕事の両立が可能な会社で今までのテレアポ経験を活かしたいと思ったから。', work: 'インサイドセールス（IS）', good: '子育てと仕事の両立が叶って効率良く稼ぐことができる。' },
   ];
   const Q = [['reason', '働くことになったきっかけ'], ['work', '今の仕事内容'], ['good', 'Insupで良かったこと']];
 
@@ -379,7 +379,7 @@
   const chat = sec.querySelector('.chat');
   chat.innerHTML = MEMBERS.map((m, i) => `
     <li class="row${i % 2 ? ' r' : ''}" style="--d:${(0.35 + i * 1.3).toFixed(2)}s">
-      ${m.photo ? `<div class="av has-photo anim"><img src="${m.photo}" alt="${m.initial}さん" width="370" height="370" decoding="async"></div>` : `<div class="ph round av anim">写真入る<small>（顔写真）</small></div>`}
+      ${m.photo ? `<div class="av has-photo anim"><img src="${m.photo}" alt="メンバーの写真（${m.initial}）" width="370" height="370" decoding="async"></div>` : `<div class="ph round av anim">写真入る<small>（顔写真）</small></div>`}
       <div class="bw">
         <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="say anim"><span class="in">
