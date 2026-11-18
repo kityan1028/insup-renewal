@@ -41,7 +41,7 @@
 <style>
   /* ===== 入口ページ — E4「ガラスのきらめき」 (ported from v5parts/ent.html, E4 only) ===== */
   :root{--navy:#0b2d6b;--blue:#1976f6;--sky:#4db3ff;--pale:#ebf4ff;--deep:#06183d;--ice:#75f2ff;--ink:#0b1d40;
-    /* fonts — F6 「上質・落ち着き」, same three variables as assets/css/site.css?v=062967ae46 (keep in sync) */
+    /* fonts — F6 「上質・落ち着き」, same three variables as assets/css/site.css?v=1972e70609 (keep in sync) */
     --font-ja:"Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
     --font-en:"Cormorant Garamond","Zen Kaku Gothic New",system-ui,-apple-system,"Hiragino Sans","Yu Gothic UI",sans-serif;
     --font-head:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif}
@@ -124,8 +124,8 @@
   .es.still *{animation:none !important}
   @media (prefers-reduced-motion:reduce){.es *{animation:none !important;transition:none !important}}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="assets/js/fx.js?v=2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="assets/js/fx.js?v=3" defer></script>
 </head>
 <body>
 <main class="es pre" id="ent">
@@ -225,14 +225,18 @@
       }
     };
   }
+  /* three.js + fx.js load with `defer` (they no longer hold up the photo and logo); start the sparkles once they are in */
   let st = null;
-  try {
-    if (window.InsupFX && window.THREE) {
-      st = InsupFX.mount(document.getElementById('entFx'), s => makeEffect(s), { hit: slide });
-      st.api.resize();
-      if (reduced) setTimeout(() => { st.enabled = false; }, 400); /* one still frame, no autoplaying motion */
-    }
-  } catch (e) { console.warn('entrance effect not started', e); }
+  const startFx = () => {
+    try {
+      if (window.InsupFX && window.THREE) {
+        st = InsupFX.mount(document.getElementById('entFx'), s => makeEffect(s), { hit: slide });
+        st.api.resize();
+        if (reduced) setTimeout(() => { st.enabled = false; }, 400); /* one still frame, no autoplaying motion */
+      }
+    } catch (e) { console.warn('entrance effect not started', e); }
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startFx); else startFx();
 
   /* entrance: one-shot; reduced motion shows the final state */
   if (reduced) { slide.classList.remove('pre'); slide.classList.add('still'); }

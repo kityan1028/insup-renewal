@@ -35,11 +35,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fonts: F3 「親しみ・力強い」 (client decision 2026-10-26) — LINE Seed JP for Japanese, Latin and numbers -->
 <link href="https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=062967ae46">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="assets/js/fx.js?v=2"></script>
-<script src="assets/js/site.js?v=062967ae46"></script>
-<script src="assets/js/careers.js?v=062967ae46" defer></script>
+<link rel="stylesheet" href="assets/css/site.css?v=1972e70609">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="assets/js/fx.js?v=3" defer></script>
+<script src="assets/js/site.js?v=1972e70609"></script>
+<script src="assets/js/careers.js?v=1972e70609" defer></script>
 </head>
 <body class="theme-light page-careers">
 <a class="skip" href="#deck">本文へ移動</a>
@@ -519,7 +519,7 @@
   const chat = sec.querySelector('.chat');
   chat.innerHTML = MEMBERS.map((m, i) => `
     <li class="row${i % 2 ? ' r' : ''}" style="--d:${(0.35 + i * 1.3).toFixed(2)}s">
-      ${m.photo ? `<div class="av has-photo anim"><img src="${m.photo}" alt="メンバーの写真（${m.initial}）" width="370" height="370" decoding="async"></div>` : `<div class="ph round av anim">写真入る<small>（顔写真）</small></div>`}
+      ${m.photo ? `<div class="av has-photo anim"><img src="${m.photo}" alt="メンバーの写真（${m.initial}）" width="370" height="370" loading="lazy" decoding="async"></div>` : `<div class="ph round av anim">写真入る<small>（顔写真）</small></div>`}
       <div class="bw">
         <div class="typing" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="say anim"><span class="in">
@@ -586,7 +586,7 @@
         <p class="rm-body" data-rv style="--d:1.55s">在宅ワーク可能、週2日〜勤務OK。ライフスタイルに合わせた働き方が可能。</p>
         <div class="pts" data-rv style="--d:1.75s"><span><b>REMOTE</b>在宅ワーク可能</span><span><b>DAYS</b>週2日〜OK</span><span><b>PAY</b>時給 1,500円〜3,000円</span></div>
       </div>
-      <figure class="rm-pic" data-rv style="--d:1.45s"><img src="assets/img/team.webp" alt="メンバーの集合写真" width="1446" height="1087" decoding="async"></figure>
+      <figure class="rm-pic" data-rv style="--d:1.45s"><img src="assets/img/team.webp" alt="メンバーの集合写真" width="1446" height="1087" loading="lazy" decoding="async"></figure>
     </div>
   </div>
 </section>
@@ -1036,7 +1036,7 @@
         <div class="btns" data-rv style="--d:.62s"><a class="btn" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%B5%E3%82%B6%E3%83%B3%E3%82%AF%E3%83%AD%E3%82%B9%E6%9C%AD%E5%B9%8C" target="_blank" rel="noopener">Googleマップで見る <span class="arr" aria-hidden="true">↗</span></a></div>
       </div>
       <figure class="ac-pic" data-rv>
-        <img src="assets/img/building.jpg" alt="サザンクロス札幌の外観" width="853" height="1280" decoding="async">
+        <img src="assets/img/building.jpg" alt="サザンクロス札幌の外観" width="853" height="1280" loading="lazy" decoding="async">
         <figcaption>サザンクロス札幌</figcaption>
       </figure>
       <div class="ac-map" data-rv style="--d:.2s">
