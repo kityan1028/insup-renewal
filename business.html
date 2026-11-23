@@ -487,202 +487,6 @@
   </div>
 </section>
 
-<!-- ===== slide s-services (business/services.html) ===== -->
-<!-- business 「事業内容」 — BUSINESS lead + SERVICE 01/02/03 (text: cur/text_business.txt) -->
-<style>
-  /* Each service is a light "picture card" (same family as 選ばれる理由 / 実績): the service's scene
-     (illust/svc-*.webp) is the card's background at the top and fades into the card; the label + title sit on a
-     white tab that overlaps the picture, and the description / bullets / chips sit on the light card body.
-     Readability: dark navy text on white-to-pale-blue, deeper blue label and icons (all small text ≥ 4.5:1).
-     The Bar scene is dark: it keeps its own colours (neon / bottles stay recognisable) and fades into the same light
-     card body as the others, so the three read as one family; its fade starts lower (--f0/--f1) to keep the grey
-     transition short. (A dark card body for Bar was tried and dropped: it broke the family on this dark page.) */
-  #s-services{--art-h:clamp(118px,18.5vh,156px);--cap-ov:46px;--sv-ink:#0b1d40;--sv-sub:#34425f;--sv-blue:#0b4fc4}
-  #s-services .sv-hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 40px}
-  #s-services .sv-hd .s-title{margin-bottom:0}
-  #s-services .sv-hd .lead{max-width:30em}
-  #s-services .sv-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:18px;align-items:stretch}
-
-  /* card shell (light, lit like the other picture cards on this dark page) */
-  #s-services .sv{display:flex;flex-direction:column;padding:0;overflow:hidden;isolation:isolate;color:var(--sv-ink);
-    background:linear-gradient(160deg,#ffffff 0%,#f6f9ff 46%,#eaf3ff 100%);border:1px solid rgba(255,255,255,.75);
-    -webkit-backdrop-filter:none;backdrop-filter:none;
-    box-shadow:0 0 0 1px rgba(159,220,255,.28),0 22px 48px rgba(0,6,24,.42),0 0 46px rgba(77,179,255,.2)}
-  #s-services .sv.main{box-shadow:0 0 0 1px rgba(117,242,255,.5),0 22px 48px rgba(0,6,24,.42),0 0 52px rgba(77,179,255,.3)}
-  #s-services .sv::before{content:"";position:absolute;z-index:3;left:22px;right:22px;top:0;height:3px;border-radius:0 0 3px 3px;
-    background:linear-gradient(90deg,#1976f6,#4db3ff 55%,rgba(77,179,255,0));transform-origin:left center}
-
-  /* the scene: card background at the top, fading softly into the card body. The picture takes all the height the
-     text does not need (min --art-h): the tallest card (SERVICE 01) keeps the minimum, and in SERVICE 02/03 the scene
-     grows so their text block ends at the card bottom too (text is bottom-aligned in all three cards). */
-  #s-services .sv-art{position:relative;z-index:0;flex:1 0 var(--art-h);height:auto;min-height:var(--art-h);overflow:hidden;pointer-events:none}
-  #s-services .sv-art img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:var(--pos,50% 30%);
-    --fade:linear-gradient(180deg,#000 0%,#000 var(--f0,62%),rgba(0,0,0,.35) var(--f1,88%),transparent 100%);
-    -webkit-mask-image:var(--fade);mask-image:var(--fade)}
-  #s-services .sv-art.is{--pos:62% 26%}
-  #s-services .sv-art.bar{--pos:62% 40%;--f0:72%;--f1:92%}
-  #s-services .sv-art.mk{--pos:8% 40%}
-  /* the marketing scene is very wide: when its card gives it a tall area, a full-height cover crop would show only a
-     slice (lettering or face cut). Cap the picture at a 620:453 window (lettering + the woman at her laptop) and let
-     its soft fade end where the title tab starts; on short/narrow areas it is a normal cover crop (max-height). */
-  #s-services .sv-art.mk img{bottom:auto;height:auto;aspect-ratio:620/453;max-height:100%}
-
-  /* label + title on a white tab that rises into the picture */
-  #s-services .sv-cap{position:relative;z-index:1;align-self:flex-start;max-width:calc(100% - 18px);margin-top:calc(-1 * var(--cap-ov));
-    padding:10px 20px 2px 22px;border-radius:0 14px 0 0;background:rgba(255,255,255,.94);
-    box-shadow:6px -6px 18px rgba(11,45,107,.10);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-  #s-services .sv .num{color:var(--sv-blue);margin-bottom:2px}
-  #s-services .sv h3{font-size:clamp(17px,1.45vw,20px);margin:0;color:#0b2d6b}
-
-  #s-services .sv-body{position:relative;z-index:1;display:flex;flex-direction:column;flex:0 0 auto;padding:8px 22px 16px}
-  #s-services .sv .desc{font-size:13.5px;line-height:1.8;color:var(--sv-sub)}
-  #s-services .sv ul{list-style:none;margin:10px 0 0;padding:10px 0 0;border-top:1px solid rgba(11,45,107,.14);display:grid;gap:5px}
-  #s-services .sv li{position:relative;padding-left:22px;font-size:13.5px;line-height:1.6;font-weight:500;color:var(--sv-ink)}
-  #s-services .sv li::before{content:"";position:absolute;left:2px;top:.38em;width:12px;height:7px;border-left:2px solid #1976f6;border-bottom:2px solid #1976f6;transform:rotate(-45deg);transform-origin:center;border-radius:1px}
-  #s-services .pos{margin-top:auto;padding-top:12px}
-  #s-services .pos h4{font:700 12px/1.5 var(--font-ja);letter-spacing:.08em;color:#46536f;margin:0 0 7px}
-  #s-services .pos ul{margin:0;padding:0;border:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-  #s-services .pos li{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 5px;border-radius:12px;background:#fff;border:1px solid #c9ddf7;
-    box-shadow:0 3px 10px rgba(11,45,107,.06);color:#0b2d6b;font-size:12px;line-height:1.35;font-weight:700;min-width:0;text-align:center;white-space:nowrap}
-  #s-services .pos li::before{display:none}
-  #s-services .pos .ic{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:24px;height:22px;padding:0 7px;border-radius:99px;
-    background:linear-gradient(135deg,#0b4fc4,#1a6fe8);color:#fff;font:800 11.5px var(--font-en);letter-spacing:.04em}
-
-  #s-services .sv .desc,#s-services .sv li,#s-services .lead{text-wrap:pretty}
-  #s-services .pos li{text-wrap:nowrap}
-
-  /* entrance: accent line draws, the picture settles in (final state = reduced motion / passed) */
-  html.js #s-services .sv::before{transform:scaleX(0);transition:transform 1.1s var(--ease) calc(var(--d,0s) + .35s)}
-  html.js #s-services.is-seen .sv::before,#s-services.is-passed .sv::before{transform:scaleX(1)}
-  html.js #s-services .sv-art img{opacity:0;transform:scale(1.06);transform-origin:var(--pos,50% 30%);
-    transition:opacity 1.2s ease calc(var(--d,0s) + .2s),transform 1.6s var(--ease) calc(var(--d,0s) + .2s)}
-  html.js #s-services.is-seen .sv-art img{opacity:1;transform:none}
-  html.js #s-services.is-passed .sv-art img{opacity:1;transform:none;transition:none}
-  @media (prefers-reduced-motion:reduce){
-    html.js #s-services .sv-art img{opacity:1;transform:none;transition:none}
-    html.js #s-services .sv::before{transform:none;transition:none}
-  }
-
-  @media (max-width:1100px){
-    #s-services .sv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    #s-services .sv.main{grid-column:1/-1}
-    #s-services .sv.main{--art-h:clamp(170px,24vw,240px)}
-    #s-services .sv-art.is{--pos:60% 24%}
-    #s-services .sv-art.bar{--pos:50% 14%} /* shorter picture here: keep the neon sign in view */
-  }
-  @media (max-width:640px){
-    #s-services{--art-h:clamp(150px,48vw,210px);--cap-ov:44px}
-    #s-services .sv.main{--art-h:clamp(150px,48vw,210px)}
-    #s-services .sv-grid{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:20px}
-    #s-services .sv::before{left:18px;right:18px}
-    #s-services .sv-cap{padding:9px 18px 2px 18px}
-    #s-services .sv-body{padding:8px 18px 20px}
-    #s-services .sv-art.is{--pos:62% 30%}
-    #s-services .sv-art.mk{--pos:6% 40%}
-    #s-services .pos ul{display:flex;flex-wrap:wrap}
-    #s-services .pos li{flex-direction:row;gap:7px;padding:4px 12px 4px 4px;border-radius:99px;font-size:12.5px}
-    #s-services .pos .ic{height:24px}
-  }
-  @media (max-width:1199px){ #s-services .br-pc{display:none} }
-  /* short desktop screens (e.g. 1024×768, 1366×768 browser windows): keep all three services on one screen
-     under the snap — three columns (the first a little wider), tighter type and spacing (nothing hidden, same text) */
-  @media (min-width:900px) and (min-height:560px) and (max-height:760px){
-    #s-services{--art-h:clamp(96px,16vh,122px);--cap-ov:40px}
-    #s-services .sv.main{--art-h:clamp(96px,16vh,122px)}
-    #s-services .sv-hd{gap:4px 32px}
-    #s-services .eyebrow{margin-bottom:4px}
-    #s-services .s-title{font-size:clamp(24px,2.6vw,34px);line-height:1.25}
-    #s-services .sv-hd .lead{font-size:14px;line-height:1.7;word-break:auto-phrase}
-    #s-services .sv-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}
-    #s-services .sv.main{grid-column:auto}
-    #s-services .sv::before{left:16px;right:16px}
-    #s-services .sv-cap{padding:8px 14px 1px 16px}
-    #s-services .sv .num{margin-bottom:0}
-    #s-services .sv h3{font-size:16.5px}
-    #s-services .sv-body{padding:6px 16px 12px}
-    #s-services .sv .desc{font-size:12.5px;line-height:1.65}
-    #s-services .sv ul{margin-top:7px;padding-top:7px;gap:2px}
-    #s-services .sv li{font-size:12.5px;line-height:1.5;padding-left:19px}
-    #s-services .sv li::before{width:10px;height:6px}
-    #s-services .pos{padding-top:8px}
-    #s-services .pos h4{font-size:11.5px;margin-bottom:5px}
-    #s-services .pos ul{gap:6px}
-    #s-services .pos li{gap:2px;padding:4px 2px 3px;border-radius:10px;font-size:11.5px;line-height:1.3}
-    #s-services .pos .ic{height:18px;min-width:22px;padding:0 6px;font-size:10.5px}
-  }
-</style>
-<section class="slide" id="s-services" data-title="事業内容">
-  <div class="s-inner wide">
-    <div class="sv-hd">
-      <div>
-        <span class="eyebrow" data-rv>BUSINESS</span>
-        <h2 class="s-title" data-rv style="--d:.08s">事業内容</h2>
-      </div>
-      <p class="lead" data-rv style="--d:.16s">テレアポBPOを軸に、お客様の満足度を最大化する<br class="br-pc">多彩なサービスを提供しています。</p>
-    </div>
-
-    <div class="sv-grid">
-      <article class="card sv main" data-rv style="--d:.24s">
-        <div class="sv-art is" aria-hidden="true"><img src="assets/img/illust/svc-inside.webp" alt="" width="736" height="485" loading="lazy" decoding="async"></div>
-        <div class="sv-cap">
-          <span class="num">SERVICE 01</span>
-          <h3>インサイドセールス支援</h3>
-        </div>
-        <div class="sv-body">
-          <p class="desc">テレアポ代行から商談代行、カスタマーサクセスまで、インサイドセールス全般をトータルでサポートいたします。</p>
-          <ul>
-            <li>1,500名を超える登録セールス人材から最適な人材を選定</li>
-            <li>初期費用無料、1ヶ月からのお試し発注可能</li>
-            <li>最短即日〜3週間程度で稼働開始</li>
-            <li>面談・オファー・契約までワンストップでサポート</li>
-            <li>30日前申告で解約可能、人員差し替えも無料対応</li>
-          </ul>
-          <div class="pos">
-            <h4>提供ポジション</h4>
-            <ul>
-              <li><span class="ic">IS</span>インサイドセールス</li>
-              <li><span class="ic">D</span>ディレクター</li>
-              <li><span class="ic">FS</span>フィールドセールス</li>
-            </ul>
-          </div>
-        </div>
-      </article>
-
-      <article class="card sv" data-rv style="--d:.36s">
-        <div class="sv-art bar" aria-hidden="true"><img src="assets/img/illust/svc-bar.webp" alt="" width="748" height="464" loading="lazy" decoding="async"></div>
-        <div class="sv-cap">
-          <span class="num">SERVICE 02</span>
-          <h3>Bar事業</h3>
-        </div>
-        <div class="sv-body">
-          <p class="desc">札幌でシーシャとカラオケが両方楽しめる唯一のBar。特別な空間で、くつろぎのひとときをお過ごしください。</p>
-          <ul>
-            <li>札幌唯一のシーシャ×カラオケが楽しめるBar</li>
-            <li>お昼はコワーキングスペースとしてサービス提供予定</li>
-            <li>仕事も遊びも、一つの空間で</li>
-          </ul>
-        </div>
-      </article>
-
-      <article class="card sv" data-rv style="--d:.48s">
-        <div class="sv-art mk" aria-hidden="true"><img src="assets/img/illust/svc-marketing.webp" alt="" width="1415" height="453" loading="lazy" decoding="async"></div>
-        <div class="sv-cap">
-          <span class="num">SERVICE 03</span>
-          <h3>マーケティング支援</h3>
-        </div>
-        <div class="sv-body">
-          <p class="desc">広告の媒体・金融商品など、多岐にわたる商材の認知獲得や顧客開拓の支援を致します。</p>
-          <ul>
-            <li>多様な業界・商材に対応</li>
-            <li>認知獲得から顧客開拓まで一貫支援</li>
-            <li>データドリブンなマーケティング戦略</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ===== slide s-remote (business/remote.html) ===== -->
 <!-- business 「フルリモート」 — headline B4 + animation B4-2 「北海道から光が走る」 (ported from v5parts/b4.html, mode 2 only) -->
 <style>
@@ -941,6 +745,202 @@
           <div data-rv style="--d:.75s"><dt>メールアドレス</dt><dd><a href="mailto:insup2025sapporo@gmail.com">insup2025sapporo@gmail.com</a></dd></div>
         </dl>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== slide s-services (business/services.html) ===== -->
+<!-- business 「事業内容」 — BUSINESS lead + SERVICE 01/02/03 (text: cur/text_business.txt) -->
+<style>
+  /* Each service is a light "picture card" (same family as 選ばれる理由 / 実績): the service's scene
+     (illust/svc-*.webp) is the card's background at the top and fades into the card; the label + title sit on a
+     white tab that overlaps the picture, and the description / bullets / chips sit on the light card body.
+     Readability: dark navy text on white-to-pale-blue, deeper blue label and icons (all small text ≥ 4.5:1).
+     The Bar scene is dark: it keeps its own colours (neon / bottles stay recognisable) and fades into the same light
+     card body as the others, so the three read as one family; its fade starts lower (--f0/--f1) to keep the grey
+     transition short. (A dark card body for Bar was tried and dropped: it broke the family on this dark page.) */
+  #s-services{--art-h:clamp(118px,18.5vh,156px);--cap-ov:46px;--sv-ink:#0b1d40;--sv-sub:#34425f;--sv-blue:#0b4fc4}
+  #s-services .sv-hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:6px 40px}
+  #s-services .sv-hd .s-title{margin-bottom:0}
+  #s-services .sv-hd .lead{max-width:30em}
+  #s-services .sv-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:18px;align-items:stretch}
+
+  /* card shell (light, lit like the other picture cards on this dark page) */
+  #s-services .sv{display:flex;flex-direction:column;padding:0;overflow:hidden;isolation:isolate;color:var(--sv-ink);
+    background:linear-gradient(160deg,#ffffff 0%,#f6f9ff 46%,#eaf3ff 100%);border:1px solid rgba(255,255,255,.75);
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    box-shadow:0 0 0 1px rgba(159,220,255,.28),0 22px 48px rgba(0,6,24,.42),0 0 46px rgba(77,179,255,.2)}
+  #s-services .sv.main{box-shadow:0 0 0 1px rgba(117,242,255,.5),0 22px 48px rgba(0,6,24,.42),0 0 52px rgba(77,179,255,.3)}
+  #s-services .sv::before{content:"";position:absolute;z-index:3;left:22px;right:22px;top:0;height:3px;border-radius:0 0 3px 3px;
+    background:linear-gradient(90deg,#1976f6,#4db3ff 55%,rgba(77,179,255,0));transform-origin:left center}
+
+  /* the scene: card background at the top, fading softly into the card body. The picture takes all the height the
+     text does not need (min --art-h): the tallest card (SERVICE 01) keeps the minimum, and in SERVICE 02/03 the scene
+     grows so their text block ends at the card bottom too (text is bottom-aligned in all three cards). */
+  #s-services .sv-art{position:relative;z-index:0;flex:1 0 var(--art-h);height:auto;min-height:var(--art-h);overflow:hidden;pointer-events:none}
+  #s-services .sv-art img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:var(--pos,50% 30%);
+    --fade:linear-gradient(180deg,#000 0%,#000 var(--f0,62%),rgba(0,0,0,.35) var(--f1,88%),transparent 100%);
+    -webkit-mask-image:var(--fade);mask-image:var(--fade)}
+  #s-services .sv-art.is{--pos:62% 26%}
+  #s-services .sv-art.bar{--pos:62% 40%;--f0:72%;--f1:92%}
+  #s-services .sv-art.mk{--pos:8% 40%}
+  /* the marketing scene is very wide: when its card gives it a tall area, a full-height cover crop would show only a
+     slice (lettering or face cut). Cap the picture at a 620:453 window (lettering + the woman at her laptop) and let
+     its soft fade end where the title tab starts; on short/narrow areas it is a normal cover crop (max-height). */
+  #s-services .sv-art.mk img{bottom:auto;height:auto;aspect-ratio:620/453;max-height:100%}
+
+  /* label + title on a white tab that rises into the picture */
+  #s-services .sv-cap{position:relative;z-index:1;align-self:flex-start;max-width:calc(100% - 18px);margin-top:calc(-1 * var(--cap-ov));
+    padding:10px 20px 2px 22px;border-radius:0 14px 0 0;background:rgba(255,255,255,.94);
+    box-shadow:6px -6px 18px rgba(11,45,107,.10);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  #s-services .sv .num{color:var(--sv-blue);margin-bottom:2px}
+  #s-services .sv h3{font-size:clamp(17px,1.45vw,20px);margin:0;color:#0b2d6b}
+
+  #s-services .sv-body{position:relative;z-index:1;display:flex;flex-direction:column;flex:0 0 auto;padding:8px 22px 16px}
+  #s-services .sv .desc{font-size:13.5px;line-height:1.8;color:var(--sv-sub)}
+  #s-services .sv ul{list-style:none;margin:10px 0 0;padding:10px 0 0;border-top:1px solid rgba(11,45,107,.14);display:grid;gap:5px}
+  #s-services .sv li{position:relative;padding-left:22px;font-size:13.5px;line-height:1.6;font-weight:500;color:var(--sv-ink)}
+  #s-services .sv li::before{content:"";position:absolute;left:2px;top:.38em;width:12px;height:7px;border-left:2px solid #1976f6;border-bottom:2px solid #1976f6;transform:rotate(-45deg);transform-origin:center;border-radius:1px}
+  #s-services .pos{margin-top:auto;padding-top:12px}
+  #s-services .pos h4{font:700 12px/1.5 var(--font-ja);letter-spacing:.08em;color:#46536f;margin:0 0 7px}
+  #s-services .pos ul{margin:0;padding:0;border:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  #s-services .pos li{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 4px 5px;border-radius:12px;background:#fff;border:1px solid #c9ddf7;
+    box-shadow:0 3px 10px rgba(11,45,107,.06);color:#0b2d6b;font-size:12px;line-height:1.35;font-weight:700;min-width:0;text-align:center;white-space:nowrap}
+  #s-services .pos li::before{display:none}
+  #s-services .pos .ic{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;min-width:24px;height:22px;padding:0 7px;border-radius:99px;
+    background:linear-gradient(135deg,#0b4fc4,#1a6fe8);color:#fff;font:800 11.5px var(--font-en);letter-spacing:.04em}
+
+  #s-services .sv .desc,#s-services .sv li,#s-services .lead{text-wrap:pretty}
+  #s-services .pos li{text-wrap:nowrap}
+
+  /* entrance: accent line draws, the picture settles in (final state = reduced motion / passed) */
+  html.js #s-services .sv::before{transform:scaleX(0);transition:transform 1.1s var(--ease) calc(var(--d,0s) + .35s)}
+  html.js #s-services.is-seen .sv::before,#s-services.is-passed .sv::before{transform:scaleX(1)}
+  html.js #s-services .sv-art img{opacity:0;transform:scale(1.06);transform-origin:var(--pos,50% 30%);
+    transition:opacity 1.2s ease calc(var(--d,0s) + .2s),transform 1.6s var(--ease) calc(var(--d,0s) + .2s)}
+  html.js #s-services.is-seen .sv-art img{opacity:1;transform:none}
+  html.js #s-services.is-passed .sv-art img{opacity:1;transform:none;transition:none}
+  @media (prefers-reduced-motion:reduce){
+    html.js #s-services .sv-art img{opacity:1;transform:none;transition:none}
+    html.js #s-services .sv::before{transform:none;transition:none}
+  }
+
+  @media (max-width:1100px){
+    #s-services .sv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    #s-services .sv.main{grid-column:1/-1}
+    #s-services .sv.main{--art-h:clamp(170px,24vw,240px)}
+    #s-services .sv-art.is{--pos:60% 24%}
+    #s-services .sv-art.bar{--pos:50% 14%} /* shorter picture here: keep the neon sign in view */
+  }
+  @media (max-width:640px){
+    #s-services{--art-h:clamp(150px,48vw,210px);--cap-ov:44px}
+    #s-services .sv.main{--art-h:clamp(150px,48vw,210px)}
+    #s-services .sv-grid{grid-template-columns:minmax(0,1fr);gap:16px;margin-top:20px}
+    #s-services .sv::before{left:18px;right:18px}
+    #s-services .sv-cap{padding:9px 18px 2px 18px}
+    #s-services .sv-body{padding:8px 18px 20px}
+    #s-services .sv-art.is{--pos:62% 30%}
+    #s-services .sv-art.mk{--pos:6% 40%}
+    #s-services .pos ul{display:flex;flex-wrap:wrap}
+    #s-services .pos li{flex-direction:row;gap:7px;padding:4px 12px 4px 4px;border-radius:99px;font-size:12.5px}
+    #s-services .pos .ic{height:24px}
+  }
+  @media (max-width:1199px){ #s-services .br-pc{display:none} }
+  /* short desktop screens (e.g. 1024×768, 1366×768 browser windows): keep all three services on one screen
+     under the snap — three columns (the first a little wider), tighter type and spacing (nothing hidden, same text) */
+  @media (min-width:900px) and (min-height:560px) and (max-height:760px){
+    #s-services{--art-h:clamp(96px,16vh,122px);--cap-ov:40px}
+    #s-services .sv.main{--art-h:clamp(96px,16vh,122px)}
+    #s-services .sv-hd{gap:4px 32px}
+    #s-services .eyebrow{margin-bottom:4px}
+    #s-services .s-title{font-size:clamp(24px,2.6vw,34px);line-height:1.25}
+    #s-services .sv-hd .lead{font-size:14px;line-height:1.7;word-break:auto-phrase}
+    #s-services .sv-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}
+    #s-services .sv.main{grid-column:auto}
+    #s-services .sv::before{left:16px;right:16px}
+    #s-services .sv-cap{padding:8px 14px 1px 16px}
+    #s-services .sv .num{margin-bottom:0}
+    #s-services .sv h3{font-size:16.5px}
+    #s-services .sv-body{padding:6px 16px 12px}
+    #s-services .sv .desc{font-size:12.5px;line-height:1.65}
+    #s-services .sv ul{margin-top:7px;padding-top:7px;gap:2px}
+    #s-services .sv li{font-size:12.5px;line-height:1.5;padding-left:19px}
+    #s-services .sv li::before{width:10px;height:6px}
+    #s-services .pos{padding-top:8px}
+    #s-services .pos h4{font-size:11.5px;margin-bottom:5px}
+    #s-services .pos ul{gap:6px}
+    #s-services .pos li{gap:2px;padding:4px 2px 3px;border-radius:10px;font-size:11.5px;line-height:1.3}
+    #s-services .pos .ic{height:18px;min-width:22px;padding:0 6px;font-size:10.5px}
+  }
+</style>
+<section class="slide" id="s-services" data-title="事業内容">
+  <div class="s-inner wide">
+    <div class="sv-hd">
+      <div>
+        <span class="eyebrow" data-rv>BUSINESS</span>
+        <h2 class="s-title" data-rv style="--d:.08s">事業内容</h2>
+      </div>
+      <p class="lead" data-rv style="--d:.16s">テレアポBPOを軸に、お客様の満足度を最大化する<br class="br-pc">多彩なサービスを提供しています。</p>
+    </div>
+
+    <div class="sv-grid">
+      <article class="card sv main" data-rv style="--d:.24s">
+        <div class="sv-art is" aria-hidden="true"><img src="assets/img/illust/svc-inside.webp" alt="" width="736" height="485" loading="lazy" decoding="async"></div>
+        <div class="sv-cap">
+          <span class="num">SERVICE 01</span>
+          <h3>インサイドセールス支援</h3>
+        </div>
+        <div class="sv-body">
+          <p class="desc">テレアポ代行から商談代行、カスタマーサクセスまで、インサイドセールス全般をトータルでサポートいたします。</p>
+          <ul>
+            <li>1,500名を超える登録セールス人材から最適な人材を選定</li>
+            <li>初期費用無料、1ヶ月からのお試し発注可能</li>
+            <li>最短即日〜3週間程度で稼働開始</li>
+            <li>面談・オファー・契約までワンストップでサポート</li>
+            <li>30日前申告で解約可能、人員差し替えも無料対応</li>
+          </ul>
+          <div class="pos">
+            <h4>提供ポジション</h4>
+            <ul>
+              <li><span class="ic">IS</span>インサイドセールス</li>
+              <li><span class="ic">D</span>ディレクター</li>
+              <li><span class="ic">FS</span>フィールドセールス</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <article class="card sv" data-rv style="--d:.36s">
+        <div class="sv-art bar" aria-hidden="true"><img src="assets/img/illust/svc-bar.webp" alt="" width="748" height="464" loading="lazy" decoding="async"></div>
+        <div class="sv-cap">
+          <span class="num">SERVICE 02</span>
+          <h3>Bar事業</h3>
+        </div>
+        <div class="sv-body">
+          <p class="desc">札幌でシーシャとカラオケが両方楽しめる唯一のBar。特別な空間で、くつろぎのひとときをお過ごしください。</p>
+          <ul>
+            <li>札幌唯一のシーシャ×カラオケが楽しめるBar</li>
+            <li>お昼はコワーキングスペースとしてサービス提供予定</li>
+            <li>仕事も遊びも、一つの空間で</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="card sv" data-rv style="--d:.48s">
+        <div class="sv-art mk" aria-hidden="true"><img src="assets/img/illust/svc-marketing.webp" alt="" width="1415" height="453" loading="lazy" decoding="async"></div>
+        <div class="sv-cap">
+          <span class="num">SERVICE 03</span>
+          <h3>マーケティング支援</h3>
+        </div>
+        <div class="sv-body">
+          <p class="desc">広告の媒体・金融商品など、多岐にわたる商材の認知獲得や顧客開拓の支援を致します。</p>
+          <ul>
+            <li>多様な業界・商材に対応</li>
+            <li>認知獲得から顧客開拓まで一貫支援</li>
+            <li>データドリブンなマーケティング戦略</li>
+          </ul>
+        </div>
+      </article>
     </div>
   </div>
 </section>
